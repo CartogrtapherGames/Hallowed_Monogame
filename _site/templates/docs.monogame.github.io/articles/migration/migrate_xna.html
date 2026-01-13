@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Migrating from XNA | hallowed </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Migrating from XNA | hallowed ">
+      <meta name="generator" content="docfx ">
+  
+      <link rel="shortcut icon" href="../../../../favicon.ico">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/night-owl.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" integrity="sha384-EvBWSlnoFgZlXJvpzS+MAUEjvN7+gcCwH+qh7GRFOGgZO0PuwOFro7qPOJnLfe7l" crossorigin="anonymous">
+      <link rel="stylesheet" href="../../../../styles/config.css">
+      <link rel="stylesheet" href="../../../../styles/singulink.css">
+      <link rel="stylesheet" href="../../../../styles/main.css">
+      <meta property="docfx:navrel" content="../../../../toc.html">
+      <meta property="docfx:tocrel" content="../toc.html">
+  
+  <meta property="docfx:rel" content="../../../../">
+  
+    </head>
+    <body>
+        <!-- Header required for docfx anchor scroll to work -->
+        <header id="head"></header>
+        <div class="top-navbar">
+            <a class="burger-icon" onclick="toggleMenu()">
+                <svg name="Hamburger" style="vertical-align: middle;" width="34" height="34" viewbox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M20 6H4V9H20V6ZM4 10.999H20V13.999H4V10.999ZM4 15.999H20V18.999H4V15.999Z"></path></svg>
+            </a>
+
+
+            <a class="brand" href="../../../../index.html">
+              <img src="../../../../logo.svg" alt="hallowed" class="logomark">
+              <span class="brand-title">hallowed</span>
+            </a>        </div>
+
+        <div class="body-content">
+            <div id="blackout" class="blackout" onclick="toggleMenu()"></div>
+
+            <nav id="sidebar" role="navigation">
+                <div class="sidebar">
+
+                    <div>
+                      <div class="mobile-hide">
+
+                        <a class="brand" href="../../../../index.html">
+                          <img src="../../../../logo.svg" alt="hallowed" class="logomark">
+                          <span class="brand-title">hallowed</span>
+                        </a>                      </div>
+
+                      <div class="sidesearch">
+                        <form id="search" role="search" class="search">
+                            <i class="bi bi-search search-icon"></i>
+                            <input type="text" id="search-query" placeholder="Search" autocomplete="off">
+                        </form>
+                      </div>
+
+                      <div id="navbar">
+                      </div>
+                    </div>                    <div class="sidebar-item-separator"></div>
+
+                        <div id="sidetoggle">
+                          <div id="sidetoc"></div>
+                        </div>
+                </div>
+                <div class="footer">
+  
+  <strong><a href='https://dotnet.github.io/docfx/'>DocFX</a> + <a href='https://www.singulink.com'>Singulink</a> = ♥</strong>
+                </div>            </nav>
+
+            <main class="main-panel">
+
+                <div id="search-results" style="display: none;">
+                  <h1 class="search-list">Search Results for <span></span></h1>
+                  <div class="sr-items">
+                    <p><i class="bi bi-hourglass-split index-loading"></i></p>
+                  </div>
+                  <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+                </div>
+ 
+
+                <div role="main" class="hide-when-search">
+
+                        <div class="subnav navbar navbar-default">
+                          <div class="container hide-when-search" id="breadcrumb">
+                            <ul class="breadcrumb">
+                              <li></li>
+                            </ul>
+                          </div>
+                        </div>
+
+                         <div class="contribution">
+                               <a href="https://github.com/MonoGame/docs.monogame.github.io/blob/main/articles/migration/migrate_xna.md/#L1" class="contribution-link">Edit this page</a>
+                         </div>
+
+                    <article class="content wrap" id="_content" data-uid="">
+
+
+<p>MonoGame is API compatible with <a href="https://docs.microsoft.com/en-us/previous-versions/windows/xna/bb200104(v=xnagamestudio.41)">XNA 4.0</a> even down to the namespaces.  That means you do not have to change much of your game code to port from XNA to MonoGame. There are however some exceptions and some things to keep in mind.</p>
+<blockquote>
+<p>If your game targets XNA 3.1, you might want to use this archived migration cheatsheet to upgrade to 4.0:</p>
+<p><a href="https://www.nelsonhurst.com/xna-cheatsheet/">http://www.nelxon.com/blog/xna-3-1-to-xna-4-0-cheatsheet/</a></p>
+</blockquote>
+<h2 id="missingremoved-api">Missing/removed API</h2>
+<ul>
+<li>The Storage namespace was removed due to portability issues (short discussion <a href="https://github.com/MonoGame/MonoGame/issues/4311">here</a>).</li>
+<li>GamerServices was removed. This part of MonoGame was badly maintained due to low usage and difficulties in providing the GamerServices API for different platforms.</li>
+<li>The Net namespace was removed due to its cost of maintenance.</li>
+</ul>
+<h2 id="effects">Effects</h2>
+<p>MonoGame does not use the legacy fxc compiler for effects that XNA used. Instead, MonoGame uses the DX11 compiler.
+The way MonoGame handles shaders imposes some restrictions and causes some caveats in what is and is not supported.</p>
+<p>This is all documented in the <a href="../getting_started/content_pipeline/custom_effects.html">custom effects</a> documentation page.</p>
+<h2 id="half-pixel-offset">Half pixel offset</h2>
+<p>XNA uses the DirectX 9 graphics API. MonoGame uses the newer Direct X 11 API for DirectX platforms.</p>
+<p>DirectX 9 interprets UV coordinates differently from other graphics API's. This is typically referred to as the half-pixel offset.</p>
+<p>MonoGame supports replicating XNA's behavior (currently only on OpenGL platforms) by setting the <code>PreferHalfPixelOffset</code> flag in &lt;xref:Microsoft.Xna.Framework.GraphicsDeviceManager&gt; to <code>true</code>. This flag is set to <code>false</code> by default to encourage users to use the modern style of pixel addressing.</p>
+<p>DirectX platforms will ignore setting the <code>PreferHalfPixelOffset</code> flag and will
+always render with a half pixel offset compared to XNA. This is usually not noticeable.</p>
+<p>This value is passed to <code>UseHalfPixelOffset</code> in &lt;xref:Microsoft.Xna.Framework.Graphics.GraphicsDevice&gt;. If <code>UseHalfPixelOffset</code> is <code>true</code>, you have to add half-pixel offset to a Projection matrix.</p>
+<p>&lt;xref:Microsoft.Xna.Framework.Graphics.SpriteBatch&gt; rendering is not affected by the flag.</p>
+<p>Regardless of what value the flag has, <code>SpriteBatch</code> will render things exactly the same as in XNA.</p>
+<p>If you migrated your game from XNA and some things seem blurred out or very slightly offset, you may want to try to enable the <code>PreferHalfPixelOffset</code> flag.</p>
+
+</article>
+                </div>
+
+            </main>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+        <script type="text/javascript" src="../../../../styles/jquery.twbsPagination.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/jquery.mark.min.js"></script>
+        <script type="text/javascript" src="../../../../styles/url.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/anchor-js@5.0.0/anchor.min.js"></script>
+        <script type="text/javascript" src="../../../../styles/docfx.js"></script>
+        <script type="text/javascript" src="../../../../styles/main.js"></script>
+        <script type="text/javascript" src="../../../../styles/singulink.js"></script>    </body>
+</html>

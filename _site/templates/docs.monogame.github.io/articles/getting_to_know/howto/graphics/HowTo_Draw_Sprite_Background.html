@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Drawing a Masked Sprite over a Background | hallowed </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Drawing a Masked Sprite over a Background | hallowed ">
+      <meta name="generator" content="docfx ">
+  
+      <link rel="shortcut icon" href="../../../../../../favicon.ico">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/night-owl.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" integrity="sha384-EvBWSlnoFgZlXJvpzS+MAUEjvN7+gcCwH+qh7GRFOGgZO0PuwOFro7qPOJnLfe7l" crossorigin="anonymous">
+      <link rel="stylesheet" href="../../../../../../styles/config.css">
+      <link rel="stylesheet" href="../../../../../../styles/singulink.css">
+      <link rel="stylesheet" href="../../../../../../styles/main.css">
+      <meta property="docfx:navrel" content="../../../../../../toc.html">
+      <meta property="docfx:tocrel" content="../../../toc.html">
+  
+  <meta property="docfx:rel" content="../../../../../../">
+  
+    </head>
+    <body>
+        <!-- Header required for docfx anchor scroll to work -->
+        <header id="head"></header>
+        <div class="top-navbar">
+            <a class="burger-icon" onclick="toggleMenu()">
+                <svg name="Hamburger" style="vertical-align: middle;" width="34" height="34" viewbox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M20 6H4V9H20V6ZM4 10.999H20V13.999H4V10.999ZM4 15.999H20V18.999H4V15.999Z"></path></svg>
+            </a>
+
+
+            <a class="brand" href="../../../../../../index.html">
+              <img src="../../../../../../logo.svg" alt="hallowed" class="logomark">
+              <span class="brand-title">hallowed</span>
+            </a>        </div>
+
+        <div class="body-content">
+            <div id="blackout" class="blackout" onclick="toggleMenu()"></div>
+
+            <nav id="sidebar" role="navigation">
+                <div class="sidebar">
+
+                    <div>
+                      <div class="mobile-hide">
+
+                        <a class="brand" href="../../../../../../index.html">
+                          <img src="../../../../../../logo.svg" alt="hallowed" class="logomark">
+                          <span class="brand-title">hallowed</span>
+                        </a>                      </div>
+
+                      <div class="sidesearch">
+                        <form id="search" role="search" class="search">
+                            <i class="bi bi-search search-icon"></i>
+                            <input type="text" id="search-query" placeholder="Search" autocomplete="off">
+                        </form>
+                      </div>
+
+                      <div id="navbar">
+                      </div>
+                    </div>                    <div class="sidebar-item-separator"></div>
+
+                        <div id="sidetoggle">
+                          <div id="sidetoc"></div>
+                        </div>
+                </div>
+                <div class="footer">
+  
+  <strong><a href='https://dotnet.github.io/docfx/'>DocFX</a> + <a href='https://www.singulink.com'>Singulink</a> = ♥</strong>
+                </div>            </nav>
+
+            <main class="main-panel">
+
+                <div id="search-results" style="display: none;">
+                  <h1 class="search-list">Search Results for <span></span></h1>
+                  <div class="sr-items">
+                    <p><i class="bi bi-hourglass-split index-loading"></i></p>
+                  </div>
+                  <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+                </div>
+ 
+
+                <div role="main" class="hide-when-search">
+
+                        <div class="subnav navbar navbar-default">
+                          <div class="container hide-when-search" id="breadcrumb">
+                            <ul class="breadcrumb">
+                              <li></li>
+                            </ul>
+                          </div>
+                        </div>
+
+                         <div class="contribution">
+                               <a href="https://github.com/MonoGame/docs.monogame.github.io/blob/main/articles/getting_to_know/howto/graphics/HowTo_Draw_Sprite_Background.md/#L1" class="contribution-link">Edit this page</a>
+                         </div>
+
+                    <article class="content wrap" id="_content" data-uid="">
+
+<h2 id="overview">Overview</h2>
+<p>In this example, you will draw a background texture, followed by another sprite on top of the background with its transparent elements not showing by using a <a href="xref:Microsoft.Xna.Framework.Graphics.BlendState">Blend State</a> that supports alpha blending.</p>
+<h3 id="end-result">End result</h3>
+<p><img src="./images/HowTo_DrawSpriteBackground_Final.png" alt="The output of this tutorial"></p>
+<h2 id="requirements">Requirements</h2>
+<p>The example assumes the texture you are loading contains multiple images, one for the background and one for the foreground ship texture.</p>
+<ul>
+<li><img src="images/starfield.png" alt="starfield"></li>
+<li><img src="images/ship.png" alt="ship texture"></li>
+</ul>
+<p>Save the textures to your content project and name it &quot;<strong>AnimatedCharacter</strong>&quot; (this name will used to reference it in the project).</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>The tutorial assumes you have already viewed the <a href="HowTo_Draw_A_Sprite.html">How to draw a Sprite</a> topic.</p>
+</div>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>The foreground sprite in this example must include masking information, e.g. a PNG or DDS file that supports transparency / an alpha channel.</p>
+</div>
+<h2 id="drawing-a-foreground-and-background-sprite">Drawing a Foreground and Background Sprite</h2>
+<ol>
+<li><p>Follow the steps of <a href="HowTo_Draw_A_Sprite.html">How To: Draw a Sprite</a>.
+A good first step to understanding the loading and drawing of textures and setting up your project.</p>
+</li>
+<li><p>Add some variables and update the <strong>LoadContent</strong> method to load and initialize the content.</p>
+<pre><code class="lang-csharp">// Position of foreground sprite on screen
+private Vector2 ViperPos;  
+
+// The texture for the ship
+private Texture2D shipTexture;
+
+// The texture for the background
+private Texture2D starTexture;
+
+protected override void LoadContent()
+{
+    // Create a new SpriteBatch, which can be used to draw textures.
+    spriteBatch = new SpriteBatch(GraphicsDevice);
+
+    starTexture = Content.Load&lt;Texture2D&gt;(&quot;starfield&quot;);
+    shipTexture = Content.Load&lt;Texture2D&gt;(&quot;ship&quot;);
+    Viewport viewport = graphics.GraphicsDevice.Viewport;
+
+    ViperPos.X = viewport.Width / 2;
+    ViperPos.Y = viewport.Height - 100;
+}
+</code></pre>
+</li>
+<li><p>In <a href="xref:Microsoft.Xna.Framework.Game#Microsoft_Xna_Framework_Game_Draw_Microsoft_Xna_Framework_GameTime_">Game.Draw</a> method of your game class, call <a href="xref:Microsoft.Xna.Framework.Graphics.SpriteBatch#Microsoft_Xna_Framework_Graphics_SpriteBatch_Begin_Microsoft_Xna_Framework_Graphics_SpriteSortMode_Microsoft_Xna_Framework_Graphics_BlendState_Microsoft_Xna_Framework_Graphics_SamplerState_Microsoft_Xna_Framework_Graphics_DepthStencilState_Microsoft_Xna_Framework_Graphics_RasterizerState_Microsoft_Xna_Framework_Graphics_Effect_System_Nullable_Microsoft_Xna_Framework_Matrix__">SpriteBatch.Begin</a> for the <a href="xref:Microsoft.Xna.Framework.Graphics.SpriteBatch">SpriteBatch</a>.</p>
+</li>
+<li><p>Specify <a href="xref:Microsoft.Xna.Framework.Graphics.BlendState">BlendState.Opaque</a>.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>This will tell the <a href="xref:Microsoft.Xna.Framework.Graphics.SpriteBatch">SpriteBatch</a> to ignore alpha color values when drawing sprites. By default, the z-order of sprites is the order in which they are drawn.</p>
+</div>
+</li>
+<li><p>Call the <a href="xref:Microsoft.Xna.Framework.Graphics.SpriteBatch">Draw</a> method, passing in the <code>starTexture</code>.  Then call <a href="xref:Microsoft.Xna.Framework.Graphics.SpriteBatch#Microsoft_Xna_Framework_Graphics_SpriteBatch_End">SpriteBatch.End</a>.</p>
+<pre><code class="lang-csharp">public override void Draw (GameTime game)
+{
+    GraphicsDevice.Clear(Color.CornflowerBlue);
+
+    _spriteBatch.Begin(blendState: BlendState.Opaque);
+    _spriteBatch.Draw(starTexture, Vector2.Zero, Color.White);
+    _spriteBatch.End();
+}
+</code></pre>
+</li>
+<li><p>After this code, call <a href="xref:Microsoft.Xna.Framework.Graphics.SpriteBatch#Microsoft_Xna_Framework_Graphics_SpriteBatch_Begin_Microsoft_Xna_Framework_Graphics_SpriteSortMode_Microsoft_Xna_Framework_Graphics_BlendState_Microsoft_Xna_Framework_Graphics_SamplerState_Microsoft_Xna_Framework_Graphics_DepthStencilState_Microsoft_Xna_Framework_Graphics_RasterizerState_Microsoft_Xna_Framework_Graphics_Effect_System_Nullable_Microsoft_Xna_Framework_Matrix__">SpriteBatch.Begin</a> for the <a href="xref:Microsoft.Xna.Framework.Graphics.SpriteBatch">SpriteBatch</a> again.  This time, specify <a href="xref:Microsoft.Xna.Framework.Graphics.BlendState">BlendState.AlphaBlend</a>.</p>
+<p>This will cause pixels on the sprite with an alpha value less than 255 to become progressively transparent based on the magnitude of the alpha value. An alpha of 0 will make the pixel completely transparent.</p>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>Calling <a href="xref:Microsoft.Xna.Framework.Graphics.SpriteBatch#Microsoft_Xna_Framework_Graphics_SpriteBatch_Begin_Microsoft_Xna_Framework_Graphics_SpriteSortMode_Microsoft_Xna_Framework_Graphics_BlendState_Microsoft_Xna_Framework_Graphics_SamplerState_Microsoft_Xna_Framework_Graphics_DepthStencilState_Microsoft_Xna_Framework_Graphics_RasterizerState_Microsoft_Xna_Framework_Graphics_Effect_System_Nullable_Microsoft_Xna_Framework_Matrix__">SpriteBatch.Begin</a> with no parameters causes <a href="xref:Microsoft.Xna.Framework.Graphics.SpriteBatch">SpriteBatch</a> to <strong>default to <a href="xref:Microsoft.Xna.Framework.Graphics.BlendState">BlendState.AlphaBlend</a></strong>.</p>
+</div>
+</li>
+<li><p>Next in the <a href="xref:Microsoft.Xna.Framework.Graphics.SpriteBatch">Draw</a> method, we draw the <code>shipTexture</code>, <code>ViperPos</code> with <a href="xref:Microsoft.Xna.Framework.Color">Color.White</a>, finishing off with a call to <a href="xref:Microsoft.Xna.Framework.Graphics.SpriteBatch#Microsoft_Xna_Framework_Graphics_SpriteBatch_End">SpriteBatch.End</a>.</p>
+<pre><code class="lang-csharp">public override void Draw (GameTime game)
+{
+    _spriteBatch.Begin(blendState: BlendState.Opaque);
+    _spriteBatch.Draw(starTexture, Vector2.Zero, Color.White);
+    _spriteBatch.End();
+
+    _spriteBatch.Begin(blendState: BlendState.AlphaBlend);
+    _spriteBatch.Draw (shipTexture, ViperPos, Color.White);
+    _spriteBatch.End();
+}
+</code></pre>
+</li>
+</ol>
+<p>The end result is a fixed / opaque background with a semi-transparent ship drawn on top for the player.  You can of course experiment with layers / parallax transparent backgrounds behind the player too, the choice is up to you.</p>
+<h3 id="extra-credit">Extra Credit</h3>
+<p>Try using this technique on top of the <a href="HowTo_Make_Scrolling_Background.html">How To Make A Scrolling Background</a> guide for the beginnings of your very own space shooter :D</p>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="HowTo_Draw_A_Sprite.html">Drawing a Sprite</a></li>
+<li><a href="HowTo_Make_Scrolling_Background.html">How To Make A Scrolling Background</a></li>
+</ul>
+<h3 id="concepts">Concepts</h3>
+<ul>
+<li><a href="../../whatis/graphics/WhatIs_Sprite.html">What Is a Sprite?</a></li>
+</ul>
+<h3 id="reference">Reference</h3>
+<ul>
+<li><a href="xref:Microsoft.Xna.Framework.Graphics.SpriteBatch">SpriteBatch</a></li>
+<li><a href="xref:Microsoft.Xna.Framework.Graphics.SpriteBatch#Microsoft_Xna_Framework_Graphics_SpriteBatch_Draw_Microsoft_Xna_Framework_Graphics_Texture2D_Microsoft_Xna_Framework_Vector2_Microsoft_Xna_Framework_Color_">SpriteBatch.Draw</a></li>
+<li><a href="xref:Microsoft.Xna.Framework.Graphics.Texture2D">Texture2D</a></li>
+</ul>
+
+</article>
+                </div>
+
+            </main>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/jquery.twbsPagination.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/jquery.mark.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/url.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/anchor-js@5.0.0/anchor.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/docfx.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/main.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/singulink.js"></script>    </body>
+</html>

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>What are Parameterized Processors? | hallowed </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="What are Parameterized Processors? | hallowed ">
+      <meta name="generator" content="docfx ">
+  
+      <link rel="shortcut icon" href="../../../../../../favicon.ico">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/night-owl.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" integrity="sha384-EvBWSlnoFgZlXJvpzS+MAUEjvN7+gcCwH+qh7GRFOGgZO0PuwOFro7qPOJnLfe7l" crossorigin="anonymous">
+      <link rel="stylesheet" href="../../../../../../styles/config.css">
+      <link rel="stylesheet" href="../../../../../../styles/singulink.css">
+      <link rel="stylesheet" href="../../../../../../styles/main.css">
+      <meta property="docfx:navrel" content="../../../../../../toc.html">
+      <meta property="docfx:tocrel" content="../../../toc.html">
+  
+  <meta property="docfx:rel" content="../../../../../../">
+  
+    </head>
+    <body>
+        <!-- Header required for docfx anchor scroll to work -->
+        <header id="head"></header>
+        <div class="top-navbar">
+            <a class="burger-icon" onclick="toggleMenu()">
+                <svg name="Hamburger" style="vertical-align: middle;" width="34" height="34" viewbox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M20 6H4V9H20V6ZM4 10.999H20V13.999H4V10.999ZM4 15.999H20V18.999H4V15.999Z"></path></svg>
+            </a>
+
+
+            <a class="brand" href="../../../../../../index.html">
+              <img src="../../../../../../logo.svg" alt="hallowed" class="logomark">
+              <span class="brand-title">hallowed</span>
+            </a>        </div>
+
+        <div class="body-content">
+            <div id="blackout" class="blackout" onclick="toggleMenu()"></div>
+
+            <nav id="sidebar" role="navigation">
+                <div class="sidebar">
+
+                    <div>
+                      <div class="mobile-hide">
+
+                        <a class="brand" href="../../../../../../index.html">
+                          <img src="../../../../../../logo.svg" alt="hallowed" class="logomark">
+                          <span class="brand-title">hallowed</span>
+                        </a>                      </div>
+
+                      <div class="sidesearch">
+                        <form id="search" role="search" class="search">
+                            <i class="bi bi-search search-icon"></i>
+                            <input type="text" id="search-query" placeholder="Search" autocomplete="off">
+                        </form>
+                      </div>
+
+                      <div id="navbar">
+                      </div>
+                    </div>                    <div class="sidebar-item-separator"></div>
+
+                        <div id="sidetoggle">
+                          <div id="sidetoc"></div>
+                        </div>
+                </div>
+                <div class="footer">
+  
+  <strong><a href='https://dotnet.github.io/docfx/'>DocFX</a> + <a href='https://www.singulink.com'>Singulink</a> = ♥</strong>
+                </div>            </nav>
+
+            <main class="main-panel">
+
+                <div id="search-results" style="display: none;">
+                  <h1 class="search-list">Search Results for <span></span></h1>
+                  <div class="sr-items">
+                    <p><i class="bi bi-hourglass-split index-loading"></i></p>
+                  </div>
+                  <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+                </div>
+ 
+
+                <div role="main" class="hide-when-search">
+
+                        <div class="subnav navbar navbar-default">
+                          <div class="container hide-when-search" id="breadcrumb">
+                            <ul class="breadcrumb">
+                              <li></li>
+                            </ul>
+                          </div>
+                        </div>
+
+                         <div class="contribution">
+                               <a href="https://github.com/MonoGame/docs.monogame.github.io/blob/main/articles/getting_to_know/whatis/content_pipeline/CP_CustomParamProcs.md/#L1" class="contribution-link">Edit this page</a>
+                         </div>
+
+                    <article class="content wrap" id="_content" data-uid="">
+
+<h2 id="programmatically-setting-parameter-values">Programmatically Setting Parameter Values</h2>
+<p>When you need to pass parameter values from one processor to another (also referred to as chaining), use the <a href="xref:Microsoft.Xna.Framework.Content.Pipeline.ContentProcessorContext">BuildAsset</a> and <a href="xref:Microsoft.Xna.Framework.Content.Pipeline.ContentProcessorContext">BuildAndLoadAsset</a> methods. Pass the parameter and its value using the <em>processorParameters</em> argument of the respective method. For example, a custom model processor would invoke a second processor for model textures with a call to <a href="xref:Microsoft.Xna.Framework.Content.Pipeline.ContentProcessorContext">BuildAsset</a> and pass any parameter values in the <em>processorParameters</em> argument.</p>
+<p>The following code example demonstrates this technique. First, add several parameters to a data dictionary:</p>
+<pre><code class="lang-csharp">      //create a dictionary to hold the processor parameter
+      OpaqueDataDictionary parameters = new OpaqueDataDictionary();
+
+      //add several parameters to the dictionary
+      parameters.Add( &quot;ColorKeyColor&quot;, Color.Magenta );
+      parameters.Add( &quot;ColorKeyEnabled&quot;, true );
+      parameters.Add( &quot;ResizeToPowerOfTwo&quot;, true );
+</code></pre>
+<p>After adding the necessary parameters, pass the dictionary to the chained processor:</p>
+<pre><code class="lang-csharp">      context.BuildAsset&lt;TextureContent, TextureContent=&quot;&quot;&gt;(
+      texture, typeof( TextureProcessor ).Name,
+      parameters,
+      null,
+      null );
+</code></pre>
+<p>This call passes all parameters (stored in <code>parameters</code>) to a texture processor.</p>
+<p>Again, any parameters not recognized by the receiving processor are ignored. Therefore, if the parameter <code>ColorKeyCode</code> is entered into the dictionary as <code>_ColourKeyCode_</code>, it is ignored by the receiving processor.</p>
+<h2 id="declaring-process-parameters">Declaring Process Parameters</h2>
+<p>Adding one or more parameters to your custom processor requires additional code in your processor's definition. Parameters support the following types:</p>
+<ul>
+<li>bool</li>
+<li>byte</li>
+<li>sbyte</li>
+<li>char</li>
+<li>decimal</li>
+<li>double</li>
+<li>float</li>
+<li>int</li>
+<li>uint</li>
+<li>long</li>
+<li>ulong</li>
+<li>short</li>
+<li>ushort</li>
+<li>string</li>
+<li>enum</li>
+<li><a href="xref:Microsoft.Xna.Framework.Vector2">Vector2</a>, <a href="xref:Microsoft.Xna.Framework.Vector3">Vector3</a>, and <a href="xref:Microsoft.Xna.Framework.Vector4">Vector4</a></li>
+<li><a href="xref:Microsoft.Xna.Framework.Color">Color</a></li>
+</ul>
+<p>Parameters of other types are ignored by the processor.</p>
+<div class="TIP">
+<h5>Tip</h5>
+<p>Apply the Browsable attribute (with a value of <strong>false</strong>) to an individual parameter to prevent that parameter from being displayed in the Properties window.</p>
+</div>
+<p>The following code example defines a simple custom processor that switches the coordinate system of a model using a single parameter (called switchCoordinateSystem):</p>
+<pre><code class="lang-csharp">      public class SwitchCoordSystemProcessor : ModelProcessor
+      {
+      #region Processor Parameters
+      private bool switchCoordinateSystem = false;
+
+      [DisplayName(&quot;Switch Coordinate System&quot;)]
+      [DefaultValue(false)]
+      [Description(&quot;Switches the coordinate system of a model.&quot;)]
+      public bool SwitchCoordinateSystem
+      {
+        get { return switchCoordinateSystem; }
+        set { switchCoordinateSystem = value; }
+      }
+      //additional class code follows...
+</code></pre>
+<p>In this code, the <code>SwitchCoordSystemProcessor</code> class is derived from <a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelProcessor">ModelProcessor</a>. This indicates that the processor accepts a model as input. The next few lines declare a single property called <code>SwitchCoordinateSystem</code> of type <strong>bool</strong>. Note that every parameter must have a <strong>set</strong> method. The property also has several attributes applied to it:</p>
+<table>
+<thead>
+<tr>
+<th>Attribute name</th>
+<th>Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DisplayName</td>
+<td>Name of the property when it appears in the Properties window of the MonoGame Pipeline tool. If not specified, the internal property name, declared in the source code, is used. For this example, &quot;Switch Coordinate System&quot; would be displayed.</td>
+</tr>
+<tr>
+<td>DefaultValue</td>
+<td>A user interface (UI) hint specifying the possible default value of the property. This value is used only as a UI hint; it will not be set on the property, nor will it override the default value declared in the code.</td>
+</tr>
+<tr>
+<td>Description</td>
+<td>Descriptive text displayed when you select the property in the Properties window of the MonoGame Pipeline Tool.</td>
+</tr>
+</tbody>
+</table>
+<p>This completes the definition of the <code>SwitchCoordinateSystem</code> property.</p>
+<p>In the next code example, the class definition is continued with an override of the <a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelProcessor">Process</a> method:</p>
+<pre><code class="lang-csharp">      //additional class code precedes...
+
+      public override ModelContent Process(NodeContent input, ContentProcessorContext context)
+      {
+        if (switchCoordinateSystem)
+        {
+          Matrix switchMatrix = Matrix.Identity;
+          switchMatrix.Forward = Vector3.Backward;
+          MeshHelper.TransformScene(input, switchMatrix);
+        }
+
+        return base.Process(input, context);
+      }
+</code></pre>
+<p>This code passes the <code>SwitchCoordinateSystem</code> property (declared earlier) value to <a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Graphics.MeshHelper">TransformScene</a>, which is a helper method that applies a transform to a scene hierarchy.</p>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="CP_Content_Advanced.html">Adding New Content Types</a></li>
+<li><a href="CP_StdParamProcs.html">Parameterized Content Processors</a></li>
+</ul>
+
+</article>
+                </div>
+
+            </main>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/jquery.twbsPagination.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/jquery.mark.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/url.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/anchor-js@5.0.0/anchor.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/docfx.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/main.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/singulink.js"></script>    </body>
+</html>

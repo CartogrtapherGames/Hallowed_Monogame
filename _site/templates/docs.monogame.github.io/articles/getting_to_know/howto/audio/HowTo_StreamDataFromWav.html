@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>How to stream Data from a WAV File | hallowed </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="How to stream Data from a WAV File | hallowed ">
+      <meta name="generator" content="docfx ">
+  
+      <link rel="shortcut icon" href="../../../../../../favicon.ico">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/night-owl.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" integrity="sha384-EvBWSlnoFgZlXJvpzS+MAUEjvN7+gcCwH+qh7GRFOGgZO0PuwOFro7qPOJnLfe7l" crossorigin="anonymous">
+      <link rel="stylesheet" href="../../../../../../styles/config.css">
+      <link rel="stylesheet" href="../../../../../../styles/singulink.css">
+      <link rel="stylesheet" href="../../../../../../styles/main.css">
+      <meta property="docfx:navrel" content="../../../../../../toc.html">
+      <meta property="docfx:tocrel" content="../../../toc.html">
+  
+  <meta property="docfx:rel" content="../../../../../../">
+  
+    </head>
+    <body>
+        <!-- Header required for docfx anchor scroll to work -->
+        <header id="head"></header>
+        <div class="top-navbar">
+            <a class="burger-icon" onclick="toggleMenu()">
+                <svg name="Hamburger" style="vertical-align: middle;" width="34" height="34" viewbox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M20 6H4V9H20V6ZM4 10.999H20V13.999H4V10.999ZM4 15.999H20V18.999H4V15.999Z"></path></svg>
+            </a>
+
+
+            <a class="brand" href="../../../../../../index.html">
+              <img src="../../../../../../logo.svg" alt="hallowed" class="logomark">
+              <span class="brand-title">hallowed</span>
+            </a>        </div>
+
+        <div class="body-content">
+            <div id="blackout" class="blackout" onclick="toggleMenu()"></div>
+
+            <nav id="sidebar" role="navigation">
+                <div class="sidebar">
+
+                    <div>
+                      <div class="mobile-hide">
+
+                        <a class="brand" href="../../../../../../index.html">
+                          <img src="../../../../../../logo.svg" alt="hallowed" class="logomark">
+                          <span class="brand-title">hallowed</span>
+                        </a>                      </div>
+
+                      <div class="sidesearch">
+                        <form id="search" role="search" class="search">
+                            <i class="bi bi-search search-icon"></i>
+                            <input type="text" id="search-query" placeholder="Search" autocomplete="off">
+                        </form>
+                      </div>
+
+                      <div id="navbar">
+                      </div>
+                    </div>                    <div class="sidebar-item-separator"></div>
+
+                        <div id="sidetoggle">
+                          <div id="sidetoc"></div>
+                        </div>
+                </div>
+                <div class="footer">
+  
+  <strong><a href='https://dotnet.github.io/docfx/'>DocFX</a> + <a href='https://www.singulink.com'>Singulink</a> = ♥</strong>
+                </div>            </nav>
+
+            <main class="main-panel">
+
+                <div id="search-results" style="display: none;">
+                  <h1 class="search-list">Search Results for <span></span></h1>
+                  <div class="sr-items">
+                    <p><i class="bi bi-hourglass-split index-loading"></i></p>
+                  </div>
+                  <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+                </div>
+ 
+
+                <div role="main" class="hide-when-search">
+
+                        <div class="subnav navbar navbar-default">
+                          <div class="container hide-when-search" id="breadcrumb">
+                            <ul class="breadcrumb">
+                              <li></li>
+                            </ul>
+                          </div>
+                        </div>
+
+                         <div class="contribution">
+                               <a href="https://github.com/MonoGame/docs.monogame.github.io/blob/main/articles/getting_to_know/howto/audio/HowTo_StreamDataFromWav.md/#L1" class="contribution-link">Edit this page</a>
+                         </div>
+
+                    <article class="content wrap" id="_content" data-uid="">
+
+<h2 id="overview">Overview</h2>
+<p>In this example we will demonstrate the uses of the <a href="xref:Microsoft.Xna.Framework.Audio.DynamicSoundEffectInstance">DynamicSoundEffectInstance</a> which is an advanced method for strictly controlling what audio data is going to be played.</p>
+<p>One approach is to tightly control the memory being used for playing audio, rather than loading an entire track into memory, you only need to load a sufficient amount to play audio for the current frame or frames.  Very useful when every bit of memory data counts.</p>
+<p>Another approach (Which was used in the <a href="https://martincaine.com/xna/introducing_vequencer_an_alphalabscc_experiment">Nokia AlphaLabs Experiment - Vequencer</a>) enables you to dynamically compose audio at runtime, especially useful when you want to control pacing and the number of instruments playing.  But buyer beware, it can be tricky to get this right. (but awesome when it works)</p>
+<h2 id="requirements">Requirements</h2>
+<p>This sample uses a sound file named <a href="https://github.com/MonoGame/MonoGame/raw/develop/Tests/Assets/Audio/rock_loop_mono.wav">rock_loop_mono.wav</a>, which you can download from <a href="https://github.com/MonoGame/MonoGame/raw/develop/Tests/Assets/Audio/rock_loop_mono.wav">this link here</a>. (save-as)
+But you can use your own if you wish.</p>
+<h2 id="opening-a-wave-file-for-streaming">Opening a wave file for streaming</h2>
+<ol>
+<li><p>Create global variables to hold the <a href="xref:Microsoft.Xna.Framework.Audio.DynamicSoundEffectInstance">DynamicSoundEffectInstance</a>, position, count, and data.</p>
+<pre><code class="lang-csharp">DynamicSoundEffectInstance dynamicSound;
+int position;
+int count;
+byte[] byteArray;
+</code></pre>
+</li>
+<li><p>In the <a href="xref:Microsoft.Xna.Framework.Game.LoadContent">Game.LoadContent</a> method of your game, open the audio data using <a href="xref:Microsoft.Xna.Framework.TitleContainer">TitleContainer.OpenStream</a>.</p>
+<pre><code class="lang-csharp">System.IO.Stream waveFileStream = TitleContainer.OpenStream(@&quot;Content\rock_loop_mono.wav&quot;);
+</code></pre>
+</li>
+<li><p>Create a new binary reader to read from the audio stream.</p>
+<pre><code class="lang-csharp">BinaryReader reader = new BinaryReader(waveFileStream);
+</code></pre>
+</li>
+<li><p>Read the wave file header from the buffer.</p>
+<pre><code class="lang-csharp">int chunkID = reader.ReadInt32();
+int fileSize = reader.ReadInt32();
+int riffType = reader.ReadInt32();
+int fmtID = reader.ReadInt32();
+int fmtSize = reader.ReadInt32();
+int fmtCode = reader.ReadInt16();
+int channels = reader.ReadInt16();
+int sampleRate = reader.ReadInt32();
+int fmtAvgBPS = reader.ReadInt32();
+int fmtBlockAlign = reader.ReadInt16();
+int bitDepth = reader.ReadInt16();
+
+if (fmtSize == 18)
+{
+    // Read any extra values
+    int fmtExtraSize = reader.ReadInt16();
+    reader.ReadBytes(fmtExtraSize);
+}
+
+int dataID = reader.ReadInt32();
+int dataSize = reader.ReadInt32();
+</code></pre>
+</li>
+<li><p>Store the audio data of the wave file to a byte array.</p>
+<pre><code class="lang-csharp">byteArray = reader.ReadBytes(dataSize);
+</code></pre>
+</li>
+<li><p>Create the new dynamic sound effect instance using the sample rate and channel information extracted from the sound file.</p>
+<pre><code class="lang-csharp">dynamicSound = new DynamicSoundEffectInstance(sampleRate, (AudioChannels)channels);
+</code></pre>
+</li>
+<li><p>Store the size of the audio buffer that is needed in the count variable, etting data in 100 ms chunks.</p>
+<pre><code class="lang-csharp">count = dynamicSound.GetSampleSizeInBytes(TimeSpan.FromMilliseconds(100));
+</code></pre>
+</li>
+<li><p>Set up the dynamic sound effect's &quot;buffer needed&quot; event handler, so audio data is only read when it needs more data.</p>
+<pre><code class="lang-csharp">dynamicSound.BufferNeeded += new EventHandler&lt;EventArgs&gt;(DynamicSound_BufferNeeded);
+</code></pre>
+</li>
+<li><p>Implement the buffer needed event handler after the <code>LoadContent</code> method.</p>
+<pre><code class="lang-csharp">void DynamicSound_BufferNeeded(object sender, EventArgs e)
+{
+    dynamicSound.SubmitBuffer(byteArray, position, count / 2);
+    dynamicSound.SubmitBuffer(byteArray, position + count / 2, count / 2);
+
+    position += count;
+    if (position + count &gt; byteArray.Length)
+    {
+        position = 0;
+    }
+}
+</code></pre>
+</li>
+<li><p>Below the <strong><a href="xref:Microsoft.Xna.Framework.Game#Microsoft_Xna_Framework_Game_Draw_Microsoft_Xna_Framework_GameTime_">Game.Draw</a></strong> method, create a new method called <strong>IsKeyPressed</strong>, which will check if a specified key is pressed and return a boolean value of true if it has been pressed.</p>
+<pre><code class="lang-csharp">private bool IsKeyPressed(Keys key)
+{
+    return Keyboard.GetState().IsKeyDown(key);
+}
+</code></pre>
+</li>
+<li><p>Use the controller buttons to play and stop the sound stream in the <code>Update</code> method.</p>
+<pre><code class="lang-csharp">    // Pressing the spacebar will start the DynamicSoundEffectInstance playing
+    if (IsKeyPressed(Keys.Space))
+    {
+        dynamicSound.Play();
+    }
+
+    // Pressing &quot;P&quot; will stop the audio playing.
+    if (IsKeyPressed(Keys.P))
+    {
+        dynamicSound.Pause();
+    }
+</code></pre>
+</li>
+</ol>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><p><a href="HowTo_PlayASound.html">Playing a Sound</a></p>
+<p>Demonstrates how to play a simple sound by using <a href="xref:Microsoft.Xna.Framework.Audio.SoundEffect">SoundEffect</a>.</p>
+</li>
+</ul>
+<h2 id="reference">Reference</h2>
+<ul>
+<li><p><a href="xref:Microsoft.Xna.Framework.Audio.DynamicSoundEffectInstance">DynamicSoundEffectInstance</a></p>
+<p>Provides properties, methods, and events for play back of the audio buffer.</p>
+</li>
+<li><p><a href="xref:Microsoft.Xna.Framework.Audio.DynamicSoundEffectInstance">BufferNeeded</a></p>
+<p>Event that occurs when the number of audio capture buffers awaiting playback is less than or equal to two.</p>
+</li>
+<li><p><a href="xref:Microsoft.Xna.Framework.TitleContainer">OpenStream</a></p>
+<p>Returns a stream to an existing file in the default title storage location.</p>
+</li>
+</ul>
+
+</article>
+                </div>
+
+            </main>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/jquery.twbsPagination.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/jquery.mark.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/url.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/anchor-js@5.0.0/anchor.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/docfx.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/main.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/singulink.js"></script>    </body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>What are the Parameterized Content Processors? | hallowed </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="What are the Parameterized Content Processors? | hallowed ">
+      <meta name="generator" content="docfx ">
+  
+      <link rel="shortcut icon" href="../../../../../../favicon.ico">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/night-owl.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" integrity="sha384-EvBWSlnoFgZlXJvpzS+MAUEjvN7+gcCwH+qh7GRFOGgZO0PuwOFro7qPOJnLfe7l" crossorigin="anonymous">
+      <link rel="stylesheet" href="../../../../../../styles/config.css">
+      <link rel="stylesheet" href="../../../../../../styles/singulink.css">
+      <link rel="stylesheet" href="../../../../../../styles/main.css">
+      <meta property="docfx:navrel" content="../../../../../../toc.html">
+      <meta property="docfx:tocrel" content="../../../toc.html">
+  
+  <meta property="docfx:rel" content="../../../../../../">
+  
+    </head>
+    <body>
+        <!-- Header required for docfx anchor scroll to work -->
+        <header id="head"></header>
+        <div class="top-navbar">
+            <a class="burger-icon" onclick="toggleMenu()">
+                <svg name="Hamburger" style="vertical-align: middle;" width="34" height="34" viewbox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M20 6H4V9H20V6ZM4 10.999H20V13.999H4V10.999ZM4 15.999H20V18.999H4V15.999Z"></path></svg>
+            </a>
+
+
+            <a class="brand" href="../../../../../../index.html">
+              <img src="../../../../../../logo.svg" alt="hallowed" class="logomark">
+              <span class="brand-title">hallowed</span>
+            </a>        </div>
+
+        <div class="body-content">
+            <div id="blackout" class="blackout" onclick="toggleMenu()"></div>
+
+            <nav id="sidebar" role="navigation">
+                <div class="sidebar">
+
+                    <div>
+                      <div class="mobile-hide">
+
+                        <a class="brand" href="../../../../../../index.html">
+                          <img src="../../../../../../logo.svg" alt="hallowed" class="logomark">
+                          <span class="brand-title">hallowed</span>
+                        </a>                      </div>
+
+                      <div class="sidesearch">
+                        <form id="search" role="search" class="search">
+                            <i class="bi bi-search search-icon"></i>
+                            <input type="text" id="search-query" placeholder="Search" autocomplete="off">
+                        </form>
+                      </div>
+
+                      <div id="navbar">
+                      </div>
+                    </div>                    <div class="sidebar-item-separator"></div>
+
+                        <div id="sidetoggle">
+                          <div id="sidetoc"></div>
+                        </div>
+                </div>
+                <div class="footer">
+  
+  <strong><a href='https://dotnet.github.io/docfx/'>DocFX</a> + <a href='https://www.singulink.com'>Singulink</a> = ♥</strong>
+                </div>            </nav>
+
+            <main class="main-panel">
+
+                <div id="search-results" style="display: none;">
+                  <h1 class="search-list">Search Results for <span></span></h1>
+                  <div class="sr-items">
+                    <p><i class="bi bi-hourglass-split index-loading"></i></p>
+                  </div>
+                  <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+                </div>
+ 
+
+                <div role="main" class="hide-when-search">
+
+                        <div class="subnav navbar navbar-default">
+                          <div class="container hide-when-search" id="breadcrumb">
+                            <ul class="breadcrumb">
+                              <li></li>
+                            </ul>
+                          </div>
+                        </div>
+
+                         <div class="contribution">
+                               <a href="https://github.com/MonoGame/docs.monogame.github.io/blob/main/articles/getting_to_know/whatis/content_pipeline/CP_StdParamProcs.md/#L1" class="contribution-link">Edit this page</a>
+                         </div>
+
+                    <article class="content wrap" id="_content" data-uid="">
+
+
+<p>Describes how parameterized Content Processors work in MonoGame. Many of the standard Content Pipeline Content Processors shipped with XNA Game Studio support parameter usage. Parameterization makes any standard or custom Content Processor more flexible and better able to meet the needs of your XNA Framework application. In addition to specifying values for standard parameters, you can easily implement parameter support for a new or an existing custom Content Processor. For more information, see <a href="CP_CustomParamProcs.html">Developing with Parameterized Processors</a>.</p>
+<p>When you select a game asset, the Properties window displays the parameters for the related Content Processor. Use the Properties window at any time to modify these parameter values.</p>
+<div class="TIP">
+<h5>Tip</h5>
+<p>If you change the Content Processor for a game asset to a different Content Processor, all parameter values are reset to their default values. This means that if you modify the <strong>Generate Mipmaps</strong> parameter value for the <a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Processors.TextureProcessor">TextureProcessor</a> and then switch to a different Content Processor (for example, <a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Processors.FontTextureProcessor">FontTextureProcessor Class</a>), the parameters switch to the default values for that Content Processor. If you then switch back again, the modified values are reset to the default values of the original Content Processor. <em>The values do not revert to the modified values you set originally</em>.</p>
+</div>
+<h2 id="standard-parameterized-content-processors">Standard Parameterized Content Processors</h2>
+<p>The following describes only standard Content Processors that accept parameters, the parameter types, and their default value. For more information about all standard Content Processors, see <a href="CP_StdImpsProcs.html">Standard Content Importers and Content Processors</a>.</p>
+<table>
+<thead>
+<tr>
+<th>Friendly name</th>
+<th>Type name</th>
+<th>Input type</th>
+<th>Output type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Model</td>
+<td><a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelProcessor">ModelProcessor</a></td>
+<td><a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Graphics.NodeContent">NodeContent Class</a></td>
+<td><a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelContent">ModelContent Class</a></td>
+<td>A parameterized Content Processor that outputs models as a <a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelContent">ModelContent Class</a> object.<br>Available parameters:<br><em>Color Key Color–Any valid <a href="xref:Microsoft.Xna.Framework.Color">Color</a>. <a href="xref:Microsoft.Xna.Framework.Color">Magenta</a> is the default value.<br></em>   Color Key Enabled–A Boolean value indicating if color keying is enabled. The default value is <strong>true</strong>.<br><em>Generate Mipmaps–A Boolean value indicating if mipmaps are generated. The default value is <strong>false</strong>.<br></em>   Generate Tangent Frames–A Boolean value indicating if tangent frames are generated. The default value is <strong>false</strong>.<br><em>Resize Textures to Power of Two–A Boolean value indicating if a texture is resized to the next largest power of 2. The default value is <strong>false</strong>.<br></em>   Scale–Any valid <a href="http://msdn.microsoft.com/en-us/library/system.single.aspx">float</a> value. The default value is 1.0.<br><em>Swap Winding Order–A Boolean value indicating if the winding order is swapped. This is useful for models that appear to be drawn inside out. The default value is <strong>false</strong>.<br></em>   Texture Format–Any valid value from <a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Processors.TextureProcessorOutputFormat">TextureProcessorOutputFormat</a>. Textures are either unchanged, converted to the Color format, or Compressed using the specified Compression algorithm.<br><em>X Axis Rotation–Number, in degrees of rotation. The default value is 0.<br></em>   Y Axis Rotation–Number, in degrees of rotation. The default value is 0.<br>*   Z Axis Rotation–Number, in degrees of rotation. The default value is 0.</td>
+</tr>
+<tr>
+<td>Sprite Font Texture</td>
+<td><a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Processors.FontTextureProcessor">FontTextureProcessor</a></td>
+<td><a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Graphics.TextureContent">TextureContent Class</a></td>
+<td><a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Graphics.SpriteFontContent">SpriteFontContent</a></td>
+<td>A parameterized Content Processor that outputs a sprite font texture as a <a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Graphics.SpriteFontContent">SpriteFontContent</a> object.<br>Available parameters:<br><br>*   First Character–Any valid character. The space character is the default value.</td>
+</tr>
+<tr>
+<td>Texture</td>
+<td><a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Processors.TextureProcessor">TextureProcessor</a></td>
+<td><a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Graphics.TextureContent">TextureContent Class</a></td>
+<td><a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Graphics.TextureContent">TextureContent Class</a></td>
+<td>A parameterized Content Processor that outputs textures as a <a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Graphics.TextureContent">TextureContent Class</a> object.<br>Available parameters:<br><br><em>Color Key Color–Any valid <a href="xref:Microsoft.Xna.Framework.Color">Color</a>. <a href="xref:Microsoft.Xna.Framework.Color">Magenta</a> is the default value.<br></em>   Color Key Enabled–A Boolean value indicating if color keying is enabled. The default value is <strong>true</strong>.<br><em>Generate Mipmaps–A Boolean value indicating if mipmaps are generated. The default value is <strong>false</strong>.<br></em>   Resize to Power of Two–A Boolean value indicating if a texture is resized to the next largest power of 2. The default value is <strong>false</strong>.<br>*   Texture Format–Any valid value from <a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Processors.TextureProcessorOutputFormat">TextureProcessorOutputFormat</a>. Textures are unchanged, converted to the <strong>Color</strong> format, or Compressed using the specified Compression algorithm.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="../../howto/content_pipeline/HowTo_GameContent_Add.html">Adding Content to a Game</a></li>
+</ul>
+
+</article>
+                </div>
+
+            </main>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/jquery.twbsPagination.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/jquery.mark.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/url.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/anchor-js@5.0.0/anchor.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/docfx.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/main.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/singulink.js"></script>    </body>
+</html>

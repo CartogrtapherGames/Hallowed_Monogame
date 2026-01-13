@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Adding Basic Code | hallowed </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Adding Basic Code | hallowed ">
+      <meta name="generator" content="docfx ">
+  
+      <link rel="shortcut icon" href="../../../../favicon.ico">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/night-owl.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" integrity="sha384-EvBWSlnoFgZlXJvpzS+MAUEjvN7+gcCwH+qh7GRFOGgZO0PuwOFro7qPOJnLfe7l" crossorigin="anonymous">
+      <link rel="stylesheet" href="../../../../styles/config.css">
+      <link rel="stylesheet" href="../../../../styles/singulink.css">
+      <link rel="stylesheet" href="../../../../styles/main.css">
+      <meta property="docfx:navrel" content="../../../../toc.html">
+      <meta property="docfx:tocrel" content="../toc.html">
+  
+  <meta property="docfx:rel" content="../../../../">
+  
+    </head>
+    <body>
+        <!-- Header required for docfx anchor scroll to work -->
+        <header id="head"></header>
+        <div class="top-navbar">
+            <a class="burger-icon" onclick="toggleMenu()">
+                <svg name="Hamburger" style="vertical-align: middle;" width="34" height="34" viewbox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M20 6H4V9H20V6ZM4 10.999H20V13.999H4V10.999ZM4 15.999H20V18.999H4V15.999Z"></path></svg>
+            </a>
+
+
+            <a class="brand" href="../../../../index.html">
+              <img src="../../../../logo.svg" alt="hallowed" class="logomark">
+              <span class="brand-title">hallowed</span>
+            </a>        </div>
+
+        <div class="body-content">
+            <div id="blackout" class="blackout" onclick="toggleMenu()"></div>
+
+            <nav id="sidebar" role="navigation">
+                <div class="sidebar">
+
+                    <div>
+                      <div class="mobile-hide">
+
+                        <a class="brand" href="../../../../index.html">
+                          <img src="../../../../logo.svg" alt="hallowed" class="logomark">
+                          <span class="brand-title">hallowed</span>
+                        </a>                      </div>
+
+                      <div class="sidesearch">
+                        <form id="search" role="search" class="search">
+                            <i class="bi bi-search search-icon"></i>
+                            <input type="text" id="search-query" placeholder="Search" autocomplete="off">
+                        </form>
+                      </div>
+
+                      <div id="navbar">
+                      </div>
+                    </div>                    <div class="sidebar-item-separator"></div>
+
+                        <div id="sidetoggle">
+                          <div id="sidetoc"></div>
+                        </div>
+                </div>
+                <div class="footer">
+  
+  <strong><a href='https://dotnet.github.io/docfx/'>DocFX</a> + <a href='https://www.singulink.com'>Singulink</a> = ♥</strong>
+                </div>            </nav>
+
+            <main class="main-panel">
+
+                <div id="search-results" style="display: none;">
+                  <h1 class="search-list">Search Results for <span></span></h1>
+                  <div class="sr-items">
+                    <p><i class="bi bi-hourglass-split index-loading"></i></p>
+                  </div>
+                  <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+                </div>
+ 
+
+                <div role="main" class="hide-when-search">
+
+                        <div class="subnav navbar navbar-default">
+                          <div class="container hide-when-search" id="breadcrumb">
+                            <ul class="breadcrumb">
+                              <li></li>
+                            </ul>
+                          </div>
+                        </div>
+
+                         <div class="contribution">
+                               <a href="https://github.com/MonoGame/docs.monogame.github.io/blob/main/articles/getting_started/5_adding_basic_code.md/#L1" class="contribution-link">Edit this page</a>
+                         </div>
+
+                    <article class="content wrap" id="_content" data-uid="">
+
+
+<div class="NOTE">
+<h5>Note</h5>
+<p>this tutorial continues from where <a href="4_adding_content.html">5. Adding Content</a> left off.</p>
+</div>
+<h2 id="positioning-the-content">Positioning the content</h2>
+<p>First, you need to add few new variables in the <code>Game1.cs</code> class file: A <code>Vector2</code> for position and a <code>float</code> for speed.</p>
+<pre><code class="lang-csharp">    public class Game1 : Game
+    {
+        Texture2D ballTexture;
+        Vector2 ballPosition;
+        float ballSpeed;
+    }
+</code></pre>
+<p>Next, you need to initialize them. Find the <code>Initialize</code> method and add the following lines.</p>
+<pre><code class="lang-csharp">    protected override void Initialize()
+    {
+        // TODO: Add your initialization logic here
+        ballPosition = new Vector2(_graphics.PreferredBackBufferWidth / 2,
+                                   _graphics.PreferredBackBufferHeight / 2);
+        ballSpeed = 100f;
+        
+        base.Initialize();
+    }
+</code></pre>
+<p>With this, you are setting the ball's starting position to the center of the screen based on the dimensions of the screen determined by the current <code>BackBufferWidth</code> and <code>BackBufferHeight</code> that was obtained from the <code>Graphics Device</code> (the current resolution the game is running at).</p>
+<p>Lastly, change the <code>Draw</code> method to draw the ball at the correct position.  Find the <code>Draw</code> method and update the <code>spriteBatch.Draw</code> call to:</p>
+<pre><code class="lang-csharp">_spriteBatch.Draw(ballTexture, ballPosition, Color.White);
+</code></pre>
+<p>Now run the game.</p>
+<p><img src="images/4_ball_not_center.png" alt="Draw Ball 1"></p>
+<p>As you can see, the ball is not quite centered yet. That is because the default <code>origin</code> of a texture is its <code>top-left corner</code>, or <code>(0, 0)</code> relative to the texture. The ball texture is drawn with its top-left corner exactly centered, rather than its actual center. You can specify a different origin when drawing, as shown in the following code snippet. The new origin takes into account the height and width of the image when drawing:</p>
+<pre><code class="lang-csharp">_spriteBatch.Draw(
+    ballTexture,
+    ballPosition,
+    null,
+    Color.White,
+    0f,
+    new Vector2(ballTexture.Width / 2, ballTexture.Height / 2),
+    Vector2.One,
+    SpriteEffects.None,
+    0f
+);
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>For more details on drawing textures, check out the <a href="../getting_to_know/howto/graphics/HowTo_Draw_A_Sprite.html">How To Draw a Sprite</a> series which goes in to greater detail.</p>
+</div>
+<p>This change adds a few extra parameters to the spriteBatch.Draw call, but do not worry about that for now. This new code sets the actual center <code>(width / 2 and height / 2)</code> of the image as its origin (drawing point).</p>
+<p>Now the image will get drawn to the center of the screen.</p>
+<p><img src="images/4_ball_center.png" alt="Draw Ball 2"></p>
+<h2 id="getting-user-input-via-keyboard">Getting user input via keyboard</h2>
+<p>Time to set up some movement. Find the <code>Update</code> method in the <code>Game1.cs</code> class file and add:</p>
+<pre><code class="lang-csharp">    protected override void Update(GameTime gameTime)
+    {
+        if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || 
+                             Keyboard.GetState().IsKeyDown(Keys.Escape))
+            Exit();
+
+        // TODO: Add your update logic here
+
+        // The time since Update was called last.
+        float updatedBallSpeed = ballSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+        var kstate = Keyboard.GetState();
+        
+        if (kstate.IsKeyDown(Keys.Up))
+        {
+            ballPosition.Y -= updatedBallSpeed;
+        }
+        
+        if (kstate.IsKeyDown(Keys.Down))
+        {
+            ballPosition.Y += updatedBallSpeed;
+        }
+        
+        if (kstate.IsKeyDown(Keys.Left))
+        {
+            ballPosition.X -= updatedBallSpeed;
+        }
+        
+        if (kstate.IsKeyDown(Keys.Right))
+        {
+            ballPosition.X += updatedBallSpeed;
+        }
+        
+        base.Update(gameTime);
+    }
+</code></pre>
+<p>The following is a line-by-line analysis of the above code.</p>
+<h3 id="calculating-speed-based-on-framerate">Calculating speed based on framerate</h3>
+<pre><code class="lang-csharp">float updatedBallSpeed = ballSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+</code></pre>
+<p>This code caches how much time, in seconds, since the last <code>Update</code> call was run, which gives us the duration of a single frame drawn to the screen.  This is then multiplied by the <code>ballSpeed</code> value to allow us to control just how fast the ball moves each frame.</p>
+<p>The reason why <code>ballSpeed</code> is multiplied by <code>gameTime.ElapsedGameTime.TotalSeconds</code> is because, when not using fixed time step, the time between Update calls varies. To account for this, the ballSpeed is multiplied by the amount of time that has passed since the last Update call. The result is that the ball appears to move at the same speed regardless of what framerate the game happens to be running at.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Try experimenting with what happens if you do not multiply the <code>ballSpeed</code> by <code>gameTime.ElapsedGameTime.TotalSeconds</code>, to see the difference it makes.</p>
+</div>
+<h3 id="getting-keyboard-state">Getting Keyboard state</h3>
+<pre><code class="lang-csharp">var kstate = Keyboard.GetState();
+</code></pre>
+<p>This code fetches the current keyboard state (<code>Keyboard.GetState()</code>) and stores it into a variable called <code>kstate</code>.</p>
+<h3 id="checking-keyboard-state">Checking Keyboard state</h3>
+<pre><code class="lang-csharp">if (kstate.IsKeyDown(Keys.Up))
+</code></pre>
+<p>This line checks to see if the <code>Up Arrow</code> key is pressed.</p>
+<h3 id="updating-the-graphics-position-to-draw-to">Updating the graphics position to draw to</h3>
+<pre><code class="lang-csharp">    ballPosition.Y -= updatedBallSpeed;
+</code></pre>
+<p>If the <code>Up Arrow</code> key is pressed, the ball moves using the value you assigned to by the calculated <code>ballSpeed</code> variable.</p>
+<p>The rest of the lines of code do the same thing but for the <code>Down</code>, <code>Left</code> and <code>Right</code> Arrow keys, and down, left, and right movement, respectively.</p>
+<p>If you run the game, you should be able to move the ball with the arrow keys.</p>
+<h2 id="getting-user-input-via-joystick--gamepad">Getting user input via Joystick / GamePad</h2>
+<p>Another option for user input is the &lt;xref:Microsoft.Xna.Framework.Input.Joystick&gt; or &lt;xref:Microsoft.Xna.Framework.Input.GamePad&gt; classes. Setting up input for Joysticks and GamePads is very similar to setting up keyboard input, the following example is designed while using a single joystick connected to the host, to support more, you will need to evaluate all the connected joysticks and read their input (see &lt;xref:Microsoft.Xna.Framework.Input.JoystickState#Microsoft_Xna_Framework_Input_JoystickState_IsConnected&gt; for reference).</p>
+<p>Find the <code>Update</code> method in the Game1.cs class file and add:</p>
+<pre><code class="lang-csharp">if(Joystick.LastConnectedIndex == 0)
+{
+    JoystickState jstate = Joystick.GetState((int) PlayerIndex.One);
+
+    float updatedBallSpeed = ballSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+    if (jstate.Axes[1] &lt; 0)
+    {
+        ballPosition.Y -= updatedBallSpeed;
+    }
+    else if (jstate.Axes[1] &gt; 0)
+    {
+        ballPosition.Y += updatedBallSpeed;
+    }
+
+    if (jstate.Axes[0] &lt; 0)
+    {
+        ballPosition.X -= updatedBallSpeed;
+    }
+    else if (jstate.Axes[0] &gt; 0)
+    {
+        ballPosition.X += updatedBallSpeed;
+    }
+}
+</code></pre>
+<p>The following is a line-by-line analysis of the above code.</p>
+<h3 id="check-joysticks-connection-state">Check Joysticks connection state</h3>
+<pre><code class="lang-csharp">if(Joystick.LastConnectedIndex == 0)
+</code></pre>
+<p>This code assumes that we have a single controller plugged into our device. <code>LastConnectedIndex</code> is the index of the last connected controller. The default is <code>-1</code>, which would mean no controller is plugged in.
+If there is no controller, the code inside the if statement will be skipped over.</p>
+<h3 id="get-the-current-state-of-joystick-1">Get the current state of Joystick 1</h3>
+<pre><code class="lang-csharp">JoystickState jstate = Joystick.GetState((int) PlayerIndex.One);
+</code></pre>
+<p>This code fetches the current first joystick state <code>Joystick.GetState((int) PlayerIndex.One)</code> and stores it into a variable called <code>jstate</code>.</p>
+<h3 id="check-the-current-value-of-axis-2">Check the current value of &quot;Axis&quot; 2</h3>
+<pre><code class="lang-csharp">if (jstate.Axes[1] &lt; 0)
+</code></pre>
+<p>This line checks whether the &quot;second&quot; <code>Joystick axis</code> is less than 0.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>The Joystick class stores multiple axis of direction for anything with an integer based range. For any number of 2D axis sticks, it stores it in an x,y format inside of an integer array.</p>
+</div>
+<p>The axis of movement for 2D joysticks goes from <code>-32768</code> to <code>32768</code> on most modern controllers. Aiming the Joystick upwards results in a negative value on the <code>Y-axis</code> (Axes[1]).</p>
+<p>The rest of the lines of the code do the same thing but for their relevant x and y directions.</p>
+<p>If you run the game, you should be able to move the ball with the left Joystick on your controller if one is plugged in.  For GamePads, just use the <code>GamePad</code> versions of the same <code>JoyStick</code> classes, but remember, GamePads usually have multiple &quot;sticks&quot; for the left and right hand sides of the controller.</p>
+<h2 id="handling-dead-zones-with-joysticksgamepads">Handling &quot;Dead Zones&quot; with Joysticks/GamePads</h2>
+<p>You will probably notice that the ball slightly moves on its own when controlled via a JoyStick or GamePad, which is likely be the result of your Joystick having a slight drift, a common scenario. You can fix that by adding a <code>deadzone</code> and changing the conditions to use this <code>deadzone</code> (a value range that needs to be exceeded in order to &quot;act&quot; on the Joystick/Keyboard input).</p>
+<pre><code class="lang-csharp">public class Game1 : Game
+{
+    ...
+    Texture2D ballTexture;
+    Vector2 ballPosition;
+    float ballSpeed;
+
+    int deadZone;
+</code></pre>
+<p>Next, you need to initialize the deadzone. Find the <code>Initialize</code> method and add the following line.</p>
+<pre><code class="lang-csharp">deadZone = 4096;
+</code></pre>
+<p>Now, replace the conditions for the Joystick movement in <code>Update</code> to the following:</p>
+<pre><code class="lang-csharp">if (jstate.Axes[1] &lt; -deadZone)
+{
+    ballPosition.Y -= updatedBallSpeed;
+}
+else if (jstate.Axes[1] &gt; deadZone)
+{
+    ballPosition.Y += updatedBallSpeed;
+}
+
+if (jstate.Axes[0] &lt; -deadZone)
+{
+    ballPosition.X -= updatedBallSpeed;
+}
+else if (jstate.Axes[0] &gt; deadZone)
+{
+    ballPosition.X += updatedBallSpeed;
+}
+</code></pre>
+<p>If you run the game and move the Joystick around, you should notice that your Joystick has to move a decent distance before the ball starts moving. This is what a deadZone does, it allows for there to be a minimum distance before the input is reflected in the game.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Try experimenting with what happens when you change the value of the deadZone. Mess around and find an amount that fits your project.</p>
+</div>
+<h2 id="handling-screen-borders">Handling screen borders</h2>
+<p>You will probably notice that the ball is not confined to the window. You can fix that by setting bounds onto the ballPosition after it has already been moved to ensure it cannot go further than the width or height of the screen.</p>
+<pre><code class="lang-csharp">if (kstate.IsKeyDown(Keys.Right))
+{
+    ballPosition.X += updatedBallSpeed;
+}
+
+if (ballPosition.X &gt; _graphics.PreferredBackBufferWidth - ballTexture.Width / 2)
+{
+    ballPosition.X = _graphics.PreferredBackBufferWidth - ballTexture.Width / 2;
+}
+else if (ballPosition.X &lt; ballTexture.Width / 2)
+{
+    ballPosition.X = ballTexture.Width / 2;
+}
+
+if (ballPosition.Y &gt; _graphics.PreferredBackBufferHeight - ballTexture.Height / 2)
+{
+    ballPosition.Y = _graphics.PreferredBackBufferHeight - ballTexture.Height / 2;
+}
+else if (ballPosition.Y &lt; ballTexture.Height / 2)
+{
+    ballPosition.Y = ballTexture.Height / 2;
+}
+
+base.Update(gameTime);
+</code></pre>
+<p>Now run the game to test for yourself that the ball cannot go beyond the window bounds any more.</p>
+<p>Happy Coding ^^</p>
+<hr>
+<h2 id="next-steps">Next Steps</h2>
+<p>We recommend browsing through the <a href="../getting_to_know/index.html">Getting to know MonoGame</a> section to learn more and get some tips and tricks from the MonoGame team.</p>
+<ul>
+<li><a href="../getting_to_know/index.html">Getting to know MonoGame</a></li>
+<li><a href="../getting_to_know/whatis/index.html">What Is articles</a></li>
+<li><a href="../getting_to_know/howto/index.html">How To articles</a></li>
+</ul>
+<h2 id="further-reading">Further Reading</h2>
+<p>Check out the <a href="../tutorials/index.html">Tutorials section</a> for many more helpful guides and tutorials on building games with MonoGame.  We have an expansive library of helpful content, all provided by other MonoGame developers in the community.</p>
+<p>Additionally, be sure to check out the official <a href="../samples.html">MonoGame Samples</a> page for fully built sample projects built with MonoGame and targeting our most common platforms.</p>
+
+</article>
+                </div>
+
+            </main>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+        <script type="text/javascript" src="../../../../styles/jquery.twbsPagination.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/jquery.mark.min.js"></script>
+        <script type="text/javascript" src="../../../../styles/url.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/anchor-js@5.0.0/anchor.min.js"></script>
+        <script type="text/javascript" src="../../../../styles/docfx.js"></script>
+        <script type="text/javascript" src="../../../../styles/main.js"></script>
+        <script type="text/javascript" src="../../../../styles/singulink.js"></script>    </body>
+</html>

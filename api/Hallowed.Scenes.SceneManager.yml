@@ -1,0 +1,543 @@
+### YamlMime:ManagedReference
+items:
+- uid: Hallowed.Scenes.SceneManager
+  commentId: T:Hallowed.Scenes.SceneManager
+  id: SceneManager
+  parent: Hallowed.Scenes
+  children:
+  - Hallowed.Scenes.SceneManager.#ctor(Hallowed.Core.GameEngine)
+  - Hallowed.Scenes.SceneManager.Goto(Hallowed.Scenes.SceneBase)
+  - Hallowed.Scenes.SceneManager.Initialize
+  - Hallowed.Scenes.SceneManager.Scene
+  langs:
+  - csharp
+  - vb
+  name: SceneManager
+  nameWithType: SceneManager
+  fullName: Hallowed.Scenes.SceneManager
+  type: Class
+  source:
+    remote:
+      path: Hallowed/Source/Scenes/SceneManager.cs
+      branch: master
+      repo: https://github.com/CartogrtapherGames/Hallowed_Monogame.git
+    id: SceneManager
+    path: Hallowed/Source/Scenes/SceneManager.cs
+    startLine: 8
+  assemblies:
+  - Hallowed
+  namespace: Hallowed.Scenes
+  syntax:
+    content: 'public class SceneManager : IGameComponent'
+    content.vb: Public Class SceneManager Implements IGameComponent
+  inheritance:
+  - System.Object
+  implements:
+  - Microsoft.Xna.Framework.IGameComponent
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: Hallowed.Scenes.SceneManager.Scene
+  commentId: P:Hallowed.Scenes.SceneManager.Scene
+  id: Scene
+  parent: Hallowed.Scenes.SceneManager
+  langs:
+  - csharp
+  - vb
+  name: Scene
+  nameWithType: SceneManager.Scene
+  fullName: Hallowed.Scenes.SceneManager.Scene
+  type: Property
+  source:
+    remote:
+      path: Hallowed/Source/Scenes/SceneManager.cs
+      branch: master
+      repo: https://github.com/CartogrtapherGames/Hallowed_Monogame.git
+    id: Scene
+    path: Hallowed/Source/Scenes/SceneManager.cs
+    startLine: 11
+  assemblies:
+  - Hallowed
+  namespace: Hallowed.Scenes
+  syntax:
+    content: public SceneBase Scene { get; }
+    parameters: []
+    return:
+      type: Hallowed.Scenes.SceneBase
+    content.vb: Public Property Scene As SceneBase
+  overload: Hallowed.Scenes.SceneManager.Scene*
+- uid: Hallowed.Scenes.SceneManager.#ctor(Hallowed.Core.GameEngine)
+  commentId: M:Hallowed.Scenes.SceneManager.#ctor(Hallowed.Core.GameEngine)
+  id: '#ctor(Hallowed.Core.GameEngine)'
+  parent: Hallowed.Scenes.SceneManager
+  langs:
+  - csharp
+  - vb
+  name: SceneManager(GameEngine)
+  nameWithType: SceneManager.SceneManager(GameEngine)
+  fullName: Hallowed.Scenes.SceneManager.SceneManager(Hallowed.Core.GameEngine)
+  type: Constructor
+  source:
+    remote:
+      path: Hallowed/Source/Scenes/SceneManager.cs
+      branch: master
+      repo: https://github.com/CartogrtapherGames/Hallowed_Monogame.git
+    id: .ctor
+    path: Hallowed/Source/Scenes/SceneManager.cs
+    startLine: 16
+  assemblies:
+  - Hallowed
+  namespace: Hallowed.Scenes
+  syntax:
+    content: public SceneManager(GameEngine game)
+    parameters:
+    - id: game
+      type: Hallowed.Core.GameEngine
+    content.vb: Public Sub New(game As GameEngine)
+  overload: Hallowed.Scenes.SceneManager.#ctor*
+  nameWithType.vb: SceneManager.New(GameEngine)
+  fullName.vb: Hallowed.Scenes.SceneManager.New(Hallowed.Core.GameEngine)
+  name.vb: New(GameEngine)
+- uid: Hallowed.Scenes.SceneManager.Initialize
+  commentId: M:Hallowed.Scenes.SceneManager.Initialize
+  id: Initialize
+  parent: Hallowed.Scenes.SceneManager
+  langs:
+  - csharp
+  - vb
+  name: Initialize()
+  nameWithType: SceneManager.Initialize()
+  fullName: Hallowed.Scenes.SceneManager.Initialize()
+  type: Method
+  source:
+    remote:
+      path: Hallowed/Source/Scenes/SceneManager.cs
+      branch: master
+      repo: https://github.com/CartogrtapherGames/Hallowed_Monogame.git
+    id: Initialize
+    path: Hallowed/Source/Scenes/SceneManager.cs
+    startLine: 21
+  assemblies:
+  - Hallowed
+  namespace: Hallowed.Scenes
+  summary: Initializes the component. Used to load non-graphical resources.
+  example: []
+  syntax:
+    content: public void Initialize()
+    content.vb: Public Sub Initialize()
+  overload: Hallowed.Scenes.SceneManager.Initialize*
+  implements:
+  - Microsoft.Xna.Framework.IGameComponent.Initialize
+- uid: Hallowed.Scenes.SceneManager.Goto(Hallowed.Scenes.SceneBase)
+  commentId: M:Hallowed.Scenes.SceneManager.Goto(Hallowed.Scenes.SceneBase)
+  id: Goto(Hallowed.Scenes.SceneBase)
+  parent: Hallowed.Scenes.SceneManager
+  langs:
+  - csharp
+  - vb
+  name: Goto(SceneBase)
+  nameWithType: SceneManager.Goto(SceneBase)
+  fullName: Hallowed.Scenes.SceneManager.Goto(Hallowed.Scenes.SceneBase)
+  type: Method
+  source:
+    remote:
+      path: Hallowed/Source/Scenes/SceneManager.cs
+      branch: master
+      repo: https://github.com/CartogrtapherGames/Hallowed_Monogame.git
+    id: Goto
+    path: Hallowed/Source/Scenes/SceneManager.cs
+    startLine: 27
+  assemblies:
+  - Hallowed
+  namespace: Hallowed.Scenes
+  syntax:
+    content: public void Goto(SceneBase scene)
+    parameters:
+    - id: scene
+      type: Hallowed.Scenes.SceneBase
+    content.vb: Public Sub [Goto](scene As SceneBase)
+  overload: Hallowed.Scenes.SceneManager.Goto*
+references:
+- uid: Hallowed.Scenes
+  commentId: N:Hallowed.Scenes
+  href: Hallowed.html
+  name: Hallowed.Scenes
+  nameWithType: Hallowed.Scenes
+  fullName: Hallowed.Scenes
+  spec.csharp:
+  - uid: Hallowed
+    name: Hallowed
+    href: Hallowed.html
+  - name: .
+  - uid: Hallowed.Scenes
+    name: Scenes
+    href: Hallowed.Scenes.html
+  spec.vb:
+  - uid: Hallowed
+    name: Hallowed
+    href: Hallowed.html
+  - name: .
+  - uid: Hallowed.Scenes
+    name: Scenes
+    href: Hallowed.Scenes.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Microsoft.Xna.Framework.IGameComponent
+  commentId: T:Microsoft.Xna.Framework.IGameComponent
+  parent: Microsoft.Xna.Framework
+  isExternal: true
+  name: IGameComponent
+  nameWithType: IGameComponent
+  fullName: Microsoft.Xna.Framework.IGameComponent
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Microsoft.Xna.Framework
+  commentId: N:Microsoft.Xna.Framework
+  isExternal: true
+  name: Microsoft.Xna.Framework
+  nameWithType: Microsoft.Xna.Framework
+  fullName: Microsoft.Xna.Framework
+  spec.csharp:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+  - name: .
+  - uid: Microsoft.Xna
+    name: Xna
+    isExternal: true
+  - name: .
+  - uid: Microsoft.Xna.Framework
+    name: Framework
+    isExternal: true
+  spec.vb:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+  - name: .
+  - uid: Microsoft.Xna
+    name: Xna
+    isExternal: true
+  - name: .
+  - uid: Microsoft.Xna.Framework
+    name: Framework
+    isExternal: true
+- uid: Hallowed.Scenes.SceneManager.Scene*
+  commentId: Overload:Hallowed.Scenes.SceneManager.Scene
+  href: Hallowed.Scenes.SceneManager.html#Hallowed_Scenes_SceneManager_Scene
+  name: Scene
+  nameWithType: SceneManager.Scene
+  fullName: Hallowed.Scenes.SceneManager.Scene
+- uid: Hallowed.Scenes.SceneBase
+  commentId: T:Hallowed.Scenes.SceneBase
+  parent: Hallowed.Scenes
+  href: Hallowed.Scenes.SceneBase.html
+  name: SceneBase
+  nameWithType: SceneBase
+  fullName: Hallowed.Scenes.SceneBase
+- uid: Hallowed.Scenes.SceneManager.#ctor*
+  commentId: Overload:Hallowed.Scenes.SceneManager.#ctor
+  href: Hallowed.Scenes.SceneManager.html#Hallowed_Scenes_SceneManager__ctor_Hallowed_Core_GameEngine_
+  name: SceneManager
+  nameWithType: SceneManager.SceneManager
+  fullName: Hallowed.Scenes.SceneManager.SceneManager
+  nameWithType.vb: SceneManager.New
+  fullName.vb: Hallowed.Scenes.SceneManager.New
+  name.vb: New
+- uid: Hallowed.Core.GameEngine
+  commentId: T:Hallowed.Core.GameEngine
+  parent: Hallowed.Core
+  href: Hallowed.Core.GameEngine.html
+  name: GameEngine
+  nameWithType: GameEngine
+  fullName: Hallowed.Core.GameEngine
+- uid: Hallowed.Core
+  commentId: N:Hallowed.Core
+  href: Hallowed.html
+  name: Hallowed.Core
+  nameWithType: Hallowed.Core
+  fullName: Hallowed.Core
+  spec.csharp:
+  - uid: Hallowed
+    name: Hallowed
+    href: Hallowed.html
+  - name: .
+  - uid: Hallowed.Core
+    name: Core
+    href: Hallowed.Core.html
+  spec.vb:
+  - uid: Hallowed
+    name: Hallowed
+    href: Hallowed.html
+  - name: .
+  - uid: Hallowed.Core
+    name: Core
+    href: Hallowed.Core.html
+- uid: Hallowed.Scenes.SceneManager.Initialize*
+  commentId: Overload:Hallowed.Scenes.SceneManager.Initialize
+  href: Hallowed.Scenes.SceneManager.html#Hallowed_Scenes_SceneManager_Initialize
+  name: Initialize
+  nameWithType: SceneManager.Initialize
+  fullName: Hallowed.Scenes.SceneManager.Initialize
+- uid: Microsoft.Xna.Framework.IGameComponent.Initialize
+  commentId: M:Microsoft.Xna.Framework.IGameComponent.Initialize
+  parent: Microsoft.Xna.Framework.IGameComponent
+  isExternal: true
+  name: Initialize()
+  nameWithType: IGameComponent.Initialize()
+  fullName: Microsoft.Xna.Framework.IGameComponent.Initialize()
+  spec.csharp:
+  - uid: Microsoft.Xna.Framework.IGameComponent.Initialize
+    name: Initialize
+    isExternal: true
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Microsoft.Xna.Framework.IGameComponent.Initialize
+    name: Initialize
+    isExternal: true
+  - name: (
+  - name: )
+- uid: Hallowed.Scenes.SceneManager.Goto*
+  commentId: Overload:Hallowed.Scenes.SceneManager.Goto
+  href: Hallowed.Scenes.SceneManager.html#Hallowed_Scenes_SceneManager_Goto_Hallowed_Scenes_SceneBase_
+  name: Goto
+  nameWithType: SceneManager.Goto
+  fullName: Hallowed.Scenes.SceneManager.Goto

@@ -1,0 +1,23 @@
+### YamlMime:ManagedReference
+items:
+- uid: Hallowed.Rendering.Utilities
+  commentId: N:Hallowed.Rendering.Utilities
+  id: Hallowed.Rendering.Utilities
+  children:
+  - Hallowed.Rendering.Utilities.PingPongBuffer
+  langs:
+  - csharp
+  - vb
+  name: Hallowed.Rendering.Utilities
+  nameWithType: Hallowed.Rendering.Utilities
+  fullName: Hallowed.Rendering.Utilities
+  type: Namespace
+  assemblies:
+  - Hallowed
+references:
+- uid: Hallowed.Rendering.Utilities.PingPongBuffer
+  commentId: T:Hallowed.Rendering.Utilities.PingPongBuffer
+  href: Hallowed.Rendering.Utilities.PingPongBuffer.html
+  name: PingPongBuffer
+  nameWithType: PingPongBuffer
+  fullName: Hallowed.Rendering.Utilities.PingPongBuffer

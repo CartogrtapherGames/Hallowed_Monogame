@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>What are Tips for Developing Custom Importers and Processors? | hallowed </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="What are Tips for Developing Custom Importers and Processors? | hallowed ">
+      <meta name="generator" content="docfx ">
+  
+      <link rel="shortcut icon" href="../../../../../../favicon.ico">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/night-owl.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" integrity="sha384-EvBWSlnoFgZlXJvpzS+MAUEjvN7+gcCwH+qh7GRFOGgZO0PuwOFro7qPOJnLfe7l" crossorigin="anonymous">
+      <link rel="stylesheet" href="../../../../../../styles/config.css">
+      <link rel="stylesheet" href="../../../../../../styles/singulink.css">
+      <link rel="stylesheet" href="../../../../../../styles/main.css">
+      <meta property="docfx:navrel" content="../../../../../../toc.html">
+      <meta property="docfx:tocrel" content="../../../toc.html">
+  
+  <meta property="docfx:rel" content="../../../../../../">
+  
+    </head>
+    <body>
+        <!-- Header required for docfx anchor scroll to work -->
+        <header id="head"></header>
+        <div class="top-navbar">
+            <a class="burger-icon" onclick="toggleMenu()">
+                <svg name="Hamburger" style="vertical-align: middle;" width="34" height="34" viewbox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M20 6H4V9H20V6ZM4 10.999H20V13.999H4V10.999ZM4 15.999H20V18.999H4V15.999Z"></path></svg>
+            </a>
+
+
+            <a class="brand" href="../../../../../../index.html">
+              <img src="../../../../../../logo.svg" alt="hallowed" class="logomark">
+              <span class="brand-title">hallowed</span>
+            </a>        </div>
+
+        <div class="body-content">
+            <div id="blackout" class="blackout" onclick="toggleMenu()"></div>
+
+            <nav id="sidebar" role="navigation">
+                <div class="sidebar">
+
+                    <div>
+                      <div class="mobile-hide">
+
+                        <a class="brand" href="../../../../../../index.html">
+                          <img src="../../../../../../logo.svg" alt="hallowed" class="logomark">
+                          <span class="brand-title">hallowed</span>
+                        </a>                      </div>
+
+                      <div class="sidesearch">
+                        <form id="search" role="search" class="search">
+                            <i class="bi bi-search search-icon"></i>
+                            <input type="text" id="search-query" placeholder="Search" autocomplete="off">
+                        </form>
+                      </div>
+
+                      <div id="navbar">
+                      </div>
+                    </div>                    <div class="sidebar-item-separator"></div>
+
+                        <div id="sidetoggle">
+                          <div id="sidetoc"></div>
+                        </div>
+                </div>
+                <div class="footer">
+  
+  <strong><a href='https://dotnet.github.io/docfx/'>DocFX</a> + <a href='https://www.singulink.com'>Singulink</a> = ♥</strong>
+                </div>            </nav>
+
+            <main class="main-panel">
+
+                <div id="search-results" style="display: none;">
+                  <h1 class="search-list">Search Results for <span></span></h1>
+                  <div class="sr-items">
+                    <p><i class="bi bi-hourglass-split index-loading"></i></p>
+                  </div>
+                  <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+                </div>
+ 
+
+                <div role="main" class="hide-when-search">
+
+                        <div class="subnav navbar navbar-default">
+                          <div class="container hide-when-search" id="breadcrumb">
+                            <ul class="breadcrumb">
+                              <li></li>
+                            </ul>
+                          </div>
+                        </div>
+
+                         <div class="contribution">
+                               <a href="https://github.com/MonoGame/docs.monogame.github.io/blob/main/articles/getting_to_know/whatis/content_pipeline/CP_Tips_For_Developing.md/#L1" class="contribution-link">Edit this page</a>
+                         </div>
+
+                    <article class="content wrap" id="_content" data-uid="">
+
+<h2 id="importing-basic-graphics-objects">Importing Basic Graphics Objects</h2>
+<p>The following information should help you import basic graphics objects.</p>
+<ul>
+<li><p>Make your coordinate system right-handed.</p>
+<p>From the standpoint of the observer, the positive x-axis points to the right, the positive y-axis points up, and the positive z-axis points toward you (out from the screen).</p>
+</li>
+<li><p>Create triangles that have a clockwise winding order.</p>
+<p>The default culling mode removes triangles that have a counterclockwise winding order.</p>
+</li>
+<li><p>Call <a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Graphics.MeshHelper#Microsoft_Xna_Framework_Content_Pipeline_Graphics_MeshHelper_SwapWindingOrder_Microsoft_Xna_Framework_Content_Pipeline_Graphics_MeshContent_">MeshHelper.SwapWindingOrder</a> to change the winding order of a triangle.</p>
+</li>
+<li><p>Set the scale for graphical objects to 1 unit = 1 meter.</p>
+</li>
+<li><p>Call <a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Graphics.MeshHelper#Microsoft_Xna_Framework_Content_Pipeline_Graphics_MeshHelper_TransformScene_Microsoft_Xna_Framework_Content_Pipeline_Graphics_NodeContent_Microsoft_Xna_Framework_Matrix_">MeshHelper.TransformScene</a> to change the scale of an object.</p>
+</li>
+</ul>
+<h2 id="taking-advantage-of-content-pipeline-mesh-classes">Taking Advantage of Content Pipeline Mesh Classes</h2>
+<p>There are several properties and classes that are particularly useful when using <a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Graphics.NodeContent">NodeContent</a> objects to represent a 3D scene or mesh.</p>
+<ul>
+<li><p>The <a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Graphics.NodeContent#Microsoft_Xna_Framework_Content_Pipeline_Graphics_NodeContent_Children">NodeContent.Children</a> property represents hierarchical information.</p>
+</li>
+<li><p>The <a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Graphics.NodeContent#Microsoft_Xna_Framework_Content_Pipeline_Graphics_NodeContent_Transform">NodeContent.Transform</a> property contains the local transform of the 3D object.</p>
+</li>
+<li><p>The <a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Graphics.MeshContent">Pipeline.Graphics.MeshContent</a> class (a subclass of <a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Graphics.NodeContent">Pipeline.Graphics.NodeContent</a>) is used to represent meshes.</p>
+</li>
+</ul>
+<p>The Content Pipeline provides two classes that make it easier to create and work with <a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Graphics.MeshContent">Pipeline.Graphics.MeshContent</a> objects.</p>
+<ul>
+<li><p>The <a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Graphics.MeshBuilder">Pipeline.Graphics.MeshBuilder</a> class creates new <a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Graphics.MeshContent">Pipeline.Graphics.MeshContent</a> objects, when necessary.</p>
+</li>
+<li><p>The <a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Graphics.MeshHelper">Pipeline.Graphics.MeshHelper</a> class implements useful operations on existing <a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Graphics.MeshContent">Pipeline.Graphics.MeshContent</a> objects.</p>
+</li>
+</ul>
+<h2 id="debugging-custom-importers-and-processors">Debugging Custom Importers and Processors</h2>
+<p>In a manner similar to projects that create a DLL, Content Pipeline extension projects cannot be directly run or debugged. After completing a few simple steps, however, you can debug any custom importer and processor used by your game. The following procedure details these steps.</p>
+<div class="TIP">
+<h5>Tip</h5>
+<p>The Start External program control (located on the Debug page of a project's property pages) is unavailable in the Microsoft Visual Studio development environment.</p>
+</div>
+<h3 id="to-debug-a-custom-importer-or-processor">To debug a custom importer or processor</h3>
+<ol>
+<li><p>Load an existing MonoGame Content Pipeline extension project (later referred to as <code>ProjCP</code>) containing the custom importers or processors to be debugged.</p>
+</li>
+<li><p>Create a separate test game project (later referred to as <code>ProjG</code>).</p>
+</li>
+<li><p>In the <strong>References</strong> node of <code>ProjG</code>'s nested content project, add a project-to-project reference to <code>ProjCP</code>.</p>
+</li>
+<li><p>Add one or two appropriate items of test content to <code>ProjG</code>, and ensure they are set to use the importer or processor (in <code>ProjCP</code>) you wish to debug.</p>
+</li>
+<li><p>Open the property pages for <code>ProjCP</code>.</p>
+</li>
+<li><p>Click the <strong>Debug</strong> tab, and then select <strong>Start external program</strong>.</p>
+</li>
+<li><p>Enter the path to the local version of MSBuild.exe.</p>
+<p>For example, <code>C:\WINDOWS\Microsoft.NET\Framework\v3.5\msbuild.exe</code> on Windows.</p>
+</li>
+<li><p>For the <strong>Command line arguments</strong> control, enter the path to <code>ProjG</code>'s nested content project.</p>
+<p>If this path contains spaces, quote the entire path.</p>
+</li>
+<li><p>Set any required breakpoints in the importer or processor code in <code>ProjCP</code>.</p>
+</li>
+<li><p>Build and debug <code>ProjCP</code>.</p>
+</li>
+</ol>
+<p>Debugging <code>ProjCP</code> causes MSBuild to compile your test content while running under the debugger. This enables you to hit your breakpoints in <code>ProjCP</code> and to step through your code.</p>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="CP_Overview.html">What Is Content?</a></li>
+<li><a href="CP_Architecture.html">What is the Content Pipeline?</a></li>
+<li><a href="../../howto/content_pipeline/HowTo_Extend_Processor.html">Extending a Standard Content Processor</a></li>
+<li><a href="CP_Content_Advanced.html">Adding New Content Types</a></li>
+</ul>
+
+</article>
+                </div>
+
+            </main>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/jquery.twbsPagination.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/jquery.mark.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/url.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/anchor-js@5.0.0/anchor.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/docfx.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/main.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/singulink.js"></script>    </body>
+</html>

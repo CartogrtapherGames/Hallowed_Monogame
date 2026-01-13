@@ -1,0 +1,302 @@
+### YamlMime:ManagedReference
+items:
+- uid: Hallowed.Core.IRenderable
+  commentId: T:Hallowed.Core.IRenderable
+  id: IRenderable
+  parent: Hallowed.Core
+  children:
+  - Hallowed.Core.IRenderable.Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch)
+  - Hallowed.Core.IRenderable.Parent
+  - Hallowed.Core.IRenderable.Update(Microsoft.Xna.Framework.GameTime)
+  - Hallowed.Core.IRenderable.Visible
+  langs:
+  - csharp
+  - vb
+  name: IRenderable
+  nameWithType: IRenderable
+  fullName: Hallowed.Core.IRenderable
+  type: Interface
+  source:
+    remote:
+      path: Hallowed/Source/Core/IRenderable.cs
+      branch: master
+      repo: https://github.com/CartogrtapherGames/Hallowed_Monogame.git
+    id: IRenderable
+    path: Hallowed/Source/Core/IRenderable.cs
+    startLine: 5
+  assemblies:
+  - Hallowed
+  namespace: Hallowed.Core
+  syntax:
+    content: public interface IRenderable
+    content.vb: Public Interface IRenderable
+- uid: Hallowed.Core.IRenderable.Parent
+  commentId: P:Hallowed.Core.IRenderable.Parent
+  id: Parent
+  parent: Hallowed.Core.IRenderable
+  langs:
+  - csharp
+  - vb
+  name: Parent
+  nameWithType: IRenderable.Parent
+  fullName: Hallowed.Core.IRenderable.Parent
+  type: Property
+  source:
+    remote:
+      path: Hallowed/Source/Core/IRenderable.cs
+      branch: master
+      repo: https://github.com/CartogrtapherGames/Hallowed_Monogame.git
+    id: Parent
+    path: Hallowed/Source/Core/IRenderable.cs
+    startLine: 7
+  assemblies:
+  - Hallowed
+  namespace: Hallowed.Core
+  syntax:
+    content: Container Parent { get; set; }
+    parameters: []
+    return:
+      type: Hallowed.Core.Container
+    content.vb: Property Parent As Container
+  overload: Hallowed.Core.IRenderable.Parent*
+- uid: Hallowed.Core.IRenderable.Visible
+  commentId: P:Hallowed.Core.IRenderable.Visible
+  id: Visible
+  parent: Hallowed.Core.IRenderable
+  langs:
+  - csharp
+  - vb
+  name: Visible
+  nameWithType: IRenderable.Visible
+  fullName: Hallowed.Core.IRenderable.Visible
+  type: Property
+  source:
+    remote:
+      path: Hallowed/Source/Core/IRenderable.cs
+      branch: master
+      repo: https://github.com/CartogrtapherGames/Hallowed_Monogame.git
+    id: Visible
+    path: Hallowed/Source/Core/IRenderable.cs
+    startLine: 8
+  assemblies:
+  - Hallowed
+  namespace: Hallowed.Core
+  syntax:
+    content: bool Visible { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Property Visible As Boolean
+  overload: Hallowed.Core.IRenderable.Visible*
+- uid: Hallowed.Core.IRenderable.Update(Microsoft.Xna.Framework.GameTime)
+  commentId: M:Hallowed.Core.IRenderable.Update(Microsoft.Xna.Framework.GameTime)
+  id: Update(Microsoft.Xna.Framework.GameTime)
+  parent: Hallowed.Core.IRenderable
+  langs:
+  - csharp
+  - vb
+  name: Update(GameTime)
+  nameWithType: IRenderable.Update(GameTime)
+  fullName: Hallowed.Core.IRenderable.Update(Microsoft.Xna.Framework.GameTime)
+  type: Method
+  source:
+    remote:
+      path: Hallowed/Source/Core/IRenderable.cs
+      branch: master
+      repo: https://github.com/CartogrtapherGames/Hallowed_Monogame.git
+    id: Update
+    path: Hallowed/Source/Core/IRenderable.cs
+    startLine: 9
+  assemblies:
+  - Hallowed
+  namespace: Hallowed.Core
+  syntax:
+    content: void Update(GameTime gameTime)
+    parameters:
+    - id: gameTime
+      type: Microsoft.Xna.Framework.GameTime
+    content.vb: Sub Update(gameTime As GameTime)
+  overload: Hallowed.Core.IRenderable.Update*
+- uid: Hallowed.Core.IRenderable.Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch)
+  commentId: M:Hallowed.Core.IRenderable.Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch)
+  id: Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch)
+  parent: Hallowed.Core.IRenderable
+  langs:
+  - csharp
+  - vb
+  name: Draw(SpriteBatch)
+  nameWithType: IRenderable.Draw(SpriteBatch)
+  fullName: Hallowed.Core.IRenderable.Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch)
+  type: Method
+  source:
+    remote:
+      path: Hallowed/Source/Core/IRenderable.cs
+      branch: master
+      repo: https://github.com/CartogrtapherGames/Hallowed_Monogame.git
+    id: Draw
+    path: Hallowed/Source/Core/IRenderable.cs
+    startLine: 10
+  assemblies:
+  - Hallowed
+  namespace: Hallowed.Core
+  syntax:
+    content: void Draw(SpriteBatch spriteBatch)
+    parameters:
+    - id: spriteBatch
+      type: Microsoft.Xna.Framework.Graphics.SpriteBatch
+    content.vb: Sub Draw(spriteBatch As SpriteBatch)
+  overload: Hallowed.Core.IRenderable.Draw*
+references:
+- uid: Hallowed.Core
+  commentId: N:Hallowed.Core
+  href: Hallowed.html
+  name: Hallowed.Core
+  nameWithType: Hallowed.Core
+  fullName: Hallowed.Core
+  spec.csharp:
+  - uid: Hallowed
+    name: Hallowed
+    href: Hallowed.html
+  - name: .
+  - uid: Hallowed.Core
+    name: Core
+    href: Hallowed.Core.html
+  spec.vb:
+  - uid: Hallowed
+    name: Hallowed
+    href: Hallowed.html
+  - name: .
+  - uid: Hallowed.Core
+    name: Core
+    href: Hallowed.Core.html
+- uid: Hallowed.Core.IRenderable.Parent*
+  commentId: Overload:Hallowed.Core.IRenderable.Parent
+  href: Hallowed.Core.IRenderable.html#Hallowed_Core_IRenderable_Parent
+  name: Parent
+  nameWithType: IRenderable.Parent
+  fullName: Hallowed.Core.IRenderable.Parent
+- uid: Hallowed.Core.Container
+  commentId: T:Hallowed.Core.Container
+  parent: Hallowed.Core
+  href: Hallowed.Core.Container.html
+  name: Container
+  nameWithType: Container
+  fullName: Hallowed.Core.Container
+- uid: Hallowed.Core.IRenderable.Visible*
+  commentId: Overload:Hallowed.Core.IRenderable.Visible
+  href: Hallowed.Core.IRenderable.html#Hallowed_Core_IRenderable_Visible
+  name: Visible
+  nameWithType: IRenderable.Visible
+  fullName: Hallowed.Core.IRenderable.Visible
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Hallowed.Core.IRenderable.Update*
+  commentId: Overload:Hallowed.Core.IRenderable.Update
+  href: Hallowed.Core.IRenderable.html#Hallowed_Core_IRenderable_Update_Microsoft_Xna_Framework_GameTime_
+  name: Update
+  nameWithType: IRenderable.Update
+  fullName: Hallowed.Core.IRenderable.Update
+- uid: Microsoft.Xna.Framework.GameTime
+  commentId: T:Microsoft.Xna.Framework.GameTime
+  parent: Microsoft.Xna.Framework
+  isExternal: true
+  name: GameTime
+  nameWithType: GameTime
+  fullName: Microsoft.Xna.Framework.GameTime
+- uid: Microsoft.Xna.Framework
+  commentId: N:Microsoft.Xna.Framework
+  isExternal: true
+  name: Microsoft.Xna.Framework
+  nameWithType: Microsoft.Xna.Framework
+  fullName: Microsoft.Xna.Framework
+  spec.csharp:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+  - name: .
+  - uid: Microsoft.Xna
+    name: Xna
+    isExternal: true
+  - name: .
+  - uid: Microsoft.Xna.Framework
+    name: Framework
+    isExternal: true
+  spec.vb:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+  - name: .
+  - uid: Microsoft.Xna
+    name: Xna
+    isExternal: true
+  - name: .
+  - uid: Microsoft.Xna.Framework
+    name: Framework
+    isExternal: true
+- uid: Hallowed.Core.IRenderable.Draw*
+  commentId: Overload:Hallowed.Core.IRenderable.Draw
+  href: Hallowed.Core.IRenderable.html#Hallowed_Core_IRenderable_Draw_Microsoft_Xna_Framework_Graphics_SpriteBatch_
+  name: Draw
+  nameWithType: IRenderable.Draw
+  fullName: Hallowed.Core.IRenderable.Draw
+- uid: Microsoft.Xna.Framework.Graphics.SpriteBatch
+  commentId: T:Microsoft.Xna.Framework.Graphics.SpriteBatch
+  parent: Microsoft.Xna.Framework.Graphics
+  isExternal: true
+  name: SpriteBatch
+  nameWithType: SpriteBatch
+  fullName: Microsoft.Xna.Framework.Graphics.SpriteBatch
+- uid: Microsoft.Xna.Framework.Graphics
+  commentId: N:Microsoft.Xna.Framework.Graphics
+  isExternal: true
+  name: Microsoft.Xna.Framework.Graphics
+  nameWithType: Microsoft.Xna.Framework.Graphics
+  fullName: Microsoft.Xna.Framework.Graphics
+  spec.csharp:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+  - name: .
+  - uid: Microsoft.Xna
+    name: Xna
+    isExternal: true
+  - name: .
+  - uid: Microsoft.Xna.Framework
+    name: Framework
+    isExternal: true
+  - name: .
+  - uid: Microsoft.Xna.Framework.Graphics
+    name: Graphics
+    isExternal: true
+  spec.vb:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+  - name: .
+  - uid: Microsoft.Xna
+    name: Xna
+    isExternal: true
+  - name: .
+  - uid: Microsoft.Xna.Framework
+    name: Framework
+    isExternal: true
+  - name: .
+  - uid: Microsoft.Xna.Framework.Graphics
+    name: Graphics
+    isExternal: true

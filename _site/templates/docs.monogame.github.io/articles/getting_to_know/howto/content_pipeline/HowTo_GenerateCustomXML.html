@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>How to create a custom XML File? | hallowed </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="How to create a custom XML File? | hallowed ">
+      <meta name="generator" content="docfx ">
+  
+      <link rel="shortcut icon" href="../../../../../../favicon.ico">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/night-owl.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" integrity="sha384-EvBWSlnoFgZlXJvpzS+MAUEjvN7+gcCwH+qh7GRFOGgZO0PuwOFro7qPOJnLfe7l" crossorigin="anonymous">
+      <link rel="stylesheet" href="../../../../../../styles/config.css">
+      <link rel="stylesheet" href="../../../../../../styles/singulink.css">
+      <link rel="stylesheet" href="../../../../../../styles/main.css">
+      <meta property="docfx:navrel" content="../../../../../../toc.html">
+      <meta property="docfx:tocrel" content="../../../toc.html">
+  
+  <meta property="docfx:rel" content="../../../../../../">
+  
+    </head>
+    <body>
+        <!-- Header required for docfx anchor scroll to work -->
+        <header id="head"></header>
+        <div class="top-navbar">
+            <a class="burger-icon" onclick="toggleMenu()">
+                <svg name="Hamburger" style="vertical-align: middle;" width="34" height="34" viewbox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M20 6H4V9H20V6ZM4 10.999H20V13.999H4V10.999ZM4 15.999H20V18.999H4V15.999Z"></path></svg>
+            </a>
+
+
+            <a class="brand" href="../../../../../../index.html">
+              <img src="../../../../../../logo.svg" alt="hallowed" class="logomark">
+              <span class="brand-title">hallowed</span>
+            </a>        </div>
+
+        <div class="body-content">
+            <div id="blackout" class="blackout" onclick="toggleMenu()"></div>
+
+            <nav id="sidebar" role="navigation">
+                <div class="sidebar">
+
+                    <div>
+                      <div class="mobile-hide">
+
+                        <a class="brand" href="../../../../../../index.html">
+                          <img src="../../../../../../logo.svg" alt="hallowed" class="logomark">
+                          <span class="brand-title">hallowed</span>
+                        </a>                      </div>
+
+                      <div class="sidesearch">
+                        <form id="search" role="search" class="search">
+                            <i class="bi bi-search search-icon"></i>
+                            <input type="text" id="search-query" placeholder="Search" autocomplete="off">
+                        </form>
+                      </div>
+
+                      <div id="navbar">
+                      </div>
+                    </div>                    <div class="sidebar-item-separator"></div>
+
+                        <div id="sidetoggle">
+                          <div id="sidetoc"></div>
+                        </div>
+                </div>
+                <div class="footer">
+  
+  <strong><a href='https://dotnet.github.io/docfx/'>DocFX</a> + <a href='https://www.singulink.com'>Singulink</a> = ♥</strong>
+                </div>            </nav>
+
+            <main class="main-panel">
+
+                <div id="search-results" style="display: none;">
+                  <h1 class="search-list">Search Results for <span></span></h1>
+                  <div class="sr-items">
+                    <p><i class="bi bi-hourglass-split index-loading"></i></p>
+                  </div>
+                  <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+                </div>
+ 
+
+                <div role="main" class="hide-when-search">
+
+                        <div class="subnav navbar navbar-default">
+                          <div class="container hide-when-search" id="breadcrumb">
+                            <ul class="breadcrumb">
+                              <li></li>
+                            </ul>
+                          </div>
+                        </div>
+
+                         <div class="contribution">
+                               <a href="https://github.com/MonoGame/docs.monogame.github.io/blob/main/articles/getting_to_know/howto/content_pipeline/HowTo_GenerateCustomXML.md/#L1" class="contribution-link">Edit this page</a>
+                         </div>
+
+                    <article class="content wrap" id="_content" data-uid="">
+
+
+<p>The <a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.IntermediateSerializer">IntermediateSerializer</a> class of the MonoGame Framework can be employed by custom tools running under Windows to directly serialize game data to an XML file.</p>
+<p>An XML file generated in this way then can be included in the game project and imported by <a href="xref:Microsoft.Xna.Framework.Content.Pipeline.XmlImporter">XmlImporter Class</a> as part of the Content Pipeline. Because <a href="xref:Microsoft.Xna.Framework.Content.Pipeline.XmlImporter">XmlImporter</a> is actually a wrapper for <a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.IntermediateSerializer">IntermediateSerializer</a>, it is certain that the XML file will be in the <a href="../../whatis/content_pipeline/CP_XML_Elements.html">correct format</a> to be deserialized by the same facility.</p>
+<p>The <a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.IntermediateSerializer">IntermediateSerializer</a> class is controlled through the <code>XmlWriter</code> class of the .NET Framework defined in <code>System.Xml</code>. The properties of the <code>XmlWriterSettings</code> class can be used to specify its output properties.</p>
+<p>The serializer produces its output according to these rules:</p>
+<ul>
+<li>All public fields and properties are serialized; a separate XML element is used for each.</li>
+<li>Protected, private, or internal data is skipped.</li>
+<li>Get-only or set-only properties are skipped.</li>
+<li>Properties come before fields.</li>
+<li>If there is more than one field or property, these are serialized in the order they are declared.</li>
+<li>Nested types are serialized using nested XML elements.</li>
+<li>When the class derives from another, members of the base class are serialized before data from the derived type.</li>
+</ul>
+<h2 id="xml-serialization-example">XML Serialization Example</h2>
+<p>The following steps create a simple program that demonstrates how a program can use the <a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.IntermediateSerializer">IntermediateSerializer</a> method <a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.IntermediateSerializer">IntermediateSerializer.Serialize Generic Method</a> to serialize program data to an XML file.</p>
+<h3 id="step-1-create-a-new-project">Step 1: Create a New Project</h3>
+<p>You will create a new project in Visual Studio.</p>
+<ol>
+<li><p>On the <code>File</code> menu, click <code>New</code>, and then click <code>Project</code>.</p>
+</li>
+<li><p>In the <code>New Project</code> dialog box, ensure <code>Windows</code> is selected in the <code>Project types</code> pane, and then click <code>Console Application</code> in the <code>Templates</code> pane.</p>
+</li>
+<li><p>Open the new project, then in the <code>Solution Explorer</code>, right-click the <code>Dependencies</code> folder, and then click <code>Manage NuGet Packages..</code>.</p>
+</li>
+<li><p>Click on the <code>Browse</code> tab (if not selected) and search for the <code>MonoGame.Framework.Content.Pipeline</code> package, and then click <code>Install</code>.</p>
+<p>Accept any dialog prompts for Licenses or dependencies as they appear.</p>
+</li>
+<li><p>Additionally, install the <code>MonoGame.Framework.DesktopGL</code> NuGet package which is required by the <code>Content.Pipeline</code> package.</p>
+</li>
+</ol>
+<h2 id="step-2-add-xml-serialization">Step 2: Add XML Serialization</h2>
+<ol>
+<li><p>In the <code>Solution Explorer</code>, double-click <code>Program.cs</code> to edit it.</p>
+</li>
+<li><p>Add <code>using</code> declarations for the System.Xml and Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate namespaces.</p>
+<pre><code class="lang-csharp">    using System.Xml;
+    using Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate;
+</code></pre>
+</li>
+<li><p>Define a class to serialize to XML with the properties you wish to store in your custom XML.</p>
+<pre><code class="lang-csharp">    namespace XMLSerializerTest
+    {
+        class MyData
+        {
+            public int elf = 23;
+            public string hello = &quot;Hello World&quot;;
+        }
+    }
+</code></pre>
+</li>
+<li><p>Within the function <code>Main</code> of the <code>Program</code> class, add the following code. This code employs <a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.IntermediateSerializer">IntermediateSerializer.Serialize Generic Method</a> to serialize the <code>MyData</code> class as an XML file.</p>
+</li>
+</ol>
+<pre><code class="lang-csharp">    class Program
+    {
+        static void Main(string[] args)
+        {
+            MyData ExampleData = new MyData();
+
+            XmlWriterSettings settings = new XmlWriterSettings();
+            settings.Indent = true;
+
+            using (XmlWriter writer = XmlWriter.Create(&quot;example.xml&quot;, settings))
+            {
+                IntermediateSerializer.Serialize(writer, ExampleData, null);
+            }
+        }
+    }
+</code></pre>
+<h2 id="step-3-generate-xml">Step 3: Generate XML</h2>
+<ol>
+<li>Press F5 to build and execute the program.</li>
+<li>Examine the <code>example.xml</code> file in the project's <code>bin\\Debug\\netx.0</code> folder.</li>
+</ol>
+<div class="NOTE">
+<h5>Note</h5>
+<p><code>netx.0</code> relates to the version of .NET your project is building under, <code>net6.0</code> for <code>.NET 6</code> and <code>net8.0</code> for <code>.NET 8</code></p>
+</div>
+<p>You should have an output that looks like the following:</p>
+<pre><code class="lang-xml">    &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+    &lt;XnaContent xmlns:XMLSerializerTest=&quot;XMLSerializerTest&quot;&gt;
+      &lt;Asset Type=&quot;XMLSerializerTest:MyData&quot;&gt;
+        &lt;elf&gt;23&lt;/elf&gt;
+        &lt;hello&gt;Hello World&lt;/hello&gt;
+      &lt;/Asset&gt;
+    &lt;/XnaContent&gt;
+</code></pre>
+<h2 id="see-also">See Also</h2>
+<h3 id="concepts">Concepts</h3>
+<ul>
+<li><a href="HowTo_UseCustomXML.html">Using an XML File to Specify Content</a></li>
+<li><a href="HowTo_GameContent_Add.html">Adding Content to a Game</a></li>
+</ul>
+<h2 id="reference">Reference</h2>
+<ul>
+<li><a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.IntermediateSerializer">IntermediateSerializer Class</a></li>
+</ul>
+
+</article>
+                </div>
+
+            </main>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/jquery.twbsPagination.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/jquery.mark.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/url.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/anchor-js@5.0.0/anchor.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/docfx.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/main.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/singulink.js"></script>    </body>
+</html>

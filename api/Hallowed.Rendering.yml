@@ -1,0 +1,23 @@
+### YamlMime:ManagedReference
+items:
+- uid: Hallowed.Rendering
+  commentId: N:Hallowed.Rendering
+  id: Hallowed.Rendering
+  children:
+  - Hallowed.Rendering.Camera2D
+  langs:
+  - csharp
+  - vb
+  name: Hallowed.Rendering
+  nameWithType: Hallowed.Rendering
+  fullName: Hallowed.Rendering
+  type: Namespace
+  assemblies:
+  - Hallowed
+references:
+- uid: Hallowed.Rendering.Camera2D
+  commentId: T:Hallowed.Rendering.Camera2D
+  href: Hallowed.Rendering.Camera2D.html
+  name: Camera2D
+  nameWithType: Camera2D
+  fullName: Hallowed.Rendering.Camera2D

@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>How to create a Custom Vertex Declaration | hallowed </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="How to create a Custom Vertex Declaration | hallowed ">
+      <meta name="generator" content="docfx ">
+  
+      <link rel="shortcut icon" href="../../../../../../favicon.ico">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/night-owl.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" integrity="sha384-EvBWSlnoFgZlXJvpzS+MAUEjvN7+gcCwH+qh7GRFOGgZO0PuwOFro7qPOJnLfe7l" crossorigin="anonymous">
+      <link rel="stylesheet" href="../../../../../../styles/config.css">
+      <link rel="stylesheet" href="../../../../../../styles/singulink.css">
+      <link rel="stylesheet" href="../../../../../../styles/main.css">
+      <meta property="docfx:navrel" content="../../../../../../toc.html">
+      <meta property="docfx:tocrel" content="../../../toc.html">
+  
+  <meta property="docfx:rel" content="../../../../../../">
+  
+    </head>
+    <body>
+        <!-- Header required for docfx anchor scroll to work -->
+        <header id="head"></header>
+        <div class="top-navbar">
+            <a class="burger-icon" onclick="toggleMenu()">
+                <svg name="Hamburger" style="vertical-align: middle;" width="34" height="34" viewbox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M20 6H4V9H20V6ZM4 10.999H20V13.999H4V10.999ZM4 15.999H20V18.999H4V15.999Z"></path></svg>
+            </a>
+
+
+            <a class="brand" href="../../../../../../index.html">
+              <img src="../../../../../../logo.svg" alt="hallowed" class="logomark">
+              <span class="brand-title">hallowed</span>
+            </a>        </div>
+
+        <div class="body-content">
+            <div id="blackout" class="blackout" onclick="toggleMenu()"></div>
+
+            <nav id="sidebar" role="navigation">
+                <div class="sidebar">
+
+                    <div>
+                      <div class="mobile-hide">
+
+                        <a class="brand" href="../../../../../../index.html">
+                          <img src="../../../../../../logo.svg" alt="hallowed" class="logomark">
+                          <span class="brand-title">hallowed</span>
+                        </a>                      </div>
+
+                      <div class="sidesearch">
+                        <form id="search" role="search" class="search">
+                            <i class="bi bi-search search-icon"></i>
+                            <input type="text" id="search-query" placeholder="Search" autocomplete="off">
+                        </form>
+                      </div>
+
+                      <div id="navbar">
+                      </div>
+                    </div>                    <div class="sidebar-item-separator"></div>
+
+                        <div id="sidetoggle">
+                          <div id="sidetoc"></div>
+                        </div>
+                </div>
+                <div class="footer">
+  
+  <strong><a href='https://dotnet.github.io/docfx/'>DocFX</a> + <a href='https://www.singulink.com'>Singulink</a> = ♥</strong>
+                </div>            </nav>
+
+            <main class="main-panel">
+
+                <div id="search-results" style="display: none;">
+                  <h1 class="search-list">Search Results for <span></span></h1>
+                  <div class="sr-items">
+                    <p><i class="bi bi-hourglass-split index-loading"></i></p>
+                  </div>
+                  <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+                </div>
+ 
+
+                <div role="main" class="hide-when-search">
+
+                        <div class="subnav navbar navbar-default">
+                          <div class="container hide-when-search" id="breadcrumb">
+                            <ul class="breadcrumb">
+                              <li></li>
+                            </ul>
+                          </div>
+                        </div>
+
+                         <div class="contribution">
+                               <a href="https://github.com/MonoGame/docs.monogame.github.io/blob/main/articles/getting_to_know/howto/graphics/HowTo_UseACustomVertex.md/#L1" class="contribution-link">Edit this page</a>
+                         </div>
+
+                    <article class="content wrap" id="_content" data-uid="">
+
+<h2 id="overview">Overview</h2>
+<p>MonoGame includes a few predefined classes for common vertex buffer declarations such as <a href="xref:Microsoft.Xna.Framework.Graphics.VertexPositionColor">VertexPositionColor</a> and <a href="xref:Microsoft.Xna.Framework.Graphics.VertexPositionColorTexture">VertexPositionColorTexture</a>. If you need to create a vertex buffer declaration that includes additional user-defined types, create a custom vertex declaration.</p>
+<p><img src="images/graphics_custom_vertex.png" alt="Custom Vertex Example"></p>
+<p>A custom vertex declaration is a class that implements fully customizable per-vertex data. Furthermore, if you derive the class from <a href="xref:Microsoft.Xna.Framework.Graphics.IVertexType">IVertexType</a>, you will not need to create a vertex declaration when creating your vertex buffer or drawing the geometry.</p>
+<h2 id="requirements">Requirements</h2>
+<p>The following texture will be used to render to the screen.</p>
+<p><img src="images/logo.png" alt="MonoGame Logo"></p>
+<p>Save it to your content project and name it &quot;<strong>logo</strong>&quot; (this name will used to reference it in the project).  Make sure to <a href="../content_pipeline/HowTo_GameContent_Add.html">add it to your content project</a>.</p>
+<h2 id="starting-from-the-basic-effect-tutorial">Starting from the <a href="HowTo_Create_a_BasicEffect.html">Basic Effect</a> tutorial</h2>
+<ol>
+<li><p>Follow the steps of <a href="HowTo_Create_a_BasicEffect.html">How to create a Basic Effect</a>.</p>
+<p>This gives us a starting project that is rendering a 3D scene with a <a href="xref:Microsoft.Xna.Framework.Graphics.BasicEffect">Basic Effect</a>.</p>
+</li>
+</ol>
+<h2 id="create-a-custom-vertex-declaration">Create a custom vertex declaration</h2>
+<ol>
+<li><p>Create a new class file called <code>CustomVertex1.cs</code></p>
+</li>
+<li><p>Add the required <code>using</code> statements to the top of the file.</p>
+<pre><code class="lang-csharp">using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+</code></pre>
+</li>
+<li><p>Declare a structure that derives from <a href="xref:Microsoft.Xna.Framework.Graphics.IVertexType">IVertexType</a>.</p>
+<pre><code class="lang-csharp">public struct CustomVertex1 : IVertexType
+</code></pre>
+</li>
+<li><p>Add members to the struct that describe the per-vertex data.</p>
+<p>This example uses position as a <a href="xref:Microsoft.Xna.Framework.Vector3">Vector3 Structure</a> type, a texture coordinate using a <a href="xref:Microsoft.Xna.Framework.Vector2">Vector2 Structure</a> type, and a vertex declaration using the <a href="xref:Microsoft.Xna.Framework.Graphics.VertexDeclaration">VertexDeclaration</a> type.</p>
+<pre><code class="lang-csharp">private Vector3 vertexPosition;
+private Vector2 vertexTextureCoordinate;
+
+public readonly static VertexDeclaration VertexDeclaration = new VertexDeclaration
+(
+    new VertexElement(0, VertexElementFormat.Vector3, VertexElementUsage.Position, 0),
+    new VertexElement(12, VertexElementFormat.Vector2, VertexElementUsage.TextureCoordinate, 0)
+);
+</code></pre>
+</li>
+<li><p>Implement the constructor and public accessor methods.</p>
+<pre><code class="lang-csharp">//The constructor for the custom vertex. This allows similar 
+//initialization of custom vertex arrays as compared to arrays of a 
+//standard vertex type, such as VertexPositionColor.
+public CustomVertex1(Vector3 pos, Vector2 textureCoordinate)
+{
+    vertexPosition = pos;
+    vertexTextureCoordinate = textureCoordinate;
+}
+
+//Public methods for accessing the components of the custom vertex.
+public Vector3 Position
+{
+    get { return vertexPosition; }
+    set { vertexPosition = value; }
+}
+
+public Vector2 TextureCoordinate
+{
+    get { return vertexTextureCoordinate; }
+    set { vertexTextureCoordinate = value; }
+}
+</code></pre>
+</li>
+<li><p>Implement a non-public method for accessing the vertex declaration.</p>
+<pre><code class="lang-csharp">VertexDeclaration IVertexType.VertexDeclaration
+{
+    get { return VertexDeclaration; }
+}
+</code></pre>
+</li>
+</ol>
+<h2 id="using-the-custom-vertex-buffer">Using the Custom Vertex Buffer</h2>
+<p>Using the Custom Vertex buffer, we will render a cube that is textured with the logo texture.</p>
+<ol>
+<li><p>Declare some variables at the top of your Game class.</p>
+<pre><code class="lang-csharp">private CustomVertex1[] cubeVertices;
+private VertexBuffer vertexBuffer;
+private Texture2D logoTexture;
+</code></pre>
+<p>This gives us the necessary data in order to draw our cube.</p>
+</li>
+<li><p>Create a new method called <code>SetupDrawingCube()</code> and we will start with initializing the vertex buffer, passing in the <strong>typeof(CustomVertex1)</strong> instead of a vertex declaration to describe the vertex buffer data.</p>
+<pre><code class="lang-csharp">public void SetupDrawingCube()
+{
+    vertexBuffer = new VertexBuffer(
+                    GraphicsDevice,
+                    typeof(CustomVertex1),
+                    36,
+                    BufferUsage.None
+                    );
+</code></pre>
+</li>
+<li><p>Create the per-vertex data; this shows a portion of the code.</p>
+<pre><code class="lang-csharp">Vector3 LeftTopFront = new Vector3(-1.0f, 1.0f, 1.0f);
+Vector3 LeftBottomFront = new Vector3(-1.0f, -1.0f, 1.0f);
+Vector3 LeftTopBack = new Vector3(-1.0f, 1.0f, -1.0f);
+Vector3 LeftBottomBack = new Vector3(-1.0f, -1.0f, -1.0f);
+
+Vector3 RightTopFront = new Vector3(1.0f, 1.0f, 1.0f);
+Vector3 RightBottomFront = new Vector3(1.0f, -1.0f, 1.0f);
+Vector3 RightTopBack = new Vector3(1.0f, 1.0f, -1.0f);
+Vector3 RightBottomBack = new Vector3(1.0f, -1.0f, -1.0f);
+
+Vector2 textureLeftTop = new Vector2(0.0f, 0.0f);
+Vector2 textureLeftBottom = new Vector2(0.0f, 1.0f);
+Vector2 textureRightTop = new Vector2(1.0f, 0.0f);
+Vector2 textureRightBottom = new Vector2(1.0f, 1.0f);
+
+// Front face.
+cubeVertices = new CustomVertex1[36];
+cubeVertices[0] = new CustomVertex1(LeftTopFront, textureLeftTop);
+cubeVertices[1] = new CustomVertex1(LeftBottomFront, textureLeftBottom);
+cubeVertices[2] = new CustomVertex1(RightTopFront, textureRightTop);
+cubeVertices[3] = new CustomVertex1(LeftBottomFront, textureLeftBottom);
+cubeVertices[4] = new CustomVertex1(RightBottomFront, textureRightBottom);
+cubeVertices[5] = new CustomVertex1(RightTopFront, textureRightTop);
+
+// Add the vertices for the BACK face.
+cubeVertices[6] = new CustomVertex1(LeftTopBack, textureRightTop);
+cubeVertices[7] = new CustomVertex1(RightTopBack, textureLeftTop);
+cubeVertices[8] = new CustomVertex1(LeftBottomBack, textureRightBottom);
+cubeVertices[9] = new CustomVertex1(LeftBottomBack, textureRightBottom);
+cubeVertices[10] = new CustomVertex1(RightTopBack, textureLeftTop);
+cubeVertices[11] = new CustomVertex1(RightBottomBack, textureLeftBottom);
+
+// Add the vertices for the TOP face.
+cubeVertices[12] = new CustomVertex1(LeftTopFront, textureLeftBottom);
+cubeVertices[13] = new CustomVertex1(RightTopBack, textureRightTop);
+cubeVertices[14] = new CustomVertex1(LeftTopBack, textureLeftTop);
+cubeVertices[15] = new CustomVertex1(LeftTopFront, textureLeftBottom);
+cubeVertices[16] = new CustomVertex1(RightTopFront, textureRightBottom);
+cubeVertices[17] = new CustomVertex1(RightTopBack, textureRightTop);
+
+// Add the vertices for the BOTTOM face. 
+cubeVertices[18] = new CustomVertex1(LeftBottomFront, textureLeftTop);
+cubeVertices[19] = new CustomVertex1(LeftBottomBack, textureLeftBottom);
+cubeVertices[20] = new CustomVertex1(RightBottomBack, textureRightBottom);
+cubeVertices[21] = new CustomVertex1(LeftBottomFront, textureLeftTop);
+cubeVertices[22] = new CustomVertex1(RightBottomBack, textureRightBottom);
+cubeVertices[23] = new CustomVertex1(RightBottomFront, textureRightTop);
+
+// Add the vertices for the LEFT face.
+cubeVertices[24] = new CustomVertex1(LeftTopFront, textureRightTop);
+cubeVertices[25] = new CustomVertex1(LeftBottomBack, textureLeftBottom);
+cubeVertices[26] = new CustomVertex1(LeftBottomFront, textureRightBottom);
+cubeVertices[27] = new CustomVertex1(LeftTopBack, textureLeftTop);
+cubeVertices[28] = new CustomVertex1(LeftBottomBack, textureLeftBottom);
+cubeVertices[29] = new CustomVertex1(LeftTopFront, textureRightTop);
+
+// Add the vertices for the RIGHT face. 
+cubeVertices[30] = new CustomVertex1(RightTopFront, textureLeftTop);
+cubeVertices[31] = new CustomVertex1(RightBottomFront, textureLeftBottom);
+cubeVertices[32] = new CustomVertex1(RightBottomBack, textureRightBottom);
+cubeVertices[33] = new CustomVertex1(RightTopBack, textureRightTop);
+cubeVertices[34] = new CustomVertex1(RightTopFront, textureLeftTop);
+cubeVertices[35] = new CustomVertex1(RightBottomBack, textureRightBottom);
+</code></pre>
+<blockquote>
+<p>For a triangle list, you need three vertices for a triangle and two triangles to make the front face of a cube.</p>
+</blockquote>
+</li>
+<li><p>Finally, set the data into the vertex buffer data by calling <a href="xref:Microsoft.Xna.Framework.Graphics.VertexBuffer">VertexBuffer.SetData</a> and set the vertex buffer to the device by calling <a href="xref:Microsoft.Xna.Framework.Graphics.GraphicsDevice">GraphicsDevice.SetVertexBuffer</a>.</p>
+<pre><code class="lang-csharp">vertexBuffer.SetData&lt;CustomVertex1&gt;(cubeVertices);
+
+graphics.GraphicsDevice.SetVertexBuffer(vertexBuffer);
+}
+</code></pre>
+</li>
+<li><p>In <code>LoadContent</code> we need to Load the texture we are going to draw, as well as call the new method we defined to setup the primitive Cube.</p>
+<pre><code class="lang-csharp">logoTexture = Content.Load&lt;Texture2D&gt;(&quot;logo&quot;);
+SetupDrawingCube();
+</code></pre>
+</li>
+<li><p>At the moment the <code>BasicEffect</code> setup from the previous tutorial only draws Vertex Colors, so we need to change that to pass it the <a href="xref:Microsoft.Xna.Framework.Graphics.BasicEffect#Microsoft_Xna_Framework_Graphics_BasicEffect_Texture">texture</a> we just loaded, as well as enabling <a href="xref:Microsoft.Xna.Framework.Graphics.BasicEffect#Microsoft_Xna_Framework_Graphics_BasicEffect_TextureEnabled">Texture drawing</a></p>
+<p>Replace:</p>
+<pre><code class="lang-csharp">basicEffect.VertexColorEnabled = true;
+</code></pre>
+<p>With the following</p>
+<pre><code class="lang-csharp">// Enable Texture Drawing - VERY IMPORTANT!!
+basicEffect.TextureEnabled = true;
+
+// Set the texture we loaded (does nothing without the above setting)
+basicEffect.Texture = logoTexture;
+</code></pre>
+</li>
+<li><p>Finally, Draw the object by calling <a href="xref:Microsoft.Xna.Framework.Graphics.GraphicsDevice">GraphicsDevice.DrawPrimitives</a>.</p>
+<pre><code class="lang-csharp">foreach (EffectPass pass in basicEffect.CurrentTechnique.Passes)
+{
+    pass.Apply();
+
+    graphics.GraphicsDevice.DrawPrimitives(
+        PrimitiveType.TriangleList,
+        0,  // start vertex
+        12  // number of primitives to draw, 2 vertexes per side of the cube
+    );
+}
+</code></pre>
+</li>
+</ol>
+<h2 id="extra-credit-make-it-spin">Extra credit, make it spin</h2>
+<p>At the moment all you can see is the front face of the cube, which is not very exciting.  Though <a href="HowTo_TransformPoint.html">Matrix Transforms</a> however, we make our cube spin.</p>
+<ol>
+<li><p>First define a variable to manage the current rotation.</p>
+<pre><code class="lang-csharp">float rotation = 0f;
+</code></pre>
+</li>
+<li><p>Next, we will update this rotation each frame in the <code>Update</code> method.</p>
+<pre><code class="lang-csharp">// Update rotation angle
+float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+rotation += deltaTime;
+</code></pre>
+</li>
+<li><p>Then finally, in the <code>Draw</code> method, we need to calculate the rotation matrix and the translation matrix to rotate the cube by and then apply that to the basic effect drawing the cube.</p>
+<p>Add the following to the <code>Draw</code> call <strong>BEFORE</strong> the effect drawing loop.</p>
+<pre><code class="lang-csharp">// Create rotation matrices
+Matrix rotationMatrix = Matrix.CreateRotationX(rotation) *
+                        Matrix.CreateRotationY(rotation) *
+                        Matrix.CreateRotationZ(rotation);
+// Apply rotation to the world matrix
+Matrix worldMatrix = rotationMatrix * Matrix.CreateTranslation(new Vector3(0, 0, 0));
+// Update the world matrix in the effect
+basicEffect.World = worldMatrix;    
+</code></pre>
+</li>
+</ol>
+<div class="NOTE">
+<h5>Note</h5>
+<p>This is a very basic example of applying rotation, just for reference.</p>
+</div>
+<p>With the changes in place, your cube will look a little more snazzy and rotate in the world.</p>
+<p><img src="images/HowTo_CustomVertex_Final.gif" alt="Spinning Cube"></p>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="HowTo_Create_a_BasicEffect.html">How to create a Basic Effect</a></li>
+<li><a href="HowTo_TransformPoint.html">How to transform a Point</a></li>
+</ul>
+<h3 id="concepts">Concepts</h3>
+<ul>
+<li><a href="../../whatis/graphics/WhatIs_3DRendering.html">What Is 3D Rendering?</a></li>
+</ul>
+<h3 id="reference">Reference</h3>
+<ul>
+<li><a href="xref:Microsoft.Xna.Framework.Graphics.IVertexType">IVertexType</a></li>
+<li><a href="xref:Microsoft.Xna.Framework.Graphics.VertexDeclaration">VertexDeclaration</a></li>
+<li><a href="xref:Microsoft.Xna.Framework.Matrix">Matrix</a></li>
+</ul>
+
+</article>
+                </div>
+
+            </main>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/jquery.twbsPagination.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/jquery.mark.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/url.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/anchor-js@5.0.0/anchor.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/docfx.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/main.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/singulink.js"></script>    </body>
+</html>

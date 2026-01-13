@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>What is the Game Loop | hallowed </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="What is the Game Loop | hallowed ">
+      <meta name="generator" content="docfx ">
+  
+      <link rel="shortcut icon" href="../../../../../../favicon.ico">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/night-owl.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" integrity="sha384-EvBWSlnoFgZlXJvpzS+MAUEjvN7+gcCwH+qh7GRFOGgZO0PuwOFro7qPOJnLfe7l" crossorigin="anonymous">
+      <link rel="stylesheet" href="../../../../../../styles/config.css">
+      <link rel="stylesheet" href="../../../../../../styles/singulink.css">
+      <link rel="stylesheet" href="../../../../../../styles/main.css">
+      <meta property="docfx:navrel" content="../../../../../../toc.html">
+      <meta property="docfx:tocrel" content="../../../toc.html">
+  
+  <meta property="docfx:rel" content="../../../../../../">
+  
+    </head>
+    <body>
+        <!-- Header required for docfx anchor scroll to work -->
+        <header id="head"></header>
+        <div class="top-navbar">
+            <a class="burger-icon" onclick="toggleMenu()">
+                <svg name="Hamburger" style="vertical-align: middle;" width="34" height="34" viewbox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M20 6H4V9H20V6ZM4 10.999H20V13.999H4V10.999ZM4 15.999H20V18.999H4V15.999Z"></path></svg>
+            </a>
+
+
+            <a class="brand" href="../../../../../../index.html">
+              <img src="../../../../../../logo.svg" alt="hallowed" class="logomark">
+              <span class="brand-title">hallowed</span>
+            </a>        </div>
+
+        <div class="body-content">
+            <div id="blackout" class="blackout" onclick="toggleMenu()"></div>
+
+            <nav id="sidebar" role="navigation">
+                <div class="sidebar">
+
+                    <div>
+                      <div class="mobile-hide">
+
+                        <a class="brand" href="../../../../../../index.html">
+                          <img src="../../../../../../logo.svg" alt="hallowed" class="logomark">
+                          <span class="brand-title">hallowed</span>
+                        </a>                      </div>
+
+                      <div class="sidesearch">
+                        <form id="search" role="search" class="search">
+                            <i class="bi bi-search search-icon"></i>
+                            <input type="text" id="search-query" placeholder="Search" autocomplete="off">
+                        </form>
+                      </div>
+
+                      <div id="navbar">
+                      </div>
+                    </div>                    <div class="sidebar-item-separator"></div>
+
+                        <div id="sidetoggle">
+                          <div id="sidetoc"></div>
+                        </div>
+                </div>
+                <div class="footer">
+  
+  <strong><a href='https://dotnet.github.io/docfx/'>DocFX</a> + <a href='https://www.singulink.com'>Singulink</a> = ♥</strong>
+                </div>            </nav>
+
+            <main class="main-panel">
+
+                <div id="search-results" style="display: none;">
+                  <h1 class="search-list">Search Results for <span></span></h1>
+                  <div class="sr-items">
+                    <p><i class="bi bi-hourglass-split index-loading"></i></p>
+                  </div>
+                  <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+                </div>
+ 
+
+                <div role="main" class="hide-when-search">
+
+                        <div class="subnav navbar navbar-default">
+                          <div class="container hide-when-search" id="breadcrumb">
+                            <ul class="breadcrumb">
+                              <li></li>
+                            </ul>
+                          </div>
+                        </div>
+
+                         <div class="contribution">
+                               <a href="https://github.com/MonoGame/docs.monogame.github.io/blob/main/articles/getting_to_know/whatis/game_loop/index.md/#L1" class="contribution-link">Edit this page</a>
+                         </div>
+
+                    <article class="content wrap" id="_content" data-uid="">
+
+
+<p>The MonoGame Framework <a href="xref:Microsoft.Xna.Framework.Game">Game</a> class implements a game loop, which provides not only the window which displays your game, but also provides overloadable methods that your game implements to facilitate communication between your game and the operating system. This topic provides an overview of the basic functionality provided by the game loop.</p>
+<ul>
+<li><a href="#making-a-new-game">Making a New Game</a></li>
+<li><a href="#game-loop-timing">Game Loop Timing</a></li>
+<li><a href="#game-components">Game Components</a></li>
+<li><a href="#game-services">Game Services</a></li>
+<li><a href="#game-components-consuming-game-services">Game Components Consuming Game Services</a></li>
+</ul>
+<p><img src="../images/MGExecution.png" alt="The MonoGame &quot;Game&quot; Loop"></p>
+<h2 id="making-a-new-game">Making a New Game</h2>
+<p>The first step in creating a new game is to make a class that derives from <a href="xref:Microsoft.Xna.Framework.Game">Game</a>. The new class needs to override the following methods:</p>
+<ul>
+<li>Initialize - which is the method is responsible for game setup before the first frame of the game.</li>
+<li>Update - which is the method is responsible for handling game logic.</li>
+<li>Draw - which is the method responsible for drawing content to the screen.</li>
+</ul>
+<h2 id="game-loop-timing">Game Loop Timing</h2>
+<p>A <a href="xref:Microsoft.Xna.Framework.Game">Game</a> is either fixed step or variable step, defaulting to fixed step. The type of step determines how often <a href="xref:Microsoft.Xna.Framework.Game">Update</a> will be called and affects how you need to represent time-based procedures such as movement and animation.</p>
+<h3 id="fixed-step-game-loops">Fixed-Step Game Loops</h3>
+<p>A fixed-step <a href="xref:Microsoft.Xna.Framework.Game">Game</a> tries to call its <strong>Update</strong> method on the fixed interval specified in <strong>TargetElapsedTime</strong>. Setting <strong>Game.IsFixedTimeStep</strong> to <strong>true</strong> causes a <a href="xref:Microsoft.Xna.Framework.Game">Game</a> to use a fixed-step game loop. A new MonoGame project uses a fixed-step game loop with a default <strong>TargetElapsedTime</strong> of 1/60th of a second.</p>
+<p>In a fixed-step game loop, <a href="xref:Microsoft.Xna.Framework.Game">Game</a> calls <strong>Update</strong> once the <strong>TargetElapsedTime</strong> has elapsed. After <strong>Update</strong> is called, if it is not time to call <strong>Update</strong> again, the <a href="xref:Microsoft.Xna.Framework.Game">Game</a> calls <strong>Draw</strong>. After <strong>Draw</strong> is called, if it is not time to call <strong>Update</strong> again, <a href="xref:Microsoft.Xna.Framework.Game">Game</a> idles until it is time to call <strong>UpdateS</strong>.</p>
+<p>If <strong>Update</strong> takes too long to process, <a href="xref:Microsoft.Xna.Framework.Game">Game</a> sets <strong>IsRunningSlowly</strong> to <strong>true</strong> and calls <strong>Update</strong> again, without calling <strong>Draw</strong> in between. When an update runs longer than the <strong>TargetElapsedTime</strong>, <a href="xref:Microsoft.Xna.Framework.Game">Game</a> responds by calling <strong>Update</strong> extra times and dropping the frames associated with those updates to catch up. This ensures that <strong>Update</strong> will have been called the expected number of times when the game loop catches up from a slowdown. You can check the value of <strong>IsRunningSlowly</strong> in your <strong>Update</strong> if you want to detect dropped frames and shorten your <strong>Update</strong> processing to compensate. You can reset the elapsed times by calling <strong>ResetElapsedTime</strong>.</p>
+<p>When your game pauses in the debugger, <a href="xref:Microsoft.Xna.Framework.Game">Game</a> will not make extra calls to <strong>Update</strong> when the game resumes.</p>
+<h3 id="variable-step-game-loops">Variable-Step Game Loops</h3>
+<p>A variable-step game calls its <strong>Update</strong> and <strong>Draw</strong> methods in a continuous loop without regard to the <a href="xref:Microsoft.Xna.Framework.Game">TargetElapsedTime</a>. Setting <a href="xref:Microsoft.Xna.Framework.Game">Game.IsFixedTimeStep</a> to <strong>false</strong> causes a <a href="xref:Microsoft.Xna.Framework.Game">Game</a> to use a variable-step game loop.</p>
+<h3 id="animation-and-timing">Animation and Timing</h3>
+<p>For operations that require precise timing, such as animation, the type of game loop your game uses (fixed-step or variable-step) is important.</p>
+<p>Using a fixed step allows game logic to use the <strong>TargetElapsedTime</strong> as its basic unit of time and assume that <strong>Update</strong> will be called at that interval. Using a variable step requires the game logic and animation code to be based on <strong>ElapsedGameTime</strong> to ensure smooth gameplay. Because the <strong>Update</strong> method is called immediately after the previous frame is drawn, the time between calls to <strong>Update</strong> can vary. Without taking the time between calls into account, the game would seem to speed up and slow down. The time elapsed between calls to the <strong>Update</strong> method is available in the <strong>Update</strong> method's <em>gameTime</em> parameter. You can reset the elapsed times by calling <strong>ResetElapsedTime</strong>.</p>
+<p>When using a variable-step game loop, you should express rates—such as the distance a sprite moves—in game units per millisecond (ms). The amount a sprite moves in any given update can then be calculated as the rate of the sprite times the elapsed time. Using this approach to calculate the distance the sprite moved ensures that the sprite will move consistently if the speed of the game or computer varies.</p>
+<h2 id="game-components">Game Components</h2>
+<p>Game components provide a modular way of adding functionality to a game. You create a game component by deriving the new component either from the</p>
+<ul>
+<li><a href="xref:Microsoft.Xna.Framework.GameComponent">GameComponent</a> class, or</li>
+<li><a href="xref:Microsoft.Xna.Framework.DrawableGameComponent">DrawableGameComponent</a> class if the component loads and draws graphics content.</li>
+</ul>
+<p>You then add game logic and rendering code to the game component by overriding the following methods:</p>
+<ul>
+<li><strong>GameComponent.Update</strong></li>
+<li><strong>GameComponent.Initialize</strong></li>
+</ul>
+<p>Additionally, if you derive from the <code>DrawableGameComponent</code> class, you will additionally be able to override:</p>
+<ul>
+<li><strong>DrawableGameComponent.Draw</strong></li>
+</ul>
+<p>A game component is registered with a game by passing the component to <code>Game.Components.Add</code>. A registered component will have its <code>initialize</code>, <code>update</code>, and <code>draw</code> methods called from the <code>Game.Initialize</code>, <code>Game.Update</code>, and <code>Game.Draw</code> methods, respectively.</p>
+<h2 id="game-services">Game Services</h2>
+<p>Game services are a mechanism for maintaining loose coupling between objects that need to interact with each other. Services work through a mediator—in this case, <a href="xref:Microsoft.Xna.Framework.Game.Services">Game.Services</a>. Service providers register with <a href="xref:Microsoft.Xna.Framework.Game.Services">Game.Services</a>, and service consumers request services from <a href="xref:Microsoft.Xna.Framework.Game.Services">Game.Services</a>. This arrangement allows an object that requires a service to request the service without knowing the name of the service provider.</p>
+<p>Game services are defined by a unique interface. A class specifies the services it provides by implementing interfaces and registering the services with <a href="xref:Microsoft.Xna.Framework.Game.Services">Game.Services</a>. A service is registered by calling <strong>Game.Services.AddService</strong> specifying the type of service being implemented and a reference to the object providing the service. For example, to register an object that provides a service represented by the interface IMyService, you would use the following code.</p>
+<pre><code class="lang-csharp">    Services.AddService( typeof( IMyService ), myobject );
+</code></pre>
+<p>Once a service is registered, the object providing the service can be retrieved by <strong>Game.Services.GetService</strong> and specifying the desired service. For example, to retrieve <a href="xref:Microsoft.Xna.Framework.Graphics.IGraphicsDeviceService">IGraphicsDeviceService</a>, you would use the following code.</p>
+<pre><code class="lang-csharp">    IGraphicsDeviceService graphicsservice = (IGraphicsDeviceService)Services.GetService( typeof(IGraphicsDeviceService) );
+</code></pre>
+<h2 id="game-components-consuming-game-services">Game Components Consuming Game Services</h2>
+<p>The <a href="xref:Microsoft.Xna.Framework.GameComponent">GameComponent</a> class provides the <a href="xref:Microsoft.Xna.Framework.GameComponent.Game">Game</a> property so a <a href="xref:Microsoft.Xna.Framework.GameComponent">GameComponent</a> can determine what <a href="xref:Microsoft.Xna.Framework.Game">Game</a> it is attached to. With the <a href="xref:Microsoft.Xna.Framework.GameComponent.Game">Game</a> property, a <a href="xref:Microsoft.Xna.Framework.GameComponent">GameComponent</a> can call <a href="xref:Microsoft.Xna.Framework.GameServiceContainer">Game.Services.GetService</a> to find a provider of a particular service. For example, a <a href="xref:Microsoft.Xna.Framework.GameComponent">GameComponent</a> would find the <a href="xref:Microsoft.Xna.Framework.Graphics.IGraphicsDeviceService">IGraphicsDeviceService</a> provider by using the following code.</p>
+<pre><code class="lang-csharp">    IGraphicsDeviceService graphicsservice = (IGraphicsDeviceService)Game.Services.GetService( typeof( IGraphicsDeviceService ) );
+</code></pre>
+<h2 id="related-articles">Related articles</h2>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>How to articles to follow.</p>
+</div>
+
+</article>
+                </div>
+
+            </main>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/jquery.twbsPagination.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/jquery.mark.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/url.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/anchor-js@5.0.0/anchor.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/docfx.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/main.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/singulink.js"></script>    </body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>What Is Color Blending? | hallowed </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="What Is Color Blending? | hallowed ">
+      <meta name="generator" content="docfx ">
+  
+      <link rel="shortcut icon" href="../../../../../../favicon.ico">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/night-owl.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" integrity="sha384-EvBWSlnoFgZlXJvpzS+MAUEjvN7+gcCwH+qh7GRFOGgZO0PuwOFro7qPOJnLfe7l" crossorigin="anonymous">
+      <link rel="stylesheet" href="../../../../../../styles/config.css">
+      <link rel="stylesheet" href="../../../../../../styles/singulink.css">
+      <link rel="stylesheet" href="../../../../../../styles/main.css">
+      <meta property="docfx:navrel" content="../../../../../../toc.html">
+      <meta property="docfx:tocrel" content="../../../toc.html">
+  
+  <meta property="docfx:rel" content="../../../../../../">
+  
+    </head>
+    <body>
+        <!-- Header required for docfx anchor scroll to work -->
+        <header id="head"></header>
+        <div class="top-navbar">
+            <a class="burger-icon" onclick="toggleMenu()">
+                <svg name="Hamburger" style="vertical-align: middle;" width="34" height="34" viewbox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M20 6H4V9H20V6ZM4 10.999H20V13.999H4V10.999ZM4 15.999H20V18.999H4V15.999Z"></path></svg>
+            </a>
+
+
+            <a class="brand" href="../../../../../../index.html">
+              <img src="../../../../../../logo.svg" alt="hallowed" class="logomark">
+              <span class="brand-title">hallowed</span>
+            </a>        </div>
+
+        <div class="body-content">
+            <div id="blackout" class="blackout" onclick="toggleMenu()"></div>
+
+            <nav id="sidebar" role="navigation">
+                <div class="sidebar">
+
+                    <div>
+                      <div class="mobile-hide">
+
+                        <a class="brand" href="../../../../../../index.html">
+                          <img src="../../../../../../logo.svg" alt="hallowed" class="logomark">
+                          <span class="brand-title">hallowed</span>
+                        </a>                      </div>
+
+                      <div class="sidesearch">
+                        <form id="search" role="search" class="search">
+                            <i class="bi bi-search search-icon"></i>
+                            <input type="text" id="search-query" placeholder="Search" autocomplete="off">
+                        </form>
+                      </div>
+
+                      <div id="navbar">
+                      </div>
+                    </div>                    <div class="sidebar-item-separator"></div>
+
+                        <div id="sidetoggle">
+                          <div id="sidetoc"></div>
+                        </div>
+                </div>
+                <div class="footer">
+  
+  <strong><a href='https://dotnet.github.io/docfx/'>DocFX</a> + <a href='https://www.singulink.com'>Singulink</a> = ♥</strong>
+                </div>            </nav>
+
+            <main class="main-panel">
+
+                <div id="search-results" style="display: none;">
+                  <h1 class="search-list">Search Results for <span></span></h1>
+                  <div class="sr-items">
+                    <p><i class="bi bi-hourglass-split index-loading"></i></p>
+                  </div>
+                  <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+                </div>
+ 
+
+                <div role="main" class="hide-when-search">
+
+                        <div class="subnav navbar navbar-default">
+                          <div class="container hide-when-search" id="breadcrumb">
+                            <ul class="breadcrumb">
+                              <li></li>
+                            </ul>
+                          </div>
+                        </div>
+
+                         <div class="contribution">
+                               <a href="https://github.com/MonoGame/docs.monogame.github.io/blob/main/articles/getting_to_know/whatis/graphics/WhatIs_ColorBlending.md/#L1" class="contribution-link">Edit this page</a>
+                         </div>
+
+                    <article class="content wrap" id="_content" data-uid="">
+
+
+<p>Color blending mixes two colors together to produce a third color.</p>
+<ul>
+<li>The first color is called the <code>source color</code> which is the new color being added.</li>
+<li>The second color is called the <code>destination color</code> which is the color that already exists (in a render target, for example).</li>
+</ul>
+<p>Each color has a separate blend factor that determines how much of each color is combined into the final product. Once the source and destination colors have been multiplied by their blend factors, the results are combined according to the specified blend function. The normal blend function is simple addition.</p>
+<p>The blend formula looks like this:</p>
+<pre><code class="lang-csharp">(source * sourceBlendFactor) blendFunction (destination*destinationBlendFactor)
+</code></pre>
+<ul>
+<li>The source blend factor is specified by the <a href="xref:Microsoft.Xna.Framework.Graphics.BlendState.ColorSourceBlend">ColorSourceBlend</a> property</li>
+<li>The destination blend factor is specified by the <a href="xref:Microsoft.Xna.Framework.Graphics.BlendState.ColorDestinationBlend">ColorDestinationBlend</a> property.</li>
+<li>The <a href="xref:Microsoft.Xna.Framework.Graphics.BlendState.ColorBlendFunction">ColorBlendFunction</a> property specifies the blend function to use, normally  <a href="/api/Microsoft.Xna.Framework.Graphics.BlendFunction.html">BlendFunction.Add</a>.</li>
+</ul>
+<p>In which case the formula reduces to this:</p>
+<pre><code class="lang-csharp">(source * sourceBlendFactor) + (destination * destinationBlendFactor)  
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>When no blending is done, a source pixel overwrites a destination pixel.</p>
+</div>
+<p>When blending, you can create a lot of special effects using the blending properties:</p>
+<ul>
+<li>Blend type.</li>
+<li>Blend settings.</li>
+</ul>
+<h2 id="alpha-blending">Alpha Blending</h2>
+<pre><code class="lang-csharp">(_source_ × [Blend.SourceAlpha](/api/Microsoft.Xna.Framework.Graphics.Blend.html)) \+ (_destination_ × [Blend.InvSourceAlpha](/api/Microsoft.Xna.Framework.Graphics.Blend.html))
+</code></pre>
+<h2 id="additive-blending">Additive Blending</h2>
+<pre><code class="lang-csharp">(_source_ × [Blend.One](/api/Microsoft.Xna.Framework.Graphics.Blend.html)) \+ (_destination_ × [Blend.One](/api/Microsoft.Xna.Framework.Graphics.Blend.html))
+</code></pre>
+<h2 id="multiplicative-blending">Multiplicative Blending</h2>
+<pre><code class="lang-csharp">(_source_ × [Blend.Zero](/api/Microsoft.Xna.Framework.Graphics.Blend.html)) \+ (_destination_ × [Blend.SourceColor](/api/Microsoft.Xna.Framework.Graphics.Blend.html))
+</code></pre>
+<h2 id="2x-multiplicative-blending">2X Multiplicative Blending</h2>
+<pre><code class="lang-csharp">(_source_ × [Blend.DestinationColor](/api/Microsoft.Xna.Framework.Graphics.Blend.html)) \+ (_destination_ × [Blend.SourceColor](/api/Microsoft.Xna.Framework.Graphics.Blend.html))
+</code></pre>
+<p><img src="images/blends.jpg" alt="This picture illustrates four common blend modes"></p>
+<p><strong>Figure 1.  This picture illustrates four common blend modes. From left to right: Alpha blending, Additive blending, Multiplicative blending, and 2X Multiplicative blending. The top image in each column is the source image and below, it's effect when added to the destination.</strong></p>
+<p>Alpha blending uses the alpha channel of the source color to create a transparency effect so that the destination color appears through the source color.</p>
+<p>For example:</p>
+<ul>
+<li>If you clear your backbuffer to <a href="/api/Microsoft.Xna.Framework.Color.html">Color.Gray</a>, it will be colored (0.5,0.5,0.5,1).</li>
+<li>If you then take a white color with a partial alpha value (1,1,1,0.4), the result will be 60 percent of the destination color and 40 percent of the source: (0.5 x 0.6) + (1 x 0.4).</li>
+</ul>
+<p>The resulting color will be (0.7,0.7,0.7, 1). The alpha values are multiplied as well - (.6 x 1) + .4 gives us an alpha value of 1.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>When drawing a sprite using the <a href="xref:Microsoft.Xna.Framework.Graphics.SpriteBatch">SpriteBatch</a> class, choose <a href="/api/Microsoft.Xna.Framework.Graphics.BlendState.html">BlendState.AlphaBlend</a> to configure alpha blending.</p>
+</div>
+<p>By default, the alpha channel is blended along with the <strong>red</strong>, <strong>green</strong>, and <strong>blue</strong> channels using the <a href="xref:Microsoft.Xna.Framework.Graphics.BlendState.ColorSourceBlend">ColorSourceBlend</a> and <a href="xref:Microsoft.Xna.Framework.Graphics.BlendState.ColorDestinationBlend">ColorDestinationBlend</a> properties. You can choose to customize the blending for just the alpha channel by using the <a href="xref:Microsoft.Xna.Framework.Graphics.BlendState.AlphaSourceBlend">AlphaSourceBlend</a> and <a href="xref:Microsoft.Xna.Framework.Graphics.BlendState.AlphaDestinationBlend">AlphaDestinationBlend</a> properties.</p>
+<h2 id="see-also">See Also</h2>
+<h3 id="concepts">Concepts</h3>
+<p><a href="WhatIs_Sprite.html">What Is a Sprite?</a><br>
+<a href="WhatIs_3DRendering.html">3D Pipeline Basics</a></p>
+
+</article>
+                </div>
+
+            </main>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/jquery.twbsPagination.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/jquery.mark.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/url.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/anchor-js@5.0.0/anchor.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/docfx.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/main.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/singulink.js"></script>    </body>
+</html>

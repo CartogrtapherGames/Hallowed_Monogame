@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>How to add Content to your game | hallowed </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="How to add Content to your game | hallowed ">
+      <meta name="generator" content="docfx ">
+  
+      <link rel="shortcut icon" href="../../../../../../favicon.ico">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/night-owl.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" integrity="sha384-EvBWSlnoFgZlXJvpzS+MAUEjvN7+gcCwH+qh7GRFOGgZO0PuwOFro7qPOJnLfe7l" crossorigin="anonymous">
+      <link rel="stylesheet" href="../../../../../../styles/config.css">
+      <link rel="stylesheet" href="../../../../../../styles/singulink.css">
+      <link rel="stylesheet" href="../../../../../../styles/main.css">
+      <meta property="docfx:navrel" content="../../../../../../toc.html">
+      <meta property="docfx:tocrel" content="../../../toc.html">
+  
+  <meta property="docfx:rel" content="../../../../../../">
+  
+    </head>
+    <body>
+        <!-- Header required for docfx anchor scroll to work -->
+        <header id="head"></header>
+        <div class="top-navbar">
+            <a class="burger-icon" onclick="toggleMenu()">
+                <svg name="Hamburger" style="vertical-align: middle;" width="34" height="34" viewbox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M20 6H4V9H20V6ZM4 10.999H20V13.999H4V10.999ZM4 15.999H20V18.999H4V15.999Z"></path></svg>
+            </a>
+
+
+            <a class="brand" href="../../../../../../index.html">
+              <img src="../../../../../../logo.svg" alt="hallowed" class="logomark">
+              <span class="brand-title">hallowed</span>
+            </a>        </div>
+
+        <div class="body-content">
+            <div id="blackout" class="blackout" onclick="toggleMenu()"></div>
+
+            <nav id="sidebar" role="navigation">
+                <div class="sidebar">
+
+                    <div>
+                      <div class="mobile-hide">
+
+                        <a class="brand" href="../../../../../../index.html">
+                          <img src="../../../../../../logo.svg" alt="hallowed" class="logomark">
+                          <span class="brand-title">hallowed</span>
+                        </a>                      </div>
+
+                      <div class="sidesearch">
+                        <form id="search" role="search" class="search">
+                            <i class="bi bi-search search-icon"></i>
+                            <input type="text" id="search-query" placeholder="Search" autocomplete="off">
+                        </form>
+                      </div>
+
+                      <div id="navbar">
+                      </div>
+                    </div>                    <div class="sidebar-item-separator"></div>
+
+                        <div id="sidetoggle">
+                          <div id="sidetoc"></div>
+                        </div>
+                </div>
+                <div class="footer">
+  
+  <strong><a href='https://dotnet.github.io/docfx/'>DocFX</a> + <a href='https://www.singulink.com'>Singulink</a> = ♥</strong>
+                </div>            </nav>
+
+            <main class="main-panel">
+
+                <div id="search-results" style="display: none;">
+                  <h1 class="search-list">Search Results for <span></span></h1>
+                  <div class="sr-items">
+                    <p><i class="bi bi-hourglass-split index-loading"></i></p>
+                  </div>
+                  <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+                </div>
+ 
+
+                <div role="main" class="hide-when-search">
+
+                        <div class="subnav navbar navbar-default">
+                          <div class="container hide-when-search" id="breadcrumb">
+                            <ul class="breadcrumb">
+                              <li></li>
+                            </ul>
+                          </div>
+                        </div>
+
+                         <div class="contribution">
+                               <a href="https://github.com/MonoGame/docs.monogame.github.io/blob/main/articles/getting_to_know/howto/content_pipeline/HowTo_GameContent_Add.md/#L1" class="contribution-link">Edit this page</a>
+                         </div>
+
+                    <article class="content wrap" id="_content" data-uid="">
+
+
+<div class="TIP">
+<h5>Tip</h5>
+<p>For help with creating a project, please look at the <a href="../../../../../../articles/getting_started/index.md">Creating a New Project</a> section of the Getting Started guide.</p>
+</div>
+<h2 id="monogame-content-builder-tool-mgcb-editor">MonoGame Content Builder Tool (MGCB Editor)</h2>
+<p>The MGCB editor is installed as a &quot;local&quot; DotNet tool with your project, utilizing the <code>dotnet-tools.json</code> configuration file located in the <code>.config</code> folder of your project.</p>
+<p><img src="../../../getting_started/tools/images/mgcb_editor.png" alt="MGCB Editor"></p>
+<p>You will need to install either the Visual Studio 2022 MonoGame extension or the <code>MonoGame Content Builder (editor)</code> extension for VSCode. If you are not using the extension, you will need to manually install and use the <a href="../../../../../../articles/getting_started/tools/mgcb_editor.md">MGCB Editor</a>.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>This is technically optional, since you can edit the .mgcb files manually if you wish, but the editor is highly recommended for ease of use.</p>
+</div>
+<p>If you are unsure of your setup, please follow one of the &quot;Setting up your development environment&quot; articles in the &quot;Getting Started&quot; section of the <a href="../../../../../../index.html">Documentation Site</a></p>
+<h2 id="adding-content">Adding content</h2>
+<p>First, you will need some content for your game. For this tutorial, use the following image of a ball:</p>
+<p><img src="../../../../../../articles/getting_started/images/ball.png" alt="Open Content"></p>
+<p>Copy the image to your machine by using <strong>right-click &gt; Save Image As</strong> and save it somewhere locally with the name “ball.png”.</p>
+<div class="tabGroup" id="tabgroup_1">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_1_vscode" role="tab" aria-controls="tabpanel_1_vscode" data-tab="vscode" tabindex="0" aria-selected="true">VSCode</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_1_visualstudio" role="tab" aria-controls="tabpanel_1_visualstudio" data-tab="visualstudio" tabindex="-1">Visual Studio</a>
+</li>
+</ul>
+<section id="tabpanel_1_vscode" role="tabpanel" data-tab="vscode">
+
+<div class="NOTE">
+<h5>Note</h5>
+<p>Requires the <code>MonoGame Content Builder (editor)</code> extension for VSCode.</p>
+</div>
+<p>Now open up your game project and look at the Explorer window. Expand the <strong>Content</strong> folder and open up <strong>Content.mgcb</strong> file by right-clicking on it and selecting <code>Open in MGCB editor</code>.</p>
+<p><img src="./images/open_mgcb_vscode.png" alt="Open Content"></p>
+</section>
+<section id="tabpanel_1_visualstudio" role="tabpanel" data-tab="visualstudio" aria-hidden="true" hidden="hidden">
+
+<div class="NOTE">
+<h5>Note</h5>
+<p>Requires the <code>MonoGame extension for Visual Studio</code> to be installed.</p>
+</div>
+<p>Now open up your game project and look at the Solution Explorer window. Expand the <strong>Content</strong> folder and open up <strong>Content.mgcb</strong> file by double-clicking on it.</p>
+<p><img src="../../../../../../articles/getting_started/images/3_open_content.png" alt="Open Content"></p>
+<p>If a text file opens instead, then right-click on <strong>Content.mgcb</strong> and select <strong>Open With</strong>, then select <strong>MGCB Editor</strong> in the list, click <strong>Set as Default</strong> and then click <strong>OK</strong>, then try again.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>If you do not see the <strong>MGCB Editor</strong> option when you right-click and select <strong>Open With</strong>, then please review the <a href="../../../../../../articles/getting_started/tools/index.md">Tools documentation</a> for installing the MGCB Editor tool for your operating system.</p>
+</div>
+</section>
+</div>
+
+<p>You should now see the MGCB Editor window open up.</p>
+<p><img src="../../../../../../articles/getting_started/images/3_mgcb_editor_tool.png" alt="MGCB Editor"></p>
+<p>Your game content is managed from this external tool. You can add content to your game in one of the following ways:</p>
+<ul>
+<li><strong>Add Existing Item</strong> toolbar button</li>
+<li><strong>Edit &gt; Add &gt; Existing Item...</strong> menu button</li>
+<li><strong>right-click &gt; Add &gt; Existing Item...</strong> context menu</li>
+</ul>
+<p>Make sure the <code>Content</code> MGCB file is selected to the left, then click the <strong>Add Existing Item</strong> toolbar button.</p>
+<p><img src="../../../../../../articles/getting_started/images/3_add_content.png" alt="Add Content"></p>
+<p>You should now be prompted to select a file. Select the “<strong>ball.png</strong>” image that you downloaded a moment ago. Once you have confirmed your selection, you will be asked whether to copy the file, add a link to it, or skip it. Make sure &quot;<strong>Copy the file to the directory</strong>&quot; option is selected and click <strong>Add</strong>.</p>
+<p><img src="../../../../../../articles/getting_started/images/3_copy_content.png" alt="Copy Content"></p>
+<p>Now click the <strong>Save</strong> toolbar button and close the MGCB Editor tool.</p>
+<p><img src="../../../../../../articles/getting_started/images/3_save_content.png" alt="Save Content"></p>
+<hr>
+<h2 id="adding-the-content-in-your-game">Adding the content in your game</h2>
+<p>Now that you have added the asset to the Content project, it is time to load it into your game. First, open up the <code>Game1.cs</code> class file and declare a new <code>ballTexture</code> variable of type <code>Texture2D</code> in the <code>Game1</code> class, so you can store the ball image into memory.</p>
+<pre><code class="lang-csharp">public class Game1 : Game
+{
+    Texture2D ballTexture;
+
+    private GraphicsDeviceManager _graphics;
+    private SpriteBatch _spriteBatch;
+</code></pre>
+<p>Next, find the <code>LoadContent</code> method. Here, use <a href="xref:Microsoft.Xna.Framework.Content.ContentManager#Microsoft_Xna_Framework_Content_ContentManager_Load__1_System_String_">Content.Load()</a> function to load the &quot;ball&quot; sprite and store it in the <code>ballTexture</code> parameter. <code>Content.Load&lt;T&gt;()</code> requires you to specify what type of content you are trying to load, in this case it is a <code>Texture2D</code>.</p>
+<pre><code class="lang-csharp">protected override void LoadContent()
+{
+    // Create a new SpriteBatch, which can be used to draw textures.
+    _spriteBatch = new SpriteBatch(GraphicsDevice);
+
+    // TODO: use this.Content to load your game content here
+    ballTexture = Content.Load&lt;Texture2D&gt;(&quot;ball&quot;);
+}
+</code></pre>
+<p>Finally, find the Draw method to draw the ball onto the screen. This is done by:</p>
+<ul>
+<li>Opening a SpriteBatch (an image drawing collection function).</li>
+<li>Adding the images you want to draw and specifying where you want to draw them.</li>
+<li>Then finally closing the SpriteBatch to commit the textures you want drawn to the screen.</li>
+</ul>
+<div class="NOTE">
+<h5>Note</h5>
+<p>If you add multiple images, they will be drawn in the order you place them from back to front (each drawn on top of each other).</p>
+</div>
+<p>As shown below:</p>
+<pre><code class="lang-csharp">protected override void Draw(GameTime gameTime)
+{
+    graphics.GraphicsDevice.Clear(Color.CornflowerBlue);
+
+    // TODO: Add your drawing code here
+    _spriteBatch.Begin();
+    _spriteBatch.Draw(ballTexture, new Vector2(0, 0), Color.White);
+    _spriteBatch.End();
+
+    base.Draw(gameTime);
+}
+</code></pre>
+<p>Now run the game. You should get the following:</p>
+<p><img src="../../../../../../articles/getting_started/images/3_game.png" alt="Game"></p>
+
+</article>
+                </div>
+
+            </main>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/jquery.twbsPagination.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/jquery.mark.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/url.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/anchor-js@5.0.0/anchor.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/docfx.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/main.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/singulink.js"></script>    </body>
+</html>

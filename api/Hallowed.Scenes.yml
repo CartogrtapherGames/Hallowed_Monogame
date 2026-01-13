@@ -1,0 +1,53 @@
+### YamlMime:ManagedReference
+items:
+- uid: Hallowed.Scenes
+  commentId: N:Hallowed.Scenes
+  id: Hallowed.Scenes
+  children:
+  - Hallowed.Scenes.SceneBase
+  - Hallowed.Scenes.SceneManager
+  langs:
+  - csharp
+  - vb
+  name: Hallowed.Scenes
+  nameWithType: Hallowed.Scenes
+  fullName: Hallowed.Scenes
+  type: Namespace
+  assemblies:
+  - Hallowed
+references:
+- uid: Hallowed.Scenes.SceneBase
+  commentId: T:Hallowed.Scenes.SceneBase
+  parent: Hallowed.Scenes
+  href: Hallowed.Scenes.SceneBase.html
+  name: SceneBase
+  nameWithType: SceneBase
+  fullName: Hallowed.Scenes.SceneBase
+- uid: Hallowed.Scenes.SceneManager
+  commentId: T:Hallowed.Scenes.SceneManager
+  href: Hallowed.Scenes.SceneManager.html
+  name: SceneManager
+  nameWithType: SceneManager
+  fullName: Hallowed.Scenes.SceneManager
+- uid: Hallowed.Scenes
+  commentId: N:Hallowed.Scenes
+  href: Hallowed.html
+  name: Hallowed.Scenes
+  nameWithType: Hallowed.Scenes
+  fullName: Hallowed.Scenes
+  spec.csharp:
+  - uid: Hallowed
+    name: Hallowed
+    href: Hallowed.html
+  - name: .
+  - uid: Hallowed.Scenes
+    name: Scenes
+    href: Hallowed.Scenes.html
+  spec.vb:
+  - uid: Hallowed
+    name: Hallowed
+    href: Hallowed.html
+  - name: .
+  - uid: Hallowed.Scenes
+    name: Scenes
+    href: Hallowed.Scenes.html

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>How to Dynamically Update Vertex Data | hallowed </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="How to Dynamically Update Vertex Data | hallowed ">
+      <meta name="generator" content="docfx ">
+  
+      <link rel="shortcut icon" href="../../../../../../favicon.ico">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/night-owl.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" integrity="sha384-EvBWSlnoFgZlXJvpzS+MAUEjvN7+gcCwH+qh7GRFOGgZO0PuwOFro7qPOJnLfe7l" crossorigin="anonymous">
+      <link rel="stylesheet" href="../../../../../../styles/config.css">
+      <link rel="stylesheet" href="../../../../../../styles/singulink.css">
+      <link rel="stylesheet" href="../../../../../../styles/main.css">
+      <meta property="docfx:navrel" content="../../../../../../toc.html">
+      <meta property="docfx:tocrel" content="../../../toc.html">
+  
+  <meta property="docfx:rel" content="../../../../../../">
+  
+    </head>
+    <body>
+        <!-- Header required for docfx anchor scroll to work -->
+        <header id="head"></header>
+        <div class="top-navbar">
+            <a class="burger-icon" onclick="toggleMenu()">
+                <svg name="Hamburger" style="vertical-align: middle;" width="34" height="34" viewbox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M20 6H4V9H20V6ZM4 10.999H20V13.999H4V10.999ZM4 15.999H20V18.999H4V15.999Z"></path></svg>
+            </a>
+
+
+            <a class="brand" href="../../../../../../index.html">
+              <img src="../../../../../../logo.svg" alt="hallowed" class="logomark">
+              <span class="brand-title">hallowed</span>
+            </a>        </div>
+
+        <div class="body-content">
+            <div id="blackout" class="blackout" onclick="toggleMenu()"></div>
+
+            <nav id="sidebar" role="navigation">
+                <div class="sidebar">
+
+                    <div>
+                      <div class="mobile-hide">
+
+                        <a class="brand" href="../../../../../../index.html">
+                          <img src="../../../../../../logo.svg" alt="hallowed" class="logomark">
+                          <span class="brand-title">hallowed</span>
+                        </a>                      </div>
+
+                      <div class="sidesearch">
+                        <form id="search" role="search" class="search">
+                            <i class="bi bi-search search-icon"></i>
+                            <input type="text" id="search-query" placeholder="Search" autocomplete="off">
+                        </form>
+                      </div>
+
+                      <div id="navbar">
+                      </div>
+                    </div>                    <div class="sidebar-item-separator"></div>
+
+                        <div id="sidetoggle">
+                          <div id="sidetoc"></div>
+                        </div>
+                </div>
+                <div class="footer">
+  
+  <strong><a href='https://dotnet.github.io/docfx/'>DocFX</a> + <a href='https://www.singulink.com'>Singulink</a> = ♥</strong>
+                </div>            </nav>
+
+            <main class="main-panel">
+
+                <div id="search-results" style="display: none;">
+                  <h1 class="search-list">Search Results for <span></span></h1>
+                  <div class="sr-items">
+                    <p><i class="bi bi-hourglass-split index-loading"></i></p>
+                  </div>
+                  <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+                </div>
+ 
+
+                <div role="main" class="hide-when-search">
+
+                        <div class="subnav navbar navbar-default">
+                          <div class="container hide-when-search" id="breadcrumb">
+                            <ul class="breadcrumb">
+                              <li></li>
+                            </ul>
+                          </div>
+                        </div>
+
+                         <div class="contribution">
+                               <a href="https://github.com/MonoGame/docs.monogame.github.io/blob/main/articles/getting_to_know/howto/graphics/HowTo_DynamicallyUpdateVertices.md/#L1" class="contribution-link">Edit this page</a>
+                         </div>
+
+                    <article class="content wrap" id="_content" data-uid="">
+
+<h2 id="overview">Overview</h2>
+<p>Geometry in a 3D game is defined by vertex data. Sometimes, a game needs to modify vertex data or even generate new vertex data dynamically (at run time). Here are some solutions for dynamically updating vertex data.</p>
+<h2 id="updating-a-set-of-primitives-dynamically">Updating a Set of Primitives Dynamically</h2>
+<p>The <a href="https://github.com/simondarksidej/XNAGameStudio/wiki/Primitives">Primitives Sample</a> demonstrates a dynamic vertex buffer that is generated during each rendering frame. The sample renders primitives by first calling <code>Begin</code>, adding the necessary vertices, using the <code>Add</code> method, and then calling <code>End</code>. This forces the buffer to be drawn to the current device. The <code>Flush</code> method calls <a href="xref:Microsoft.Xna.Framework.Graphics.GraphicsDevice#Microsoft_Xna_Framework_Graphics_GraphicsDevice_DrawUserPrimitives__1_Microsoft_Xna_Framework_Graphics_PrimitiveType___0___System_Int32_System_Int32_">GraphicsDevice.DrawUserPrimitives</a> method when <code>End</code> is called or when the buffer has no room for new vertices. If there is no room, the buffer is written to the device, it is reset, and the pending vertices are added.</p>
+<h2 id="dynamically-rendering-a-persistent-set-of-primitives">Dynamically Rendering a Persistent Set of Primitives</h2>
+<p>The <a href="https://github.com/simondarksidej/XNAGameStudio/wiki/Particles-3D">Particle 3D Sample</a>, implements a dynamic vertex buffer that contains custom vertices with a limited lifespan. The application adds and removes particles into a fixed length buffer. The custom shader of the sample renders the active subset of vertices dynamically. Because particles have a limited lifespan, the <code>ParticleSystem</code> class handles all adding, updating, and deleting of the vertex buffer in real time.</p>
+<h2 id="generating-geometry-programmatically">Generating Geometry Programmatically</h2>
+<p>Sometimes, your game needs to generate geometry because the geometry is not known at design-time or it changes at run time. For this scenario, create a dynamic vertex and index buffer, and use <a href="xref:Microsoft.Xna.Framework.Graphics.VertexBuffer">VertexBuffer.SetData</a> and <a href="xref:Microsoft.Xna.Framework.Graphics.IndexBuffer">IndexBuffer.SetData</a> to set or change the data at run time.</p>
+<h2 id="remarks">Remarks</h2>
+<p>Create a dynamic vertex or index buffer using <a href="xref:Microsoft.Xna.Framework.Graphics.DynamicVertexBuffer">DynamicVertexBuffer</a> and <a href="xref:Microsoft.Xna.Framework.Graphics.DynamicIndexBuffer">DynamicIndexBuffer</a> ; create a static vertex or index buffer using <a href="xref:Microsoft.Xna.Framework.Graphics.VertexBuffer">VertexBuffer</a> and <a href="xref:Microsoft.Xna.Framework.Graphics.IndexBuffer">IndexBuffer</a>. Use a dynamic buffer for vertex data that is updated every render frame, otherwise, use a static buffer.</p>
+<p>The samples are located on the App Hub Web site. For a more advanced solution for dynamic vertex updating, download the <a href="http://go.microsoft.com/fwlink/?LinkId=93007">Generated Geometry Sample</a>. This sample uses the <a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Graphics.MeshBuilder">MeshBuilder</a> helper class and a custom processor to generate a terrain map from a bitmap loaded by the content manager. Specifically, examine the <code>Process</code> method, located in TerrainProcessor.cs, which programmatically creates the terrain geometry based on input from the specified bitmap.</p>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="index.html">How to articles for the Graphics Pipeline</a></li>
+</ul>
+<h3 id="concepts">Concepts</h3>
+<ul>
+<li><a href="../../whatis/graphics/WhatIs_3DRendering.html">What Is 3D Rendering?</a></li>
+<li><a href="../../whatis/graphics/WhatIs_ConfigurableEffect.html">What Is a Configurable Effect?</a></li>
+</ul>
+<h3 id="reference">Reference</h3>
+<ul>
+<li><a href="xref:Microsoft.Xna.Framework.GraphicsDeviceManager">GraphicsDeviceManager</a></li>
+<li><a href="xref:Microsoft.Xna.Framework.Graphics.VertexBuffer">VertexBuffer</a></li>
+<li><a href="xref:Microsoft.Xna.Framework.Graphics.IndexBuffer">IndexBuffer</a></li>
+<li><a href="xref:Microsoft.Xna.Framework.Graphics.DynamicVertexBuffer">DynamicVertexBuffer</a></li>
+<li><a href="xref:Microsoft.Xna.Framework.Graphics.DynamicIndexBuffer">DynamicIndexBuffer</a></li>
+</ul>
+
+</article>
+                </div>
+
+            </main>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/jquery.twbsPagination.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/jquery.mark.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/url.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/anchor-js@5.0.0/anchor.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/docfx.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/main.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/singulink.js"></script>    </body>
+</html>

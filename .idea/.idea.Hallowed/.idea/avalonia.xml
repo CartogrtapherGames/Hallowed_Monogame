@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="HallowedEditor/App.axaml" value="HallowedEditor/HallowedEditor.csproj" />
+        <entry key="HallowedEditor/Styles/ButtonStyles.axaml" value="HallowedEditor/HallowedEditor.csproj" />
+        <entry key="HallowedEditor/Styles/ComboBox.axaml" value="HallowedEditor/HallowedEditor.csproj" />
+        <entry key="HallowedEditor/Styles/DataGridStyles.axaml" value="HallowedEditor/HallowedEditor.csproj" />
+        <entry key="HallowedEditor/Styles/EditorStyles.axaml" value="HallowedEditor/HallowedEditor.csproj" />
+        <entry key="HallowedEditor/Styles/InputStyles.axaml" value="HallowedEditor/HallowedEditor.csproj" />
+        <entry key="HallowedEditor/Styles/ListBoxStyles.axaml" value="HallowedEditor/HallowedEditor.csproj" />
+        <entry key="HallowedEditor/Styles/NavigationStyles.axaml" value="HallowedEditor/HallowedEditor.csproj" />
+        <entry key="HallowedEditor/Styles/NaviguationStyles.axaml" value="HallowedEditor/HallowedEditor.csproj" />
+        <entry key="HallowedEditor/Styles/TextStyles.axaml" value="HallowedEditor/HallowedEditor.csproj" />
+        <entry key="HallowedEditor/Views/Dummy.axaml" value="HallowedEditor/HallowedEditor.csproj" />
+        <entry key="HallowedEditor/Views/ItemsView.axaml" value="HallowedEditor/HallowedEditor.csproj" />
+        <entry key="HallowedEditor/Views/MainWindow.axaml" value="HallowedEditor/HallowedEditor.csproj" />
+        <entry key="HallowedEditor/Views/NavigationSidebar.axaml" value="HallowedEditor/HallowedEditor.csproj" />
+        <entry key="HallowedEditor/Views/SystemView.axaml" value="HallowedEditor/HallowedEditor.csproj" />
+      </map>
+    </option>
+  </component>
+</project>

@@ -1,0 +1,92 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:HallowedEditor.ViewModels"
+        xmlns:views="using:HallowedEditor.Views"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="1920" d:DesignHeight="1080"
+        x:Class="HallowedEditor.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="HallowedEditor">
+
+   <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+    
+    <DockPanel>
+        <!-- Top bar with project name and menu -->
+        <DockPanel DockPanel.Dock="Top" Classes="MenuBar">
+            <StackPanel DockPanel.Dock="Left" 
+                       Orientation="Horizontal"
+                       VerticalAlignment="Center"
+                       Margin="15,0,15,0">
+                <TextBlock Text="📁" FontSize="18" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                <TextBlock Text="{Binding ProjectName}" Classes="ProjectName"/>
+            </StackPanel>
+            
+            <Menu>
+                <MenuItem Header="_File">
+                    <MenuItem Header="_New Project..." InputGesture="Ctrl+N" Command="{Binding NewProjectCommand}"/>
+                    <MenuItem Header="_Open Project..." InputGesture="Ctrl+O" Command="{Binding OpenProjectCommand}"/>
+                    <Separator/>
+                    <MenuItem Header="_Save" InputGesture="Ctrl+S" Command="{Binding SaveCommand}"/>
+                    <MenuItem Header="Save _As..." InputGesture="Ctrl+Shift+S" Command="{Binding SaveAsCommand}"/>
+                    <Separator/>
+                    <MenuItem Header="E_xit" Command="{Binding ExitCommand}"/>
+                </MenuItem>
+                
+                <MenuItem Header="_Edit">
+                    <MenuItem Header="_Undo" InputGesture="Ctrl+Z" Command="{Binding UndoCommand}"/>
+                    <MenuItem Header="_Redo" InputGesture="Ctrl+Y" Command="{Binding RedoCommand}"/>
+                    <Separator/>
+                    <MenuItem Header="Prefere_nces..." Command="{Binding OpenPreferencesCommand}"/>
+                </MenuItem>
+                
+                <MenuItem Header="_View">
+                    <MenuItem Header="_Story Editor" Command="{Binding ShowStoryEditorCommand}"/>
+                    <MenuItem Header="_Actors" Command="{Binding ShowActorCommand}"/>
+                    <MenuItem Header="_Content Manager" Command="{Binding ShowContentManagerCommand}"/>
+                </MenuItem>
+                
+                <MenuItem Header="_Tools">
+                    <MenuItem Header="_Validate All Nodes" Command="{Binding ValidateNodesCommand}"/>
+                    <MenuItem Header="_Export Project..." Command="{Binding ExportProjectCommand}"/>
+                </MenuItem>
+                
+                <MenuItem Header="_Help">
+                    <MenuItem Header="_Documentation" Command="{Binding OpenDocumentationCommand}"/>
+                    <MenuItem Header="_About" Command="{Binding ShowAboutCommand}"/>
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+        
+        <!-- Main content with side navigation -->
+        <Grid ColumnDefinitions="97,*">
+            <!-- Left: Icon sidebar -->
+            <views:NavigationSidebar Grid.Column="0"/>
+    
+            <!-- Right: Content area with view switching -->
+            <Grid Grid.Column="1">
+                <!-- Show CurrentView if it's set -->
+                <ContentControl Content="{Binding CurrentView}" 
+                               IsVisible="{Binding CurrentView, Converter={x:Static ObjectConverters.IsNotNull}}"/>
+                
+                <!-- Show placeholder when CurrentView is null -->
+                <Border Classes="ContentPanel" 
+                       IsVisible="{Binding CurrentView, Converter={x:Static ObjectConverters.IsNull}}">
+                    <StackPanel HorizontalAlignment="Center" 
+                               VerticalAlignment="Center"
+                               Spacing="10">
+                        <TextBlock Text="{Binding CurrentViewTitle}" 
+                                  Classes="SectionHeader"
+                                  HorizontalAlignment="Center"/>
+                        <TextBlock Text="{Binding CurrentViewSubtitle}" 
+                                  Classes="Subtitle"
+                                  HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Grid>
+    </DockPanel>
+</Window>

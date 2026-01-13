@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>How to render a Model using a Basic Effect | hallowed </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="How to render a Model using a Basic Effect | hallowed ">
+      <meta name="generator" content="docfx ">
+  
+      <link rel="shortcut icon" href="../../../../../../favicon.ico">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/night-owl.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" integrity="sha384-EvBWSlnoFgZlXJvpzS+MAUEjvN7+gcCwH+qh7GRFOGgZO0PuwOFro7qPOJnLfe7l" crossorigin="anonymous">
+      <link rel="stylesheet" href="../../../../../../styles/config.css">
+      <link rel="stylesheet" href="../../../../../../styles/singulink.css">
+      <link rel="stylesheet" href="../../../../../../styles/main.css">
+      <meta property="docfx:navrel" content="../../../../../../toc.html">
+      <meta property="docfx:tocrel" content="../../../toc.html">
+  
+  <meta property="docfx:rel" content="../../../../../../">
+  
+    </head>
+    <body>
+        <!-- Header required for docfx anchor scroll to work -->
+        <header id="head"></header>
+        <div class="top-navbar">
+            <a class="burger-icon" onclick="toggleMenu()">
+                <svg name="Hamburger" style="vertical-align: middle;" width="34" height="34" viewbox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M20 6H4V9H20V6ZM4 10.999H20V13.999H4V10.999ZM4 15.999H20V18.999H4V15.999Z"></path></svg>
+            </a>
+
+
+            <a class="brand" href="../../../../../../index.html">
+              <img src="../../../../../../logo.svg" alt="hallowed" class="logomark">
+              <span class="brand-title">hallowed</span>
+            </a>        </div>
+
+        <div class="body-content">
+            <div id="blackout" class="blackout" onclick="toggleMenu()"></div>
+
+            <nav id="sidebar" role="navigation">
+                <div class="sidebar">
+
+                    <div>
+                      <div class="mobile-hide">
+
+                        <a class="brand" href="../../../../../../index.html">
+                          <img src="../../../../../../logo.svg" alt="hallowed" class="logomark">
+                          <span class="brand-title">hallowed</span>
+                        </a>                      </div>
+
+                      <div class="sidesearch">
+                        <form id="search" role="search" class="search">
+                            <i class="bi bi-search search-icon"></i>
+                            <input type="text" id="search-query" placeholder="Search" autocomplete="off">
+                        </form>
+                      </div>
+
+                      <div id="navbar">
+                      </div>
+                    </div>                    <div class="sidebar-item-separator"></div>
+
+                        <div id="sidetoggle">
+                          <div id="sidetoc"></div>
+                        </div>
+                </div>
+                <div class="footer">
+  
+  <strong><a href='https://dotnet.github.io/docfx/'>DocFX</a> + <a href='https://www.singulink.com'>Singulink</a> = ♥</strong>
+                </div>            </nav>
+
+            <main class="main-panel">
+
+                <div id="search-results" style="display: none;">
+                  <h1 class="search-list">Search Results for <span></span></h1>
+                  <div class="sr-items">
+                    <p><i class="bi bi-hourglass-split index-loading"></i></p>
+                  </div>
+                  <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+                </div>
+ 
+
+                <div role="main" class="hide-when-search">
+
+                        <div class="subnav navbar navbar-default">
+                          <div class="container hide-when-search" id="breadcrumb">
+                            <ul class="breadcrumb">
+                              <li></li>
+                            </ul>
+                          </div>
+                        </div>
+
+                         <div class="contribution">
+                               <a href="https://github.com/MonoGame/docs.monogame.github.io/blob/main/articles/getting_to_know/howto/graphics/HowTo_RenderModel.md/#L1" class="contribution-link">Edit this page</a>
+                         </div>
+
+                    <article class="content wrap" id="_content" data-uid="">
+
+<h2 id="overview">Overview</h2>
+<p>This example has three main parts:</p>
+<ul>
+<li>Importing and processing the model</li>
+<li>Drawing the resultant managed object as a model with full lighting effect in the game</li>
+<li>Enabling movement of the model with a game pad.</li>
+</ul>
+<h2 id="requirements">Requirements</h2>
+<blockquote>
+<p>It is assumed that an existing project is loaded in MonoGame. In this example, the project is called &quot;CPModel&quot;.</p>
+</blockquote>
+<h2 id="adding-a-model">Adding a Model</h2>
+<p>Follow the steps in <a href="../content_pipeline/HowTo_GameContent_Add.html">How to add content</a> in order to add a Model to your project.</p>
+<p>For this example, use the <a href="https://github.com/MonoGame/MonoGame.Samples/raw/3.8.2/FuelCell/FuelCell.Core/Content/Models/fuelcarrier.fbx">Fuel Carrier model</a> file and its corresponding <a href="https://github.com/MonoGame/MonoGame.Samples/raw/3.8.2/FuelCell/FuelCell.Core/Content/Models/ShipDiffuse.tga">diffuse texture</a>.  But you can use any model file you wish, and set the <strong>Content Importer</strong> to <code>FBX Importer - MonoGame</code> and the <strong>Content Processor</strong> is <code>Model - MonoGame</code> (which should be the default for an FBX) and Save the solution.</p>
+<p>The remaining parts render the model and add some user control of the model. All code modifications for this part occur within the game1.cs file of the game project.</p>
+<h2 id="rendering-the-model">Rendering the model</h2>
+<ol>
+<li><p>Open the <code>game1.cs</code> file.</p>
+</li>
+<li><p>Modify the <strong>Game1</strong> class by adding the following code at the beginning of the declaration.</p>
+<pre><code class="lang-csharp">private Model gameShip;
+</code></pre>
+<p>This member holds the ship model.</p>
+</li>
+<li><p>Modify the <strong>LoadContent</strong> method by adding the following code.</p>
+<pre><code class="lang-csharp">gameShip = Content.Load&lt;Model&gt;(&quot;fuelcarrier&quot;);
+</code></pre>
+<p>This code loads the model into the <code>gameShip</code> member (using <a href="xref:Microsoft.Xna.Framework.Content.ContentManager">Load</a>).</p>
+</li>
+<li><p>Create a new <strong>private</strong> method (called <strong>DrawModel</strong>) in the <strong>Game1</strong> class by adding the following code before the existing <a href="xref:Microsoft.Xna.Framework.Game#Microsoft_Xna_Framework_Game_Draw_Microsoft_Xna_Framework_GameTime_">Game.Draw</a> method.</p>
+<pre><code class="lang-csharp">private void DrawModel(Model m)
+{
+    Matrix[] transforms = new Matrix[m.Bones.Count];
+    float aspectRatio = GraphicsDevice.Viewport.AspectRatio;
+    m.CopyAbsoluteBoneTransformsTo(transforms);
+    Matrix projection =
+        Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45.0f),
+        aspectRatio, 1.0f, 10000.0f);
+    Matrix view = Matrix.CreateLookAt(new Vector3(0.0f, 50.0f, zoom),
+        Vector3.Zero, Vector3.Up);
+
+    foreach (ModelMesh mesh in m.Meshes)
+    {
+        foreach (BasicEffect effect in mesh.Effects)
+        {
+            effect.EnableDefaultLighting();
+
+            effect.View = view;
+            effect.Projection = projection;
+            effect.World = gameWorldRotation *
+                transforms[mesh.ParentBone.Index] *
+                Matrix.CreateTranslation(position);
+        }
+        mesh.Draw();
+    }
+}
+</code></pre>
+<p>This code sets up the lighting effects for each sub-mesh of the model. The <code>gameWorldRotation</code> and <code>Zoom</code> variables are used for player control. This functionality is added later.</p>
+<blockquote>
+<p>This render code is designed for only those models with a <a href="xref:Microsoft.Xna.Framework.Graphics.BasicEffect">BasicEffect</a> (set in the <code>MGCB</code> editor as the <code>defaultEffect</code> property for the model). For custom effects, the inner <code>for-each</code> loop should be changed to use the <a href="xref:Microsoft.Xna.Framework.Graphics.Effect">Effect</a> class instead of the <a href="xref:Microsoft.Xna.Framework.Graphics.BasicEffect">BasicEffect</a> class. In addition, you must use <a href="xref:Microsoft.Xna.Framework.Graphics.EffectParameter">EffectParameter</a> objects to manually set the world, view, and projection matrices.</p>
+</blockquote>
+</li>
+<li><p>Modify the <strong>Game1.Draw</strong> method by replacing the following code <code>**// TODO: Add your drawing code here</code> with the following code:</p>
+<pre><code class="lang-csharp">DrawModel(gameShip);
+</code></pre>
+<p>This initializes the model's effects before the model is rendered.</p>
+</li>
+<li><p>Save the solution.</p>
+</li>
+</ol>
+<p>At this point, the rendering code for the model is complete, but the user control code still needs implementation.</p>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>The project will not run as this point as there is more to add.</p>
+</div>
+<h2 id="moving-the-model">Moving the model</h2>
+<p>To begin moving the model, we need to add some controls and User input.</p>
+<ol>
+<li><p>Modify the <strong>Game1</strong> class by adding the following code after the <code>gameShip</code> declaration.</p>
+<pre><code class="lang-csharp">private Vector3 position = Vector3.One;
+private float zoom = 2500;
+private float rotationY = 0.0f;
+private float rotationX = 0.0f;
+private Matrix gameWorldRotation;
+float speed = 10f;
+</code></pre>
+<p>These members store the current position, zoom, and rotation values. In addition, the <code>gameWorldRotation</code> is updated by the <code>UpdateGamePad</code> method below.</p>
+</li>
+<li><p>Add a private method (called <strong>UpdateGamePad</strong>) before the call to <a href="xref:Microsoft.Xna.Framework.Game#Microsoft_Xna_Framework_Game_Update_Microsoft_Xna_Framework_GameTime_">Game.Update</a>.</p>
+<pre><code class="lang-csharp">private void UpdateGamePad()
+{
+    GamePadState gamePadState = GamePad.GetState(PlayerIndex.One);
+    KeyboardState keyState = Keyboard.GetState();
+
+    // Gamepad controls
+    position.X += gamePadState.ThumbSticks.Left.X * speed;
+    position.Y += gamePadState.ThumbSticks.Left.Y * speed;
+    zoom += gamePadState.ThumbSticks.Right.Y * speed;
+    rotationY += gamePadState.ThumbSticks.Right.X * speed;
+    if (gamePadState.Buttons.RightShoulder == ButtonState.Pressed)
+    {
+        rotationX += 1.0f * speed;
+    }
+    else if (gamePadState.Buttons.LeftShoulder == ButtonState.Pressed)
+    {
+        rotationX -= 1.0f * speed;
+    }
+
+    // Keyboard controls
+    if (keyState.IsKeyDown(Keys.A)) { position.X += 1.0f * speed; }
+    else if (keyState.IsKeyDown(Keys.D)) { position.X -= 1.0f * speed; }
+    if (keyState.IsKeyDown(Keys.W)) { zoom += 1.0f * speed; }
+    else if (keyState.IsKeyDown(Keys.S)) { zoom -= 1.0f * speed; }
+    if (keyState.IsKeyDown(Keys.E)) { rotationY += 1.0f * speed; }
+    else if (keyState.IsKeyDown(Keys.Q)) { rotationY -= 1.0f * speed; }
+
+    if (keyState.IsKeyDown(Keys.Right)) { position.Y += 1.0f * speed; }
+    else if (keyState.IsKeyDown(Keys.Left)) { position.Y -= 1.0f * speed; }
+    if (keyState.IsKeyDown(Keys.Up)) { rotationX += 1.0f * speed; }
+    else if (keyState.IsKeyDown(Keys.Down)) { rotationX -= 1.0f * speed; }
+
+    gameWorldRotation =
+        Matrix.CreateRotationX(MathHelper.ToRadians(rotationX)) *
+        Matrix.CreateRotationY(MathHelper.ToRadians(rotationY));
+}
+</code></pre>
+<p>This code implements an exit method for the game (pressing the <strong>A</strong> button on a GamePad), and updates the position members with the current input of the game controller.</p>
+</li>
+<li><p>Modify the <strong>Update</strong> method by adding a call to <code>UpdateGamePad</code>, before the call to <a href="xref:Microsoft.Xna.Framework.Game#Microsoft_Xna_Framework_Game_Update_Microsoft_Xna_Framework_GameTime_">Game.Update</a>.</p>
+<pre><code class="lang-csharp">UpdateGamePad();
+</code></pre>
+<p>This code updates the state of the position variables with the latest input.</p>
+</li>
+<li><p>Save the solution.</p>
+</li>
+</ol>
+<p>Development is complete so you are ready to build and run the game. Control the ship location with the game pad, and exit by pressing the <strong>A</strong> button.</p>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="../content_pipeline/HowTo_GameContent_Add.html">Adding Content to a Game</a></li>
+<li><a href="../input/index.html">Using Input</a></li>
+</ul>
+<h3 id="concepts">Concepts</h3>
+<ul>
+<li><a href="../../whatis/graphics/WhatIs_3DRendering.html">What Is a Configurable Effect?</a></li>
+<li><a href="../../whatis/graphics/WhatIs_ConfigurableEffect.html">What Is a Configurable Effect?</a></li>
+</ul>
+<h3 id="reference">Reference</h3>
+<ul>
+<li><a href="xref:Microsoft.Xna.Framework.Graphics.BasicEffect">BasicEffect</a></li>
+<li><a href="xref:Microsoft.Xna.Framework.Matrix">Matrix</a></li>
+<li><a href="xref:Microsoft.Xna.Framework.Input.GamePadState">GamePadState</a></li>
+<li><a href="xref:Microsoft.Xna.Framework.Input.KeyboardState">KeyboardState</a></li>
+</ul>
+
+</article>
+                </div>
+
+            </main>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/jquery.twbsPagination.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/jquery.mark.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/url.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/anchor-js@5.0.0/anchor.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/docfx.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/main.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/singulink.js"></script>    </body>
+</html>

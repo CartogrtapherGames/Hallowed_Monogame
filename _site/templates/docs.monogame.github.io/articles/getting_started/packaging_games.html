@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Package games for distribution | hallowed </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Package games for distribution | hallowed ">
+      <meta name="generator" content="docfx ">
+  
+      <link rel="shortcut icon" href="../../../../favicon.ico">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/night-owl.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" integrity="sha384-EvBWSlnoFgZlXJvpzS+MAUEjvN7+gcCwH+qh7GRFOGgZO0PuwOFro7qPOJnLfe7l" crossorigin="anonymous">
+      <link rel="stylesheet" href="../../../../styles/config.css">
+      <link rel="stylesheet" href="../../../../styles/singulink.css">
+      <link rel="stylesheet" href="../../../../styles/main.css">
+      <meta property="docfx:navrel" content="../../../../toc.html">
+      <meta property="docfx:tocrel" content="../toc.html">
+  
+  <meta property="docfx:rel" content="../../../../">
+  
+    </head>
+    <body>
+        <!-- Header required for docfx anchor scroll to work -->
+        <header id="head"></header>
+        <div class="top-navbar">
+            <a class="burger-icon" onclick="toggleMenu()">
+                <svg name="Hamburger" style="vertical-align: middle;" width="34" height="34" viewbox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M20 6H4V9H20V6ZM4 10.999H20V13.999H4V10.999ZM4 15.999H20V18.999H4V15.999Z"></path></svg>
+            </a>
+
+
+            <a class="brand" href="../../../../index.html">
+              <img src="../../../../logo.svg" alt="hallowed" class="logomark">
+              <span class="brand-title">hallowed</span>
+            </a>        </div>
+
+        <div class="body-content">
+            <div id="blackout" class="blackout" onclick="toggleMenu()"></div>
+
+            <nav id="sidebar" role="navigation">
+                <div class="sidebar">
+
+                    <div>
+                      <div class="mobile-hide">
+
+                        <a class="brand" href="../../../../index.html">
+                          <img src="../../../../logo.svg" alt="hallowed" class="logomark">
+                          <span class="brand-title">hallowed</span>
+                        </a>                      </div>
+
+                      <div class="sidesearch">
+                        <form id="search" role="search" class="search">
+                            <i class="bi bi-search search-icon"></i>
+                            <input type="text" id="search-query" placeholder="Search" autocomplete="off">
+                        </form>
+                      </div>
+
+                      <div id="navbar">
+                      </div>
+                    </div>                    <div class="sidebar-item-separator"></div>
+
+                        <div id="sidetoggle">
+                          <div id="sidetoc"></div>
+                        </div>
+                </div>
+                <div class="footer">
+  
+  <strong><a href='https://dotnet.github.io/docfx/'>DocFX</a> + <a href='https://www.singulink.com'>Singulink</a> = ♥</strong>
+                </div>            </nav>
+
+            <main class="main-panel">
+
+                <div id="search-results" style="display: none;">
+                  <h1 class="search-list">Search Results for <span></span></h1>
+                  <div class="sr-items">
+                    <p><i class="bi bi-hourglass-split index-loading"></i></p>
+                  </div>
+                  <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+                </div>
+ 
+
+                <div role="main" class="hide-when-search">
+
+                        <div class="subnav navbar navbar-default">
+                          <div class="container hide-when-search" id="breadcrumb">
+                            <ul class="breadcrumb">
+                              <li></li>
+                            </ul>
+                          </div>
+                        </div>
+
+                         <div class="contribution">
+                               <a href="https://github.com/MonoGame/docs.monogame.github.io/blob/main/articles/getting_started/packaging_games.md/#L1" class="contribution-link">Edit this page</a>
+                         </div>
+
+                    <article class="content wrap" id="_content" data-uid="">
+
+<h2 id="desktop-games">Desktop games</h2>
+<p>To publish desktop games, it is recommended that you build your project as a <a href="https://docs.microsoft.com/en-us/dotnet/core/deploying/#publish-self-contained">self-contained</a> .NET application. As such, your game will require absolutely no external dependencies and should run out-of-the-box as-is.</p>
+<h3 id="building-and-packaging">Building and packaging</h3>
+<div class="tabGroup" id="tabgroup_1">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_1_windows" role="tab" aria-controls="tabpanel_1_windows" data-tab="windows" tabindex="0" aria-selected="true">Windows</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_1_macos" role="tab" aria-controls="tabpanel_1_macos" data-tab="macos" tabindex="-1">macOS</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_1_ubuntu" role="tab" aria-controls="tabpanel_1_ubuntu" data-tab="ubuntu" tabindex="-1">Ubuntu</a>
+</li>
+</ul>
+<section id="tabpanel_1_windows" role="tabpanel" data-tab="windows">
+
+<p>From the .NET CLI:</p>
+<p><code>dotnet publish -c Release -r win-x64 -p:PublishReadyToRun=false -p:TieredCompilation=false --self-contained</code></p>
+<p>You can then zip the content of the publish folder and distribute the archive as-is.</p>
+<p>If you are targeting WindowsDX, note that players will need <a href="https://www.microsoft.com/en-us/download/details.aspx?id=8109">the DirectX June 2010 runtime</a> to be installed on their machine for audio and gamepads to work properly.</p>
+</section>
+<section id="tabpanel_1_macos" role="tabpanel" data-tab="macos" aria-hidden="true" hidden="hidden">
+
+<p>We recommend that you distribute your game as an <a href="https://developer.apple.com/library/archive/documentation/CoreFoundation/Conceptual/CFBundles/BundleTypes/BundleTypes.html">application bundle</a>. Application bundles are directories with the following file structure:</p>
+<pre><code class="lang-text">YourGame.app                    (this is your root folder)
+    - Contents
+        - Resources
+            - Content           (this is where all your content and XNB's should go)
+            - YourGame.icns     (this is your app icon, in ICNS format)
+        - MacOS
+            - YourGame          (the main executable for your game)
+        - Info.plist            (the metadata of your app, see below for contents)
+</code></pre>
+<p>So first lets create our directory structure.</p>
+<pre><code class="lang-cli">mkdir -p bin/Release/YourGame.app/Contents/MacOS/
+mkdir -p bin/Release/YourGame.app/Contents/Resources/Content
+</code></pre>
+<p>Next we need to publish our application for both <code>arm64</code> (Apple Silicon) and <code>x64</code> (Intel). From the .NET CLI:</p>
+<pre><code class="lang-cli">dotnet publish -c Release -r osx-x64 -p:PublishReadyToRun=false -p:TieredCompilation=false --self-contained
+dotnet publish -c Release -r osx-arm64 -p:PublishReadyToRun=false -p:TieredCompilation=false --self-contained
+</code></pre>
+<p>Next we need to combine the two binaries into one Universal Binary which will work on both arm64 and x64 machines.
+We can do this using the <code>xcode</code> utility <code>lipo</code>.</p>
+<pre><code class="lang-cli">lipo -create bin/Release/net8.0/osx-arm64/publish/YourGame bin/Release/net8.0/osx-x64/publish/YourGame -output bin/Release/YourGame.app/Contents/MacOS/YourGame
+</code></pre>
+<p>The above command will combine the two output executables into one. It assumes you are using the standard <code>Output</code> path for your application.
+If you are using a custom <code>Output</code> folder, you will need to make adjustments to the above command.</p>
+<p>Copy over your content</p>
+<pre><code class="lang-cli">cp -R bin/Release/net8.0/Content bin/Release/YourGame.app/Contents/Resources/Content
+</code></pre>
+<p>The <code>Info.plist</code> file is a standard macOS file containing metadata about your game. Here is an example file with required and recommended values set:</p>
+<pre><code class="lang-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE plist PUBLIC &quot;-//Apple//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;
+&lt;plist version=&quot;1.0&quot;&gt;
+&lt;dict&gt;
+    &lt;key&gt;CFBundleDevelopmentRegion&lt;/key&gt;
+    &lt;string&gt;en&lt;/string&gt;
+    &lt;key&gt;CFBundleExecutable&lt;/key&gt;
+    &lt;string&gt;YourGame&lt;/string&gt;
+    &lt;key&gt;CFBundleIconFile&lt;/key&gt;
+    &lt;string&gt;YourGame&lt;/string&gt;
+    &lt;key&gt;CFBundleIdentifier&lt;/key&gt;
+    &lt;string&gt;com.your-domain.YourGame&lt;/string&gt;
+    &lt;key&gt;CFBundleInfoDictionaryVersion&lt;/key&gt;
+    &lt;string&gt;6.0&lt;/string&gt;
+    &lt;key&gt;CFBundleName&lt;/key&gt;
+    &lt;string&gt;YourGame&lt;/string&gt;
+    &lt;key&gt;CFBundlePackageType&lt;/key&gt;
+    &lt;string&gt;APPL&lt;/string&gt;
+    &lt;key&gt;CFBundleShortVersionString&lt;/key&gt;
+    &lt;string&gt;1.0&lt;/string&gt;
+    &lt;key&gt;CFBundleSignature&lt;/key&gt;
+    &lt;string&gt;FONV&lt;/string&gt;
+    &lt;key&gt;CFBundleVersion&lt;/key&gt;
+    &lt;string&gt;1&lt;/string&gt;
+    &lt;key&gt;LSApplicationCategoryType&lt;/key&gt;
+    &lt;string&gt;public.app-category.games&lt;/string&gt;
+    &lt;key&gt;LSMinimumSystemVersion&lt;/key&gt;
+    &lt;string&gt;10.15&lt;/string&gt;
+    &lt;key&gt;NSHumanReadableCopyright&lt;/key&gt;
+    &lt;string&gt;Copyright © 2022&lt;/string&gt;
+    &lt;key&gt;NSPrincipalClass&lt;/key&gt;
+    &lt;string&gt;NSApplication&lt;/string&gt;
+    &lt;key&gt;LSRequiresNativeExecution&lt;/key&gt;
+    &lt;true/&gt;
+    &lt;key&gt;LSArchitecturePriority&lt;/key&gt;
+    &lt;array&gt;
+        &lt;string&gt;arm64&lt;/string&gt;
+    &lt;/array&gt;
+&lt;/dict&gt;
+&lt;/plist&gt;
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>For more information about <code>Info.plist</code> files, see the Apple <a href="https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Introduction/Introduction.html">documentation</a>.</p>
+</div>
+<p>After completing these steps, your <code>.app</code> folder should appear as an executable application on macOS.
+However it does need an icon. So we need to create an <code>.icns</code> file. We can use online tools to do this or you can use the following:</p>
+<pre><code class="lang-cli">mkdir -p bin/Release/YourGame.iconset
+sips -z 16 16 Icon.png --out bin/Release/YourGame.iconset/icon_16x16.png
+sips -z 32 32 Icon.png --out bin/Release/YourGame.iconset/icon_16x16@2x.png
+sips -z 32 32 Icon.png --out bin/Release/YourGame.iconset/icon_32x32.png
+sips -z 64 64 Icon.png --out bin/Release/YourGame.iconset/icon_32x32@2x.png
+sips -z 128 128 Icon.png --out bin/Release/YourGame.iconset/icon_128x128.png
+sips -z 256 256 Icon.png --out bin/Release/YourGame.iconset/icon_128x128@2x.png
+sips -z 256 256 Icon.png --out bin/Release/YourGame.iconset/icon_256x256.png
+sips -z 512 512 Icon.png --out bin/Release/YourGame.iconset/icon_256x256@2x.png
+sips -z 512 512 Icon.png --out bin/Release/YourGame.iconset/icon_512x512.png
+sips -z 1024 1024 Icon.png  bin/Release/YourGame.iconset/icon_512x512@2x.png
+iconutil -c icns bin/Release/YourGame.iconset --output bin/Release/YourGame.app/Contents/Resources/YourGame.icns
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>This code is expecting an <code>Icon.png</code> file to be in the same directory. This file should be <code>1024</code> x <code>1024</code> pixels.</p>
+</div>
+<p>For archiving, we recommend using the <code>.tar.gz</code> format to preserve the execution permissions (you will likely run into permission issues if you use <code>.zip</code> at any point).</p>
+</section>
+<section id="tabpanel_1_ubuntu" role="tabpanel" data-tab="ubuntu" aria-hidden="true" hidden="hidden">
+
+<p>From the .NET CLI:</p>
+<p><code>dotnet publish -c Release -r linux-x64 -p:PublishReadyToRun=false -p:TieredCompilation=false --self-contained</code></p>
+<p>You can then archive the content of the publish folder and distribute the archive as-is.</p>
+<p>We recommend using the <code>.tar.gz</code> archiving format to preserve the execution permissions.</p>
+</section>
+</div>
+<h2 id="special-notes-about-net-parameters">Special notes about .NET parameters</h2>
+<p>.NET proposes several parameters when publishing apps that may sound helpful, but have many issues when it comes to games (because they were never meant for games in the first place, but for small lightweight applications).</p>
+<h3 id="publishaot-and-publishtrimmed">PublishAot and PublishTrimmed</h3>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>The WindowsDX target is not compatible with <code>PublishAot</code> or <code>PublishTrimmed</code> because it uses Windows Forms, which is (as of .NET 9) not compatible with these options. If you need trimming or AOT compilation for desktop platforms, please consider using the DesktopGL target instead of WindowsDX.</p>
+</div>
+<p>The <code>PublishAot</code> option optimises your game code &quot;Ahead of Time&quot; for performance. It allows you to ship your game without the need to JIT (Just In Time compile), and will basically natively compile your game.</p>
+<p><code>PublishAot</code> binaries are much faster, which is typically desired for games. It however comes with limitations, like the inability to use runtime reflection and runtime code generation (IL emition).</p>
+<p><code>PublishAot</code> makes use of <code>PublishTrimmed</code>, which is another option that strip binaries of unused code to make much lighter executables and assemblies. Trimming can be aggressive and might remove types if the compiler can't detect if they are used (e.g. if you are using reflection or generics).</p>
+<p>MonoGame is mostly compatible with <code>PublishAot</code> and <code>PublishTrimmed</code>, and will just work in most cases. It may however crash at runtime if you are using custom content importers that use generic collections. If you are using <code>PublishAot</code> and you are running into runtime exceptions occuring when loading content saying that a type is missing, the solution is to call <code>ContentTypeReaderManager.AddTypeCreator()</code> on that type before trying to load your content. This will tell the AOT compiler to include that type.</p>
+<p>Besides MonoGame itself, it may happen that the third party libraries that you are using are not compatible with AOT or trimming. In that case, you should refer to those libraries maintainers for workarounds, or replace them with compatible libraries.</p>
+<p>Overall, AOT and trimming have similar limitations you need to watchout for:</p>
+<ol>
+<li>Using <code>XmlSerializer</code> in your game will probably cause issues. Since it uses reflection it will be difficult for the Trimmer to figure out what needs to be kept.
+It is recommended that, instead of using the <code>Deserialize</code> method, you write your own custom deserializer using <code>XDocument</code> or <code>XmlReader</code>.
+Alternatively you can use the Content Pipeline and create a custom <code>Processor</code> and <code>Reader</code> to convert the Xml into a binary format that can be loaded via the usual <code>Content.Load&lt;T&gt;</code> method.</li>
+<li>Dynamically loading assemblies via <code>Assembly.LoadFile</code>.</li>
+<li>No run-time code generation, for example, System.Reflection.Emit.</li>
+</ol>
+<p>You can also refer to the <a href="preparing_for_consoles.html">Preparing for consoles</a> documentation, which leverage AOT and has the same limitations. If your game runs with <code>PublishAot</code>, you'll be well ahead into porting your game to consoles.</p>
+<p>For more information, please see <a href="https://learn.microsoft.com/en-us/dotnet/core/deploying/native-aot/">Native AOT deployment</a> and <a href="https://learn.microsoft.com/en-us/dotnet/core/deploying/trimming/trim-self-contained">Trim self-contained deployments</a>.</p>
+<h3 id="readytorun-r2r">ReadyToRun (R2R)</h3>
+<p><a href="https://learn.microsoft.com/en-us/dotnet/core/deploying/ready-to-run">ReadyToRun</a> is advertised as improving application startup time, but slightly increasing binary size. We recommend not using it for games because it produces micro stutters when your game is running.</p>
+<p>ReadyToRun code is of low quality and makes the Just-In-Time compiler (JIT) trigger regularly to promote the code to a higher quality. Whenever the JIT runs, it produces potentially very visible stutters.</p>
+<p>Disabling ReadyToRun solves this issue (at the cost of a slightly longer startup time, but typically very negligible).</p>
+<p>ReadyToRun is disabled by default. You can configure it by setting the <code>PublishReadyToRun</code> property in your <code>.csproj</code> file.</p>
+<p>MonoGame templates for .NET projects explicitly set this to <code>false</code>.</p>
+<h3 id="tiered-compilation">Tiered compilation</h3>
+<p><a href="https://docs.microsoft.com/en-us/dotnet/core/whats-new/dotnet-core-3-0#tiered-compilation">Tiered compilation</a> is a companion system to ReadyToRun and works on the same principle to enhance startup time. We suggest disabling it to avoid any stutter while your game is running.</p>
+<p>Tiered compilation is <strong>enabled by default</strong>. To disable it, set the <code>TieredCompilation</code> property to <code>false</code> in your <code>.csproj</code>.
+MonoGame templates for .NET projects explicitly set this to <code>false</code>.</p>
+<h3 id="publishsinglefile">PublishSingleFile</h3>
+<p><a href="https://learn.microsoft.com/en-us/dotnet/core/deploying/single-file/overview">PublishSingleFile</a> packages your game into a single executable file with all dependencies and content integrated.</p>
+<p>While it sounds very convenient, be aware that it's not magical and is in fact a hidden self-extracting zip archive. As such, it may make app startup take <strong>a lot</strong> longer if your game is large, and may fail to launch on systems where user permissions don't allow extracting files (or if there is not enough storage space available).</p>
+<p>We highly recommend not using it for better compatibility across systems.</p>
+<p>If you need to reduce the footprint of your game, please refer to <code>PublishAot</code> and <code>PublishTrimmed</code> instead.</p>
+<h2 id="mobile-games">Mobile games</h2>
+<p>Please refer to the Xamarin documentation:</p>
+<ul>
+<li><p><a href="https://docs.microsoft.com/en-us/xamarin/android/deploy-test/publishing/">Android</a></p>
+</li>
+<li><p><a href="https://docs.microsoft.com/en-us/xamarin/ios/deploy-test/app-distribution/app-store-distribution/publishing-to-the-app-store?tabs=windows">iOS</a></p>
+</li>
+</ul>
+
+</article>
+                </div>
+
+            </main>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+        <script type="text/javascript" src="../../../../styles/jquery.twbsPagination.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/jquery.mark.min.js"></script>
+        <script type="text/javascript" src="../../../../styles/url.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/anchor-js@5.0.0/anchor.min.js"></script>
+        <script type="text/javascript" src="../../../../styles/docfx.js"></script>
+        <script type="text/javascript" src="../../../../styles/main.js"></script>
+        <script type="text/javascript" src="../../../../styles/singulink.js"></script>    </body>
+</html>

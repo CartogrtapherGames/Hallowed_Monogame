@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Chapter 01: What is MonoGame | hallowed </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Chapter 01: What is MonoGame | hallowed ">
+      <meta name="generator" content="docfx ">
+  
+      <link rel="shortcut icon" href="../../../../../../favicon.ico">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/night-owl.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" integrity="sha384-EvBWSlnoFgZlXJvpzS+MAUEjvN7+gcCwH+qh7GRFOGgZO0PuwOFro7qPOJnLfe7l" crossorigin="anonymous">
+      <link rel="stylesheet" href="../../../../../../styles/config.css">
+      <link rel="stylesheet" href="../../../../../../styles/singulink.css">
+      <link rel="stylesheet" href="../../../../../../styles/main.css">
+      <meta property="docfx:navrel" content="../../../../../../toc.html">
+      <meta property="docfx:tocrel" content="../../../toc.html">
+  
+  <meta property="docfx:rel" content="../../../../../../">
+  
+    </head>
+    <body>
+        <!-- Header required for docfx anchor scroll to work -->
+        <header id="head"></header>
+        <div class="top-navbar">
+            <a class="burger-icon" onclick="toggleMenu()">
+                <svg name="Hamburger" style="vertical-align: middle;" width="34" height="34" viewbox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M20 6H4V9H20V6ZM4 10.999H20V13.999H4V10.999ZM4 15.999H20V18.999H4V15.999Z"></path></svg>
+            </a>
+
+
+            <a class="brand" href="../../../../../../index.html">
+              <img src="../../../../../../logo.svg" alt="hallowed" class="logomark">
+              <span class="brand-title">hallowed</span>
+            </a>        </div>
+
+        <div class="body-content">
+            <div id="blackout" class="blackout" onclick="toggleMenu()"></div>
+
+            <nav id="sidebar" role="navigation">
+                <div class="sidebar">
+
+                    <div>
+                      <div class="mobile-hide">
+
+                        <a class="brand" href="../../../../../../index.html">
+                          <img src="../../../../../../logo.svg" alt="hallowed" class="logomark">
+                          <span class="brand-title">hallowed</span>
+                        </a>                      </div>
+
+                      <div class="sidesearch">
+                        <form id="search" role="search" class="search">
+                            <i class="bi bi-search search-icon"></i>
+                            <input type="text" id="search-query" placeholder="Search" autocomplete="off">
+                        </form>
+                      </div>
+
+                      <div id="navbar">
+                      </div>
+                    </div>                    <div class="sidebar-item-separator"></div>
+
+                        <div id="sidetoggle">
+                          <div id="sidetoc"></div>
+                        </div>
+                </div>
+                <div class="footer">
+  
+  <strong><a href='https://dotnet.github.io/docfx/'>DocFX</a> + <a href='https://www.singulink.com'>Singulink</a> = ♥</strong>
+                </div>            </nav>
+
+            <main class="main-panel">
+
+                <div id="search-results" style="display: none;">
+                  <h1 class="search-list">Search Results for <span></span></h1>
+                  <div class="sr-items">
+                    <p><i class="bi bi-hourglass-split index-loading"></i></p>
+                  </div>
+                  <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+                </div>
+ 
+
+                <div role="main" class="hide-when-search">
+
+                        <div class="subnav navbar navbar-default">
+                          <div class="container hide-when-search" id="breadcrumb">
+                            <ul class="breadcrumb">
+                              <li></li>
+                            </ul>
+                          </div>
+                        </div>
+
+                         <div class="contribution">
+                               <a href="https://github.com/MonoGame/docs.monogame.github.io/blob/main/articles/tutorials/building_2d_games/01_what_is_monogame/index.md/#L1" class="contribution-link">Edit this page</a>
+                         </div>
+
+                    <article class="content wrap" id="_content" data-uid="">
+
+<h2 id="a-brief-history">A Brief History</h2>
+<p>In 2006, Microsoft released a game development framework named <em><a href="https://learn.microsoft.com/en-us/previous-versions/windows/xna/bb203894(v=xnagamestudio.42)">XNA Game Studio</a></em> to facilitate game development for Windows PC and the Xbox 360 console. It revolutionized game development for indie creators by bringing a simplified approach to building games and offering a set of tools that lowered the entry barrier for aspiring game developers. Out of XNA Game Studio came critically acclaimed titles such as <a href="https://www.supergiantgames.com/games/bastion/">Bastion</a> and <a href="https://terraria.org/">Terraria</a>. In 2008, XNA was expanded to support development for both the Zune and Windows Phone.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Fun fact, provided by community member <a href="https://github.com/stromkos">stromkos</a>, The release of XNA 3.0 in 2008, which added the support for Windows Phone, is also the release that specified the default window resolution of 800x480 for new projects as this was the preferred resolution on Windows Phone. <a href="https://github.com/MonoGame/MonoGame/blob/8b35cf50783777507cd6b21828ed0109b3b07b50/MonoGame.Framework/GraphicsDeviceManager.cs#L44">It is still the default resolution used in MonoGame projects today</a>.</p>
+</div>
+<p>As XNA became more popular, the need for cross-platform development started to grow. In 2009, <a href="https://github.com/jalf">José Antonio Leal de Farias</a> introduced <em>XNA Touch</em>, an open-source project that aimed to make games with XNA playable on iOS devices. This marked the beginning of what would later become MonoGame. <a href="https://github.com/CartBlanche">Dominique Louis</a> came on board in 2009 and soon took over as full-time project lead, driving its initial development and expansion. The project attracted other developers, such as <a href="https://github.com/tomspilman">Tom Spilman</a>, who were interested in expanding the scope of the project as well as its reach.</p>
+<p>The official first release of MonoGame occurred in 2011, as an open-source version of XNA. While it still had the same familiar API as XNA, the cross-platform support was expanded to include Windows, macOS, Linux, iOS, Android, Xbox, and PlayStation. Despite Microsoft discontinuing XNA in 2013, MonoGame continued to grow and develop. Maintenance of the project was given to <a href="https://github.com/KonajuGames">Steve Williams</a> and <a href="https://github.com/tomspilman">Tom Spilman</a> in 2014. In order to direct its future development and undertaking, the <a href="https://monogame.net/about/">MonoGame Foundation</a> was formed on September 29th, 2023.</p>
+<p>Today, MonoGame is a mature cross-platform framework, that is built with the spirit of preserving XNA while adopting modern game development practices. Some popular titles created using MonoGame include <a href="https://store.steampowered.com/app/504230/Celeste/">Celeste</a>, <a href="https://store.steampowered.com/app/413150/Stardew_Valley/">Stardew Valley</a>, and <a href="https://store.steampowered.com/app/985890/Streets_of_Rage_4/">Streets of Rage 4</a>.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><img src="./images/celeste.png" alt="Figure 1-1: Celeste"></th>
+<th style="text-align: center;"><img src="./images/stardew-valley.png" alt="Figure 1-2: Stardew Valley"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>Figure 1-1 Celeste.</strong></td>
+<td style="text-align: center;"><strong>Figure 1-2: Stardew Valley</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;"><img src="./images/sor4.jpg" alt="Figure 1-3: Streets of Rage 4"></td>
+<td style="text-align: center;"><img src="./images/bastion.jpg" alt="Figure 1-4: Bastion"></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Figure 1-3: Streets of Rage 4</strong></td>
+<td style="text-align: center;"><strong>Figure 1-4: Bastion</strong></td>
+</tr>
+</tbody>
+</table>
+<div class="NOTE">
+<h5>Note</h5>
+<p>For more details about MonoGame's history, check the <a href="https://monogame.net/about/">About</a> on the official MonoGame website.</p>
+</div>
+<h2 id="features">Features</h2>
+<p>MonoGame, following in the footsteps of XNA, is a &quot;bring your own tools&quot; framework. It provides developers the basic blocks to design the game, engines, and/or tools. As a code-first approach to game development, MonoGame does not include any pre-built editors or interfaces; instead, it gives developers the freedom to create their own working environment.</p>
+<h3 id="api">API</h3>
+<p>At its core, MonoGame offers a set of libraries and APIs to handle common game development tasks. These include:</p>
+<ol>
+<li><strong>Graphics Rendering</strong>: 2D and 3D rendering are supported through the graphics API offered by MonoGame. This API provides sprite batching for 2D graphics, a flexible 3D pipeline, and shaders for custom visuals and effects.</li>
+<li><strong>Input Handling</strong>: Input from keyboard, mouse, gamepads, and touchscreens is supported, allowing for development of games for any platform and different styles of play.</li>
+<li><strong>Audio</strong>: A comprehensive audio system that can be used to create sound effects as well as play music with included support for many audio formats.</li>
+<li><strong>Content Pipeline</strong>: An out-of-the-box workflow for importing and processing game assets such as textures, models, and audio, and compiling them to a format that is optimal for the game's target platform.</li>
+<li><strong>Math Library</strong>: A math library specifically optimized for game development, providing essential mathematical functions and operations.</li>
+</ol>
+<h3 id="cross-platform">Cross Platform</h3>
+<p>One of the main advantages of MonoGame is its cross-platform support. Games built with MonoGame are compatible with a variety of platforms, including:</p>
+<ul>
+<li><strong>Desktop</strong>: Windows, macOS, and Linux.</li>
+<li><strong>Mobile</strong>: iOS and Android.</li>
+<li><strong>Consoles</strong> <a href="https://docs.monogame.net/articles/console_access.html">(with appropriate license)</a>: Xbox, PlayStation, and Nintendo Switch.</li>
+</ul>
+<p>By providing cross-platform support, developers can target multiple platforms from a single code base, significantly reducing development time and resources needed for porting.</p>
+<h3 id="programming-language-support">Programming Language Support</h3>
+<p>MonoGame is designed and built in C#. It is the official programming language supported in documentation, samples, and community discussion. However, MonoGame is not exclusively tied to C#. As a .NET library, MonoGame can be used with any .NET-compatible language, including Visual Basic and F#.</p>
+<div class="CAUTION">
+<h5>Caution</h5>
+<p>While the alternative .NET languages can be used, community support may be limited outside the scope of C#.</p>
+</div>
+<p>Regardless of which .NET language is used, developers should have a foundational understanding of the language and programming concepts such as:</p>
+<ul>
+<li>Object-oriented programming.</li>
+<li>Data types and structures.</li>
+<li>Control flow and loops.</li>
+<li>Error handling and debugging.</li>
+</ul>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="https://monogame.net/about">About MonoGame | MonoGame</a></li>
+</ul>
+<h2 id="test-your-knowledge">Test Your Knowledge</h2>
+<ol>
+<li><p>Name one of the advantages of using the MonoGame framework to develop games.</p>
+<p>:::question-answer
+Any of the following are advantages of using the MonoGame framework.</p>
+<ol>
+<li>It provides cross-platform support, allowing developers to target multiple platforms from a single code base.</li>
+<li>It offers a set of libraries and APIs common for game development tasks, such as graphics rendering, input handling, audio, and content management.</li>
+<li>It is a &quot;bring your own tools&quot; framework, giving developers flexibility in their working environment.
+:::</li>
+</ol>
+</li>
+<li><p>What programming languages can be used when creating a game with MonoGame?</p>
+<p>:::question-answer
+The primary language used is C#, which is the same language that the MonoGame framework is developed in.  However, any .NET language can be used, such as F# or Visual Basic.
+:::</p>
+</li>
+</ol>
+
+</article>
+                </div>
+
+            </main>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/jquery.twbsPagination.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/jquery.mark.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/url.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/anchor-js@5.0.0/anchor.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/docfx.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/main.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/singulink.js"></script>    </body>
+</html>

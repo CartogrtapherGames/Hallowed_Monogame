@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Creating a Custom Effect with Texturing | hallowed </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Creating a Custom Effect with Texturing | hallowed ">
+      <meta name="generator" content="docfx ">
+  
+      <link rel="shortcut icon" href="../../../../../../favicon.ico">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/night-owl.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" integrity="sha384-EvBWSlnoFgZlXJvpzS+MAUEjvN7+gcCwH+qh7GRFOGgZO0PuwOFro7qPOJnLfe7l" crossorigin="anonymous">
+      <link rel="stylesheet" href="../../../../../../styles/config.css">
+      <link rel="stylesheet" href="../../../../../../styles/singulink.css">
+      <link rel="stylesheet" href="../../../../../../styles/main.css">
+      <meta property="docfx:navrel" content="../../../../../../toc.html">
+      <meta property="docfx:tocrel" content="../../../toc.html">
+  
+  <meta property="docfx:rel" content="../../../../../../">
+  
+    </head>
+    <body>
+        <!-- Header required for docfx anchor scroll to work -->
+        <header id="head"></header>
+        <div class="top-navbar">
+            <a class="burger-icon" onclick="toggleMenu()">
+                <svg name="Hamburger" style="vertical-align: middle;" width="34" height="34" viewbox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M20 6H4V9H20V6ZM4 10.999H20V13.999H4V10.999ZM4 15.999H20V18.999H4V15.999Z"></path></svg>
+            </a>
+
+
+            <a class="brand" href="../../../../../../index.html">
+              <img src="../../../../../../logo.svg" alt="hallowed" class="logomark">
+              <span class="brand-title">hallowed</span>
+            </a>        </div>
+
+        <div class="body-content">
+            <div id="blackout" class="blackout" onclick="toggleMenu()"></div>
+
+            <nav id="sidebar" role="navigation">
+                <div class="sidebar">
+
+                    <div>
+                      <div class="mobile-hide">
+
+                        <a class="brand" href="../../../../../../index.html">
+                          <img src="../../../../../../logo.svg" alt="hallowed" class="logomark">
+                          <span class="brand-title">hallowed</span>
+                        </a>                      </div>
+
+                      <div class="sidesearch">
+                        <form id="search" role="search" class="search">
+                            <i class="bi bi-search search-icon"></i>
+                            <input type="text" id="search-query" placeholder="Search" autocomplete="off">
+                        </form>
+                      </div>
+
+                      <div id="navbar">
+                      </div>
+                    </div>                    <div class="sidebar-item-separator"></div>
+
+                        <div id="sidetoggle">
+                          <div id="sidetoc"></div>
+                        </div>
+                </div>
+                <div class="footer">
+  
+  <strong><a href='https://dotnet.github.io/docfx/'>DocFX</a> + <a href='https://www.singulink.com'>Singulink</a> = ♥</strong>
+                </div>            </nav>
+
+            <main class="main-panel">
+
+                <div id="search-results" style="display: none;">
+                  <h1 class="search-list">Search Results for <span></span></h1>
+                  <div class="sr-items">
+                    <p><i class="bi bi-hourglass-split index-loading"></i></p>
+                  </div>
+                  <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+                </div>
+ 
+
+                <div role="main" class="hide-when-search">
+
+                        <div class="subnav navbar navbar-default">
+                          <div class="container hide-when-search" id="breadcrumb">
+                            <ul class="breadcrumb">
+                              <li></li>
+                            </ul>
+                          </div>
+                        </div>
+
+                         <div class="contribution">
+                               <a href="https://github.com/MonoGame/docs.monogame.github.io/blob/main/articles/getting_to_know/howto/graphics/HowTo_Draw_Textured_Quad.md/#L1" class="contribution-link">Edit this page</a>
+                         </div>
+
+                    <article class="content wrap" id="_content" data-uid="">
+
+<h2 id="overview">Overview</h2>
+<p>Drawing a textured quad is a basic technique to have in any Game Developers arsenal, which can be populated by any texture from either the Content Pipeline (loaded from disk) or generated in memory (which we will use here for simplicity).</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Drawing a texture quad is in effect what a SpriteBatch does under the hood, but while a SpriteBatch natively only draws flat to the screen, a Quad can be positioned in any way you see fit.  Either approach has its pros and cons.</p>
+</div>
+<p>There is a but of setup to draw a quad in MonoGame and there are many ways to achieve it.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>This example draws from community responses to the same question <a href="https://community.monogame.net/t/minimal-example-of-drawing-a-quad-into-2d-space/11063/2">here, on the MonoGame Community site</a>, with a little clean-up to make it simpler.</p>
+</div>
+<h2 id="to-use-a-custom-effect-with-a-texture">To use a custom effect with a texture</h2>
+<ol>
+<li><p>Create a custom vertex format declaration and a set of indices to indicate the drawing order.</p>
+<pre><code class="lang-csharp">// A Vertex format with Texture information
+private VertexPositionColorTexture[] drawingQuad;
+
+// The indices array for drawing a quad
+private short[] drawingIndices;
+
+public void SetupUserIndexedVertexRectangle(Rectangle r)
+{
+    drawingQuad = new VertexPositionColorTexture[4];
+    drawingQuad[0] = new VertexPositionColorTexture(new Vector3(r.Left, r.Top, 0f), Color.White, new Vector2(0f, 0f));
+    drawingQuad[1] = new VertexPositionColorTexture(new Vector3(r.Left, r.Bottom, 0f), Color.Red, new Vector2(0f, 1f));
+    drawingQuad[2] = new VertexPositionColorTexture(new Vector3(r.Right, r.Bottom, 0f), Color.Green, new Vector2(1f, 1f));
+    drawingQuad[3] = new VertexPositionColorTexture(new Vector3(r.Right, r.Top, 0f), Color.Blue, new Vector2(1f, 0f));
+
+    drawingIndices = [0, 2, 1, 2, 0, 3];
+}
+</code></pre>
+</li>
+<li><p>To make setup simpler, we will also define two methods to Set the <a href="HowTo_Create_a_StateObject.html">Graphics State</a> and <a href="xref:Microsoft.Xna.Framework.Graphics.Effect">create our basic effect</a>.</p>
+<pre><code class="lang-csharp">// The basic effect definition
+private BasicEffect basicEffect;
+
+// A Texture2D that we will generate data into
+private Texture2D generatedTexture;
+
+/// &lt;summary&gt;
+/// Set the states for the graphics device.
+/// &lt;/summary&gt;
+private void SetStates()
+{
+    GraphicsDevice.BlendState = BlendState.Opaque;
+    GraphicsDevice.DepthStencilState = DepthStencilState.Default;
+    GraphicsDevice.SamplerStates[0] = SamplerState.PointWrap;
+    GraphicsDevice.RasterizerState = RasterizerState.CullCounterClockwise;
+}
+
+/// &lt;summary&gt;
+/// Creates a basic effect for drawing a textured quad.
+/// &lt;/summary&gt;
+private void SetUpBasicEffect()
+{
+    basicEffect = new BasicEffect(this.GraphicsDevice);
+    basicEffect.VertexColorEnabled = true;
+    basicEffect.TextureEnabled = true;
+    basicEffect.Texture = generatedTexture;
+
+    // set up our matrix to match basic effect.
+    Viewport viewport = GraphicsDevice.Viewport;
+    basicEffect.World = Matrix.Identity;
+    Vector3 cameraUp = Vector3.Transform(Vector3.Down, Matrix.CreateRotationZ(0));
+    basicEffect.View = Matrix.CreateLookAt(Vector3.Forward, Vector3.Zero, cameraUp);
+    basicEffect.Projection = Matrix.CreateScale(1, -1, 1) * Matrix.CreateOrthographicOffCenter(0, viewport.Width, viewport.Height, 0, 0, 1);
+}
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Note that the basic effect is created with <code>basicEffect.TextureEnabled = true;</code> and the texture to draw using <code>basicEffect.Texture = generatedTexture;</code>, just stating we are drawing a texture and what it is.</p>
+</div>
+</li>
+<li><p>Next, we will generate a Texture to draw as part of the quad, a simple white texture which the effect will also draw a coloured &quot;tint&quot; over thanks to the <code>basicEffect.VertexColorEnabled = true;</code> set in the effect.</p>
+<pre><code class="lang-csharp">private Texture2D GenerateTexture2D()
+{
+    Texture2D t = new Texture2D(this.GraphicsDevice, 250, 250);
+    var cdata = new Color[250 * 250];
+    for (int i = 0; i &lt; 250; i++)
+    {
+        for (int j = 0; j &lt; 250; j++)
+        {
+            cdata[i * 250 + j] = Color.White;
+        }
+    }
+    t.SetData(cdata);
+    return t;
+}
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Alternatively, you can just use a texture loaded from the Content Pipeline, just be sure to change the Vertex format used in Step 1 to <code>VertexPositionTexture</code> unless you want the coloured gradient, or simply disable <code>basicEffect.VertexColorEnabled = false;</code>.  That is unless you want to apply color tints with the vertex declaration.</p>
+</div>
+</li>
+<li><p>Putting this together, setup all the relevant artifacts in the <code>LoadContent</code> method.</p>
+<pre><code class="lang-csharp">protected override void LoadContent()
+{
+    // Set render state
+    SetStates();
+
+    // Setup basic effect
+    SetUpBasicEffect();
+
+    // Create the quad to draw
+    SetupUserIndexedVertexRectangle(new Rectangle(10, 40, 450, 260));
+
+    // Generate (or load) the Texture
+    generatedTexture = GenerateTexture2D();
+}
+</code></pre>
+</li>
+<li><p>Finally, draw the primitive quad to the screen using the BasicEffect and generated data.</p>
+<pre><code class="lang-csharp">protected override void Draw(GameTime gameTime)
+{
+    GraphicsDevice.Clear(Color.CornflowerBlue);
+
+    foreach (EffectPass pass in basicEffect.CurrentTechnique.Passes)
+    {
+        pass.Apply();
+        GraphicsDevice.DrawUserIndexedPrimitives(PrimitiveType.TriangleList, drawingQuad, 0, 4, drawingIndices, 0, 2);
+    }
+
+    base.Draw(gameTime);
+} 
+</code></pre>
+</li>
+<li><p>Marvel at the wonder of your drawn Textured Quad plus vertex effect.</p>
+<p><img src="./images/HowTo_DrawTexturedQuad_Final.png" alt="Final effect"></p>
+</li>
+</ol>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="HowTo_Create_a_BasicEffect.html">How to create a Basic Effect</a></li>
+</ul>
+<h3 id="concepts">Concepts</h3>
+<ul>
+<li><a href="../../whatis/graphics/WhatIs_3DRendering.html">3D Pipeline Basics</a></li>
+</ul>
+<h3 id="reference">Reference</h3>
+<ul>
+<li><a href="xref:Microsoft.Xna.Framework.Graphics.GraphicsDevice">GraphicsDevice</a></li>
+<li><a href="xref:Microsoft.Xna.Framework.Graphics.BasicEffect">BasicEffect</a></li>
+</ul>
+
+</article>
+                </div>
+
+            </main>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/jquery.twbsPagination.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/jquery.mark.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/url.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/anchor-js@5.0.0/anchor.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/docfx.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/main.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/singulink.js"></script>    </body>
+</html>

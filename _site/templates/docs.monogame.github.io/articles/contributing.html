@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Contributing to MonoGame Documentation | hallowed </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Contributing to MonoGame Documentation | hallowed ">
+      <meta name="generator" content="docfx ">
+  
+      <link rel="shortcut icon" href="../../../favicon.ico">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/night-owl.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" integrity="sha384-EvBWSlnoFgZlXJvpzS+MAUEjvN7+gcCwH+qh7GRFOGgZO0PuwOFro7qPOJnLfe7l" crossorigin="anonymous">
+      <link rel="stylesheet" href="../../../styles/config.css">
+      <link rel="stylesheet" href="../../../styles/singulink.css">
+      <link rel="stylesheet" href="../../../styles/main.css">
+      <meta property="docfx:navrel" content="../../../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+  
+  <meta property="docfx:rel" content="../../../">
+  
+    </head>
+    <body>
+        <!-- Header required for docfx anchor scroll to work -->
+        <header id="head"></header>
+        <div class="top-navbar">
+            <a class="burger-icon" onclick="toggleMenu()">
+                <svg name="Hamburger" style="vertical-align: middle;" width="34" height="34" viewbox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M20 6H4V9H20V6ZM4 10.999H20V13.999H4V10.999ZM4 15.999H20V18.999H4V15.999Z"></path></svg>
+            </a>
+
+
+            <a class="brand" href="../../../index.html">
+              <img src="../../../logo.svg" alt="hallowed" class="logomark">
+              <span class="brand-title">hallowed</span>
+            </a>        </div>
+
+        <div class="body-content">
+            <div id="blackout" class="blackout" onclick="toggleMenu()"></div>
+
+            <nav id="sidebar" role="navigation">
+                <div class="sidebar">
+
+                    <div>
+                      <div class="mobile-hide">
+
+                        <a class="brand" href="../../../index.html">
+                          <img src="../../../logo.svg" alt="hallowed" class="logomark">
+                          <span class="brand-title">hallowed</span>
+                        </a>                      </div>
+
+                      <div class="sidesearch">
+                        <form id="search" role="search" class="search">
+                            <i class="bi bi-search search-icon"></i>
+                            <input type="text" id="search-query" placeholder="Search" autocomplete="off">
+                        </form>
+                      </div>
+
+                      <div id="navbar">
+                      </div>
+                    </div>                    <div class="sidebar-item-separator"></div>
+
+                        <div id="sidetoggle">
+                          <div id="sidetoc"></div>
+                        </div>
+                </div>
+                <div class="footer">
+  
+  <strong><a href='https://dotnet.github.io/docfx/'>DocFX</a> + <a href='https://www.singulink.com'>Singulink</a> = ♥</strong>
+                </div>            </nav>
+
+            <main class="main-panel">
+
+                <div id="search-results" style="display: none;">
+                  <h1 class="search-list">Search Results for <span></span></h1>
+                  <div class="sr-items">
+                    <p><i class="bi bi-hourglass-split index-loading"></i></p>
+                  </div>
+                  <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+                </div>
+ 
+
+                <div role="main" class="hide-when-search">
+
+                        <div class="subnav navbar navbar-default">
+                          <div class="container hide-when-search" id="breadcrumb">
+                            <ul class="breadcrumb">
+                              <li></li>
+                            </ul>
+                          </div>
+                        </div>
+
+                         <div class="contribution">
+                               <a href="https://github.com/MonoGame/docs.monogame.github.io/blob/main/articles/contributing.md/#L1" class="contribution-link">Edit this page</a>
+                         </div>
+
+                    <article class="content wrap" id="_content" data-uid="">
+
+
+<p>Thank you for choosing to contribute to the MonoGame project! This page provides guidance on how you can help to improve the documentation for MonoGame.</p>
+<h2 id="getting-started">Getting Started</h2>
+<div class="NOTE">
+<h5>Note</h5>
+<p>If you are new to making contributions to open source projects, it is recommended to understand the following concepts before submitting your contribution:</p>
+<ul>
+<li><a href="https://help.github.com/articles/fork-a-repo/">How to fork a repo</a>.</li>
+<li><a href="https://help.github.com/articles/creating-and-deleting-branches-within-your-repository/">Creating a new branch for your fork</a> from <code>main</code>.</li>
+<li><a href="https://help.github.com/articles/creating-new-files/">Creating a new file</a> or <a href="https://help.github.com/articles/editing-files-in-your-repository/">editing an existing one</a> using the GitHub markup editor.</li>
+<li><a href="https://help.github.com/articles/creating-a-pull-request/">How to submit your contributions for review through a pull request</a>.</li>
+</ul>
+</div>
+<h3 id="articles-and-api-references">Articles and API References</h3>
+<p>The MonoGame documentation contains two types of documents: articles and API references.</p>
+<p>Articles include manuals, guides, and tutorials on how to use the MonoGame Framework to create games.</p>
+<p>API references provide detailed explanation of each class and method found in the MonoGame Framework. The documentation is written in the <a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/xmldoc/xml-documentation-comments">C# XML format</a> and is inline to the MonoGame source code.</p>
+<h3 id="generating-the-documentation-site">Generating the Documentation Site</h3>
+<p>The pages for articles and API references are hosted on a documentation site that is generated using <a href="https://dotnet.github.io/docfx/">DocFX</a>.</p>
+<p>To generate a local copy of the documentation site:</p>
+<ol>
+<li>Fork the <a href="https://github.com/MonoGame/docs.monogame.github.io">docs.monogame.github.io</a> repository.</li>
+<li>Follow the instructions in the site's <a href="https://github.com/MonoGame/docs.monogame.github.io?tab=readme-ov-file#docsmonogamegithubio">readme</a> for preparing your environment and generating the documentation.</li>
+<li>If you intend to make contributions to the API References, then run <code>git submodule update --init --recursive</code> command to update the <code>external/MonoGame</code> submodule to your local fork.</li>
+<li>Use the <code>dotnet docfx docfx.json --serve</code> command to serve a local copy of the documentation site.</li>
+<li>Browse the running site from <code>http://localhost:xxxx</code>.</li>
+</ol>
+<div class="TIP">
+<h5>Tip</h5>
+<p>Verify your changes in your local documentation site before submitting a pull request with said changes. It is recommended to include screenshots of the pages in the pull request to help reviewers confirm these changes.</p>
+</div>
+<h2 id="general-rules">General Rules</h2>
+<p>The following rules <strong>must</strong> be observed at all times when contributing documentation to the MonoGame project.</p>
+<ul>
+<li>Write in a neutral, technical tone.</li>
+<li>Avoid humor, personal opinions, and colloquial language.</li>
+<li><strong>Never</strong> plagiarize any documentation from another source.</li>
+<li>Do not use automatic documentation tools as they are ineffective.</li>
+</ul>
+<div class="WARNING">
+<h5>Warning</h5>
+<p>Breaking these rules can result in your contribution being rejected.</p>
+</div>
+<h2 id="general-style-guide">General Style Guide</h2>
+<p>Because there are many contributors to the MonoGame documentation, it can be difficult to maintain a coherent writing style throughout the documentation site. In addition to the <a href="#general-rules">General Rules</a>, this style guide serves to inform contributors of the conventions needed to maintain this writing style. So please review the following expectations before contributing any documentation.</p>
+<h3 id="every-word-should-contain-value">Every Word Should Contain Value</h3>
+<p>Every word in the reference documentation should provide information beyond the API itself.  Documentation that only rehashes or rephrases what is already apparent in the class, method, parameter, or property name has zero value and wastes time for both the writer and reader.</p>
+<h3 id="the-first-sentence-is-the-most-important">The First Sentence Is the Most Important</h3>
+<p>There is no guarantee that the reader will read beyond the first sentence of the reference documentation.  This is why that first sentence is the most important and should convey the most key piece of information.  Take your time to write the most concise and clear first sentence possible.  This helps users tremendously and goes a long way towards having great documentation.</p>
+<h3 id="surface-information-hidden-in-the-code">Surface Information Hidden in the Code</h3>
+<p>Being inline with the code allows you to easily look for critical information within it that the user might not know from looking at the API alone.  Take your time to explore inner method calls and platform specific sections of the code.  The time to write the documentation is once you feel you fully understand the code you are documenting.  If you don't feel you understand the code then leave the documentation for someone else to write.</p>
+<h3 id="focus-on-what-adds-value-to-the-consumer">Focus on What Adds Value to the Consumer</h3>
+<p>Limit documentation to public methods and functions unless there is a specific reason to include internal methods, while documenting internals helps with the readability of the code, it provides limited use to consumers of the MonoGame Framework.</p>
+<h3 id="documentation-is-referenced-not-read">Documentation Is Referenced Not Read</h3>
+<p>Remember that the user is searching for an answer for a specific question.  It is your job to predict these questions and provide them clear answers.</p>
+<h3 id="descriptions-should-add-value-and-understanding">Descriptions Should Add Value and Understanding</h3>
+<p>Describing a thing by naming the thing does not help the developer to understand what the concept is that you are describing, for example:</p>
+<blockquote>
+<p>&quot;The Genre class provides information about a genre&quot;</p>
+</blockquote>
+<p>Which does not help someone reading the documentation if they do not know what a <code>Genre</code> is.  Be descriptive and improve the readers understanding for what something is and WHY it is.</p>
+<h2 id="api-reference-style-guide">API Reference Style Guide</h2>
+<p>In addition to the <a href="#general-style-guide">General Style Guide</a>, please consider the following conventions used for code associated with the API reference docs.</p>
+<h3 id="xml-tag-guidance">XML Tag Guidance</h3>
+<p>By default, the standard <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/xmldoc/recommended-tags">Microsoft recommendations</a> should be used for filling in XML tags for each class, method and property.</p>
+<p>With a few points to call out:</p>
+<h4 id="see-and-cref-should-be-used-whenever-an-api-reference-is-used-in-the-documentation"><code>&lt;see&gt;</code> and <code>&lt;cref/&gt;</code> should be used whenever an API reference is used in the documentation</h4>
+<p>To ensure that API documentation is linked to whichever reference is used, <code>&lt;see&gt;</code> and <code>&lt;cref/&gt;</code> references should be used. This helps users navigate the methods, especially when looking up initializers or use of a property or method.</p>
+<h4 id="avoid-self-referencing-cref-unless-it-provides-value">Avoid self referencing <code>&lt;cref/&gt;</code> unless it provides value</h4>
+<p><code>&lt;cref/&gt;</code> blocks are there to add links and create references to other classes, functions and methods that help inform the developer for what those concepts are.  Adding a <code>&lt;cref/&gt;</code> for the same class or property you are describing just creates a circular reference that does not add value.</p>
+<p>References to other methods or properties in the same class is fine, just avoid self if possible.</p>
+<h4 id="use-descriptors-in-see-and-cref-statements-for-better-readability">Use descriptors in <code>&lt;see/&gt;</code> and <code>&lt;cref/&gt;</code> statements for better readability</h4>
+<p>By default, a <code>&lt;cref/&gt;</code> or <code>&lt;see/&gt;</code> reference will use only the type you are referencing when rendered to the user, e.g. <code>&lt;cref=&quot;Album.Genre&quot;/&gt;</code> will render as <code>Genre</code>.</p>
+<p>Instead, use the descriptor in the style to render what you actually mean, for example: <code>&lt;cref=&quot;Album.Genre&quot;&gt;Album.Genre&lt;/cref&gt;</code> which will always render as <code>Album.Genre</code> which is much clearer, it is the same for <code>&lt;see/&gt;</code> tags.</p>
+<h4 id="120-width-comments-for-easy-reading">120 width comments for easy reading</h4>
+<p>Comments should be limited to <strong>120</strong> width, with overflow moving to the next line to make reading easier, for example:</p>
+<pre><code class="lang-csharp">&lt;summary&gt;
+Packed vector type containing unsigned normalized values ranging from 0 to 1. The x and z components use 5 bits,
+and the y component uses 6 bits.
+&lt;/summary&gt;
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>If the <code>cref</code> description would cause the line to exceed the 120 recommendation, this is generally ok, so long as the rendered line does not exceed the limit.
+The limit however, is more of a guideline than a hard rule, so common sense should be applied to keep the limit near 120 characters.</p>
+</div>
+<h4 id="use-the-packed-multi-line-style-with-surrounding-tags">Use the packed multi-line style with surrounding tags</h4>
+<p>To keep the documentation packed and readable, each parameter should be contained to a single line, for example:</p>
+<pre><code class="lang-csharp">&lt;summary&gt;
+Creates a new instance of Bgr565.
+&lt;/summary&gt;
+&lt;param name=&quot;x&quot;&gt;The x component&lt;/param&gt;
+&lt;param name=&quot;y&quot;&gt;The y component&lt;/param&gt;
+&lt;param name=&quot;z&quot;&gt;The z component&lt;/param&gt;
+</code></pre>
+<h3 id="interface-documentation">Interface Documentation</h3>
+<p>If documentation is already provided by an interface or inherited class, then the <code>&lt;inheritdoc /&gt;</code> tag should be used.  Critically, <strong>DO NOT</strong> duplicate documentation as it increases maintenance later, for example:</p>
+<pre><code class="lang-csharp">/// &lt;inheritdoc /&gt;
+public void InterfaceDefinedMethod()
+
+/// &lt;inheritdoc cref=&quot;IDisposable.Dispose()&quot;/&gt;
+public void Dispose()
+</code></pre>
+<p>This applies to all derived elements within a class, property or method.</p>
+<h3 id="inherited-properties">Inherited Properties</h3>
+<p>Where a property or type is already documented in an <code>enum</code> or <code>static</code>, to avoid duplication the <code>&lt;inheritdoc cref=&quot;&quot;/&gt;</code> style should be used, for example:</p>
+<pre><code class="lang-csharp">    public struct VertexPositionColorNormalTexture : IVertexType
+    {
+        /// &lt;inheritdoc cref=&quot;VertexPosition.Position&quot; /&gt;
+        public Vector3 Position;
+
+        /// &lt;inheritdoc cref=&quot;VertexPositionColor.Color&quot; /&gt;
+        public Color Color;
+
+        /// &lt;inheritdoc cref=&quot;VertexPositionNormalTexture.Normal&quot; /&gt;
+        public Vector3 Normal;
+
+        /// &lt;inheritdoc cref=&quot;VertexPositionTexture.Texture&quot; /&gt;
+        public Vector2 TextureCoordinate;
+
+        /// &lt;inheritdoc cref=&quot;IVertexType.VertexDeclaration&quot; /&gt;
+        public static readonly VertexDeclaration VertexDeclaration;
+</code></pre>
+<h3 id="protected-methods-requiring-documentation-by-the-linter">Protected Methods Requiring Documentation by the Linter</h3>
+<p>By default, we do not document Finalizers or other protected methods, the recommendation is to apply an empty <code>&lt;summary /&gt;</code> tag to suppress the warnings raised by the linter, for example:</p>
+<pre><code class="lang-csharp">/// &lt;summary /&gt;
+~Foo() =&gt; Dispose(false);
+</code></pre>
+<h2 id="license">License</h2>
+<p>All documentation contributed to the MonoGame project is subject to the <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike</a> license.  By contributing you are agreeing to the terms of that license.</p>
+<p align="center"><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"></a><br><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">MonoGame Documentation</span> by the <a xmlns:cc="http://creativecommons.org/ns#" href="http://www.monogame.net" property="cc:attributionName" rel="cc:attributionURL">MonoGame Team</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike License</a>.</p>
+
+</article>
+                </div>
+
+            </main>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+        <script type="text/javascript" src="../../../styles/jquery.twbsPagination.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/jquery.mark.min.js"></script>
+        <script type="text/javascript" src="../../../styles/url.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/anchor-js@5.0.0/anchor.min.js"></script>
+        <script type="text/javascript" src="../../../styles/docfx.js"></script>
+        <script type="text/javascript" src="../../../styles/main.js"></script>
+        <script type="text/javascript" src="../../../styles/singulink.js"></script>    </body>
+</html>

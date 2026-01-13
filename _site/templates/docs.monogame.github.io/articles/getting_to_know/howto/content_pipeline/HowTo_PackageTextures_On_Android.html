@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>How to package Textures for Android? | hallowed </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="How to package Textures for Android? | hallowed ">
+      <meta name="generator" content="docfx ">
+  
+      <link rel="shortcut icon" href="../../../../../../favicon.ico">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/night-owl.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" integrity="sha384-EvBWSlnoFgZlXJvpzS+MAUEjvN7+gcCwH+qh7GRFOGgZO0PuwOFro7qPOJnLfe7l" crossorigin="anonymous">
+      <link rel="stylesheet" href="../../../../../../styles/config.css">
+      <link rel="stylesheet" href="../../../../../../styles/singulink.css">
+      <link rel="stylesheet" href="../../../../../../styles/main.css">
+      <meta property="docfx:navrel" content="../../../../../../toc.html">
+      <meta property="docfx:tocrel" content="../../../toc.html">
+  
+  <meta property="docfx:rel" content="../../../../../../">
+  
+    </head>
+    <body>
+        <!-- Header required for docfx anchor scroll to work -->
+        <header id="head"></header>
+        <div class="top-navbar">
+            <a class="burger-icon" onclick="toggleMenu()">
+                <svg name="Hamburger" style="vertical-align: middle;" width="34" height="34" viewbox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M20 6H4V9H20V6ZM4 10.999H20V13.999H4V10.999ZM4 15.999H20V18.999H4V15.999Z"></path></svg>
+            </a>
+
+
+            <a class="brand" href="../../../../../../index.html">
+              <img src="../../../../../../logo.svg" alt="hallowed" class="logomark">
+              <span class="brand-title">hallowed</span>
+            </a>        </div>
+
+        <div class="body-content">
+            <div id="blackout" class="blackout" onclick="toggleMenu()"></div>
+
+            <nav id="sidebar" role="navigation">
+                <div class="sidebar">
+
+                    <div>
+                      <div class="mobile-hide">
+
+                        <a class="brand" href="../../../../../../index.html">
+                          <img src="../../../../../../logo.svg" alt="hallowed" class="logomark">
+                          <span class="brand-title">hallowed</span>
+                        </a>                      </div>
+
+                      <div class="sidesearch">
+                        <form id="search" role="search" class="search">
+                            <i class="bi bi-search search-icon"></i>
+                            <input type="text" id="search-query" placeholder="Search" autocomplete="off">
+                        </form>
+                      </div>
+
+                      <div id="navbar">
+                      </div>
+                    </div>                    <div class="sidebar-item-separator"></div>
+
+                        <div id="sidetoggle">
+                          <div id="sidetoc"></div>
+                        </div>
+                </div>
+                <div class="footer">
+  
+  <strong><a href='https://dotnet.github.io/docfx/'>DocFX</a> + <a href='https://www.singulink.com'>Singulink</a> = ♥</strong>
+                </div>            </nav>
+
+            <main class="main-panel">
+
+                <div id="search-results" style="display: none;">
+                  <h1 class="search-list">Search Results for <span></span></h1>
+                  <div class="sr-items">
+                    <p><i class="bi bi-hourglass-split index-loading"></i></p>
+                  </div>
+                  <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+                </div>
+ 
+
+                <div role="main" class="hide-when-search">
+
+                        <div class="subnav navbar navbar-default">
+                          <div class="container hide-when-search" id="breadcrumb">
+                            <ul class="breadcrumb">
+                              <li></li>
+                            </ul>
+                          </div>
+                        </div>
+
+                         <div class="contribution">
+                               <a href="https://github.com/MonoGame/docs.monogame.github.io/blob/main/articles/getting_to_know/howto/content_pipeline/HowTo_PackageTextures_On_Android.md/#L1" class="contribution-link">Edit this page</a>
+                         </div>
+
+                    <article class="content wrap" id="_content" data-uid="">
+
+
+<p>The Android ecosystem is unique in that the hardware it runs on can be from many different manufacturers.
+Unlike iOS or PC, you cannot always guarantee what graphics card a user will be using. For this reason, Android needs to have some special attention when shipping your game.</p>
+<h2 id="texture-compression">Texture Compression</h2>
+<p>As stated in &quot;<a href="https://docs.monogame.net/articles/getting_started/content_pipeline/why_content_pipeline.html">Why use the Content Pipeline</a>&quot;, you need to be aware of the performance limitations on mobile devices.
+The graphics cards on mobile phones do not have the same kind of capabilities as those on the PC or Consoles.  They usually have less memory and less power. So you need to make use of what you have in a more efficient way.</p>
+<p>One of these ways is to use Texture Compression. As stated in &quot;<a href="https://docs.monogame.net/articles/getting_started/content_pipeline/why_content_pipeline.html">Why use the Content Pipeline</a>&quot;, this allows you to fit more textures on the graphics card than you could if you just used raw <code>RGBA</code> textures.</p>
+<h2 id="how-android-deals-with-textures">How Android deals with textures</h2>
+<p>Fortunately, the Android engineers recognized that supporting all of these texture compression formats was not an easy task. So, with the introduction of the <code>.aab</code> file format, they added the ability to add multiple texture format files to the package. The way the <code>.aab</code> works is that it is not the final <code>.apk</code>. The final <code>.apk</code> will be built from the <code>.aab</code> when the game is delivered to the en- user device.</p>
+<p>As a result, not all of the files in the <code>.aab</code> will make it to the device. It will filter out things like <code>.so</code> files for other cpu types, and yes, texture formats.</p>
+<p>The <code>.aab</code> supports the following directory suffixes for texture compression:</p>
+<table>
+<thead>
+<tr>
+<th>Texture Format</th>
+<th>Suffix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PVRTC</td>
+<td>#tcf_pvrtc</td>
+</tr>
+<tr>
+<td>ATC</td>
+<td>#tcf_atc</td>
+</tr>
+<tr>
+<td>ASTC</td>
+<td>#tcf_astc</td>
+</tr>
+<tr>
+<td>S3TC</td>
+<td>#tcf_s3tc</td>
+</tr>
+<tr>
+<td>DXT1</td>
+<td>#tcf_dxt1</td>
+</tr>
+<tr>
+<td>ETC1</td>
+<td>#tcf_etc1</td>
+</tr>
+<tr>
+<td>ETC2</td>
+<td>#tcf_etc2</td>
+</tr>
+</tbody>
+</table>
+<div class="NOTE">
+<h5>Note</h5>
+<p>see <a href="https://developer.android.com/guide/playcore/asset-delivery/texture-compression">https://developer.android.com/guide/playcore/asset-delivery/texture-compression</a></p>
+</div>
+<p>MonoGame has its own <a href="https://docs.monogame.net/api/Microsoft.Xna.Framework.Content.Pipeline.Processors.TextureProcessorOutputFormat.html">TextureProcessorOutputFormat</a> enumeration. It describes the type of Texture Compression you use when processing an image.</p>
+<p>The following table shows you how to map that to the Suffix:</p>
+<table>
+<thead>
+<tr>
+<th>TextureProcessorOutputFormat</th>
+<th>Suffix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PvrCompressed</td>
+<td>#tcf_pvrtc</td>
+</tr>
+<tr>
+<td>AtcCompressed</td>
+<td>#tcf_atc</td>
+</tr>
+<tr>
+<td>AstcCompressed</td>
+<td>#tcf_astc</td>
+</tr>
+<tr>
+<td>DxtCompressed</td>
+<td>#tcf_s3tc</td>
+</tr>
+<tr>
+<td>Etc1Compressed</td>
+<td>#tcf_etc1</td>
+</tr>
+<tr>
+<td>EtcCompressed</td>
+<td>#tcf_etc2</td>
+</tr>
+<tr>
+<td>Compressed or Color</td>
+<td>No Suffix</td>
+</tr>
+</tbody>
+</table>
+<h2 id="adding-texture-compression-suffixes">Adding Texture Compression Suffixes</h2>
+<p>With the latest MonoGame we added support for being able to have one texture with multiple outputs.  Previously it would only build the last item, but this has been fixed.</p>
+<p>In the Content Editor:</p>
+<ol>
+<li>Add a new folder for your desired Suffix. This is usually in the form of <code>Textures&lt;suffix&gt;</code>.
+<img src="./images/HowTo_PackageTextures_Android_Add.png" alt="Add Folder"></li>
+<li>Right-click on the new folder and Add an Existing File.</li>
+<li>Select the file you want to use for this Suffix and Add it
+<img src="./images/HowTo_PackageTextures_Android_Folder.png" alt="Folder Structure"></li>
+<li>In the Properties of the new file change the TextureFormat to the one that matches the desired Suffix.
+<img src="./images/HowTo_PackageTextures_AndroidATSC.png" alt="Change Properties"></li>
+</ol>
+<p>In the <code>.mgcb</code> file directly you can do the following</p>
+<pre><code class="lang-sh">/processorParam:TextureFormat=PvrCompressed
+/build:Textures/LogoOnly_64px.png;Textures#tcf_pvrtc/LogoOnly_64px
+</code></pre>
+<p>As documented the <a href="https://docs.monogame.net/articles/getting_started/tools/mgcb.html#build-content-file">/build</a> command takes an optional <code>&lt;destination_filepath&gt;</code> after the <code>&lt;content_filepath&gt;</code>. We can use this to provide the target folder for our output.
+So in the example above, the <code>LogoOnly_64px.png</code> file will be compressed using <code>PvrCompressed</code> and then the output will end up in <code>Textures#tcf_pvrtc</code>.</p>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>Some texture formats have specific size requirements. For example PVRTC Compressed Textures MUST be a Power of 2 and Square (e.g 1024x1024).
+Many others need to be Power of 2. It is recommended that you make all your textures Power of 2  just to make life easier.</p>
+</div>
+<h2 id="supporting-multiple-texture-compression-types">Supporting Multiple Texture Compression Types</h2>
+<p>To allow your game to work on as many devices as possible we need to support multiple compression formats. Now that we know how to specify a specific texture compression format for a texture, how do we go about supporting multiple formats? It is really quite simple. We can duplicate the entry for each texture and specify a different <code>/processorParam:TextureFormat</code> and output path. For example, the following code is how we would build both <code>pcrtc</code> and <code>dxt</code> formats.</p>
+<pre><code class="lang-sh">#begin Textures/LogoOnly_64px.png for PvrCompressed
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:TextureFormat=PvrCompressed
+/build:Textures/LogoOnly_64px.png;Textures#tcf_pvrtc/LogoOnly_64px
+
+#begin Textures/LogoOnly_64px.png for DxtCompressed
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:TextureFormat=DxtCompressed
+/build:Textures/LogoOnly_64px.png;Textures#tcf_s3tc/LogoOnly_64px
+</code></pre>
+<p>In the Content Editor:</p>
+<ol>
+<li>Add a new folder for your desired Suffix. This is usually in the form of <code>Textures&lt;suffix&gt;</code>.
+<img src="./images/HowTo_PackageTextures_Android_Add.png" alt="Add Folder"></li>
+<li>Right click on the new folder and Add an Existing File.</li>
+<li>Select the file you want to use for this Suffix and Add it
+<img src="./images/HowTo_PackageTextures_Android_Folder.png" alt="Folder Structure"></li>
+<li>In the Properties of the new file change the TextureFormat to the one that matches the desired Suffix.
+<img src="./images/HowTo_PackageTextures_AndroidATSC.png" alt="Change Properties"></li>
+</ol>
+<p>As you can see, supporting multiple texture compression formats is quite easy.</p>
+<h2 id="sample-mgcb">Sample <code>.mgcb</code></h2>
+<pre><code class="lang-sh">#begin Textures/LogoOnly_64px.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=True
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=PvrCompressed
+/build:Textures/LogoOnly_64px.png;Textures#tcf_pvrtc/LogoOnly_64px
+</code></pre>
+<h2 id="using-android-asset-packs">Using Android Asset Packs</h2>
+<p>The Google Play Store has some fairly strict limitations on package sizes for Android apps. However there are ways to extend these limits for large games and apps, which are known as <code>Asset Packs</code>. Simply put, an <code>Asset Pack</code> is a way to organize your game content/assets into separate pieces which can be downloaded shortly after installation or dynamically at runtime.  For most games using the <code>Install Time</code> packs are the best option.</p>
+<p>Using them in your game can be quite straight forward. It only requires a little bit of <code>MSBuild</code> markup in your Android platform <code>.csproj</code>.</p>
+<pre><code class="lang-xml">&lt;Target Name=&quot;_MoveContentIntoPacks&quot; AfterTargets=&quot;IncludeContent&quot;&gt;
+  &lt;ItemGroup&gt;
+    &lt;AndroidAsset Update=&quot;Content/Music/**/*.*&quot; AssetPack=&quot;MyGameAssets&quot; /&gt;
+  &lt;/ItemGroup&gt;
+&lt;/Target&gt;
+</code></pre>
+<p>This adds an <code>MSBuild</code> target to your project which will process all the items in the <code>Content/Music</code> folder and subfolders. It will place them in an <code>Asset Pack</code> called <code>MyGameAssets</code>. You can change the name of this pack as you wish. By default, this will be an <code>InstallTime</code> pack. So it will be installed at the same time as your game is. There is no need to do anything else, the assets will be placed in the usual location and opened via <code>Content.Load&lt;T&gt;</code>.</p>
+<p>If you are using dynamic delivery and install packs at runtime, you will need to open the content from a different location. This is out of scope for this document.
+If you want to learn more about how to use these features please check out the following links:</p>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/dotnet/maui/android/asset-packs?view=net-maui-9.0">Android Asset Packs</a></li>
+<li><a href="https://devblogs.microsoft.com/dotnet/android-asset-packs-in-dotnet-android/">Android Asset Packs for .NET &amp; .NET MAUI Android Apps</a></li>
+<li><a href="https://developer.android.com/guide/playcore/asset-delivery">Play Asset Delivery</a></li>
+</ul>
+<h2 id="sample-mgcb-with-multiple-compression-formats">Sample <code>.mgcb</code> with Multiple Compression Formats</h2>
+<pre><code class="lang-sh">#----------------------------- Global Properties ----------------------------#
+
+/outputDir:bin/$(Platform)
+/intermediateDir:obj/$(Platform)
+/platform:Android
+/config:
+/profile:Reach
+/compress:False
+
+#-------------------------------- References --------------------------------#
+
+
+#---------------------------------- Content ---------------------------------#
+
+#begin ContentFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:ContentFont.spritefont
+
+#begin Textures/LogoOnly_64px.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=True
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Compressed
+/build:Textures/LogoOnly_64px.png
+
+#begin Textures/LogoOnly_64px.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=True
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=PvrCompressed
+/build:Textures/LogoOnly_64px.png;Textures#tcf_pvrtc/LogoOnly_64px
+
+#begin Textures/LogoOnly_64px.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=True
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=DxtCompressed
+/build:Textures/LogoOnly_64px.png;Textures#tcf_s3tc/LogoOnly_64px
+
+#begin Textures/LogoOnly_64px.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=True
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=AtscCompressed
+/build:Textures/LogoOnly_64px.png;Textures#tcf_atsc/LogoOnly_64px
+</code></pre>
+<h2 id="also-see">Also see</h2>
+<p><a href="https://docs.monogame.net/articles/getting_started/tools/mgcb.html#build-content-file">MGCB File Format</a>
+<a href="https://docs.monogame.net/articles/getting_started/content_pipeline/why_content_pipeline.html">Why use the Content Pipeline</a></p>
+
+</article>
+                </div>
+
+            </main>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/jquery.twbsPagination.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/jquery.mark.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/url.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/anchor-js@5.0.0/anchor.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/docfx.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/main.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/singulink.js"></script>    </body>
+</html>

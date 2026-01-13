@@ -1,0 +1,69 @@
+### YamlMime:ManagedReference
+items:
+- uid: Hallowed.Core
+  commentId: N:Hallowed.Core
+  id: Hallowed.Core
+  children:
+  - Hallowed.Core.Container
+  - Hallowed.Core.DisplayObject
+  - Hallowed.Core.GameEngine
+  - Hallowed.Core.IRenderable
+  langs:
+  - csharp
+  - vb
+  name: Hallowed.Core
+  nameWithType: Hallowed.Core
+  fullName: Hallowed.Core
+  type: Namespace
+  assemblies:
+  - Hallowed
+references:
+- uid: Hallowed.Core.Container
+  commentId: T:Hallowed.Core.Container
+  parent: Hallowed.Core
+  href: Hallowed.Core.Container.html
+  name: Container
+  nameWithType: Container
+  fullName: Hallowed.Core.Container
+- uid: Hallowed.Core.DisplayObject
+  commentId: T:Hallowed.Core.DisplayObject
+  parent: Hallowed.Core
+  href: Hallowed.Core.DisplayObject.html
+  name: DisplayObject
+  nameWithType: DisplayObject
+  fullName: Hallowed.Core.DisplayObject
+- uid: Hallowed.Core.GameEngine
+  commentId: T:Hallowed.Core.GameEngine
+  parent: Hallowed.Core
+  href: Hallowed.Core.GameEngine.html
+  name: GameEngine
+  nameWithType: GameEngine
+  fullName: Hallowed.Core.GameEngine
+- uid: Hallowed.Core.IRenderable
+  commentId: T:Hallowed.Core.IRenderable
+  href: Hallowed.Core.IRenderable.html
+  name: IRenderable
+  nameWithType: IRenderable
+  fullName: Hallowed.Core.IRenderable
+- uid: Hallowed.Core
+  commentId: N:Hallowed.Core
+  href: Hallowed.html
+  name: Hallowed.Core
+  nameWithType: Hallowed.Core
+  fullName: Hallowed.Core
+  spec.csharp:
+  - uid: Hallowed
+    name: Hallowed
+    href: Hallowed.html
+  - name: .
+  - uid: Hallowed.Core
+    name: Core
+    href: Hallowed.Core.html
+  spec.vb:
+  - uid: Hallowed
+    name: Hallowed
+    href: Hallowed.html
+  - name: .
+  - uid: Hallowed.Core
+    name: Core
+    href: Hallowed.Core.html

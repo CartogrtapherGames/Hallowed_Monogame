@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Setting up your OS for development on Arch Linux | hallowed </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Setting up your OS for development on Arch Linux | hallowed ">
+      <meta name="generator" content="docfx ">
+  
+      <link rel="shortcut icon" href="../../../../favicon.ico">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/night-owl.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" integrity="sha384-EvBWSlnoFgZlXJvpzS+MAUEjvN7+gcCwH+qh7GRFOGgZO0PuwOFro7qPOJnLfe7l" crossorigin="anonymous">
+      <link rel="stylesheet" href="../../../../styles/config.css">
+      <link rel="stylesheet" href="../../../../styles/singulink.css">
+      <link rel="stylesheet" href="../../../../styles/main.css">
+      <meta property="docfx:navrel" content="../../../../toc.html">
+      <meta property="docfx:tocrel" content="../toc.html">
+  
+  <meta property="docfx:rel" content="../../../../">
+  
+    </head>
+    <body>
+        <!-- Header required for docfx anchor scroll to work -->
+        <header id="head"></header>
+        <div class="top-navbar">
+            <a class="burger-icon" onclick="toggleMenu()">
+                <svg name="Hamburger" style="vertical-align: middle;" width="34" height="34" viewbox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M20 6H4V9H20V6ZM4 10.999H20V13.999H4V10.999ZM4 15.999H20V18.999H4V15.999Z"></path></svg>
+            </a>
+
+
+            <a class="brand" href="../../../../index.html">
+              <img src="../../../../logo.svg" alt="hallowed" class="logomark">
+              <span class="brand-title">hallowed</span>
+            </a>        </div>
+
+        <div class="body-content">
+            <div id="blackout" class="blackout" onclick="toggleMenu()"></div>
+
+            <nav id="sidebar" role="navigation">
+                <div class="sidebar">
+
+                    <div>
+                      <div class="mobile-hide">
+
+                        <a class="brand" href="../../../../index.html">
+                          <img src="../../../../logo.svg" alt="hallowed" class="logomark">
+                          <span class="brand-title">hallowed</span>
+                        </a>                      </div>
+
+                      <div class="sidesearch">
+                        <form id="search" role="search" class="search">
+                            <i class="bi bi-search search-icon"></i>
+                            <input type="text" id="search-query" placeholder="Search" autocomplete="off">
+                        </form>
+                      </div>
+
+                      <div id="navbar">
+                      </div>
+                    </div>                    <div class="sidebar-item-separator"></div>
+
+                        <div id="sidetoggle">
+                          <div id="sidetoc"></div>
+                        </div>
+                </div>
+                <div class="footer">
+  
+  <strong><a href='https://dotnet.github.io/docfx/'>DocFX</a> + <a href='https://www.singulink.com'>Singulink</a> = ♥</strong>
+                </div>            </nav>
+
+            <main class="main-panel">
+
+                <div id="search-results" style="display: none;">
+                  <h1 class="search-list">Search Results for <span></span></h1>
+                  <div class="sr-items">
+                    <p><i class="bi bi-hourglass-split index-loading"></i></p>
+                  </div>
+                  <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+                </div>
+ 
+
+                <div role="main" class="hide-when-search">
+
+                        <div class="subnav navbar navbar-default">
+                          <div class="container hide-when-search" id="breadcrumb">
+                            <ul class="breadcrumb">
+                              <li></li>
+                            </ul>
+                          </div>
+                        </div>
+
+                         <div class="contribution">
+                               <a href="https://github.com/MonoGame/docs.monogame.github.io/blob/main/articles/getting_started/1_setting_up_your_os_for_development_arch.md/#L1" class="contribution-link">Edit this page</a>
+                         </div>
+
+                    <article class="content wrap" id="_content" data-uid="">
+
+
+<div class="TIP">
+<h5>Tip</h5>
+<p>Arch Linux is a rolling release distribution. This guide was tested in October 2025 with kernel <code>version 6.15.9-arch1-1</code>.</p>
+</div>
+<p>To develop with MonoGame in C#, you will need to install the .NET SDK. As of MonoGame 3.8.2 the minimum supported version is .NET 8.</p>
+<h2 id="install-net-8-sdk">Install .NET 8 SDK</h2>
+<ol>
+<li><p>Open a new <strong>Terminal</strong> window.</p>
+</li>
+<li><p>Enter the following command in the terminal to install the latest .NET 8 SDK:</p>
+<pre><code class="lang-sh">sudo pacman -Syu
+sudo pacman -S dotnet-sdk-8.0
+</code></pre>
+</li>
+</ol>
+<h2 id="install-additional-workloads">Install additional workloads</h2>
+<p>If you intend to also work with platforms such as <code>Android</code> or <code>iOS</code>, you will need to install the additional .NET workload templates for those platforms which include additional features and simulators to support those platforms.  Just run the following commands from the terminal for the platforms below you wish to install.</p>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>For mobile development with iOS and Android, you must also install the MAUI workload even though MonoGame does not use MAUI. The MAUI workload contains the debugging tools required to run and debug mobile .NET applications. Without it, you will not be able to properly debug your MonoGame mobile projects.</p>
+</div>
+<div class="tabGroup" id="tabgroup_1">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_1_android" role="tab" aria-controls="tabpanel_1_android" data-tab="android" tabindex="0" aria-selected="true">Android</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_1_iOS" role="tab" aria-controls="tabpanel_1_iOS" data-tab="iOS" tabindex="-1">iOS</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_1_maui" role="tab" aria-controls="tabpanel_1_maui" data-tab="maui" tabindex="-1">Maui</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_1_all" role="tab" aria-controls="tabpanel_1_all" data-tab="all" tabindex="-1">Android, iOS, and Maui</a>
+</li>
+</ul>
+<section id="tabpanel_1_android" role="tabpanel" data-tab="android">
+
+<pre><code class="lang-cli">dotnet workload install android
+</code></pre>
+</section>
+<section id="tabpanel_1_iOS" role="tabpanel" data-tab="iOS" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-cli">dotnet workload install ios
+</code></pre>
+</section>
+<section id="tabpanel_1_maui" role="tabpanel" data-tab="maui" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-cli">dotnet workload install maui
+</code></pre>
+</section>
+<section id="tabpanel_1_all" role="tabpanel" data-tab="all" aria-hidden="true" hidden="hidden">
+
+<pre><code class="lang-cli">dotnet workload install android ios maui
+</code></pre>
+</section>
+</div>
+
+<div class="NOTE">
+<h5>Note</h5>
+<p>You can use <code>dotnet workload search</code> to detect any other available workloads you wish to use.</p>
+</div>
+<h2 id="setup-wine-for-effect-compilation">Setup Wine For Effect Compilation</h2>
+<p>Effect (shader) compilation requires access to DirectX.  This means it will not work natively on macOS and Linux systems, but it can be used through <a href="https://www.winehq.org/">Wine</a>.</p>
+<p>MonoGame provides a setup script that can be executed to setup the Wine environment for Effect (shader) compilation.</p>
+<ol>
+<li><p>Open a terminal window</p>
+</li>
+<li><p>Install Wine and required dependencies</p>
+<pre><code class="lang-sh">sudo pacman -S wget curl 7zip wine
+</code></pre>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>Arch Linux recently transitioned the Wine package to a pure wow64 build to align with upstream Wine development.  Because of this, when you install Wine using pacman, you will not get a separate <code>wine64</code> executable that the MonoGame tools will expect.</p>
+<p>Reference: <a href="https://archlinux.org/news/transition-to-the-new-wow64-wine-and-wine-staging/">https://archlinux.org/news/transition-to-the-new-wow64-wine-and-wine-staging/</a></p>
+<p>This means you will need to create a symlink for MonoGame to reference with the following command</p>
+<pre><code class="lang-sh">sudo ln -s /usr/bin/wine /usr/local/bin/wine64
+</code></pre>
+</div>
+</li>
+<li><p>Now that the prerequisites are installed, download the <a href="https://monogame.net/downloads/net8_mgfxc_wine_setup.sh">mgfxc_wine_setup.sh</a> script and execute it by entering the following command in the terminal:</p>
+<pre><code class="lang-sh">wget -qO- https://monogame.net/downloads/net8_mgfxc_wine_setup.sh | bash
+</code></pre>
+<div class="TIP">
+<h5>Tip</h5>
+<p>When running the Wine setup script, you may see a popup asking to install <strong>Wine Mono</strong> for .NET support.  You can cancel/close this popup.  It's not needed because the MonoGame script installs the actual Windows .NET SDK instead.</p>
+</div>
+<div class="NOTE">
+<h5>Note</h5>
+<p>This script will create a new directory called <code>.winemonogame</code> in your home directory.  If you ever wish to undo the setup this script performed, just simply delete that directory.</p>
+</div>
+</li>
+<li><p>After the script completes, you must add the <code>MGFXC_WINE_PATH</code> environment variable to your <strong>system environment</strong> for it to be accessible to all applications:</p>
+<pre><code class="lang-sh">echo 'MGFXC_WINE_PATH=&quot;'$HOME'/.winemonogame&quot;' | sudo tee -a /etc/environment
+</code></pre>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>Unlike other Linux distributions, such as Ubuntu, Arch Linux may not automatically load environment variables from your user profile at <code>~/.profile</code> for all applications.  Adding <code>MGFXC_WINE_PATH</code> to <code>/etc/environment</code> ensures it is available system-wide, including for GUI applications (such as the MGCB Editor) and IDEs</p>
+</div>
+</li>
+<li><p>For the environment variable to take effect, you can either log out and back in (recommended) or reboot your system.</p>
+</li>
+<li><p>After logging back in, verify the environment variable is set:</p>
+<pre><code class="lang-sh">echo $MGFXC_WINE_PATH
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>When running the above command you should see an output similar to the following</p>
+<pre><code class="lang-sh">/home/yourusername/.winemonogame
+</code></pre>
+</div>
+</li>
+</ol>
+<h2 id="next-steps">Next Steps</h2>
+<p>Choose from one of the two IDE options on Arch Linux:</p>
+<ul>
+<li><a href="2_choosing_your_ide_vscode.html">Setting up VSCode</a></li>
+<li><a href="2_choosing_your_ide_rider.html">Setting up Rider</a></li>
+</ul>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="issue-wine64-not-found-error">Issue: &quot;wine64 not found error&quot;</h3>
+<p>If the setup script fails with <code>wine64 not found</code>, ensure you created the symlink from step 2 above</p>
+<pre><code class="lang-sh">sudo ln -s /usr/bin/wine /usr/local/bin/wine64
+</code></pre>
+<h3 id="issue-shader-compilation-fails-with-mgfxc-effect-compiler-requires-a-valid-wine-installation">Issue: Shader compilation fails with &quot;MGFXC effect compiler requires a valid wine installation&quot;</h3>
+<p>This means the <code>MGFXC_WINE_PATH</code> environment variable is not set.  Ensure you:</p>
+<ol>
+<li>Added it to <code>/etc/environment</code> as shown above in step 4</li>
+<li>Logged out and logged back in</li>
+<li>Can see it with <code>echo $MGFXC_WINE_PATH</code></li>
+</ol>
+<h3 id="issue-wine-creates-a-wine-mgfxc-directory-instead-of-using-winemonogame">Issue: Wine creates a <code>.wine-mgfxc</code> directory instead of using <code>.winemonogame</code></h3>
+<p>This is another symptom of the environment variable not being set.  Follow the steps in the previous issue to resolve it.</p>
+<h3 id="issue-wine-version-too-old">Issue: Wine version too old</h3>
+<p>The MonoGame setup script requires Wine 8.0 or later.  Check your version:</p>
+<pre><code class="lang-sh">wine --version
+</code></pre>
+<p>If it's too old, update your system:</p>
+<pre><code class="lang-sh">sudo pacman -Syu
+</code></pre>
+
+</article>
+                </div>
+
+            </main>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+        <script type="text/javascript" src="../../../../styles/jquery.twbsPagination.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/jquery.mark.min.js"></script>
+        <script type="text/javascript" src="../../../../styles/url.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/anchor-js@5.0.0/anchor.min.js"></script>
+        <script type="text/javascript" src="../../../../styles/docfx.js"></script>
+        <script type="text/javascript" src="../../../../styles/main.js"></script>
+        <script type="text/javascript" src="../../../../styles/singulink.js"></script>    </body>
+</html>

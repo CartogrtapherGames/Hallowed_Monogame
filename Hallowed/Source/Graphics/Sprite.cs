@@ -1,5 +1,6 @@
 ﻿using System;
-using Hallowed.Rendering;
+using System.Diagnostics;
+using Hallowed.Core;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -13,32 +14,46 @@ public enum SpriteOrientation
   Both            // flip both horizontally and vertically
 }
 /// <summary>
-/// 
+/// Represents a 2D renderable object that displays a texture in the scene graph.
+/// A <see cref="Sprite"/> is the primary visual element used for rendering images,
+/// supporting transformations (position, rotation, scale), color tinting, and
+/// orientation flips.
 /// </summary>
-public class Sprite : DisplayObject, IDisposable
+/// <remarks>
+/// The <see cref="Sprite"/> class inherits from <see cref="DisplayObject"/>,
+/// meaning it participates in the world transform hierarchy.
+/// The texture is automatically disposed when the sprite is disposed, so it should
+/// not be shared across multiple sprites unless handled externally.
+/// </remarks>
+public class Sprite : DisplayObject
 {
-  
-  private Texture2D _texture; // maybe later we could do an bitmap Class? but in same time its not useful?
-  private Color _color;
-  private SpriteOrientation _orientation;
+  Vector2 anchor;
+  Rectangle frame;
+  SpriteOrientation orientation;
+  Texture2D texture;
 
-
-
-  Sprite() : base()
+  public Sprite()
   {
     Frame = Rectangle.Empty;
     Color = Color.White;
     Origin = Vector2.Zero;
-    _orientation = SpriteOrientation.Normal;
+    anchor = Vector2.Zero;
+    orientation = SpriteOrientation.Normal;
   }
 
   /// <summary>
   ///  The sprite constructor.
   /// </summary>
   /// <param name="texture"> the sprite texture</param>
-  Sprite(Texture2D texture) : this()
+  public Sprite(Texture2D texture) : this()
   {
-    _texture = texture;
+    this.texture = texture;
+  }
+
+  public Sprite(TextureAtlas textureAtlas, string regionName) : this(textureAtlas.Texture)
+  {
+    textureAtlas.GetRegion(regionName, out var region);
+    Frame = region;
   }
 
   /// <summary>
@@ -46,26 +61,76 @@ public class Sprite : DisplayObject, IDisposable
   /// </summary>
   public virtual Texture2D Texture
   {
-    get => _texture;
+    get => texture;
     set
     {
-      _texture = value;
-      Frame = Texture.Bounds;
+      if (TextureWrapper != null)
+      {
+        TextureWrapper.Texture = value;
+        texture = TextureWrapper.Texture;
+      }
+      texture = value;
+      Frame = texture?.Bounds ?? Rectangle.Empty;
+      UpdateOriginFromAnchor();
     }
   }
 
-  public Color Color
-  {
-    get => _color;
-    set => _color = value;
-  }
+  /// <summary>
+  /// The sprite texture wrapper object used for allowing texture
+  /// manipulation *such as blur*
+  /// </summary>
+  public TextureWrapper TextureWrapper { get; private set; }
 
-  public Rectangle Frame { get; set; } // used for animations or texture atlas.
+  public Color Color { get; set; }
+
+
+  public Rectangle Frame
+  {
+    get => frame;
+    set
+    {
+      frame = value;
+      UpdateOriginFromAnchor(); // ← THIS WAS MISSING
+    }
+  }
 
   public SpriteOrientation Orientation
   {
-    get => _orientation;
-    set => _orientation = value;
+    get => orientation;
+    set => orientation = value;
+  }
+
+  public Vector2 Anchor
+  {
+    get => anchor;
+    set
+    {
+      anchor = value;
+      UpdateOriginFromAnchor();
+    }
+  }
+
+  public override Vector2 Origin
+  {
+    get => base.Origin;
+    set
+    {
+      base.Origin = value;
+      UpdateAnchorFromOrigin();
+    }
+  }
+
+  public void SetScale(float x, float? y = null)
+  {
+    var scale = new Vector2(x, y ?? x);
+    Scale = scale;
+  } 
+  public void BindTextureWrapper(TextureWrapper textureWrapper)
+  {
+    TextureWrapper = textureWrapper;
+    texture = textureWrapper.Texture;
+    Frame = Texture.Bounds;
+    UpdateOriginFromAnchor();
   }
 
   public override Rectangle GetBounds()
@@ -79,32 +144,50 @@ public class Sprite : DisplayObject, IDisposable
     );
   }
 
-  public void Update(GameTime gameTime)
+  public override void Draw(SpriteBatch spriteBatch)
   {
-    base.Update(gameTime);
-  }
 
-  public void Draw(SpriteBatch spriteBatch)
-  {
-    if (Texture == null && !this.Visible) return;
-    Vector2 scale;
-    DecomposeMatrix2D(WorldTransform, out var position, out var rotation, out scale);
+    if (Texture == null || !this.Visible) return;
+
+    var colorWithAlpha = Color * WorldAlpha;
+    Rectangle? sourceRectangle = (Frame != Rectangle.Empty && Frame != Texture.Bounds)
+      ? Frame
+      : null;
+    DecomposeMatrix2D(WorldTransform, out var position, out var rotation, out var scale);
     spriteBatch.Draw(
       Texture,
       position,
-      null,
-      Color,
+      sourceRectangle,
+      colorWithAlpha,
       rotation,
-      Origin,
+      Vector2.Zero, // ✅ IMPORTANT
       scale,
       GetSpriteEffects(),
-      0f
+      Depth
+    );
+    base.Draw(spriteBatch);
+  }
+
+  /// <summary>
+  /// Sets the frame of the texture based on its width, height, row, and column.
+  /// </summary>
+  /// <param name="width">The frame width.</param>
+  /// <param name="height">The frame height.</param>
+  /// <param name="row">The row where the frame is positioned (starting from 0).</param>
+  /// <param name="col">The column where the frame is positioned (starting from 0).</param>
+  public void SetFrame(int width, int height, int row, int col)
+  {
+    Frame = new Rectangle(
+      col * width,
+      row * height,
+      width,
+      height
     );
   }
 
   protected virtual SpriteEffects GetSpriteEffects()
   {
-    return _orientation switch
+    return orientation switch
     {
       SpriteOrientation.Normal => SpriteEffects.None,
       SpriteOrientation.FlipHorizontal => SpriteEffects.FlipHorizontally,
@@ -115,7 +198,29 @@ public class Sprite : DisplayObject, IDisposable
   }
   protected override void Dispose(bool disposing)
   {
-    _texture?.Dispose();
+    texture?.Dispose();
     base.Dispose(true); // we call it last to make sure that the texture is disposed before the object.
+  }
+
+  protected void UpdateOriginFromAnchor()
+  {
+    if (Frame == Rectangle.Empty) return;
+
+    // Origin MUST be frame-local
+    base.Origin = new Vector2(
+      Frame.Width * anchor.X,
+      Frame.Height * anchor.Y
+    );
+  }
+
+  protected void UpdateAnchorFromOrigin()
+  {
+    if (Frame == Rectangle.Empty || Frame.Width == 0 || Frame.Height == 0)
+      return;
+
+    anchor = new Vector2(
+      base.Origin.X / Frame.Width,
+      base.Origin.Y / Frame.Height
+    );
   }
 }

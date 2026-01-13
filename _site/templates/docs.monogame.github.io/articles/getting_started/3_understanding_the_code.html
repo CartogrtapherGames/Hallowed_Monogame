@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Understanding the Code | hallowed </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Understanding the Code | hallowed ">
+      <meta name="generator" content="docfx ">
+  
+      <link rel="shortcut icon" href="../../../../favicon.ico">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/night-owl.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" integrity="sha384-EvBWSlnoFgZlXJvpzS+MAUEjvN7+gcCwH+qh7GRFOGgZO0PuwOFro7qPOJnLfe7l" crossorigin="anonymous">
+      <link rel="stylesheet" href="../../../../styles/config.css">
+      <link rel="stylesheet" href="../../../../styles/singulink.css">
+      <link rel="stylesheet" href="../../../../styles/main.css">
+      <meta property="docfx:navrel" content="../../../../toc.html">
+      <meta property="docfx:tocrel" content="../toc.html">
+  
+  <meta property="docfx:rel" content="../../../../">
+  
+    </head>
+    <body>
+        <!-- Header required for docfx anchor scroll to work -->
+        <header id="head"></header>
+        <div class="top-navbar">
+            <a class="burger-icon" onclick="toggleMenu()">
+                <svg name="Hamburger" style="vertical-align: middle;" width="34" height="34" viewbox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M20 6H4V9H20V6ZM4 10.999H20V13.999H4V10.999ZM4 15.999H20V18.999H4V15.999Z"></path></svg>
+            </a>
+
+
+            <a class="brand" href="../../../../index.html">
+              <img src="../../../../logo.svg" alt="hallowed" class="logomark">
+              <span class="brand-title">hallowed</span>
+            </a>        </div>
+
+        <div class="body-content">
+            <div id="blackout" class="blackout" onclick="toggleMenu()"></div>
+
+            <nav id="sidebar" role="navigation">
+                <div class="sidebar">
+
+                    <div>
+                      <div class="mobile-hide">
+
+                        <a class="brand" href="../../../../index.html">
+                          <img src="../../../../logo.svg" alt="hallowed" class="logomark">
+                          <span class="brand-title">hallowed</span>
+                        </a>                      </div>
+
+                      <div class="sidesearch">
+                        <form id="search" role="search" class="search">
+                            <i class="bi bi-search search-icon"></i>
+                            <input type="text" id="search-query" placeholder="Search" autocomplete="off">
+                        </form>
+                      </div>
+
+                      <div id="navbar">
+                      </div>
+                    </div>                    <div class="sidebar-item-separator"></div>
+
+                        <div id="sidetoggle">
+                          <div id="sidetoc"></div>
+                        </div>
+                </div>
+                <div class="footer">
+  
+  <strong><a href='https://dotnet.github.io/docfx/'>DocFX</a> + <a href='https://www.singulink.com'>Singulink</a> = ♥</strong>
+                </div>            </nav>
+
+            <main class="main-panel">
+
+                <div id="search-results" style="display: none;">
+                  <h1 class="search-list">Search Results for <span></span></h1>
+                  <div class="sr-items">
+                    <p><i class="bi bi-hourglass-split index-loading"></i></p>
+                  </div>
+                  <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+                </div>
+ 
+
+                <div role="main" class="hide-when-search">
+
+                        <div class="subnav navbar navbar-default">
+                          <div class="container hide-when-search" id="breadcrumb">
+                            <ul class="breadcrumb">
+                              <li></li>
+                            </ul>
+                          </div>
+                        </div>
+
+                         <div class="contribution">
+                               <a href="https://github.com/MonoGame/docs.monogame.github.io/blob/main/articles/getting_started/3_understanding_the_code.md/#L1" class="contribution-link">Edit this page</a>
+                         </div>
+
+                    <article class="content wrap" id="_content" data-uid="">
+
+
+<div class="NOTE">
+<h5>Note</h5>
+<p>For help with creating a project, please look at the Creating a New Project section of the <a href="index.html">Getting Started guide</a>.</p>
+</div>
+<p>Within the <code>Game1.cs</code> class file, which is the core of any MonoGame project, you will find several critical sections necessary for your game to run:</p>
+<ul>
+<li><p><code>Using statements</code> - which provide easy access to the various components of MonoGame.</p>
+</li>
+<li><p>The <code>Game</code> Class definition - the heart of any MonoGame project.</p>
+</li>
+<li><p>The <code>Game constructor</code> and key variables - which tell the project how to start.</p>
+</li>
+<li><p>The <code>Initialize</code> method - to initialize the game upon its startup.</p>
+</li>
+<li><p>The <code>Load and Unload Content</code> methods - which are used to add and remove assets from the running game from the <a href="4_adding_content.html">Content project</a>.</p>
+</li>
+<li><p>The <code>Update</code> method - which is called on a regular interval to update your game state, e.g. take player inputs, move ships, or animate entities.</p>
+</li>
+<li><p>The <code>Draw</code> method - which is called on a regular interval to take the current game state and draw your game entities to the screen.</p>
+</li>
+</ul>
+<p>Read further for more details and examples while looking through the code of your new project.</p>
+<hr>
+<h2 id="using-statements">Using Statements</h2>
+<pre><code class="lang-csharp">using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Storage;
+using Microsoft.Xna.Framework.Input;
+</code></pre>
+<p>These using statements make it easier to use the code that MonoGame has to offer.</p>
+<blockquote>
+<p>They are prefixed with Microsoft.Xna.Framework because MonoGame is an open source re-implementation of Microsoft's XNA framework, and in order to maintain compatibility with the XNA code, it uses the same namespaces.</p>
+</blockquote>
+<h2 id="the-game1-class">The Game1 Class</h2>
+<pre><code class="lang-csharp">public class Game1 : Game
+</code></pre>
+<p>The main <code>Game1</code> class inherits from the <code>Game</code> class, which provides all the core methods for your game (ie. Load/Unload Content, Update, Draw etc.). You usually only have one Game class per game, so its name is not that important.</p>
+<h2 id="instance-variables">Instance Variables</h2>
+<pre><code class="lang-csharp">GraphicsDeviceManager graphics;
+SpriteBatch spriteBatch;
+</code></pre>
+<p>The two default variables that the blank template starts with are the <code>GraphicsDeviceManager</code> and <code>SpriteBatch</code>. Both of these variables are used for drawing to the screen, as you will see in a later tutorial.</p>
+<h2 id="constructor">Constructor</h2>
+<pre><code class="lang-csharp">public Game1()
+{
+    graphics = new GraphicsDeviceManager(this);
+    Content.RootDirectory = &quot;Content&quot;;
+    IsMouseVisible = true;
+}
+</code></pre>
+<p>The main game constructor is used to initialize the starting variables. In this case, a new <code>GraphicsDeviceManager</code> is created, the root directory containing the game's content files is set, and the mouse cursor is set to visible.</p>
+<h2 id="initialize-method">Initialize Method</h2>
+<pre><code class="lang-csharp">protected override void Initialize()
+{
+    // TODO: Add your initialization logic here
+
+    base.Initialize();
+}
+</code></pre>
+<p>The <code>Initialize</code> method is called after the constructor but before the main game loop (Update/Draw). This is where you can query any required services and load any non-graphic related content.</p>
+<h2 id="loadcontent-method">LoadContent Method</h2>
+<pre><code class="lang-csharp">protected override void LoadContent()
+{
+    // Create a new SpriteBatch, which can be used to draw textures.
+    spriteBatch = new SpriteBatch(GraphicsDevice);
+
+    // TODO: use this.Content to load your game content here
+}
+</code></pre>
+<p>The <code>LoadContent</code> method is used to load your game content. It is called only once per game, within the <code>Initialize</code> method, before the main game loop starts.</p>
+<h2 id="update-method">Update Method</h2>
+<pre><code class="lang-csharp">protected override void Update(GameTime gameTime)
+{
+    if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+        Exit();
+
+    // TODO: Add your update logic here
+
+    base.Update(gameTime);
+}
+</code></pre>
+<p>The <code>Update</code> method is called multiple times per second, and it is used to update your game state (checking for collisions, gathering input, playing audio, etc.).</p>
+<h2 id="draw-method">Draw Method</h2>
+<pre><code class="lang-csharp">protected override void Draw(GameTime gameTime)
+{
+    GraphicsDevice.Clear(Color.CornflowerBlue);
+
+    // TODO: Add your drawing code here
+
+    base.Draw(gameTime);
+}
+</code></pre>
+<p>Similar to the Update method, the <code>Draw</code> method is also called multiple times per second.  This, as the name suggests, is responsible for drawing content to the screen.</p>
+<hr>
+<h2 id="next-steps">Next Steps</h2>
+<p>Next, learn how to add and import content into your game project:</p>
+<ul>
+<li><a href="4_adding_content.html">Adding Content</a></li>
+</ul>
+
+</article>
+                </div>
+
+            </main>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+        <script type="text/javascript" src="../../../../styles/jquery.twbsPagination.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/jquery.mark.min.js"></script>
+        <script type="text/javascript" src="../../../../styles/url.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/anchor-js@5.0.0/anchor.min.js"></script>
+        <script type="text/javascript" src="../../../../styles/docfx.js"></script>
+        <script type="text/javascript" src="../../../../styles/main.js"></script>
+        <script type="text/javascript" src="../../../../styles/singulink.js"></script>    </body>
+</html>

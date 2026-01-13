@@ -1,0 +1,23 @@
+### YamlMime:ManagedReference
+items:
+- uid: Hallowed
+  commentId: N:Hallowed
+  id: Hallowed
+  children:
+  - Hallowed.Game1
+  langs:
+  - csharp
+  - vb
+  name: Hallowed
+  nameWithType: Hallowed
+  fullName: Hallowed
+  type: Namespace
+  assemblies:
+  - Hallowed
+references:
+- uid: Hallowed.Game1
+  commentId: T:Hallowed.Game1
+  href: Hallowed.Game1.html
+  name: Game1
+  nameWithType: Game1
+  fullName: Hallowed.Game1

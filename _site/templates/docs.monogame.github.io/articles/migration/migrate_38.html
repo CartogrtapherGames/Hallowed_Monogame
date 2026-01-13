@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Upgrading MonoGame from 3.8.x to latest | hallowed </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Upgrading MonoGame from 3.8.x to latest | hallowed ">
+      <meta name="generator" content="docfx ">
+  
+      <link rel="shortcut icon" href="../../../../favicon.ico">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/night-owl.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" integrity="sha384-EvBWSlnoFgZlXJvpzS+MAUEjvN7+gcCwH+qh7GRFOGgZO0PuwOFro7qPOJnLfe7l" crossorigin="anonymous">
+      <link rel="stylesheet" href="../../../../styles/config.css">
+      <link rel="stylesheet" href="../../../../styles/singulink.css">
+      <link rel="stylesheet" href="../../../../styles/main.css">
+      <meta property="docfx:navrel" content="../../../../toc.html">
+      <meta property="docfx:tocrel" content="../toc.html">
+  
+  <meta property="docfx:rel" content="../../../../">
+  
+    </head>
+    <body>
+        <!-- Header required for docfx anchor scroll to work -->
+        <header id="head"></header>
+        <div class="top-navbar">
+            <a class="burger-icon" onclick="toggleMenu()">
+                <svg name="Hamburger" style="vertical-align: middle;" width="34" height="34" viewbox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M20 6H4V9H20V6ZM4 10.999H20V13.999H4V10.999ZM4 15.999H20V18.999H4V15.999Z"></path></svg>
+            </a>
+
+
+            <a class="brand" href="../../../../index.html">
+              <img src="../../../../logo.svg" alt="hallowed" class="logomark">
+              <span class="brand-title">hallowed</span>
+            </a>        </div>
+
+        <div class="body-content">
+            <div id="blackout" class="blackout" onclick="toggleMenu()"></div>
+
+            <nav id="sidebar" role="navigation">
+                <div class="sidebar">
+
+                    <div>
+                      <div class="mobile-hide">
+
+                        <a class="brand" href="../../../../index.html">
+                          <img src="../../../../logo.svg" alt="hallowed" class="logomark">
+                          <span class="brand-title">hallowed</span>
+                        </a>                      </div>
+
+                      <div class="sidesearch">
+                        <form id="search" role="search" class="search">
+                            <i class="bi bi-search search-icon"></i>
+                            <input type="text" id="search-query" placeholder="Search" autocomplete="off">
+                        </form>
+                      </div>
+
+                      <div id="navbar">
+                      </div>
+                    </div>                    <div class="sidebar-item-separator"></div>
+
+                        <div id="sidetoggle">
+                          <div id="sidetoc"></div>
+                        </div>
+                </div>
+                <div class="footer">
+  
+  <strong><a href='https://dotnet.github.io/docfx/'>DocFX</a> + <a href='https://www.singulink.com'>Singulink</a> = ♥</strong>
+                </div>            </nav>
+
+            <main class="main-panel">
+
+                <div id="search-results" style="display: none;">
+                  <h1 class="search-list">Search Results for <span></span></h1>
+                  <div class="sr-items">
+                    <p><i class="bi bi-hourglass-split index-loading"></i></p>
+                  </div>
+                  <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+                </div>
+ 
+
+                <div role="main" class="hide-when-search">
+
+                        <div class="subnav navbar navbar-default">
+                          <div class="container hide-when-search" id="breadcrumb">
+                            <ul class="breadcrumb">
+                              <li></li>
+                            </ul>
+                          </div>
+                        </div>
+
+                         <div class="contribution">
+                               <a href="https://github.com/MonoGame/docs.monogame.github.io/blob/main/articles/migration/migrate_38.md/#L1" class="contribution-link">Edit this page</a>
+                         </div>
+
+                    <article class="content wrap" id="_content" data-uid="">
+
+
+<p>Upgrading existing projects from earlier 3.8 releases should be straightforward for most platforms.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>If you are migrating/upgrading from <a href="migrate_xna.html">XNA</a> or <a href="migrate_37.html">MonoGame 3.7 or earlier</a> then check the dedicated guides for those actions before returning here.</p>
+</div>
+<ul>
+<li><p>The critical difference from pre 3.8.2 builds, <a href="#addupdate-dotnet-toolsjson-configuration">is that the MGCB Editor is no longer a global .NET tool</a> and the MGCB editor is now included as part of the specific project through the use of the dotnet tooling configuration <code>dotnet-tools.json</code> file located in the <code>.config</code> folder in your solution/project.</p>
+</li>
+<li><p>The major difference from 3.8.4 onwards is that we recommend using .NET 9 in your client project, but it is not mandatory, we are also simplifying the <code>csproj</code> configuration to reduce management for developers from 3.8.4.1.</p>
+<blockquote>
+<p>For iOS/Android however, DotNet 9 at a minimum is Mandatory, <a href="#iosipados-and-android-considerations">see details here</a>.</p>
+</blockquote>
+</li>
+</ul>
+<p>You can follow the <a href="../getting_started/index.html">environment setup tutorial</a> to make sure that you are not missing any components.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>If you are using Visual Studio 2022, we recommend that you use the MonoGame extension which helps with accessing the MGCB editor without the need of CLI commands.</p>
+</div>
+<p>The process of updating your project should be fairly quick and painless without having to change your code or your content project.</p>
+<h2 id="contents">Contents</h2>
+<ul>
+<li><a href="#updating-the-dotnet-target-framework">Updating DotNet Target Framework</a></li>
+<li><a href="#update-monogame-references">Update MonoGame references</a></li>
+<li><a href="#addupdate-dotnet-toolsjson-configuration">Add/Update <code>dotnet-tools.json</code> Configuration</a></li>
+<li><a href="#remove-restoredotnettools-section-from-csproj">Remove <code>RestoreDotNetTools</code> section from csproj</a></li>
+<li><a href="#iosipados-and-android-considerations">iOS/iPadOS, and Android Considerations</a></li>
+</ul>
+<h2 id="updating-the-dotnet-target-framework">Updating the DotNet Target Framework</h2>
+<p>Modern MonoGame projects now use the DotNet framework (older projects used to rely on the NetCore/NetFramework libraries).  As MonoGame has used DotNet project templates since 3.8.x, you only need to update the <code>TargetFramework</code> element of any <code>csproj</code> files referencing MonoGame libraries, namely:</p>
+<ul>
+<li>Replace any <code>&lt;TargetFramework&gt;</code> entries with the following:</li>
+</ul>
+<pre><code class="lang-xml">&lt;TargetFramework&gt;net9.0&lt;/TargetFramework&gt;
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Using <code>DotNet 9</code> is only a <strong>recommendation</strong>, you can use any version of DotNet (from 8.0 and above) so long as it supports the MonoGame DotNet 8 dependency.  This includes the upcoming DotNet 10 LTS.</p>
+</div>
+<p>Make sure to update any and all projects in your solution, especially you have a multi-project solution similar to those in the <a href="https://github.com/MonoGame/MonoGame.Samples/tree/3.8.4/Platformer2D">MonoGame.Samples</a></p>
+<h2 id="update-monogame-references">Update MonoGame references</h2>
+<p>Make sure you update the MonoGame references to the latest version, this can be achieved by either:</p>
+<ul>
+<li><p>Editing the <code>csproj</code> files that reference MonoGame to the latest version.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>The MonoGame templates set the Version number as <code>Version=&quot;3.8.*&quot;</code>, this means that it will use the LATEST public version of MonoGame (not including preview releases) that is available.</p>
+<p>However, this does mean your <code>tools</code> configuration can become out of sync with your project and potentially cause issue.</p>
+</div>
+</li>
+<li><p>Use the <a href="../getting_to_know/howto/HowTo_Install_Preview_Release.html#updating-nuget-package-dependencies">Updating NuGet package dependencies</a> documentation as part of the &quot;Preview Release installation instructions&quot;, which states you should run the following commands (the example is for <code>DesktopGL</code>, use other platforms accordingly):</p>
+<pre><code class="lang-dotnetcli">dotnet add package MonoGame.Framework.DesktopGL -v 3.8.4.1
+dotnet add package MonoGame.Content.Builder.Task -v 3.8.4.1
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>The <code>MonoGame.Content.Builder.Task</code> is only needed for client projects and not libraries.</p>
+</div>
+</li>
+</ul>
+<p>This will ensure your project is using the intended version of MonoGame.</p>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>Always ensure your <code>dotnet-tools.json</code> version matches any updates to the version of MonoGame you are using, as detailed in the next section.</p>
+</div>
+<h2 id="addupdate-dotnet-toolsjson-configuration">Add/Update <code>dotnet-tools.json</code> Configuration</h2>
+<p>MonoGame DotNet projects currently <strong>Require</strong> DotNet tools configuration to be able to locate and run the <code>MGCB</code> editor which is installed locally per project (preventing issues when working with multiple projects using different versions of MonoGame).</p>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>The MGCB Editor is no longer a .NET global tool, and does not need to be installed or registered separately. When migrating from 3.8.0, it is recommended that you <strong>uninstall</strong> the global versions of the tools. You can accomplish that with these commands:</p>
+<pre><code class="lang-sh">dotnet tool uninstall dotnet-mgcb -g
+dotnet tool uninstall dotnet-2mgfx -g
+dotnet tool uninstall dotnet-mgcb-editor -g
+</code></pre>
+</div>
+<p>You can either copy the <code>config</code> folder with the configuration from a new project template (e.g. <code>dotnet new mgdesktopgl -o &lt;project name&gt;</code>),
+or alternatively you can do the following:</p>
+<ul>
+<li>Create a new folder in the root of your project named <code>.config</code>.</li>
+<li>Add a new file called <code>dotnet-tools.json</code> and replace its contents with the following:</li>
+</ul>
+<pre><code class="lang-text">{
+  &quot;version&quot;: 1,
+  &quot;isRoot&quot;: true,
+  &quot;tools&quot;: {
+    &quot;dotnet-mgcb&quot;: {
+      &quot;version&quot;: &quot;3.8.4.1&quot;,
+      &quot;commands&quot;: [
+        &quot;mgcb&quot;
+      ]
+    },
+    &quot;dotnet-mgcb-editor&quot;: {
+      &quot;version&quot;: &quot;3.8.4.1&quot;,
+      &quot;commands&quot;: [
+        &quot;mgcb-editor&quot;
+      ]
+    },
+    &quot;dotnet-mgcb-editor-linux&quot;: {
+      &quot;version&quot;: &quot;3.8.4.1&quot;,
+      &quot;commands&quot;: [
+        &quot;mgcb-editor-linux&quot;
+      ]
+    },
+    &quot;dotnet-mgcb-editor-windows&quot;: {
+      &quot;version&quot;: &quot;3.8.4.1&quot;,
+      &quot;commands&quot;: [
+        &quot;mgcb-editor-windows&quot;
+      ]
+    },
+    &quot;dotnet-mgcb-editor-mac&quot;: {
+      &quot;version&quot;: &quot;3.8.4.1&quot;,
+      &quot;commands&quot;: [
+        &quot;mgcb-editor-mac&quot;
+      ]
+    }
+  }
+}
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Please note that you cannot use the <code>3.8.*</code> wildcard in the <code>dotnet-tools.json</code> file (tool versions have to be fully qualified). We strongly recommend that the versions match the MonoGame version referenced in your <code>.csproj</code> (if you are using the <code>*</code> wildcard, make sure that they do not end up mismatching if the NuGet packages are updated without you noticing).</p>
+</div>
+<p>The file is the same regardless of which platform / target you are intending to use.  If you have a multi-project solution, you only need a <strong>SINGLE</strong> configuration at the root of the project for all client projects.</p>
+<h2 id="remove-restoredotnettools-section-from-csproj">Remove <code>RestoreDotNetTools</code> section from csproj</h2>
+<p>From <code>3.8.4.1</code> and above, the <code>RestoreDotNetTools</code> section is no longer required in client project <code>csproj</code> files, as the processing is now handled within the MonoGame deliverables.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Earlier versions of MonoGame, e.g. 3.8.0 do not have this configuration in the project template, if your <code>csproj</code> does not have a <code>RestoreDotNetTools</code> element, you can safely ignore this section.</p>
+</div>
+<pre><code class="lang-xml">  &lt;Target Name=&quot;RestoreDotNetTools&quot; BeforeTargets=&quot;Restore&quot;&gt;
+    &lt;Message Text=&quot;Restoring dotnet tools&quot; Importance=&quot;High&quot; /&gt;
+    &lt;Exec Command=&quot;dotnet tool restore&quot; /&gt;
+  &lt;/Target&gt;
+</code></pre>
+<div class="TIP">
+<h5>Tip</h5>
+<p>The XML has changed over versions with various messages and layout, but the section to remove is always titled <code>Name=&quot;RestoreDotNetTools&quot;</code></p>
+</div>
+<p>Simply remove this section safely from any and all <code>csproj</code> files located in your solution that are dependent on MonoGame.</p>
+<h2 id="iosipados-and-android-considerations">iOS/iPadOS, and Android Considerations</h2>
+<p>DotNet 9 is MANDATORY for iOS and Android due to platform requirements, as well as the following configurations:</p>
+<ul>
+<li>MonoGame 3.8.4.1 is <strong>REQUIRED</strong> to comply with the Google Policies on 16kb pages and other affordances.</li>
+<li>The Android <code>targetSdkVersion</code> in the <code>AndroidManifest.xml</code> <strong>MUST</strong> be a minimum &quot;35&quot; to comply with the latest Google policies.  The templates set the minimum to <code>21</code> which is safe, only the <code>TARGET</code> SDK is critical.</li>
+<li>iOS <strong>MUST</strong> use a minimum <code>SupportedOSPlatformVersion</code> of <code>12.2</code> in both the <code>csproj</code> and in the <code>info.plist</code> configuration for the project.</li>
+</ul>
+
+</article>
+                </div>
+
+            </main>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+        <script type="text/javascript" src="../../../../styles/jquery.twbsPagination.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/jquery.mark.min.js"></script>
+        <script type="text/javascript" src="../../../../styles/url.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/anchor-js@5.0.0/anchor.min.js"></script>
+        <script type="text/javascript" src="../../../../styles/docfx.js"></script>
+        <script type="text/javascript" src="../../../../styles/main.js"></script>
+        <script type="text/javascript" src="../../../../styles/singulink.js"></script>    </body>
+</html>

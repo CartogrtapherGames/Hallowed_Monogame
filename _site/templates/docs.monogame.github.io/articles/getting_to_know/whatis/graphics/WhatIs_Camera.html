@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>What is A Camera? | hallowed </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="What is A Camera? | hallowed ">
+      <meta name="generator" content="docfx ">
+  
+      <link rel="shortcut icon" href="../../../../../../favicon.ico">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/night-owl.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" integrity="sha384-EvBWSlnoFgZlXJvpzS+MAUEjvN7+gcCwH+qh7GRFOGgZO0PuwOFro7qPOJnLfe7l" crossorigin="anonymous">
+      <link rel="stylesheet" href="../../../../../../styles/config.css">
+      <link rel="stylesheet" href="../../../../../../styles/singulink.css">
+      <link rel="stylesheet" href="../../../../../../styles/main.css">
+      <meta property="docfx:navrel" content="../../../../../../toc.html">
+      <meta property="docfx:tocrel" content="../../../toc.html">
+  
+  <meta property="docfx:rel" content="../../../../../../">
+  
+    </head>
+    <body>
+        <!-- Header required for docfx anchor scroll to work -->
+        <header id="head"></header>
+        <div class="top-navbar">
+            <a class="burger-icon" onclick="toggleMenu()">
+                <svg name="Hamburger" style="vertical-align: middle;" width="34" height="34" viewbox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M20 6H4V9H20V6ZM4 10.999H20V13.999H4V10.999ZM4 15.999H20V18.999H4V15.999Z"></path></svg>
+            </a>
+
+
+            <a class="brand" href="../../../../../../index.html">
+              <img src="../../../../../../logo.svg" alt="hallowed" class="logomark">
+              <span class="brand-title">hallowed</span>
+            </a>        </div>
+
+        <div class="body-content">
+            <div id="blackout" class="blackout" onclick="toggleMenu()"></div>
+
+            <nav id="sidebar" role="navigation">
+                <div class="sidebar">
+
+                    <div>
+                      <div class="mobile-hide">
+
+                        <a class="brand" href="../../../../../../index.html">
+                          <img src="../../../../../../logo.svg" alt="hallowed" class="logomark">
+                          <span class="brand-title">hallowed</span>
+                        </a>                      </div>
+
+                      <div class="sidesearch">
+                        <form id="search" role="search" class="search">
+                            <i class="bi bi-search search-icon"></i>
+                            <input type="text" id="search-query" placeholder="Search" autocomplete="off">
+                        </form>
+                      </div>
+
+                      <div id="navbar">
+                      </div>
+                    </div>                    <div class="sidebar-item-separator"></div>
+
+                        <div id="sidetoggle">
+                          <div id="sidetoc"></div>
+                        </div>
+                </div>
+                <div class="footer">
+  
+  <strong><a href='https://dotnet.github.io/docfx/'>DocFX</a> + <a href='https://www.singulink.com'>Singulink</a> = ♥</strong>
+                </div>            </nav>
+
+            <main class="main-panel">
+
+                <div id="search-results" style="display: none;">
+                  <h1 class="search-list">Search Results for <span></span></h1>
+                  <div class="sr-items">
+                    <p><i class="bi bi-hourglass-split index-loading"></i></p>
+                  </div>
+                  <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+                </div>
+ 
+
+                <div role="main" class="hide-when-search">
+
+                        <div class="subnav navbar navbar-default">
+                          <div class="container hide-when-search" id="breadcrumb">
+                            <ul class="breadcrumb">
+                              <li></li>
+                            </ul>
+                          </div>
+                        </div>
+
+                         <div class="contribution">
+                               <a href="https://github.com/MonoGame/docs.monogame.github.io/blob/main/articles/getting_to_know/whatis/graphics/WhatIs_Camera.md/#L1" class="contribution-link">Edit this page</a>
+                         </div>
+
+                    <article class="content wrap" id="_content" data-uid="">
+
+
+<p>In order to render anything to the screen the Graphics device needs to understand what it needs to render and where, in basic terms, it needs a projection in 3D space with objects in view that need to be rendered.</p>
+<p>An easier way to break it down is to compare it to the movies (or movie making), what you need in actuality is a <strong>Camera</strong>.  Where the camera points in the movie scene, what actors are in view and the scenery behind them, that is what makes it into the movie and shows on the screen.  In Game Development the principle is the same.</p>
+<h2 id="the-view-frustrum">The <a href="WhatIs_ViewFrustum.html">View Frustrum</a></h2>
+<p>The way we describe a camera in 3D terms is to define a <a href="WhatIs_ViewFrustum.html">View Frustrum</a>, which tells the graphics device:</p>
+<ul>
+<li>Where is it looking in 3D space.</li>
+<li>What is the closest point at which is should be looking from. (Near Plane)</li>
+<li>What is the furthest point objects can be rendered. (Far Plane)</li>
+<li>And what is the angle of projection.</li>
+</ul>
+<p>The following diagram shows how this looks.</p>
+<p><img src="images/frustum.jpg" alt="A diagram visualization of the View Frustrum"></p>
+<p>Everything within the &quot;cone of view&quot; is recognized by the graphics pipeline and is rendered into a Texture for displaying on the screen.  Everything outside these bounds is ignored (culled) and left on the cutting room floor.</p>
+<div class="CAUTION">
+<h5>Caution</h5>
+<p>Be aware, that in 3D rendering EVERYTHING is evaluated to determine if it is in &quot;View&quot;, EVERYTHING you send to the graphics card that you want to be rendered.  So if you send a massive scene and ALL your Models, ALL your textures, etc, then everything is evaluated.  Sure, Graphics Processing has evolved considerably over the years and the processes running on Graphics Cards keep getting quicker, but you still want to make that as efficient as possible.</p>
+</div>
+<h2 id="what-defines-a-camera">What defines a camera</h2>
+<p>Beyond the View Frustrum above, a Camera exists in graphical terms as:</p>
+<ul>
+<li>A position - Where in 3D space is the camera positioned?</li>
+<li>A direction - Which direction is the camera pointing?</li>
+<li>The Target of the camera - What is it looking at? The central point.</li>
+<li>The View Frustrum of the camera - What is in the field of view?</li>
+<li>The World Matrix, where in the world is the camera in relation to the center and other objects?</li>
+</ul>
+<p>You will see this defined in many samples as the <code>World</code>, <code>View</code> and <code>Projection</code> Matrices, as shown below:</p>
+<pre><code class="lang-csharp">// A centered world with no transformation
+Matrix worldMatrix = Matrix.Identity;
+
+// A view pointing at the center of the world from a position 50 units backwards.
+Matrix viewMatrix = Matrix.CreateLookAt(
+                    // View Position, where it is viewed FROM
+                    new Vector3(0, 0, 50), 
+                    // The world space coordinates it is looking at (0,0,0)
+                    Vector3.Zero,
+                    // The rotation of the view, the direction of the upper edge of the camera.
+                    Vector3.Up);
+
+// The frustrum of the camera
+Matrix projectionMatrix = Matrix.CreatePerspectiveFieldOfView(
+    // The width of the camera view.
+    MathHelper.PiOver4,
+    // The height of the camera view.
+    GraphicsDevice.Viewport.AspectRatio,
+    // The near plane, when to start rendering objects from.
+    1.0f,
+    // The far plane, when to stop rendering objects from.
+    300.0f);
+</code></pre>
+<h2 id="2d-drawing"><a href="../../howto/graphics/HowTo_Draw_A_Sprite.html">2D drawing</a></h2>
+<p>Now to break one illusion, 2D drawing (without all the camera setup) is still 3D drawing but from a fixed point of view with all content drawn at the same physical depth.</p>
+<p>The <a href="xref:Microsoft.Xna.Framework.Graphics.SpriteBatch">SpriteBatch</a> class does a very clever job of setting up this fixed view behind the scenes and also provides some basic ordering/laying of content as it is drawn into view.  Each batch is sent to the graphics card collectively and then processed in order from first to last, each subsequent draw being on top of the last.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Texture / Font drawing is effectively like placing pieces of paper on a table, one on top of another until you are done.  What can be seen once all the paper has been placed is the final view.</p>
+</div>
+<p>An example 2D drawing method:</p>
+<pre><code class="lang-csharp">void DrawTexture(SpriteBatch spriteBatch, Texture2D spriteTexture, Vector2 spritePosition, Color spriteColor)
+{
+    spriteBatch.Begin();
+    spriteBatch.Draw(spriteTexture, spritePosition, spriteColor);
+    spriteBatch.End();
+}
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>For more on 2D / Sprite rendering, check the <a href="https://docs.monogame.net/articles/getting_to_know/howto/graphics/#2d-sprite-rendering">How To</a> series for 2D rendering.</p>
+</div>
+<p>The functionality does provide some techniques to sort what is drawn, provide some additional depth and layers, as well as blending options to effectively merge what is drawn.</p>
+<h2 id="3d-drawing"><a href="../../howto/graphics/HowTo_RenderModel.html">3D Drawing</a></h2>
+<p>When drawing 3D content in a scene, the Camera's current <code>View</code> and <code>Projection</code> are what are fed in to an <a href="xref:Microsoft.Xna.Framework.Graphics.Effect">Effect</a> that draws the 3D content, together with a <a href="../../howto/graphics/HowTo_TransformPoint.html">Transformational Matrix</a> (<code>World</code> position and rotation of the model) multiplied by the same <code>World</code> matrix used by the camera (as they are both part of the same world).</p>
+<p>The MonoGame <code>Model</code> class has a built in <code>Draw</code> Method which performs the basic functions needed in order to render a 3D model into the view, requiring only the <code>World</code>, <code>View</code>, and <code>Projection</code> matrices required to draw it, as follows:</p>
+<pre><code class="lang-csharp">    Model myModel;
+
+    protected override void LoadContent()
+    {
+        myModel = Content.Load&lt;Model&gt;(&quot;&lt;model file name&gt;&quot;);
+    }
+
+    protected override void Draw(GameTime gameTime)
+    {
+        GraphicsDevice.Clear(Color.CornflowerBlue);
+
+        // Ground drawn from the center of the scene
+        myModel.Draw(Matrix.Identity, currentCameraView, currentCameraProjection);
+    }
+    
+</code></pre>
+<blockquote>
+<p>[!INFO]
+For information purposes only</p>
+</blockquote>
+<p>Behind the scenes, the <code>model.Draw()</code> method is using a <code>BasicEffect</code> and performing the necessary matrix calculations to position and render the model, as follows:</p>
+<pre><code class="lang-csharp">/// &lt;summary&gt;
+/// Draw the model, a model can have multiple meshes, so loop.
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;aModel&quot;&gt;The Model to draw.&lt;/param&gt;
+/// &lt;param name=&quot;aWorld&quot;&gt;The World matrix from the camera or shared world matrix.&lt;/param&gt;
+/// &lt;param name=&quot;aView&quot;&gt;The camera view in the world.&lt;/param&gt;
+/// &lt;param name=&quot;aProjection&quot;&gt;The camera projection in the world.&lt;/param&gt;
+void DrawModel(Model aModel, Matrix aWorld, Matrix aView, Matrix aProjection)
+{
+    //Copy any parent transforms
+    Matrix[] transforms = new Matrix[ aModel.Bones.Count ];
+    aModel.CopyAbsoluteBoneTransformsTo( transforms );
+
+    //Draw the model, a model can have multiple meshes, so loop
+    foreach (ModelMesh mesh in aModel.Meshes)
+    {              
+        //This is where the mesh orientation is set, as well as our camera and projection
+        foreach (BasicEffect effect in mesh.Effects)
+        {
+            effect.EnableDefaultLighting();
+            effect.PreferPerPixelLighting = true;
+            effect.World = transforms[ mesh.ParentBone.Index ] * aWorld;
+            effect.View = aView;
+            effect.Projection = aProjection;
+        }
+
+        //Draw the mesh, will use the effects set above.
+        mesh.Draw( );
+    }
+}
+</code></pre>
+<h2 id="types-of-camera">Types of Camera</h2>
+<p>Cameras have many roles in games, in certain cases you may even use multiple cameras to render a scene, or render scenes from different angles to a texture to use as a HUD or mini-map.</p>
+<p>Camera types include:</p>
+<table>
+<thead>
+<tr>
+<th>Camera Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Fixed</td>
+<td>A camera that is locked in place and is not intended to move (e.g. a Security Camera)</td>
+</tr>
+<tr>
+<td>First Person</td>
+<td>A camera that represents a players perspective of the world, moving and looking around.</td>
+</tr>
+<tr>
+<td>Third Person</td>
+<td>A camera that is locked behind a player avatar or model, moving with them as they move, can also rotate around the player for alternate views.</td>
+</tr>
+<tr>
+<td>Top Down</td>
+<td>A fixed view that looks from up on high and down in to the game world, sometimes fixed, sometimes tracking the movement of the main player or avatar.</td>
+</tr>
+<tr>
+<td>Side View</td>
+<td>A side scrolling view, or platformer, again, sometimes fixed, sometimes following the player or avatar</td>
+</tr>
+</tbody>
+</table>
+<p>These are just the most common examples as everyone has seen in the many games that have come before.  Some games use a combination of these modes to achieve the games look and feel.</p>
+<p>Multiple cameras can be used simultaneously for either a <a href="../../howto/graphics/HowTo_UseViewportForSplitscreenGaming.html">split screen multi-player</a> effect or by showing an alternate view in a window.</p>
+<h2 id="views-of-cameras">Views of Cameras</h2>
+<p>The projection of the camera can also be made to look different, MonoGame supports the two main modes of projection:</p>
+<ul>
+<li><a href="xref:Microsoft.Xna.Framework.Matrix#Microsoft_Xna_Framework_Matrix_CreatePerspective_System_Single_System_Single_System_Single_System_Single_">Perspective</a> - A realistic 3D view.</li>
+<li><a href="xref:Microsoft.Xna.Framework.Matrix#Microsoft_Xna_Framework_Matrix_CreateOrthographic_System_Single_System_Single_System_Single_System_Single_">Orthographic</a> - Provides a flat 2D view.</li>
+</ul>
+<p>Each perspective simply alters the way in which content is rendered into view.</p>
+<h2 id="camera-example">Camera Example</h2>
+<p>To demonstrate a camera setup, the following class acts as a base camera definition that can then be extended to meet your needs for rendering:</p>
+<pre><code class="lang-csharp">using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
+
+public class Camera
+{
+    private Vector3 position;
+    private float yaw;
+    private float pitch;
+    private int viewportWidth;
+    private int viewportHeight;
+    private float nearClip = 10.0f;
+    private float farClip = 100000.0f;
+
+    public Vector3 Position =&gt; position;
+
+    public float Yaw =&gt; yaw;
+
+    public float Pitch =&gt; pitch;
+
+    public Matrix ViewMatrix
+    {
+        get
+        {
+            Vector3 cameraDirection = Vector3.Transform(Vector3.Forward, Matrix.CreateFromYawPitchRoll(yaw, pitch, 0));
+            Vector3 cameraTarget = position + cameraDirection;
+            return Matrix.CreateLookAt(position, cameraTarget, Vector3.Up);
+        }
+    }
+
+    public Matrix ProjectionMatrix { get; private set; }
+
+    public Camera(Vector3 startPosition, float startYaw, float startPitch, int viewportWidth, int viewportHeight)
+    {
+        position = startPosition;
+        yaw = startYaw;
+        this.viewportWidth = viewportWidth;
+        this.viewportHeight = viewportHeight;
+        this.nearClip = nearClip;
+        this.farClip = farClip;
+
+        ProjectionMatrix = Matrix.CreatePerspectiveFieldOfView(
+            MathHelper.ToRadians(45),
+            viewportWidth / (float)viewportHeight,
+            nearClip,
+            farClip
+        );
+    }
+}
+</code></pre>
+<p>Using this camera is then as simple as:</p>
+<pre><code class="lang-csharp">using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+
+public class MonoGameCameraSample : Game
+{
+    private GraphicsDeviceManager _graphics;
+    private SpriteBatch _spriteBatch;
+    private Camera camera;
+
+    private Model myModel;
+
+    public MonoGameCameraSample()
+    {
+        _graphics = new GraphicsDeviceManager(this);
+        Content.RootDirectory = &quot;Content&quot;;
+    }
+
+    protected override void Initialize()
+    {
+        // Create a new camera with the following parameters:
+        // 1. Position 50 units Up and 100 units back from the center
+        // 2. Camera is looking straight forward, no turn.
+        // 3. Angle the camera down 25 degrees
+        // 4. Pass in the width and height of the Graphics Device
+        camera = new Camera(
+            new Vector3(0, 50, 100),
+            0f,
+            -MathHelper.ToRadians(25f),
+            GraphicsDevice.Viewport.Width,
+            GraphicsDevice.Viewport.Height
+        );
+
+        base.Initialize();
+    }
+
+    protected override void LoadContent()
+    {
+        _spriteBatch = new SpriteBatch(GraphicsDevice);
+
+        myModel = Content.Load&lt;Model&gt;(&quot;Models/p1_wedge&quot;);
+    }
+
+    protected override void Draw(GameTime gameTime)
+    {
+        GraphicsDevice.Clear(Color.CornflowerBlue);
+        GraphicsDevice.BlendState = BlendState.Opaque;
+        GraphicsDevice.RasterizerState = RasterizerState.CullNone;
+        GraphicsDevice.SamplerStates[0] = SamplerState.LinearWrap;
+        GraphicsDevice.DepthStencilState = DepthStencilState.Default;
+
+        // Draw a model using the camera's current View and Projection Matrix
+        DrawModel(myModel, Matrix.Identity, camera.ViewMatrix, camera.ProjectionMatrix);
+
+        base.Draw(gameTime);
+    }
+
+    void DrawModel(Model aModel, Matrix aWorld, Matrix aView, Matrix aProjection)
+    {
+        //Copy any parent transforms
+        Matrix[] transforms = new Matrix[aModel.Bones.Count];
+        aModel.CopyAbsoluteBoneTransformsTo(transforms);
+
+        //Draw the model, a model can have multiple meshes, so loop
+        foreach (ModelMesh mesh in aModel.Meshes)
+        {
+            //This is where the mesh orientation is set, as well as our camera and projection
+            foreach (BasicEffect effect in mesh.Effects)
+            {
+                effect.EnableDefaultLighting();
+                effect.PreferPerPixelLighting = true;
+                effect.World = transforms[mesh.ParentBone.Index] * aWorld;
+                effect.View = aView;
+                effect.Projection = aProjection;
+            }
+
+            //Draw the mesh, will use the effects set above.
+            mesh.Draw();
+        }
+    }
+}
+</code></pre>
+<p>This is a fixed camera with no movement and only looking in a single direction all the time, it has no movement, input logic or capability to move around the scene.</p>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="../../howto/graphics/HowTo_UseViewportForSplitscreenGaming.html">How to display Multiple Screens with Viewports</a></li>
+</ul>
+<h3 id="concepts">Concepts</h3>
+<ul>
+<li><a href="WhatIs_3DRendering.html">What Is 3D Rendering?</a></li>
+<li><a href="WhatIs_Viewport.html">What Is a Viewport?</a></li>
+<li><a href="WhatIs_ViewFrustum.html">What Is a View Frustum?</a></li>
+<li><a href="WhatIs_Render_Target.html">What Is a Render Target?</a></li>
+</ul>
+<h3 id="reference">Reference</h3>
+<ul>
+<li><a href="xref:Microsoft.Xna.Framework.Graphics.GraphicsDevice">GraphicsDevice.Viewport</a></li>
+<li><a href="xref:Microsoft.Xna.Framework.Matrix">Matrix</a></li>
+<li><a href="xref:Microsoft.Xna.Framework.Graphics.SpriteBatch">SpriteBatch</a></li>
+</ul>
+
+</article>
+                </div>
+
+            </main>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/jquery.twbsPagination.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/jquery.mark.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/url.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/anchor-js@5.0.0/anchor.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/docfx.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/main.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/singulink.js"></script>    </body>
+</html>

@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class PingPongBuffer | hallowed </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class PingPongBuffer | hallowed ">
+      <meta name="generator" content="docfx ">
+  
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/night-owl.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" integrity="sha384-EvBWSlnoFgZlXJvpzS+MAUEjvN7+gcCwH+qh7GRFOGgZO0PuwOFro7qPOJnLfe7l" crossorigin="anonymous">
+      <link rel="stylesheet" href="../styles/config.css">
+      <link rel="stylesheet" href="../styles/singulink.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+  
+  <meta property="docfx:rel" content="../">
+  
+    </head>
+    <body>
+        <!-- Header required for docfx anchor scroll to work -->
+        <header id="head"></header>
+        <div class="top-navbar">
+            <a class="burger-icon" onclick="toggleMenu()">
+                <svg name="Hamburger" style="vertical-align: middle;" width="34" height="34" viewbox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M20 6H4V9H20V6ZM4 10.999H20V13.999H4V10.999ZM4 15.999H20V18.999H4V15.999Z"></path></svg>
+            </a>
+
+
+            <a class="brand" href="../index.html">
+              <img src="../logo.svg" alt="hallowed" class="logomark">
+              <span class="brand-title">hallowed</span>
+            </a>        </div>
+
+        <div class="body-content">
+            <div id="blackout" class="blackout" onclick="toggleMenu()"></div>
+
+            <nav id="sidebar" role="navigation">
+                <div class="sidebar">
+
+                    <div>
+                      <div class="mobile-hide">
+
+                        <a class="brand" href="../index.html">
+                          <img src="../logo.svg" alt="hallowed" class="logomark">
+                          <span class="brand-title">hallowed</span>
+                        </a>                      </div>
+
+                      <div class="sidesearch">
+                        <form id="search" role="search" class="search">
+                            <i class="bi bi-search search-icon"></i>
+                            <input type="text" id="search-query" placeholder="Search" autocomplete="off">
+                        </form>
+                      </div>
+
+                      <div id="navbar">
+                      </div>
+                    </div>                    <div class="sidebar-item-separator"></div>
+
+                        <div id="sidetoggle">
+                          <div id="sidetoc"></div>
+                        </div>
+                </div>
+                <div class="footer">
+  
+  <strong><a href='https://dotnet.github.io/docfx/'>DocFX</a> + <a href='https://www.singulink.com'>Singulink</a> = ♥</strong>
+                </div>            </nav>
+
+            <main class="main-panel">
+
+                <div id="search-results" style="display: none;">
+                  <h1 class="search-list">Search Results for <span></span></h1>
+                  <div class="sr-items">
+                    <p><i class="bi bi-hourglass-split index-loading"></i></p>
+                  </div>
+                  <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+                </div>
+ 
+
+                <div role="main" class="hide-when-search">
+
+                        <div class="subnav navbar navbar-default">
+                          <div class="container hide-when-search" id="breadcrumb">
+                            <ul class="breadcrumb">
+                              <li></li>
+                            </ul>
+                          </div>
+                        </div>
+
+                         <div class="contribution">
+                               <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/new/master/apiSpec/new?filename=Hallowed_Rendering_Utilities_PingPongBuffer.md&amp;value=---%0Auid%3A%20Hallowed.Rendering.Utilities.PingPongBuffer%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                         </div>
+
+                    <article class="content wrap" id="_content" data-uid="Hallowed.Rendering.Utilities.PingPongBuffer">
+
+
+
+  <h1 id="Hallowed_Rendering_Utilities_PingPongBuffer" data-uid="Hallowed.Rendering.Utilities.PingPongBuffer" class="text-break">Class PingPongBuffer</h1>
+  <div class="markdown level0 summary"><p>Provides a double-buffered render target system (&quot;ping-pong&quot; buffer)
+for iterative texture operations and post-processing in MonoGame.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><span class="xref">PingPongBuffer</span></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Hallowed.html">Hallowed</a>.<a class="xref" href="Hallowed.Rendering.html">Rendering</a>.<a class="xref" href="Hallowed.Rendering.Utilities.html">Utilities</a></h6>
+  <h6><strong>Assembly</strong>: Hallowed.dll</h6>
+  <h5 id="Hallowed_Rendering_Utilities_PingPongBuffer_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class PingPongBuffer : IDisposable</code></pre>
+  </div>
+  <h5 id="Hallowed_Rendering_Utilities_PingPongBuffer_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>The ping-pong technique alternates between two render targets — one
+for reading (<a class="xref" href="Hallowed.Rendering.Utilities.PingPongBuffer.html#Hallowed_Rendering_Utilities_PingPongBuffer_Source">Source</a>) and one for writing (<a class="xref" href="Hallowed.Rendering.Utilities.PingPongBuffer.html#Hallowed_Rendering_Utilities_PingPongBuffer_Target">Target</a>)
+— avoiding GPU read/write conflicts. This allows chained rendering
+passes, feedback effects, and texture blitting without reallocating
+textures or copying data between frames.</p>
+</div>
+  <h5 id="Hallowed_Rendering_Utilities_PingPongBuffer_examples"><strong>Examples</strong></h5>
+  <p>Example usage:</p>
+<pre><code class="lang-csharp">var buffer = new PingPongBuffer(graphicsDevice, 1024, 1024);
+
+// Draw to the current target
+graphicsDevice.SetRenderTarget(buffer.Target);
+spriteBatch.Begin();
+spriteBatch.Draw(texture1, Vector2.Zero, Color.White);
+spriteBatch.Draw(texture2, new Vector2(512, 0), Color.White);
+spriteBatch.End();
+graphicsDevice.SetRenderTarget(null);
+
+// Swap read/write targets for the next iteration
+buffer.Swap();
+
+// Use the final composed texture
+Texture2D result = buffer.Source;</code></pre>
+
+  <h3 id="constructors">Constructors
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/new/master/apiSpec/new?filename=Hallowed_Rendering_Utilities_PingPongBuffer__ctor_Microsoft_Xna_Framework_Graphics_GraphicsDevice_System_Int32_System_Int32_Microsoft_Xna_Framework_Graphics_SurfaceFormat_.md&amp;value=---%0Auid%3A%20Hallowed.Rendering.Utilities.PingPongBuffer.%23ctor(Microsoft.Xna.Framework.Graphics.GraphicsDevice%2CSystem.Int32%2CSystem.Int32%2CMicrosoft.Xna.Framework.Graphics.SurfaceFormat)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/blob/master/Hallowed/Source/Rendering/Utilities/PingPongBuffer.cs/#L62">View Source</a>
+  </span>
+  <a id="Hallowed_Rendering_Utilities_PingPongBuffer__ctor_" data-uid="Hallowed.Rendering.Utilities.PingPongBuffer.#ctor*"></a>
+  <h4 id="Hallowed_Rendering_Utilities_PingPongBuffer__ctor_Microsoft_Xna_Framework_Graphics_GraphicsDevice_System_Int32_System_Int32_Microsoft_Xna_Framework_Graphics_SurfaceFormat_" data-uid="Hallowed.Rendering.Utilities.PingPongBuffer.#ctor(Microsoft.Xna.Framework.Graphics.GraphicsDevice,System.Int32,System.Int32,Microsoft.Xna.Framework.Graphics.SurfaceFormat)">PingPongBuffer(GraphicsDevice, int, int, SurfaceFormat)</h4>
+  <div class="markdown level1 summary"><p>The ping pong buffer constructor.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PingPongBuffer(GraphicsDevice device, int width, int height, SurfaceFormat format = SurfaceFormat.Color)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">GraphicsDevice</span></td>
+        <td><span class="parametername">device</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><span class="parametername">width</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><span class="parametername">height</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">SurfaceFormat</span></td>
+        <td><span class="parametername">format</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/new/master/apiSpec/new?filename=Hallowed_Rendering_Utilities_PingPongBuffer_HasSource.md&amp;value=---%0Auid%3A%20Hallowed.Rendering.Utilities.PingPongBuffer.HasSource%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/blob/master/Hallowed/Source/Rendering/Utilities/PingPongBuffer.cs/#L186">View Source</a>
+  </span>
+  <a id="Hallowed_Rendering_Utilities_PingPongBuffer_HasSource_" data-uid="Hallowed.Rendering.Utilities.PingPongBuffer.HasSource*"></a>
+  <h4 id="Hallowed_Rendering_Utilities_PingPongBuffer_HasSource" data-uid="Hallowed.Rendering.Utilities.PingPongBuffer.HasSource">HasSource</h4>
+  <div class="markdown level1 summary"><p>Check if the buffer has been initialized.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool HasSource { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/new/master/apiSpec/new?filename=Hallowed_Rendering_Utilities_PingPongBuffer_Height.md&amp;value=---%0Auid%3A%20Hallowed.Rendering.Utilities.PingPongBuffer.Height%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/blob/master/Hallowed/Source/Rendering/Utilities/PingPongBuffer.cs/#L105">View Source</a>
+  </span>
+  <a id="Hallowed_Rendering_Utilities_PingPongBuffer_Height_" data-uid="Hallowed.Rendering.Utilities.PingPongBuffer.Height*"></a>
+  <h4 id="Hallowed_Rendering_Utilities_PingPongBuffer_Height" data-uid="Hallowed.Rendering.Utilities.PingPongBuffer.Height">Height</h4>
+  <div class="markdown level1 summary"><p>the buffer height.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int Height { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/new/master/apiSpec/new?filename=Hallowed_Rendering_Utilities_PingPongBuffer_Source.md&amp;value=---%0Auid%3A%20Hallowed.Rendering.Utilities.PingPongBuffer.Source%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/blob/master/Hallowed/Source/Rendering/Utilities/PingPongBuffer.cs/#L92">View Source</a>
+  </span>
+  <a id="Hallowed_Rendering_Utilities_PingPongBuffer_Source_" data-uid="Hallowed.Rendering.Utilities.PingPongBuffer.Source*"></a>
+  <h4 id="Hallowed_Rendering_Utilities_PingPongBuffer_Source" data-uid="Hallowed.Rendering.Utilities.PingPongBuffer.Source">Source</h4>
+  <div class="markdown level1 summary"><p>Gets the current source texture (read from this).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RenderTarget2D Source { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">RenderTarget2D</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/new/master/apiSpec/new?filename=Hallowed_Rendering_Utilities_PingPongBuffer_Target.md&amp;value=---%0Auid%3A%20Hallowed.Rendering.Utilities.PingPongBuffer.Target%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/blob/master/Hallowed/Source/Rendering/Utilities/PingPongBuffer.cs/#L95">View Source</a>
+  </span>
+  <a id="Hallowed_Rendering_Utilities_PingPongBuffer_Target_" data-uid="Hallowed.Rendering.Utilities.PingPongBuffer.Target*"></a>
+  <h4 id="Hallowed_Rendering_Utilities_PingPongBuffer_Target" data-uid="Hallowed.Rendering.Utilities.PingPongBuffer.Target">Target</h4>
+  <div class="markdown level1 summary"><p>Gets the current target texture (write to this).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RenderTarget2D Target { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">RenderTarget2D</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/new/master/apiSpec/new?filename=Hallowed_Rendering_Utilities_PingPongBuffer_Width.md&amp;value=---%0Auid%3A%20Hallowed.Rendering.Utilities.PingPongBuffer.Width%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/blob/master/Hallowed/Source/Rendering/Utilities/PingPongBuffer.cs/#L100">View Source</a>
+  </span>
+  <a id="Hallowed_Rendering_Utilities_PingPongBuffer_Width_" data-uid="Hallowed.Rendering.Utilities.PingPongBuffer.Width*"></a>
+  <h4 id="Hallowed_Rendering_Utilities_PingPongBuffer_Width" data-uid="Hallowed.Rendering.Utilities.PingPongBuffer.Width">Width</h4>
+  <div class="markdown level1 summary"><p>the buffer width.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int Width { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/new/master/apiSpec/new?filename=Hallowed_Rendering_Utilities_PingPongBuffer_Assign_Microsoft_Xna_Framework_Graphics_Texture2D_.md&amp;value=---%0Auid%3A%20Hallowed.Rendering.Utilities.PingPongBuffer.Assign(Microsoft.Xna.Framework.Graphics.Texture2D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/blob/master/Hallowed/Source/Rendering/Utilities/PingPongBuffer.cs/#L158">View Source</a>
+  </span>
+  <a id="Hallowed_Rendering_Utilities_PingPongBuffer_Assign_" data-uid="Hallowed.Rendering.Utilities.PingPongBuffer.Assign*"></a>
+  <h4 id="Hallowed_Rendering_Utilities_PingPongBuffer_Assign_Microsoft_Xna_Framework_Graphics_Texture2D_" data-uid="Hallowed.Rendering.Utilities.PingPongBuffer.Assign(Microsoft.Xna.Framework.Graphics.Texture2D)">Assign(Texture2D)</h4>
+  <div class="markdown level1 summary"><p>First assign a texture to the source and target buffers.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Assign(Texture2D texture)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Texture2D</span></td>
+        <td><span class="parametername">texture</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/new/master/apiSpec/new?filename=Hallowed_Rendering_Utilities_PingPongBuffer_Clear.md&amp;value=---%0Auid%3A%20Hallowed.Rendering.Utilities.PingPongBuffer.Clear%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/blob/master/Hallowed/Source/Rendering/Utilities/PingPongBuffer.cs/#L119">View Source</a>
+  </span>
+  <a id="Hallowed_Rendering_Utilities_PingPongBuffer_Clear_" data-uid="Hallowed.Rendering.Utilities.PingPongBuffer.Clear*"></a>
+  <h4 id="Hallowed_Rendering_Utilities_PingPongBuffer_Clear" data-uid="Hallowed.Rendering.Utilities.PingPongBuffer.Clear">Clear()</h4>
+  <div class="markdown level1 summary"><p>Clear the current source to transparent.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Clear()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/new/master/apiSpec/new?filename=Hallowed_Rendering_Utilities_PingPongBuffer_ClearAll.md&amp;value=---%0Auid%3A%20Hallowed.Rendering.Utilities.PingPongBuffer.ClearAll%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/blob/master/Hallowed/Source/Rendering/Utilities/PingPongBuffer.cs/#L129">View Source</a>
+  </span>
+  <a id="Hallowed_Rendering_Utilities_PingPongBuffer_ClearAll_" data-uid="Hallowed.Rendering.Utilities.PingPongBuffer.ClearAll*"></a>
+  <h4 id="Hallowed_Rendering_Utilities_PingPongBuffer_ClearAll" data-uid="Hallowed.Rendering.Utilities.PingPongBuffer.ClearAll">ClearAll()</h4>
+  <div class="markdown level1 summary"><p>Clear both buffers.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ClearAll()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/new/master/apiSpec/new?filename=Hallowed_Rendering_Utilities_PingPongBuffer_Dispose.md&amp;value=---%0Auid%3A%20Hallowed.Rendering.Utilities.PingPongBuffer.Dispose%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/blob/master/Hallowed/Source/Rendering/Utilities/PingPongBuffer.cs/#L191">View Source</a>
+  </span>
+  <a id="Hallowed_Rendering_Utilities_PingPongBuffer_Dispose_" data-uid="Hallowed.Rendering.Utilities.PingPongBuffer.Dispose*"></a>
+  <h4 id="Hallowed_Rendering_Utilities_PingPongBuffer_Dispose" data-uid="Hallowed.Rendering.Utilities.PingPongBuffer.Dispose">Dispose()</h4>
+  <div class="markdown level1 summary"><p>Dispose the buffer.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Dispose()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/new/master/apiSpec/new?filename=Hallowed_Rendering_Utilities_PingPongBuffer_Resize_System_Int32_System_Int32_Microsoft_Xna_Framework_Graphics_SurfaceFormat_.md&amp;value=---%0Auid%3A%20Hallowed.Rendering.Utilities.PingPongBuffer.Resize(System.Int32%2CSystem.Int32%2CMicrosoft.Xna.Framework.Graphics.SurfaceFormat)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/blob/master/Hallowed/Source/Rendering/Utilities/PingPongBuffer.cs/#L146">View Source</a>
+  </span>
+  <a id="Hallowed_Rendering_Utilities_PingPongBuffer_Resize_" data-uid="Hallowed.Rendering.Utilities.PingPongBuffer.Resize*"></a>
+  <h4 id="Hallowed_Rendering_Utilities_PingPongBuffer_Resize_System_Int32_System_Int32_Microsoft_Xna_Framework_Graphics_SurfaceFormat_" data-uid="Hallowed.Rendering.Utilities.PingPongBuffer.Resize(System.Int32,System.Int32,Microsoft.Xna.Framework.Graphics.SurfaceFormat)">Resize(int, int, SurfaceFormat)</h4>
+  <div class="markdown level1 summary"><p>Resize both buffers.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Resize(int width, int height, SurfaceFormat format = SurfaceFormat.Color)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><span class="parametername">width</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int32">int</a></td>
+        <td><span class="parametername">height</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">SurfaceFormat</span></td>
+        <td><span class="parametername">format</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/new/master/apiSpec/new?filename=Hallowed_Rendering_Utilities_PingPongBuffer_Swap.md&amp;value=---%0Auid%3A%20Hallowed.Rendering.Utilities.PingPongBuffer.Swap%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/blob/master/Hallowed/Source/Rendering/Utilities/PingPongBuffer.cs/#L110">View Source</a>
+  </span>
+  <a id="Hallowed_Rendering_Utilities_PingPongBuffer_Swap_" data-uid="Hallowed.Rendering.Utilities.PingPongBuffer.Swap*"></a>
+  <h4 id="Hallowed_Rendering_Utilities_PingPongBuffer_Swap" data-uid="Hallowed.Rendering.Utilities.PingPongBuffer.Swap">Swap()</h4>
+  <div class="markdown level1 summary"><p>Swap source and target buffers.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Swap()</code></pre>
+  </div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a>
+  </div>
+  <h3 id="seealso">See Also</h3>
+  <div class="seealso">
+      <div><span><a href="https://en.wikipedia.org/wiki/Ping-pong_scheme">Ping-pong scheme (Wikipedia)</a></span></div>
+  </div>
+
+</article>
+                </div>
+
+            </main>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+        <script type="text/javascript" src="../styles/jquery.twbsPagination.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/jquery.mark.min.js"></script>
+        <script type="text/javascript" src="../styles/url.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/anchor-js@5.0.0/anchor.min.js"></script>
+        <script type="text/javascript" src="../styles/docfx.js"></script>
+        <script type="text/javascript" src="../styles/main.js"></script>
+        <script type="text/javascript" src="../styles/singulink.js"></script>    </body>
+</html>

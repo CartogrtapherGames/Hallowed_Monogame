@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>What is Sprite Font XML Schema Reference? | hallowed </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="What is Sprite Font XML Schema Reference? | hallowed ">
+      <meta name="generator" content="docfx ">
+  
+      <link rel="shortcut icon" href="../../../../../../favicon.ico">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/night-owl.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" integrity="sha384-EvBWSlnoFgZlXJvpzS+MAUEjvN7+gcCwH+qh7GRFOGgZO0PuwOFro7qPOJnLfe7l" crossorigin="anonymous">
+      <link rel="stylesheet" href="../../../../../../styles/config.css">
+      <link rel="stylesheet" href="../../../../../../styles/singulink.css">
+      <link rel="stylesheet" href="../../../../../../styles/main.css">
+      <meta property="docfx:navrel" content="../../../../../../toc.html">
+      <meta property="docfx:tocrel" content="../../../toc.html">
+  
+  <meta property="docfx:rel" content="../../../../../../">
+  
+    </head>
+    <body>
+        <!-- Header required for docfx anchor scroll to work -->
+        <header id="head"></header>
+        <div class="top-navbar">
+            <a class="burger-icon" onclick="toggleMenu()">
+                <svg name="Hamburger" style="vertical-align: middle;" width="34" height="34" viewbox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M20 6H4V9H20V6ZM4 10.999H20V13.999H4V10.999ZM4 15.999H20V18.999H4V15.999Z"></path></svg>
+            </a>
+
+
+            <a class="brand" href="../../../../../../index.html">
+              <img src="../../../../../../logo.svg" alt="hallowed" class="logomark">
+              <span class="brand-title">hallowed</span>
+            </a>        </div>
+
+        <div class="body-content">
+            <div id="blackout" class="blackout" onclick="toggleMenu()"></div>
+
+            <nav id="sidebar" role="navigation">
+                <div class="sidebar">
+
+                    <div>
+                      <div class="mobile-hide">
+
+                        <a class="brand" href="../../../../../../index.html">
+                          <img src="../../../../../../logo.svg" alt="hallowed" class="logomark">
+                          <span class="brand-title">hallowed</span>
+                        </a>                      </div>
+
+                      <div class="sidesearch">
+                        <form id="search" role="search" class="search">
+                            <i class="bi bi-search search-icon"></i>
+                            <input type="text" id="search-query" placeholder="Search" autocomplete="off">
+                        </form>
+                      </div>
+
+                      <div id="navbar">
+                      </div>
+                    </div>                    <div class="sidebar-item-separator"></div>
+
+                        <div id="sidetoggle">
+                          <div id="sidetoc"></div>
+                        </div>
+                </div>
+                <div class="footer">
+  
+  <strong><a href='https://dotnet.github.io/docfx/'>DocFX</a> + <a href='https://www.singulink.com'>Singulink</a> = ♥</strong>
+                </div>            </nav>
+
+            <main class="main-panel">
+
+                <div id="search-results" style="display: none;">
+                  <h1 class="search-list">Search Results for <span></span></h1>
+                  <div class="sr-items">
+                    <p><i class="bi bi-hourglass-split index-loading"></i></p>
+                  </div>
+                  <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+                </div>
+ 
+
+                <div role="main" class="hide-when-search">
+
+                        <div class="subnav navbar navbar-default">
+                          <div class="container hide-when-search" id="breadcrumb">
+                            <ul class="breadcrumb">
+                              <li></li>
+                            </ul>
+                          </div>
+                        </div>
+
+                         <div class="contribution">
+                               <a href="https://github.com/MonoGame/docs.monogame.github.io/blob/main/articles/getting_to_know/whatis/content_pipeline/CP_SpriteFontSchema.md/#L1" class="contribution-link">Edit this page</a>
+                         </div>
+
+                    <article class="content wrap" id="_content" data-uid="">
+
+<h2 id="sprite-font-xml-schema-reference">Sprite Font XML Schema Reference</h2>
+<table>
+<thead>
+<tr>
+<th>Tag name</th>
+<th>Content type</th>
+<th>Content description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;FontName&gt;</code></td>
+<td>string</td>
+<td>The name of the font to be imported. This is not the name of a font file, but rather the friendly name that identifies the font once it is installed on your computer. You can use the <strong>Fonts</strong> folder in Control Panel to see the names of fonts installed on your system, and to install new ones as well. The Content Pipeline supports the same fonts as the <a href="http://msdn.microsoft.com/en-us/library/system.drawing.font.aspx">System.Drawing.Font</a> class, including TrueType fonts, but not bitmap (.fon) fonts.</td>
+</tr>
+<tr>
+<td><code>&lt;Size&gt;</code></td>
+<td>float</td>
+<td>The point size of the font to be imported.</td>
+</tr>
+<tr>
+<td><code>&lt;Spacing&gt;</code></td>
+<td>float</td>
+<td>The number of pixels to add between each character when the string is rendered.</td>
+</tr>
+<tr>
+<td><code>&lt;UseKerning&gt;</code></td>
+<td>Boolean</td>
+<td>Specifies whether to use kerning information when rendering the font. Default value is <strong>true</strong>.</td>
+</tr>
+<tr>
+<td><code>&lt;Style&gt;</code></td>
+<td>Regular, Bold, Italic, or Bold Italic</td>
+<td>The style of the font to be imported.</td>
+</tr>
+<tr>
+<td><code>&lt;DefaultCharacter&gt;</code></td>
+<td>char</td>
+<td>The Unicode character to substitute any time an attempt is made to render characters that are not in the font. Specifying this element is optional.</td>
+</tr>
+<tr>
+<td><code>&lt;CharacterRegions&gt;</code></td>
+<td>One or more <code>&lt;CharacterRegion&gt;</code> tags</td>
+<td>One or more numerical ranges indicating which subset of Unicode characters to import.</td>
+</tr>
+<tr>
+<td><code>&lt;CharacterRegion&gt;</code></td>
+<td>One <code>&lt;Start&gt;</code> and one <code>&lt;End&gt;</code> tag</td>
+<td>The beginning and ending of a region of Unicode characters.</td>
+</tr>
+<tr>
+<td><code>&lt;Start&gt;</code></td>
+<td>char</td>
+<td>The first Unicode character to include in a <code>&lt;CharacterRegion&gt;</code>.</td>
+</tr>
+<tr>
+<td><code>&lt;End&gt;</code></td>
+<td>char</td>
+<td>The last Unicode character to include in a <code>&lt;CharacterRegion&gt;</code>.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="example">Example</h2>
+<p>Here is a sample <code>.spritefont</code> file:</p>
+<pre><code class="lang-xml">    &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+    &lt;XnaContent xmlns:Graphics=&quot;Microsoft.Xna.Framework.Content.Pipeline.Graphics&quot;&gt;
+      &lt;Asset Type=&quot;Graphics:FontDescription&quot;&gt;
+        &lt;FontName&gt;Courier New&lt;/FontName&gt;
+        &lt;Size&gt;18&lt;/Size&gt;
+        &lt;Spacing&gt;0&lt;/Spacing&gt;
+        &lt;UseKerning&gt;true&lt;/UseKerning&gt;
+        &lt;Style&gt;Regular&lt;/Style&gt;
+        &lt;CharacterRegions&gt;
+          &lt;CharacterRegion&gt;
+            &lt;Start&gt;32&lt;/Start&gt;
+            &lt;End&gt;127&lt;/End&gt;
+          &lt;/CharacterRegion&gt;
+        &lt;/CharacterRegions&gt;
+      &lt;/Asset&gt;
+    &lt;/XnaContent&gt;
+</code></pre>
+<p>Here is a sample localized <code>.spritefont</code> file:</p>
+<pre><code class="lang-xml">    &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+    &lt;XnaContent xmlns:Graphics=&quot;Microsoft.Xna.Framework.Content.Pipeline.Graphics&quot;&gt;
+      &lt;Asset Type=&quot;Graphics:LocalizedFontDescription&quot;&gt;
+        &lt;FontName&gt;Courier New&lt;/FontName&gt;
+        &lt;Size&gt;18&lt;/Size&gt;
+        &lt;Spacing&gt;0&lt;/Spacing&gt;
+        &lt;UseKerning&gt;true&lt;/UseKerning&gt;
+        &lt;Style&gt;Regular&lt;/Style&gt;
+        &lt;CharacterRegions&gt;
+          &lt;CharacterRegion&gt;
+            &lt;Start&gt;32&lt;/Start&gt;
+            &lt;End&gt;127&lt;/End&gt;
+          &lt;/CharacterRegion&gt;
+        &lt;/CharacterRegions&gt;
+        &lt;ResourceFiles&gt;
+          &lt;Resx&gt;Strings.resx&lt;/Resx&gt;
+          &lt;Resx&gt;Strings-fr.resx&lt;/Resx&gt;
+        &lt;/ResourceFiles&gt;
+      &lt;/Asset&gt;
+    &lt;/XnaContent&gt;
+</code></pre>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="../../howto/content_pipeline/HowTo_GameContent_Add.html">Adding Content to a Game</a></li>
+</ul>
+<h3 id="reference">Reference</h3>
+<ul>
+<li><a href="xref:Microsoft.Xna.Framework.Graphics.SpriteFont">SpriteFont</a></li>
+</ul>
+
+</article>
+                </div>
+
+            </main>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/jquery.twbsPagination.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/jquery.mark.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/url.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/anchor-js@5.0.0/anchor.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/docfx.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/main.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/singulink.js"></script>    </body>
+</html>

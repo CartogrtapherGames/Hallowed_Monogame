@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>How to create a Basic Effect | hallowed </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="How to create a Basic Effect | hallowed ">
+      <meta name="generator" content="docfx ">
+  
+      <link rel="shortcut icon" href="../../../../../../favicon.ico">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/night-owl.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" integrity="sha384-EvBWSlnoFgZlXJvpzS+MAUEjvN7+gcCwH+qh7GRFOGgZO0PuwOFro7qPOJnLfe7l" crossorigin="anonymous">
+      <link rel="stylesheet" href="../../../../../../styles/config.css">
+      <link rel="stylesheet" href="../../../../../../styles/singulink.css">
+      <link rel="stylesheet" href="../../../../../../styles/main.css">
+      <meta property="docfx:navrel" content="../../../../../../toc.html">
+      <meta property="docfx:tocrel" content="../../../toc.html">
+  
+  <meta property="docfx:rel" content="../../../../../../">
+  
+    </head>
+    <body>
+        <!-- Header required for docfx anchor scroll to work -->
+        <header id="head"></header>
+        <div class="top-navbar">
+            <a class="burger-icon" onclick="toggleMenu()">
+                <svg name="Hamburger" style="vertical-align: middle;" width="34" height="34" viewbox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M20 6H4V9H20V6ZM4 10.999H20V13.999H4V10.999ZM4 15.999H20V18.999H4V15.999Z"></path></svg>
+            </a>
+
+
+            <a class="brand" href="../../../../../../index.html">
+              <img src="../../../../../../logo.svg" alt="hallowed" class="logomark">
+              <span class="brand-title">hallowed</span>
+            </a>        </div>
+
+        <div class="body-content">
+            <div id="blackout" class="blackout" onclick="toggleMenu()"></div>
+
+            <nav id="sidebar" role="navigation">
+                <div class="sidebar">
+
+                    <div>
+                      <div class="mobile-hide">
+
+                        <a class="brand" href="../../../../../../index.html">
+                          <img src="../../../../../../logo.svg" alt="hallowed" class="logomark">
+                          <span class="brand-title">hallowed</span>
+                        </a>                      </div>
+
+                      <div class="sidesearch">
+                        <form id="search" role="search" class="search">
+                            <i class="bi bi-search search-icon"></i>
+                            <input type="text" id="search-query" placeholder="Search" autocomplete="off">
+                        </form>
+                      </div>
+
+                      <div id="navbar">
+                      </div>
+                    </div>                    <div class="sidebar-item-separator"></div>
+
+                        <div id="sidetoggle">
+                          <div id="sidetoc"></div>
+                        </div>
+                </div>
+                <div class="footer">
+  
+  <strong><a href='https://dotnet.github.io/docfx/'>DocFX</a> + <a href='https://www.singulink.com'>Singulink</a> = ♥</strong>
+                </div>            </nav>
+
+            <main class="main-panel">
+
+                <div id="search-results" style="display: none;">
+                  <h1 class="search-list">Search Results for <span></span></h1>
+                  <div class="sr-items">
+                    <p><i class="bi bi-hourglass-split index-loading"></i></p>
+                  </div>
+                  <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+                </div>
+ 
+
+                <div role="main" class="hide-when-search">
+
+                        <div class="subnav navbar navbar-default">
+                          <div class="container hide-when-search" id="breadcrumb">
+                            <ul class="breadcrumb">
+                              <li></li>
+                            </ul>
+                          </div>
+                        </div>
+
+                         <div class="contribution">
+                               <a href="https://github.com/MonoGame/docs.monogame.github.io/blob/main/articles/getting_to_know/howto/graphics/HowTo_Create_a_BasicEffect.md/#L1" class="contribution-link">Edit this page</a>
+                         </div>
+
+                    <article class="content wrap" id="_content" data-uid="">
+
+<h2 id="overview">Overview</h2>
+<p>The steps described here apply to effects created with the <a href="xref:Microsoft.Xna.Framework.Graphics.BasicEffect">BasicEffect</a> class using the <a href="xref:Microsoft.Xna.Framework.Graphics.Effect">Effect</a> class to write a custom effect.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>The example draws aliased geometry, to see an example that draws smoother edges because it also applies anti-aliasing, see <a href="HowTo_Enable_Anti_Aliasing.html">Enabling Anti-aliasing (Multi-sampling)</a>.</p>
+</div>
+<h3 id="end-result">End result</h3>
+<p><img src="images/HowTo_BasicEffect_Sample.png" alt="The output of this tutorial"></p>
+<h2 id="to-use-basiceffect">To use BasicEffect</h2>
+<p>Using the basic effect class requires a set of <code>world</code>, <code>view</code>, and <code>projection</code> matrices, a <code>vertex buffer</code>, a <code>vertex declaration</code>, and an instance of the <a href="xref:Microsoft.Xna.Framework.Graphics.BasicEffect">BasicEffect</a> class.</p>
+<ol>
+<li><p>Declare these properties at the beginning of the game class.</p>
+<pre><code class="lang-csharp">//Matrices for 3D perspective
+private Matrix worldMatrix, viewMatrix, projectionMatrix;
+
+// Vertex data for rendering
+private VertexPositionColor[] triangleVertices;
+
+// A Vertex format structure that contains position, normal data, and one set of texture coordinates
+private BasicEffect basicEffect;
+</code></pre>
+</li>
+<li><p>Initialize the world, view, and projection matrices in the <code>Initialize</code>.</p>
+<p>Next, create a world matrix using the default <code>Matrix.Identity</code> for simplicity. Set the <code>view matrix</code> as a <code>look-at</code> matrix with a camera position of <code>(0, 0, 50)</code>, pointing at the origin. The <code>projection matrix</code> is a <code>perspective</code> projection matrix based on a a <code>45-degree</code> field of view, an aspect ratio equal to the client window, and a set of <code>near</code> and <code>far</code> planes to render the geometry within in view of the camera.</p>
+<pre><code class="lang-csharp">protected override void Initialize()
+{
+    // Setup the matrices to look forward
+    worldMatrix = Matrix.Identity;
+    viewMatrix = Matrix.CreateLookAt(new Vector3(0, 0, 50), Vector3.Zero, Vector3.Up);
+
+    projectionMatrix = Matrix.CreatePerspectiveFieldOfView(
+        MathHelper.PiOver4,
+        GraphicsDevice.Viewport.AspectRatio,
+        1.0f, 300.0f);
+
+    base.Initialize();
+}
+</code></pre>
+</li>
+<li><p>Initialize a <a href="xref:Microsoft.Xna.Framework.Graphics.BasicEffect">BasicEffect</a> with the transformation and light values in the <code>LoadContent</code> method.</p>
+<pre><code class="lang-csharp">protected override void LoadContent()
+{
+    basicEffect = new BasicEffect(_graphics.GraphicsDevice);
+
+    basicEffect.World = worldMatrix;
+    basicEffect.View = viewMatrix;
+    basicEffect.Projection = projectionMatrix;
+
+    // primitive color
+    basicEffect.AmbientLightColor = new Vector3(0.1f, 0.1f, 0.1f);
+    basicEffect.DiffuseColor = new Vector3(1.0f, 1.0f, 1.0f);
+    basicEffect.SpecularColor = new Vector3(0.25f, 0.25f, 0.25f);
+    basicEffect.SpecularPower = 5.0f;
+    basicEffect.Alpha = 1.0f;
+    // The following MUST be enabled if you want to color your vertices
+    basicEffect.VertexColorEnabled = true;
+
+    // Use the built in 3 lighting mode provided with BasicEffect            
+    basicEffect.EnableDefaultLighting();
+}
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>If you wish, you can set up the lighting manually through code, as follows:</p>
+<pre><code class="lang-csharp">basicEffect.LightingEnabled = true;
+if (basicEffect.LightingEnabled)
+{
+    basicEffect.DirectionalLight0.Enabled = true; // enable each light individually
+    if (basicEffect.DirectionalLight0.Enabled)
+    {
+        // x direction
+        basicEffect.DirectionalLight0.DiffuseColor = new Vector3(1, 0, 0); // range is 0 to 1
+        basicEffect.DirectionalLight0.Direction = Vector3.Normalize(new Vector3(-1, 0, 0));
+        // points from the light to the origin of the scene
+        basicEffect.DirectionalLight0.SpecularColor = Vector3.One;
+    }
+
+    basicEffect.DirectionalLight1.Enabled = true;
+    if (basicEffect.DirectionalLight1.Enabled)
+    {
+        // y direction
+        basicEffect.DirectionalLight1.DiffuseColor = new Vector3(0, 0.75f, 0);
+        basicEffect.DirectionalLight1.Direction = Vector3.Normalize(new Vector3(0, -1, 0));
+        basicEffect.DirectionalLight1.SpecularColor = Vector3.One;
+    }
+
+    basicEffect.DirectionalLight2.Enabled = true;
+    if (basicEffect.DirectionalLight2.Enabled)
+    {
+        // z direction
+        basicEffect.DirectionalLight2.DiffuseColor = new Vector3(0, 0, 0.5f);
+        basicEffect.DirectionalLight2.Direction = Vector3.Normalize(new Vector3(0, 0, -1));
+        basicEffect.DirectionalLight2.SpecularColor = Vector3.One;
+    }
+}
+</code></pre></div>
+</li>
+<li><p>Still in <code>LoadContent</code>, create the per vertex data using the <code>VertexPositionColor</code> format. This example shows the data for the face of a triangle.</p>
+<pre><code class="lang-csharp">triangleVertices = new VertexPositionColor[3];
+
+triangleVertices[0].Position = new Vector3(0f, 0f, 0f);
+triangleVertices[0].Color = Color.Red;
+triangleVertices[1].Position = new Vector3(10f, 10f, 0f);
+triangleVertices[1].Color = Color.Yellow;
+triangleVertices[2].Position = new Vector3(10f, 0f, -5f);
+triangleVertices[2].Color = Color.Green;
+</code></pre>
+</li>
+<li><p>Finally, in the <code>Draw</code> Method, call <a href="xref:Microsoft.Xna.Framework.Graphics.GraphicsDevice#Microsoft_Xna_Framework_Graphics_GraphicsDevice_Clear_Microsoft_Xna_Framework_Color_">GraphicsDevice.Clear</a> to clear the render target.</p>
+</li>
+<li><p>Set the rasterizer state to turn off culling using the <a href="xref:Microsoft.Xna.Framework.Graphics.GraphicsDevice.RasterizerState">RasterizerState</a> property.</p>
+</li>
+<li><p>Call <a href="/api/Microsoft.Xna.Framework.Graphics.EffectPass.html#Microsoft_Xna_Framework_Graphics_EffectPass_Apply">EffectPass.Apply</a> to set the effect state in preparation for rendering.</p>
+</li>
+<li><p>Draw the geometry by calling <a href="/api/Microsoft.Xna.Framework.Graphics.GraphicsDevice.html#Microsoft_Xna_Framework_Graphics_GraphicsDevice_DrawUserPrimitives__1_Microsoft_Xna_Framework_Graphics_PrimitiveType___0___System_Int32_System_Int32_Microsoft_Xna_Framework_Graphics_VertexDeclaration_">GraphicsDevice.DrawUserPrimitives</a>.</p>
+<pre><code class="lang-csharp">protected override void Draw(GameTime gameTime)
+{
+    GraphicsDevice.Clear(Color.SteelBlue);
+
+    RasterizerState rasterizerState1 = new RasterizerState();
+    rasterizerState1.CullMode = CullMode.None;
+    GraphicsDevice.RasterizerState = rasterizerState1;
+    foreach (EffectPass pass in basicEffect.CurrentTechnique.Passes)
+    {
+        pass.Apply();
+
+        GraphicsDevice.DrawUserPrimitives(
+            PrimitiveType.TriangleList,
+            triangleVertices,
+            0,
+            1,
+            VertexPositionColor.VertexDeclaration
+        );
+    }
+
+    base.Draw(gameTime);
+}
+</code></pre>
+</li>
+</ol>
+<p>When the sample is run, the basic geometry is rendered using the custom <a href="xref:Microsoft.Xna.Framework.Graphics.BasicEffect">BasicEffect</a>, feel free to play with the position, content or rendering order to enhance the effect.</p>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="HowTo_Create_a_StateObject.html">How to create a State Object</a></li>
+</ul>
+<h3 id="concepts">Concepts</h3>
+<ul>
+<li><a href="../../whatis/graphics/WhatIs_ConfigurableEffect.html">What Is a Configurable Effect?</a></li>
+</ul>
+<h3 id="reference">Reference</h3>
+<ul>
+<li><a href="xref:Microsoft.Xna.Framework.Graphics.GraphicsDevice">GraphicsDevice</a></li>
+<li><a href="xref:Microsoft.Xna.Framework.Graphics.BasicEffect">BasicEffect</a></li>
+<li><a href="xref:Microsoft.Xna.Framework.Graphics.GraphicsDevice.RasterizerState">RasterizerState</a></li>
+</ul>
+
+</article>
+                </div>
+
+            </main>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/jquery.twbsPagination.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/jquery.mark.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/url.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/anchor-js@5.0.0/anchor.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/docfx.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/main.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/singulink.js"></script>    </body>
+</html>

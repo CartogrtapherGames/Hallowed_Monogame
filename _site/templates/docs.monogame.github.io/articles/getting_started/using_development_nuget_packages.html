@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Using the Development Nuget Packages | hallowed </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Using the Development Nuget Packages | hallowed ">
+      <meta name="generator" content="docfx ">
+  
+      <link rel="shortcut icon" href="../../../../favicon.ico">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/night-owl.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" integrity="sha384-EvBWSlnoFgZlXJvpzS+MAUEjvN7+gcCwH+qh7GRFOGgZO0PuwOFro7qPOJnLfe7l" crossorigin="anonymous">
+      <link rel="stylesheet" href="../../../../styles/config.css">
+      <link rel="stylesheet" href="../../../../styles/singulink.css">
+      <link rel="stylesheet" href="../../../../styles/main.css">
+      <meta property="docfx:navrel" content="../../../../toc.html">
+      <meta property="docfx:tocrel" content="../toc.html">
+  
+  <meta property="docfx:rel" content="../../../../">
+  
+    </head>
+    <body>
+        <!-- Header required for docfx anchor scroll to work -->
+        <header id="head"></header>
+        <div class="top-navbar">
+            <a class="burger-icon" onclick="toggleMenu()">
+                <svg name="Hamburger" style="vertical-align: middle;" width="34" height="34" viewbox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M20 6H4V9H20V6ZM4 10.999H20V13.999H4V10.999ZM4 15.999H20V18.999H4V15.999Z"></path></svg>
+            </a>
+
+
+            <a class="brand" href="../../../../index.html">
+              <img src="../../../../logo.svg" alt="hallowed" class="logomark">
+              <span class="brand-title">hallowed</span>
+            </a>        </div>
+
+        <div class="body-content">
+            <div id="blackout" class="blackout" onclick="toggleMenu()"></div>
+
+            <nav id="sidebar" role="navigation">
+                <div class="sidebar">
+
+                    <div>
+                      <div class="mobile-hide">
+
+                        <a class="brand" href="../../../../index.html">
+                          <img src="../../../../logo.svg" alt="hallowed" class="logomark">
+                          <span class="brand-title">hallowed</span>
+                        </a>                      </div>
+
+                      <div class="sidesearch">
+                        <form id="search" role="search" class="search">
+                            <i class="bi bi-search search-icon"></i>
+                            <input type="text" id="search-query" placeholder="Search" autocomplete="off">
+                        </form>
+                      </div>
+
+                      <div id="navbar">
+                      </div>
+                    </div>                    <div class="sidebar-item-separator"></div>
+
+                        <div id="sidetoggle">
+                          <div id="sidetoc"></div>
+                        </div>
+                </div>
+                <div class="footer">
+  
+  <strong><a href='https://dotnet.github.io/docfx/'>DocFX</a> + <a href='https://www.singulink.com'>Singulink</a> = ♥</strong>
+                </div>            </nav>
+
+            <main class="main-panel">
+
+                <div id="search-results" style="display: none;">
+                  <h1 class="search-list">Search Results for <span></span></h1>
+                  <div class="sr-items">
+                    <p><i class="bi bi-hourglass-split index-loading"></i></p>
+                  </div>
+                  <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+                </div>
+ 
+
+                <div role="main" class="hide-when-search">
+
+                        <div class="subnav navbar navbar-default">
+                          <div class="container hide-when-search" id="breadcrumb">
+                            <ul class="breadcrumb">
+                              <li></li>
+                            </ul>
+                          </div>
+                        </div>
+
+                         <div class="contribution">
+                               <a href="https://github.com/MonoGame/docs.monogame.github.io/blob/main/articles/getting_started/using_development_nuget_packages.md/#L1" class="contribution-link">Edit this page</a>
+                         </div>
+
+                    <article class="content wrap" id="_content" data-uid="">
+
+<h2 id="overview">Overview</h2>
+<p>When the MonoGame develop branch builds, it publishes development NuGet packages to the MonoGame NuGet Feed on GitHub. If you want to test a new feature or just be on the very latest code you can use this Feed to do that.</p>
+<div class="TIP">
+<h5>Tip</h5>
+<p>Alternatively, consider using the Preview Packages provided by MonoGame to get access to the latest preview release rather than the raw development code.</p>
+<ul>
+<li><a href="../getting_to_know/howto/HowTo_Install_Preview_Release.html">How to install MonoGame Preview packages</a></li>
+</ul>
+</div>
+<h2 id="adding-a-nuget-source">Adding a NuGet Source</h2>
+<ol>
+<li><p>Create a <code>NuGet.config</code> in the root or top level directory of your project.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>NuGet will automatically walk up the directory tree to find <code>NuGet.config</code> files.</p>
+</div>
+</li>
+<li><p>Add the following content:</p>
+<pre><code class="lang-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;configuration&gt;
+    &lt;packageSources&gt;
+        &lt;add key=&quot;MonoGameGitHub&quot; value=&quot;https://nuget.pkg.github.com/MonoGame/index.json&quot; /&gt;
+    &lt;/packageSources&gt;
+&lt;/configuration&gt;
+</code></pre>
+</li>
+<li><p>Next (in the root or top level directory), create a <code>Directory.Build.props</code> file and add the following content.</p>
+<pre><code class="lang-xml">&lt;Project&gt;
+    &lt;PropertyGroup&gt;
+        &lt;MonoGamePackageVersion&gt;1.0.0.1233-develop&lt;/MonoGamePackageVersion&gt;
+    &lt;/PropertyGroup&gt;
+&lt;/Project&gt;
+</code></pre>
+<p><code>Directory.Build.props</code> is an MSBuild file which will be imported by all projects in your game.  It is like a file that contains global variables. In this case the version of MonoGame we want to use.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>To find out the latest version number, you can look at one of the packages at <a href="https://github.com/orgs/MonoGame/packages?repo_name=MonoGame">https://github.com/orgs/MonoGame/packages?repo_name=MonoGame</a>. Or to get the information from the GitHub feed, you can run the following command.</p>
+<pre><code class="lang-CLI">   nuget search &quot;MonoGame.Framework&quot; -PreRelease -Source MonoGameGitHub
+</code></pre>
+</div>
+<p>This will give you the following output</p>
+<pre><code class="lang-text">====================
+Source: MonoGameGitHub
+--------------------
+&gt; MonoGame.Framework.Android | 1.0.0.1278-develop | Downloads: 164
+  The MonoGame runtime for Android.
+--------------------
+&gt; MonoGame.Framework.Content.Pipeline | 1.0.0.1278-develop | Downloads: 69
+  The Monogame Content Pipeline for Windows, Mac and Linux is used to compile raw content to xnb files...
+--------------------
+&gt; MonoGame.Framework.DesktopGL | 1.0.0.1278-develop | Downloads: 337
+  The MonoGame runtime supporting Windows, Linux and macOS using SDL2 and OpenGL.
+--------------------
+&gt; MonoGame.Framework.Native | 1.0.0.1278-develop | Downloads: 1
+  The MonoGame Native platform.
+--------------------
+&gt; MonoGame.Framework.WindowsDX | 1.0.0.1278-develop | Downloads: 76
+  The MonoGame runtime for Windows using DirectX API's.
+--------------------
+&gt; MonoGame.Framework.WindowsUniversal | 3.8.1.1128-develop | Downloads: 54
+  The MonoGame runtime for UWP (Universal Windows Platform) which supports Windows 10 and Xbox One.
+--------------------
+&gt; MonoGame.Framework.iOS | 1.0.0.1278-develop | Downloads: 153
+  The MonoGame runtime for iOS amd iPadOS.
+--------------------
+</code></pre>
+<p>The version number you want to use is listed in the output.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>As packages are published, the version number will always change. Unfortunately, due to limitations in the way NuGet works, we cannot
+use a wildcard with a pre-release package (so you cannot do <code>1.0.0.*-develop</code>). So this is the best way to find the latest version you want to use.</p>
+</div>
+</li>
+<li><p>Next update all the <code>PackageReference</code> entries in your <code>csproj</code>'s which use MonoGame to use <code>$(MonoGamePackageVersion)</code> MSBuild property.
+For example:</p>
+</li>
+</ol>
+<pre><code class="lang-xml">&lt;ItemGroup&gt;
+    &lt;PackageReference Include=&quot;MonoGame.Framework.DesktopGL&quot; Version=&quot;$(MonoGamePackageVersion)&quot; /&gt;
+    &lt;PackageReference Include=&quot;MonoGame.Content.Builder.Task&quot; Version=&quot;$(MonoGamePackageVersion)&quot; /&gt;
+&lt;/ItemGroup&gt;
+</code></pre>
+<p>If you try to build now you will get an error. This is because the NuGet feeds on GitHub are not public. You need to be a valid GitHub user to use them.</p>
+<h2 id="authentication">Authentication</h2>
+<p>You need to create a <strong>Personal Access Token</strong> (PAT) on your GitHub account in order to use the NuGet feed.  See the following documentation on how to create your PAT.</p>
+<p><a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens">managing-your-personal-access-tokens</a></p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>You need to create a &quot;PAT (Classic)&quot; token in order for it to work with the Nuget feed. See <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic">creating-a-personal-access-token-classic</a> for details.</p>
+</div>
+<p>Once you have your <strong>PAT</strong>, you can create a new <code>NuGet.config</code> file in the directory ABOVE your game project directory.
+To be clear, this file should NOT be in your source tree. It should be outside of any directory which is under source control.</p>
+<pre><code class="lang-cli"> Projects
+      NuGet.config &lt;-- THIS IS WHERE YOU PUT THE FILE.
+      MyGame
+        .git
+        Directory.Build.props
+        NuGet.config
+        MyGame.DesktopGL
+          MyGame.DesktopGL.csproj
+
+</code></pre>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>Do Not... <strong>DO NOT</strong> place a <code>NuGet.config</code> file with valid <code>packageSourceCredentials</code> in your source control.</p>
+</div>
+<p>The contents of the file are as follows, replace <code>%GITHUB_USER%</code> with your GitHub username and the <code>%GITHUB_TOKEN%</code> with your token.</p>
+<pre><code class="lang-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;configuration&gt;
+    &lt;packageSourceCredentials&gt;
+        &lt;MonoGameGitHub&gt;
+            &lt;add key=&quot;Username&quot; value=&quot;%GITHUB_USER%&quot; /&gt;
+            &lt;add key=&quot;ClearTextPassword&quot; value=&quot;%GITHUB_TOKEN%&quot; /&gt;
+        &lt;/MonoGameGitHub&gt;
+    &lt;/packageSourceCredentials&gt;
+&lt;/configuration&gt;
+</code></pre>
+<p>The really good thing about placing these credentials outside of source control is that they are safe. But also any new projects you create under that folder can also make use of these credentials. So it is a good idea to keep them in one place.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>For more information, you can read <a href="https://learn.microsoft.com/en-us/nuget/consume-packages/consuming-packages-authenticated-feeds#credentials-in-nugetconfig-files">consuming-packages-authenticated-feeds</a>.</p>
+</div>
+
+</article>
+                </div>
+
+            </main>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+        <script type="text/javascript" src="../../../../styles/jquery.twbsPagination.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/jquery.mark.min.js"></script>
+        <script type="text/javascript" src="../../../../styles/url.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/anchor-js@5.0.0/anchor.min.js"></script>
+        <script type="text/javascript" src="../../../../styles/docfx.js"></script>
+        <script type="text/javascript" src="../../../../styles/main.js"></script>
+        <script type="text/javascript" src="../../../../styles/singulink.js"></script>    </body>
+</html>

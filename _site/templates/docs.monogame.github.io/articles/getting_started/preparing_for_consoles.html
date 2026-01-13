@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Preparing for consoles | hallowed </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Preparing for consoles | hallowed ">
+      <meta name="generator" content="docfx ">
+  
+      <link rel="shortcut icon" href="../../../../favicon.ico">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/night-owl.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" integrity="sha384-EvBWSlnoFgZlXJvpzS+MAUEjvN7+gcCwH+qh7GRFOGgZO0PuwOFro7qPOJnLfe7l" crossorigin="anonymous">
+      <link rel="stylesheet" href="../../../../styles/config.css">
+      <link rel="stylesheet" href="../../../../styles/singulink.css">
+      <link rel="stylesheet" href="../../../../styles/main.css">
+      <meta property="docfx:navrel" content="../../../../toc.html">
+      <meta property="docfx:tocrel" content="../toc.html">
+  
+  <meta property="docfx:rel" content="../../../../">
+  
+    </head>
+    <body>
+        <!-- Header required for docfx anchor scroll to work -->
+        <header id="head"></header>
+        <div class="top-navbar">
+            <a class="burger-icon" onclick="toggleMenu()">
+                <svg name="Hamburger" style="vertical-align: middle;" width="34" height="34" viewbox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M20 6H4V9H20V6ZM4 10.999H20V13.999H4V10.999ZM4 15.999H20V18.999H4V15.999Z"></path></svg>
+            </a>
+
+
+            <a class="brand" href="../../../../index.html">
+              <img src="../../../../logo.svg" alt="hallowed" class="logomark">
+              <span class="brand-title">hallowed</span>
+            </a>        </div>
+
+        <div class="body-content">
+            <div id="blackout" class="blackout" onclick="toggleMenu()"></div>
+
+            <nav id="sidebar" role="navigation">
+                <div class="sidebar">
+
+                    <div>
+                      <div class="mobile-hide">
+
+                        <a class="brand" href="../../../../index.html">
+                          <img src="../../../../logo.svg" alt="hallowed" class="logomark">
+                          <span class="brand-title">hallowed</span>
+                        </a>                      </div>
+
+                      <div class="sidesearch">
+                        <form id="search" role="search" class="search">
+                            <i class="bi bi-search search-icon"></i>
+                            <input type="text" id="search-query" placeholder="Search" autocomplete="off">
+                        </form>
+                      </div>
+
+                      <div id="navbar">
+                      </div>
+                    </div>                    <div class="sidebar-item-separator"></div>
+
+                        <div id="sidetoggle">
+                          <div id="sidetoc"></div>
+                        </div>
+                </div>
+                <div class="footer">
+  
+  <strong><a href='https://dotnet.github.io/docfx/'>DocFX</a> + <a href='https://www.singulink.com'>Singulink</a> = ♥</strong>
+                </div>            </nav>
+
+            <main class="main-panel">
+
+                <div id="search-results" style="display: none;">
+                  <h1 class="search-list">Search Results for <span></span></h1>
+                  <div class="sr-items">
+                    <p><i class="bi bi-hourglass-split index-loading"></i></p>
+                  </div>
+                  <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+                </div>
+ 
+
+                <div role="main" class="hide-when-search">
+
+                        <div class="subnav navbar navbar-default">
+                          <div class="container hide-when-search" id="breadcrumb">
+                            <ul class="breadcrumb">
+                              <li></li>
+                            </ul>
+                          </div>
+                        </div>
+
+                         <div class="contribution">
+                               <a href="https://github.com/MonoGame/docs.monogame.github.io/blob/main/articles/getting_started/preparing_for_consoles.md/#L1" class="contribution-link">Edit this page</a>
+                         </div>
+
+                    <article class="content wrap" id="_content" data-uid="">
+
+
+<p>MonoGame for gaming consoles uses a dedicated .NET runtime that is not maintained by Microsoft. Therefore, a 100% accuracy and reliability is not guaranteed. Moreover, the console runtime makes use of <code>ahead-of-time</code> native compilation (AOT), which means that some .NET features will not, and cannot work on consoles.</p>
+<p>This article explains the most common pitfalls and suggested guidelines to optimize your chances of having a smoother porting experience.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p><em>Gaming consoles are restricted to registered developers and are not publicly available nor publicly documented. To get access to those platforms, please contact your console account manager(s). MonoGame documentation for closed platforms is available in their respective repositories.</em></p>
+</div>
+<h2 id="no-use-of-runtime-reflection">No use of runtime reflection</h2>
+<p>The main show stopper when it comes to porting a .NET game to consoles, is the use of runtime <a href="https://learn.microsoft.com/en-us/dotnet/fundamentals/reflection/reflection">reflection</a>.</p>
+<p>Reflection is, at large, unsupported in an AOT context. Which means that anywhere you or a third party library uses reflection, your game will crash.</p>
+<p>In order to make sure that your game abides to that rule, you can try to publish an AOT'd version of it for desktop computers and verify how it fares.</p>
+<p>To publish with AOT:</p>
+<ul>
+<li>Add <code>&lt;PublishAot&gt;true&lt;/PublishAot&gt;</code> to your <code>.csproj</code>.</li>
+<li>Then run <code>dotnet publish</code> from the command-line/terminal.</li>
+</ul>
+<p>This will natively compile your game in a fashion similar to consoles. The output executable will be in your output folder, within a sub-folder named <code>publish</code>.</p>
+<p>From there, you can try running this executable. If it does not start or crashes later on, you likely are using reflection or another unsupported feature in a AOT runtime.</p>
+<p>Native executables can debugged by:</p>
+<ul>
+<li>Starting an empty Visual Studio with no code.</li>
+<li>Opening the compiled exe.</li>
+<li>Then hitting &quot;Start debugging&quot;.</li>
+</ul>
+<p>It should show you on which C# lines it crashed.</p>
+<p>It is important to note that you should test every aspect of your game, and not just if it starts.  Run through all the menus/screens, scene transitions and gameplay.</p>
+<p>Another way to make sure that everything is safe is to enable <code>&lt;EnableTrimAnalyzer&gt;true&lt;/EnableTrimAnalyzer&gt;</code> in your <code>.csproj</code>, and then <strong>rebuild</strong> (not just build) your game and check the build output for AOT warnings. Those warnings will tell you which parts of your code might trigger crashes or unexpected results when running on AOT compilation. You should seek to resolve all of them.</p>
+<h2 id="no-runtime-compilation--il-emit">No runtime compilation / IL emit</h2>
+<p>Generating code at runtime is a scenario that is also not supported in AOT contexts, it is also forbidden by console manufacturers.</p>
+<p>Like reflection, trying to make a <code>PublishAot</code> build is a good way to verify that your game is compliant because any use of IL emit will crash.</p>
+<h2 id="no-use-of-dynamic-assembly-loading">No use of dynamic assembly loading</h2>
+<p>Loading assemblies at runtime with <code>Assembly.Load()</code> is not supported.</p>
+<h2 id="third-party-libraries">Third party libraries</h2>
+<p>Many third party libraries heavily rely on using reflection or IL emit, this is a common practice for JSON or XML parsers for example (and they are the most common source of third party incompatibilities).</p>
+<p>It is advised to choose very carefully the libraries that you are using when porting to consoles. If you do not select them with this in mind, you might run into a situation in which you will have to rewrite entire chunks of data handling.</p>
+<p>The best way to make sure if they will work, is to search if they are <strong>&quot;AOT-compatible&quot;</strong>, or try to compile with the <code>&lt;EnableTrimAnalyzer&gt;true&lt;/EnableTrimAnalyzer&gt;</code> setting in your <code>.csproj</code> and check if there are any warnings related to those libraries.</p>
+<p>For example, here are some parsing libraries known for their compliance with AOT compilation and good handling of memory:</p>
+<ul>
+<li><a href="https://github.com/xoofx/TurboXml">TurboXML</a></li>
+<li><a href="https://github.com/zanders3/json">TinyJSON</a></li>
+</ul>
+<p>On the contrary, Newtonsoft JSON is known to be unsupported (there are modified forks around, but we overall recommend to not use it for games).</p>
+<h2 id="native-libraries">Native libraries</h2>
+<p>If you are using native libraries, make sure that they provide builds for consoles, or make sure that you can compile and run them on consoles yourself.</p>
+<p>Even though a library might be open-source, it is unlikely they will just compile and run on consoles.</p>
+<p>It is suggested to only use native libraries that have been proven to run on consoles.</p>
+<h2 id="linq">LINQ</h2>
+<p>While LINQ mostly works on consoles, it should be noted that due to AOT compilation, LINQ queries can not be optimized and performance can be very slow.</p>
+<p>Moreover, LINQ is very garbage-prone and if your game has stuttering issues you might want to reduce your usage of LINQ.</p>
+<h2 id="avoiding-garbage-generation">Avoiding garbage generation</h2>
+<p>Even though your game has good performance on PC and does not show stutters, you might want to be very cautious about how your game handles memory.</p>
+<p>The garbage collector is slower on consoles and if your game generates a lot of garbage memory, there will be visible stutters.</p>
+<p>To verify that your game is not too garbage-prone, you can run Visual Studio's Performance Profiler (<code>Debug/Performance Profiler...</code>) and check the <strong>&quot;.NET Object Allocation Tracking&quot;</strong> tool.</p>
+<p>From there, you can check which parts of your code generate garbage and you can pinpoint where to optimize.</p>
+<p>In order to avoid garbage, here are some best practices:</p>
+<ul>
+<li>Only use strings as const. Do not use strings dynamically (e.g. string concatenation, patterns...), this is the most common source of garbage.</li>
+<li>Avoid allocating anything with the <code>new</code> keyword during your game loop, e.g. pre-allocate everything ahead of using them during gameplay.</li>
+<li>Pool your dynamic objects, e.g. do not destroy your projectiles or particles, instead place them into another &quot;unused&quot; list and reuse them instead of creating new instances when needed.</li>
+<li>Avoid using LINQ.</li>
+<li>If you are using collections, initialize them with a large enough capacity to avoid their internal data structure being silently recreated.</li>
+<li>Mind your foreach loops, depending on the data you are looping on, the loop might create garbage when duplicating an item.  Or better yet, use a for loop for tigher control.</li>
+</ul>
+<h2 id="do-not-rely-on-system-calls">Do not rely on system calls</h2>
+<p>If your game calls directly to system functions, like kernel, win32 or Unix commands, you might want to get rid of them.</p>
+<h2 id="consider-io-to-be-asynchronous">Consider I/O to be asynchronous</h2>
+<p>Saving player data/settings, or unlocking achievements are operations that should be considered asynchronous.</p>
+<p>Most, if not all consoles, consider system accesses to be asynchronous. Even though it is not on PC, you should prepare your game to handle asynchronous operation (e.g. consider saving game data in a thread which will not block the game).</p>
+<p>If you consider all your I/O and system operations as asynchronous, you will likely be spared some headache.</p>
+<h2 id="suggestions">Suggestions</h2>
+<p>If you have other tips or suggestions when building for consoles, then let the MonoGame team know by raising an issue and we will improve this article even further over time.</p>
+
+</article>
+                </div>
+
+            </main>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+        <script type="text/javascript" src="../../../../styles/jquery.twbsPagination.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/jquery.mark.min.js"></script>
+        <script type="text/javascript" src="../../../../styles/url.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/anchor-js@5.0.0/anchor.min.js"></script>
+        <script type="text/javascript" src="../../../../styles/docfx.js"></script>
+        <script type="text/javascript" src="../../../../styles/main.js"></script>
+        <script type="text/javascript" src="../../../../styles/singulink.js"></script>    </body>
+</html>

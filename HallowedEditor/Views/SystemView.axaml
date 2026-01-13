@@ -1,0 +1,216 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:HallowedEditor.ViewModels"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="800"
+             x:Class="HallowedEditor.Views.SystemView"
+             x:DataType="vm:SystemViewModel">
+    
+    <Border Classes="ContentPanel">
+        <ScrollViewer>
+            <StackPanel Spacing="15" Margin="20">
+                
+                <!-- Top Row: Project Info, Game Settings, Display Settings -->
+                <Grid ColumnDefinitions="*,*,*" ColumnSpacing="15">
+                    
+                    <!-- Project Information -->
+                    <Border Grid.Column="0" 
+                            Background="{StaticResource ParchmentMedium}"
+                            Padding="15"
+                            CornerRadius="8">
+                        <StackPanel Spacing="10">
+                            <TextBlock Text="Project Information" 
+                                      FontWeight="Bold"
+                                      FontSize="14"
+                                      Foreground="{StaticResource TextDark}"/>
+                            <Separator/>
+                            
+                            <StackPanel Spacing="8">
+                                <TextBlock Text="Game Title:" Classes="SmallText"/>
+                                <TextBox Text="{Binding ProjectName}" Watermark="Enter game title"/>
+                                
+                                <TextBlock Text="Version:" Classes="SmallText" Margin="0,5,0,0"/>
+                                <TextBox Text="{Binding Version}" Watermark="e.g., 1.0.0"/>
+                                
+                                <TextBlock Text="Author:" Classes="SmallText" Margin="0,5,0,0"/>
+                                <TextBox Text="{Binding Author}" Watermark="Your name"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                    
+                    <!-- Game Settings -->
+                    <Border Grid.Column="1" 
+                            Background="{StaticResource ParchmentMedium}"
+                            Padding="15"
+                            CornerRadius="8">
+                        <StackPanel Spacing="10">
+                            <TextBlock Text="Game Settings" 
+                                      FontWeight="Bold"
+                                      FontSize="14"
+                                      Foreground="{StaticResource TextDark}"/>
+                            <Separator/>
+                            
+                            <StackPanel Spacing="8">
+                                <TextBlock Text="Starting Scene:" Classes="SmallText"/>
+                                <ComboBox ItemsSource="{Binding StartingScenes}"
+                                         SelectedItem="{Binding SelectedStartingScene}"
+                                         PlaceholderText="Select scene"
+                                         HorizontalAlignment="Stretch"/>
+                                
+                                <TextBlock Text="Currency:" Classes="SmallText" Margin="0,5,0,0"/>
+                                <TextBox Text="{Binding Currency}" Watermark="Gold"/>
+                                
+                                <TextBlock Text="Max Party Size:" Classes="SmallText" Margin="0,5,0,0"/>
+                                <NumericUpDown Value="{Binding MaxPartySize}" 
+                                              Minimum="1" 
+                                              Maximum="10"
+                                              Increment="1"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                    
+                    <!-- Display Settings -->
+                    <Border Grid.Column="2" 
+                            Background="{StaticResource ParchmentMedium}"
+                            Padding="15"
+                            CornerRadius="8">
+                        <StackPanel Spacing="10">
+                            <TextBlock Text="Display Settings" 
+                                      FontWeight="Bold"
+                                      FontSize="14"
+                                      Foreground="{StaticResource TextDark}"/>
+                            <Separator/>
+                            
+                            <StackPanel Spacing="8">
+                                <TextBlock Text="Resolution:" Classes="SmallText"/>
+                                <ComboBox ItemsSource="{Binding Resolutions}"
+                                         SelectedItem="{Binding SelectedResolution}"
+                                         HorizontalAlignment="Stretch"/>
+                                
+                                <TextBlock Text="Window Mode:" Classes="SmallText" Margin="0,5,0,0"/>
+                                <ComboBox ItemsSource="{Binding WindowModes}"
+                                         SelectedItem="{Binding SelectedWindowMode}"
+                                         HorizontalAlignment="Stretch"/>
+                                
+                                <CheckBox Content="VSync Enabled" 
+                                         IsChecked="{Binding VSyncEnabled}"
+                                         Margin="0,5,0,0"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+                
+                <!-- Second Row: Game Options and Advanced -->
+                <Grid ColumnDefinitions="2.039*,*" ColumnSpacing="15">
+                    
+                    <!-- Game Options -->
+                    <Border Grid.Column="0" 
+                            Background="{StaticResource ParchmentMedium}"
+                            Padding="15"
+                            CornerRadius="8">
+                        <StackPanel Spacing="10">
+                            <TextBlock Text="Game Options" 
+                                      FontWeight="Bold"
+                                      FontSize="14"
+                                      Foreground="{StaticResource TextDark}"/>
+                            <Separator/>
+                            
+                            <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto,Auto,Auto">
+                                <CheckBox Grid.Row="0" Grid.Column="0" 
+                                         Content="Enable Autosave"
+                                         IsChecked="{Binding EnableAutosave}"/>
+                                <CheckBox Grid.Row="0" Grid.Column="1" 
+                                         Content="Show Message Skip"
+                                         IsChecked="{Binding ShowMessageSkip}"/>
+                                
+                                <CheckBox Grid.Row="1" Grid.Column="0" 
+                                         Content="Enable Combat"
+                                         IsChecked="{Binding EnableCombat}"
+                                         Margin="0,8,0,0"/>
+                                <CheckBox Grid.Row="1" Grid.Column="1" 
+                                         Content="Skip Titles screen"
+                                         IsChecked="{Binding SkipTitleScreen}"
+                                         Margin="0,8,0,0"/>
+                                
+                                <CheckBox Grid.Row="2" Grid.Column="0" 
+                                         Content="Enable Inventory"
+                                         IsChecked="{Binding EnableInventory}"
+                                         Margin="0,8,0,0"/>
+                                <CheckBox Grid.Row="2" Grid.Column="1" 
+                                         Content="Enable Quest System"
+                                         IsChecked="{Binding EnableQuests}"
+                                         Margin="0,8,0,0"/>
+                                
+                                <CheckBox Grid.Row="3" Grid.Column="0" 
+                                         Content="Enable Skills"
+                                         IsChecked="{Binding EnableSkills}"
+                                         Margin="0,8,0,0"/>
+                                <CheckBox Grid.Row="3" Grid.Column="1" 
+                                         Content="Enable Equipment"
+                                         IsChecked="{Binding EnableEquipment}"
+                                         Margin="0,8,0,0"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                    
+                    <!-- Description -->
+                    <Border Grid.Column="1" 
+                            Background="{StaticResource ParchmentMedium}"
+                            Padding="15"
+                            CornerRadius="8">
+                        <StackPanel Spacing="10">
+                            <TextBlock Text="Description" 
+                                      FontWeight="Bold"
+                                      FontSize="14"
+                                      Foreground="{StaticResource TextDark}"/>
+                            <Separator/>
+                            
+                            <TextBox Text="{Binding Description}"
+                                    Watermark="Project description..."
+                                    AcceptsReturn="True"
+                                    TextWrapping="Wrap"
+                                    Height="120"/>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+                
+                <!-- Project Statistics Table -->
+                <Border Background="{StaticResource ParchmentMedium}"
+                        Padding="15"
+                        CornerRadius="8">
+                    <StackPanel Spacing="10">
+                        <TextBlock Text="Project Statistics" 
+                                  FontWeight="Bold"
+                                  FontSize="14"
+                                  Foreground="{StaticResource TextDark}"/>
+                        <Separator/>
+                        
+                        <DataGrid ItemsSource="{Binding Statistics}"
+                                 AutoGenerateColumns="False"
+                                 IsReadOnly="True"
+                                 CanUserReorderColumns="False"
+                                 CanUserResizeColumns="True"
+                                 GridLinesVisibility="Horizontal"
+                                 HeadersVisibility="Column"
+                                 Background="Transparent"
+                                 BorderThickness="0"
+                                 Height="200">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Type" 
+                                                   Binding="{Binding Type}"
+                                                   Width="*"
+                                                   IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Count" 
+                                                   Binding="{Binding Count}"
+                                                   Width="100"
+                                                   IsReadOnly="True"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+                </Border>
+                
+            </StackPanel>
+        </ScrollViewer>
+    </Border>
+</UserControl>

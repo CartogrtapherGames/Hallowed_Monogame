@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>How to apply Best Practices for MonoGame Games | hallowed </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="How to apply Best Practices for MonoGame Games | hallowed ">
+      <meta name="generator" content="docfx ">
+  
+      <link rel="shortcut icon" href="../../../../../favicon.ico">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/night-owl.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" integrity="sha384-EvBWSlnoFgZlXJvpzS+MAUEjvN7+gcCwH+qh7GRFOGgZO0PuwOFro7qPOJnLfe7l" crossorigin="anonymous">
+      <link rel="stylesheet" href="../../../../../styles/config.css">
+      <link rel="stylesheet" href="../../../../../styles/singulink.css">
+      <link rel="stylesheet" href="../../../../../styles/main.css">
+      <meta property="docfx:navrel" content="../../../../../toc.html">
+      <meta property="docfx:tocrel" content="../../toc.html">
+  
+  <meta property="docfx:rel" content="../../../../../">
+  
+    </head>
+    <body>
+        <!-- Header required for docfx anchor scroll to work -->
+        <header id="head"></header>
+        <div class="top-navbar">
+            <a class="burger-icon" onclick="toggleMenu()">
+                <svg name="Hamburger" style="vertical-align: middle;" width="34" height="34" viewbox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M20 6H4V9H20V6ZM4 10.999H20V13.999H4V10.999ZM4 15.999H20V18.999H4V15.999Z"></path></svg>
+            </a>
+
+
+            <a class="brand" href="../../../../../index.html">
+              <img src="../../../../../logo.svg" alt="hallowed" class="logomark">
+              <span class="brand-title">hallowed</span>
+            </a>        </div>
+
+        <div class="body-content">
+            <div id="blackout" class="blackout" onclick="toggleMenu()"></div>
+
+            <nav id="sidebar" role="navigation">
+                <div class="sidebar">
+
+                    <div>
+                      <div class="mobile-hide">
+
+                        <a class="brand" href="../../../../../index.html">
+                          <img src="../../../../../logo.svg" alt="hallowed" class="logomark">
+                          <span class="brand-title">hallowed</span>
+                        </a>                      </div>
+
+                      <div class="sidesearch">
+                        <form id="search" role="search" class="search">
+                            <i class="bi bi-search search-icon"></i>
+                            <input type="text" id="search-query" placeholder="Search" autocomplete="off">
+                        </form>
+                      </div>
+
+                      <div id="navbar">
+                      </div>
+                    </div>                    <div class="sidebar-item-separator"></div>
+
+                        <div id="sidetoggle">
+                          <div id="sidetoc"></div>
+                        </div>
+                </div>
+                <div class="footer">
+  
+  <strong><a href='https://dotnet.github.io/docfx/'>DocFX</a> + <a href='https://www.singulink.com'>Singulink</a> = ♥</strong>
+                </div>            </nav>
+
+            <main class="main-panel">
+
+                <div id="search-results" style="display: none;">
+                  <h1 class="search-list">Search Results for <span></span></h1>
+                  <div class="sr-items">
+                    <p><i class="bi bi-hourglass-split index-loading"></i></p>
+                  </div>
+                  <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+                </div>
+ 
+
+                <div role="main" class="hide-when-search">
+
+                        <div class="subnav navbar navbar-default">
+                          <div class="container hide-when-search" id="breadcrumb">
+                            <ul class="breadcrumb">
+                              <li></li>
+                            </ul>
+                          </div>
+                        </div>
+
+                         <div class="contribution">
+                               <a href="https://github.com/MonoGame/docs.monogame.github.io/blob/main/articles/getting_to_know/howto/HowTo_MobileBestPractices.md/#L1" class="contribution-link">Edit this page</a>
+                         </div>
+
+                    <article class="content wrap" id="_content" data-uid="">
+
+<h2 id="overview">Overview</h2>
+<p>The practices discussed here will help you have the most success possible with your MonoGame game.</p>
+<p>This overview covers the following topics.</p>
+<ul>
+<li><a href="#polish-your-game">Polish Your Game</a></li>
+<li><a href="#build-intuitive-and-fun-controls">Build Intuitive and Fun Controls</a></li>
+<li><a href="#support-changing-screen-orientation">Support Changing Screen Orientation</a></li>
+<li><a href="#audio-tips">Audio Tips</a></li>
+<li><a href="#respond-correctly-to-back-button-use">Respond Correctly to Back Button Use</a></li>
+<li><a href="#diligently-save-game-state">Diligently Save Game State</a></li>
+</ul>
+<h2 id="polish-your-game">Polish Your Game</h2>
+<p>It is difficult to over emphasize how important polish is for a successful game. The best game ideas and the most stable code do not compare to a game with an extra level of polish. Polish can be defined as putting in the extra effort to make your game look and feel its best. It also is:</p>
+<ul>
+<li>The difference between a basic menu with buttons that just work and the same menu with polish. It may take time to add a small flourish of animation for each button press, sound effect, and styled buttons to a menu, but doing so makes a big difference.</li>
+<li>Smooth menu operation and intuitive controls.</li>
+<li>Smooth transitions among screens, modes, and levels.</li>
+</ul>
+<h2 id="build-intuitive-and-fun-controls">Build Intuitive and Fun Controls</h2>
+<p>Avoid simulating traditional controls such as thumbsticks in MonoGame games. That type of control takes away useful space from the gameplay area and is not platform friendly. Use gestures for user input. Games that are engaging and naturally fun have controls that are natural to the platform.</p>
+<table>
+<thead>
+<tr>
+<th>Control</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Touch</td>
+<td>Touch control systems will feel natural to MonoGame users. Design games from the beginning to take full advantage of the touch screen. The touch screen is the primary way users interact with their phone, and users expect to interact with games in the same way.</td>
+</tr>
+<tr>
+<td>Back Button</td>
+<td>Although there are other buttons on the device, only the <strong>Back</strong> button is available to the game. Use the <strong>Back</strong> button for pausing and exiting the game.</td>
+</tr>
+<tr>
+<td>Gestures</td>
+<td>Design your gameplay to use touch gestures in natural ways. For example: allowing players to draw paths on the screen to direct gameplay, or allowing for group selection by stretching an on-screen rectangle around play pieces. Consider allowing navigation by dragging the landscape, and allowing users to rotate by touching and rotating two fingers.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="support-changing-screen-orientation">Support Changing Screen Orientation</h2>
+<p>MonoGame supports three screen orientation views: portrait, landscape left, and landscape right. Portrait view is the default view for applications. The <strong>Start</strong> button is always presented in portrait view. In portrait view, the page is oriented vertically with the steering buttons displayed at the bottom of the phone.</p>
+<p>In both landscape views, the <strong>Status Bar</strong> and <strong>Application Bar</strong> remain on the side of the screen that has the <strong>Power</strong> and <strong>Start</strong> buttons. Landscape left has the <strong>Status Bar</strong> on the left, and landscape right has the <strong>Status Bar</strong> on the right.</p>
+<p>Routinely check current screen orientation and enable gameplay regardless of how the phone is held.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>For more detailed information on screen rotation see <a href="HowTo_AutomaticRotation.html">Automatic Rotation and Scaling</a>.</p>
+</div>
+<h2 id="audio-tips">Audio Tips</h2>
+<p>Audio can enrich an application and add needed polish. Playing audio should also dependent on user preference. Consider these tips when building audio into your game:</p>
+<ul>
+<li>Play sound effects at an average volume to avoid forcing the player to adjust the devices volume during the game.</li>
+<li>Allow sound effects and background music to be turned on and off by users.</li>
+<li>Play directional sounds that reflect a location of the originating element on the screen.</li>
+</ul>
+<div class="NOTE">
+<h5>Note</h5>
+<p>For more detailed information on audio see <a href="../whatis/audio/index.html">Creating and Playing Sounds</a>.</p>
+</div>
+<h2 id="respond-correctly-to-back-button-use">Respond Correctly to Back Button Use</h2>
+<p>Games must respond to use of the <strong>Back</strong> button, or &quot;esc&quot; on Windows. MonoGame consistently uses <strong>Back</strong> to move backward through the UI. Games must implement this behavior as follows:</p>
+<ul>
+<li><p>During gameplay, the game can do one of the following:</p>
+<ul>
+<li>Present a contextual pause menu (dialog). Pressing the <strong>Back</strong> button again while in the pause menu closes the menu and resumes the game.</li>
+<li>Navigate the user to the prior menu screen. Pressing the <strong>Back</strong> button again should continue to return the user to the previous menu or page.</li>
+</ul>
+</li>
+<li><p>Outside of gameplay, such as within the game's menu system, pressing <strong>Back</strong> must return to the previous menu or page.</p>
+</li>
+<li><p>At the game’s initial (start) screen, pressing <strong>Back</strong> must exit the game.</p>
+</li>
+</ul>
+<p>It is a good practice in case the player exits the game to automatically save the game state while the pause menu is shown.</p>
+<h2 id="diligently-save-game-state">Diligently Save Game State</h2>
+<p>On MonoGame, a game might be exited at any time. An incoming call may interrupt gameplay, or the user might quit the game by using the <strong>Home</strong> or <strong>Search</strong> buttons to use other applications. We recommend saving game state whenever possible to protect the user's time investment in the game. We also recommend that you make a distinction between the automatically saved game state and the user's explicitly saved games. Automatically saved games should be viewed as a backup in case the game ends unexpectedly, but should not replace the user's ability to save the game at a chosen time or place.</p>
+<p>If you implement automatic game saving, check for an automatically saved state when the game launches. If found, let the user choose to resume the game from the automatically saved state or from a specific manually saved game, if present. During the save process, we also recommend that you display a visual cue warning users not to press the <strong>Search</strong> or <strong>Home</strong> button because the action could cause the game to exit before the save is complete.</p>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="https://monogame.net/articles/getting_started/index.html">Creating a your first MonoGame Game</a></li>
+<li><a href="graphics/HowTo_AspectRatio.html">Setting Aspect ratios for your game</a></li>
+</ul>
+
+</article>
+                </div>
+
+            </main>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+        <script type="text/javascript" src="../../../../../styles/jquery.twbsPagination.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/jquery.mark.min.js"></script>
+        <script type="text/javascript" src="../../../../../styles/url.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/anchor-js@5.0.0/anchor.min.js"></script>
+        <script type="text/javascript" src="../../../../../styles/docfx.js"></script>
+        <script type="text/javascript" src="../../../../../styles/main.js"></script>
+        <script type="text/javascript" src="../../../../../styles/singulink.js"></script>    </body>
+</html>

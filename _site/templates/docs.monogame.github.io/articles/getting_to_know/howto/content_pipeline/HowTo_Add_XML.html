@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>How to add a custom XML Content File to a Project? | hallowed </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="How to add a custom XML Content File to a Project? | hallowed ">
+      <meta name="generator" content="docfx ">
+  
+      <link rel="shortcut icon" href="../../../../../../favicon.ico">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/night-owl.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" integrity="sha384-EvBWSlnoFgZlXJvpzS+MAUEjvN7+gcCwH+qh7GRFOGgZO0PuwOFro7qPOJnLfe7l" crossorigin="anonymous">
+      <link rel="stylesheet" href="../../../../../../styles/config.css">
+      <link rel="stylesheet" href="../../../../../../styles/singulink.css">
+      <link rel="stylesheet" href="../../../../../../styles/main.css">
+      <meta property="docfx:navrel" content="../../../../../../toc.html">
+      <meta property="docfx:tocrel" content="../../../toc.html">
+  
+  <meta property="docfx:rel" content="../../../../../../">
+  
+    </head>
+    <body>
+        <!-- Header required for docfx anchor scroll to work -->
+        <header id="head"></header>
+        <div class="top-navbar">
+            <a class="burger-icon" onclick="toggleMenu()">
+                <svg name="Hamburger" style="vertical-align: middle;" width="34" height="34" viewbox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M20 6H4V9H20V6ZM4 10.999H20V13.999H4V10.999ZM4 15.999H20V18.999H4V15.999Z"></path></svg>
+            </a>
+
+
+            <a class="brand" href="../../../../../../index.html">
+              <img src="../../../../../../logo.svg" alt="hallowed" class="logomark">
+              <span class="brand-title">hallowed</span>
+            </a>        </div>
+
+        <div class="body-content">
+            <div id="blackout" class="blackout" onclick="toggleMenu()"></div>
+
+            <nav id="sidebar" role="navigation">
+                <div class="sidebar">
+
+                    <div>
+                      <div class="mobile-hide">
+
+                        <a class="brand" href="../../../../../../index.html">
+                          <img src="../../../../../../logo.svg" alt="hallowed" class="logomark">
+                          <span class="brand-title">hallowed</span>
+                        </a>                      </div>
+
+                      <div class="sidesearch">
+                        <form id="search" role="search" class="search">
+                            <i class="bi bi-search search-icon"></i>
+                            <input type="text" id="search-query" placeholder="Search" autocomplete="off">
+                        </form>
+                      </div>
+
+                      <div id="navbar">
+                      </div>
+                    </div>                    <div class="sidebar-item-separator"></div>
+
+                        <div id="sidetoggle">
+                          <div id="sidetoc"></div>
+                        </div>
+                </div>
+                <div class="footer">
+  
+  <strong><a href='https://dotnet.github.io/docfx/'>DocFX</a> + <a href='https://www.singulink.com'>Singulink</a> = ♥</strong>
+                </div>            </nav>
+
+            <main class="main-panel">
+
+                <div id="search-results" style="display: none;">
+                  <h1 class="search-list">Search Results for <span></span></h1>
+                  <div class="sr-items">
+                    <p><i class="bi bi-hourglass-split index-loading"></i></p>
+                  </div>
+                  <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+                </div>
+ 
+
+                <div role="main" class="hide-when-search">
+
+                        <div class="subnav navbar navbar-default">
+                          <div class="container hide-when-search" id="breadcrumb">
+                            <ul class="breadcrumb">
+                              <li></li>
+                            </ul>
+                          </div>
+                        </div>
+
+                         <div class="contribution">
+                               <a href="https://github.com/MonoGame/docs.monogame.github.io/blob/main/articles/getting_to_know/howto/content_pipeline/HowTo_Add_XML.md/#L1" class="contribution-link">Edit this page</a>
+                         </div>
+
+                    <article class="content wrap" id="_content" data-uid="">
+
+
+<p>Custom game data that is expressed in an XML format can be easily integrated into your game through the MonoGame Content Pipeline.</p>
+<p>This example demonstrates the procedure for integrating custom XML data into the content project of a simple game for the Windows platform.</p>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>This tutorial assumes you are using Visual Studio as your IDE, for VSCode, follow <a href="https://learn.microsoft.com/en-us/dotnet/core/tutorials/library-with-visual-studio-code?pivots=dotnet-8-0">this guide from Microsoft</a> for creating multi-project solutions from the command-line utilizing the MonoGame Project and MonoGame Class library templates.</p>
+</div>
+<h3 id="to-define-game-data">To define game data</h3>
+<p>Within the MonoGame solution, you create a new Windows Game Library project.</p>
+<ol>
+<li><p>Right-click the solution node, point to <code>Add</code>, click <code>New Project</code>, and then select the <code>MonoGame Game Library</code> template.</p>
+<div class="TIP">
+<h5>Tip</h5>
+<p>A <code>MonoGame Game Library</code> project is created instead of a Content Pipeline Extension Library project so that the class we will define can be used by both the <a href="https://docs.monogame.net/api/Microsoft.Xna.Framework.Content.Pipeline.ContentImporter-1.html">Content Importer</a> that runs at build-time and the <a href="xref:Microsoft.Xna.Framework.Content.ContentManager#Microsoft_Xna_Framework_Content_ContentManager_Load__1_System_String_">Content Loader</a> at game runtime.</p>
+</div>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>For MonoGame <code>3.8.2</code> and below, make sure to keep the project at <code>.NET 6</code> or below.  The MGCB tool for 3.8.2 CANNOT understand or read .NET 8 libraries as it is compiled with .NET 6.  The Game project can use a higher version, but library projects must stay at <code>.NET 6</code> else they cannot be read.</p>
+</div>
+</li>
+<li><p>In the <code>Name</code> box, type <code>MyDataTypes</code>, and then click <code>OK</code>.</p>
+</li>
+<li><p>In the <code>Solution Explorer</code>, delete the existing <code>Game1.cs</code> as it is not needed.</p>
+</li>
+<li><p><code>right-click</code> and select <code>Add -&gt; Add New Item</code> to add a new class, call it <code>PetData.cs</code></p>
+</li>
+<li><p>Double click on <code>PetData.cs</code> and replace its contents with the following code to define the <code>PetData</code> class.</p>
+<pre><code class="lang-csharp">namespace MyDataTypes
+{
+    public class PetData
+    {
+        public string Name;
+        public string Species;
+        public float Weight;
+        public int Age;
+    }
+}
+</code></pre>
+</li>
+<li><p>Build the <code>MyDataTypes</code> project for debug or release to generate the library's dll file (note which profile you used).</p>
+</li>
+</ol>
+<h3 id="add-an-xml-file-using-the-custom-data-to-the-game-content">Add an XML file using the custom data to the game content</h3>
+<p>In this procedure, the <code>MyDataTypes</code> library is added as a reference in the content project.</p>
+<ol>
+<li><p>Build the <code>MyDataTypes</code> project, making not of whether it is a <code>Debug</code> or <code>Release</code> build.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>It is recommended to always use the same built type for building library projects, as they normally only contain &quot;types&quot; it is safe to just build them as <code>Release</code>.  The reason being that you cannot CHANGE the reference once made in the MGCB editor and it is not affected by the <code>Build Type</code> used to generate the project.</p>
+</div>
+</li>
+<li><p>In the <code>Solution Explorer</code> or your game project, <code>right-click</code> the game content folder, point to <code>Add</code>, and then click <code>New Item</code>.</p>
+</li>
+<li><p>In the <code>Add New Item</code> dialog box, type <code>pets.xml</code> as the file name, and then click <code>OK</code>.</p>
+</li>
+<li><p>Replace the contents of the template file with the following XML code:</p>
+<pre><code class="lang-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+&lt;XnaContent&gt;
+  &lt;Asset Type=&quot;MyDataTypes.PetData[]&quot;&gt;
+    &lt;Item&gt;
+      &lt;Name&gt;Fifi&lt;/Name&gt;
+      &lt;Species&gt;Dog&lt;/Species&gt;
+      &lt;Weight&gt;11&lt;/Weight&gt;
+      &lt;Age&gt;6&lt;/Age&gt;
+    &lt;/Item&gt;
+    &lt;Item&gt;
+      &lt;Name&gt;Bruno&lt;/Name&gt;
+      &lt;Species&gt;Dog&lt;/Species&gt;
+      &lt;Weight&gt;21&lt;/Weight&gt;
+      &lt;Age&gt;12&lt;/Age&gt;
+    &lt;/Item&gt;
+    &lt;Item&gt;
+      &lt;Name&gt;Chloe&lt;/Name&gt;
+      &lt;Species&gt;Cat&lt;/Species&gt;
+      &lt;Weight&gt;6&lt;/Weight&gt;
+      &lt;Age&gt;3&lt;/Age&gt;
+    &lt;/Item&gt;
+    &lt;Item&gt;
+      &lt;Name&gt;Pickles&lt;/Name&gt;
+      &lt;Species&gt;Hamster&lt;/Species&gt;
+      &lt;Weight&gt;0.4&lt;/Weight&gt;
+      &lt;Age&gt;1&lt;/Age&gt;
+    &lt;/Item&gt;
+  &lt;/Asset&gt;
+&lt;/XnaContent&gt;
+</code></pre>
+<div class="TIP">
+<h5>Tip</h5>
+<p>TO learn how to generate the custom MonoGame XML content from your own classes, refer to the <a href="HowTo_GenerateCustomXML.html">How to Generate custom XML</a> guide.</p>
+</div>
+</li>
+<li><p>Open the <code>MGCB Editor</code> from the <code>Game</code> project (not the library) by selecting the <code>.mgcb</code> file and either Double-clicking it (Visual Studio) or Right-clicking it and selecting <code>Open</code> (VSCode).</p>
+<div class="TIP">
+<h5>Tip</h5>
+<p>If you have any issues opening the MGCB content project, please refer to the <a href="HowTo_GameContent_Add.html">How to load content</a> guide.</p>
+</div>
+</li>
+<li><p>In the <code>MGCB Editor</code>, select the &quot;Content&quot; node and the top and then locate the <code>References</code> section in the <code>Properties</code> window, as shown below:</p>
+<p><a href="./images/mgcb_editor_content_properties_referencesSelected.png">MGCB Editor window properties</a></p>
+</li>
+<li><p>Click the <code>References</code> VALUE field and a new window should pop up allowing you to manage the references for the MGCB project:</p>
+<p><a href="./images/mgcb_editor_references_window.png">MGCB editor references window</a></p>
+</li>
+<li><p>In the <code>Reference Editor</code> window, click <code>Add</code>, and navigate to the <code>MyDataTypes</code> project and locate the built <code>dll</code>, normally under <code>bin/release/net8.0</code> (or DEBUG if you use the debug build). Once selected, click <code>Open</code> and the reference should be added to the Reference Editor as shown above.</p>
+<div class="TIP">
+<h5>Tip</h5>
+<p>If the folder is empty, return to visual studio and build the <code>MyDataTypes</code> project, if it is not built, there is no dll.
+And make sure to choose either the <code>debug</code> or <code>release</code> folder depending on how the class library is built.</p>
+</div>
+</li>
+<li><p>Click on <code>Add Existing</code> from the <code>Edit -&gt; Add</code> options in the menu (or the <code>Add Existing</code> toolbar button) and select the <code>pets.xml</code> file.</p>
+</li>
+</ol>
+<p>When you press <code>F6</code> to build the solution, it should build successfully, including the custom game content imported from the XML file.</p>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>Adding the the class library of the data types project to the Content project is critical, else the Content Pipeline does not know how to serialize or deserialize the custom data you have defined.
+Although it is possible to simply serialize <code>value types</code> or <code>value type arrays</code> without this step.</p>
+</div>
+<p>To load the data at runtime, see the tutorial <a href="HowTo_Load_XML.html">Loading XML Content at Runtime</a>.</p>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="HowTo_UseCustomXML.html">Using an XML File to Specify Content</a></li>
+<li><a href="HowTo_GameContent_Add.html">Adding Content to a Game</a></li>
+</ul>
+
+</article>
+                </div>
+
+            </main>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/jquery.twbsPagination.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/jquery.mark.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/url.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/anchor-js@5.0.0/anchor.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/docfx.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/main.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/singulink.js"></script>    </body>
+</html>

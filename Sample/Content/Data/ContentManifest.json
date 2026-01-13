@@ -1,0 +1,11 @@
+﻿{
+  "Boot": [
+  ],
+  "SceneSplashScreen": [
+    "Sprites/System/cartographerGame_logo",
+    "Sprites/System/monogame_logo"
+  ],
+  "SceneTitle" : [
+    "Theme1.ogg"
+  ]
+}

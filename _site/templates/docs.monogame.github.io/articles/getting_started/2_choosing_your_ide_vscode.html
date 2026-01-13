@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Setting up your development environment for VSCode | hallowed </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Setting up your development environment for VSCode | hallowed ">
+      <meta name="generator" content="docfx ">
+  
+      <link rel="shortcut icon" href="../../../../favicon.ico">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/night-owl.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" integrity="sha384-EvBWSlnoFgZlXJvpzS+MAUEjvN7+gcCwH+qh7GRFOGgZO0PuwOFro7qPOJnLfe7l" crossorigin="anonymous">
+      <link rel="stylesheet" href="../../../../styles/config.css">
+      <link rel="stylesheet" href="../../../../styles/singulink.css">
+      <link rel="stylesheet" href="../../../../styles/main.css">
+      <meta property="docfx:navrel" content="../../../../toc.html">
+      <meta property="docfx:tocrel" content="../toc.html">
+  
+  <meta property="docfx:rel" content="../../../../">
+  
+    </head>
+    <body>
+        <!-- Header required for docfx anchor scroll to work -->
+        <header id="head"></header>
+        <div class="top-navbar">
+            <a class="burger-icon" onclick="toggleMenu()">
+                <svg name="Hamburger" style="vertical-align: middle;" width="34" height="34" viewbox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M20 6H4V9H20V6ZM4 10.999H20V13.999H4V10.999ZM4 15.999H20V18.999H4V15.999Z"></path></svg>
+            </a>
+
+
+            <a class="brand" href="../../../../index.html">
+              <img src="../../../../logo.svg" alt="hallowed" class="logomark">
+              <span class="brand-title">hallowed</span>
+            </a>        </div>
+
+        <div class="body-content">
+            <div id="blackout" class="blackout" onclick="toggleMenu()"></div>
+
+            <nav id="sidebar" role="navigation">
+                <div class="sidebar">
+
+                    <div>
+                      <div class="mobile-hide">
+
+                        <a class="brand" href="../../../../index.html">
+                          <img src="../../../../logo.svg" alt="hallowed" class="logomark">
+                          <span class="brand-title">hallowed</span>
+                        </a>                      </div>
+
+                      <div class="sidesearch">
+                        <form id="search" role="search" class="search">
+                            <i class="bi bi-search search-icon"></i>
+                            <input type="text" id="search-query" placeholder="Search" autocomplete="off">
+                        </form>
+                      </div>
+
+                      <div id="navbar">
+                      </div>
+                    </div>                    <div class="sidebar-item-separator"></div>
+
+                        <div id="sidetoggle">
+                          <div id="sidetoc"></div>
+                        </div>
+                </div>
+                <div class="footer">
+  
+  <strong><a href='https://dotnet.github.io/docfx/'>DocFX</a> + <a href='https://www.singulink.com'>Singulink</a> = ♥</strong>
+                </div>            </nav>
+
+            <main class="main-panel">
+
+                <div id="search-results" style="display: none;">
+                  <h1 class="search-list">Search Results for <span></span></h1>
+                  <div class="sr-items">
+                    <p><i class="bi bi-hourglass-split index-loading"></i></p>
+                  </div>
+                  <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+                </div>
+ 
+
+                <div role="main" class="hide-when-search">
+
+                        <div class="subnav navbar navbar-default">
+                          <div class="container hide-when-search" id="breadcrumb">
+                            <ul class="breadcrumb">
+                              <li></li>
+                            </ul>
+                          </div>
+                        </div>
+
+                         <div class="contribution">
+                               <a href="https://github.com/MonoGame/docs.monogame.github.io/blob/main/articles/getting_started/2_choosing_your_ide_vscode.md/#L1" class="contribution-link">Edit this page</a>
+                         </div>
+
+                    <article class="content wrap" id="_content" data-uid="">
+
+
+<p>This is a guide on setting up your development IDE for creating games with MonoGame using Visual Studio Code. By following this guide, you will learn how to install the necessary tools for developing C# applications and configure Visual Studio Code with recommended extensions for C# development.</p>
+<p>By the end, you will be fully equipped to start creating games with MonoGame using Visual Studio Code.</p>
+<h2 id="install-visual-studio-code">Install Visual Studio Code</h2>
+<div class="tabGroup" id="tabgroup_1">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_1_windows" role="tab" aria-controls="tabpanel_1_windows" data-tab="windows" tabindex="0" aria-selected="true">Windows</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_1_macos" role="tab" aria-controls="tabpanel_1_macos" data-tab="macos" tabindex="-1">macOS</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_1_ubuntu" role="tab" aria-controls="tabpanel_1_ubuntu" data-tab="ubuntu" tabindex="-1">Ubuntu</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_1_arch" role="tab" aria-controls="tabpanel_1_arch" data-tab="arch" tabindex="-1">Arch Linux</a>
+</li>
+</ul>
+<section id="tabpanel_1_windows" role="tabpanel" data-tab="windows">
+
+<ol>
+<li><p>Open your web browser and navigate to <a href="https://code.visualstudio.com/">https://code.visualstudio.com/</a>.</p>
+<p><img src="./images/1_setting_up_your_development_environment/vscode/windows/download-vscode.png" alt="Download VSCode"></p>
+</li>
+<li><p>Click the <strong>Download for Windows</strong> button.  This will redirect you to the download page where the installer will automatically download.</p>
+</li>
+<li><p>When the download completes, run the installer and complete the steps to install Visual Studio Code.</p>
+</li>
+</ol>
+</section>
+<section id="tabpanel_1_macos" role="tabpanel" data-tab="macos" aria-hidden="true" hidden="hidden">
+
+<ol>
+<li><p>Open your web browser and navigate to <a href="https://code.visualstudio.com/">https://code.visualstudio.com/</a>.</p>
+<p><img src="./images/1_setting_up_your_development_environment/vscode/mac/download-vscode.png" alt="Download VSCode"></p>
+</li>
+<li><p>Click the <strong>Download Mac Universal</strong> button.  This will redirect you to the page where the application archive (.zip) file will begin downloading.</p>
+</li>
+<li><p>Extract the contents of the VSCode archive that downloaded by double-clicking it inside a Finder window.  This will extract the <strong>Visual Studio Code.app</strong> file.</p>
+</li>
+<li><p>Drag the <strong>Visual Studio Code.app</strong> file into the <strong>Applications</strong> folder, making it available in the macOS Launchpad.</p>
+</li>
+</ol>
+</section>
+<section id="tabpanel_1_ubuntu" role="tabpanel" data-tab="ubuntu" aria-hidden="true" hidden="hidden">
+
+<ol>
+<li><p>Open your web browser and navigate to <a href="https://code.visualstudio.com/">https://code.visualstudio.com/</a>.</p>
+<p><img src="./images/1_setting_up_your_development_environment/vscode/linux/download-vscode.png" alt="Download VSCode"></p>
+</li>
+<li><p>Click the Download <code>.deb</code> button.</p>
+</li>
+<li><p>Double click the <code>.deb</code> file and press the <code>Install</code> button.</p>
+</li>
+</ol>
+</section>
+<section id="tabpanel_1_arch" role="tabpanel" data-tab="arch" aria-hidden="true" hidden="hidden">
+
+<p>On Arch Linux, you have two options for installing Visual Studio Code:</p>
+<h4 id="option-1-code-oss-open-source-version">Option 1: Code OSS (Open Source Version)</h4>
+<p>Code OSS is the fully open-source version available under the MIT License. It's available in the official Arch repositories and can be installed with a single command:</p>
+<pre><code class="lang-sh">sudo pacman -S code
+</code></pre>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>Code OSS <strong>cannot</strong> use the proprietary Microsoft <strong>C# Dev Kit</strong> extension. However, it can use the base <strong>C#</strong> extension (formerly OmniSharp, now LSP-based), which provides IntelliSense, syntax highlighting, debugging, and code navigation, sufficient for MonoGame development.</p>
+</div>
+<h4 id="option-2-visual-studio-code-official-microsoft-version---recommended">Option 2: Visual Studio Code (Official Microsoft Version) - Recommended</h4>
+<p>The official Microsoft version includes proprietary features like settings sync, Microsoft account integration, and <strong>support for the C# Dev Kit extension</strong>. It's available through the AUR (Arch User Repository).</p>
+<ol>
+<li><p>First, ensure you have an AUR helper installed. If you don't have one, install <code>yay</code>:</p>
+<pre><code class="lang-sh">sudo pacman -S git base-devel
+git clone https://aur.archlinux.org/yay.git
+cd yay
+makepkg -si
+</code></pre>
+</li>
+<li><p>Install Visual Studio Code using yay:</p>
+<pre><code class="lang-sh">yay -S visual-studio-code-bin
+</code></pre>
+</li>
+</ol>
+<div class="TIP">
+<h5>Tip</h5>
+<p>For the best MonoGame development experience with full C# Dev Kit support (enhanced project management, integrated testing, better solution support), install the official Visual Studio Code. Code OSS works but has limitations with Microsoft extensions.</p>
+</div>
+</section>
+</div>
+<h2 id="setting-up-vs-code-for-development-with-monogame">Setting up VS Code for development with MonoGame</h2>
+<ol>
+<li><p>Open Visual Studio Code</p>
+</li>
+<li><p>Open up its terminal window (<code>Ctrl</code> + <code>`</code>)</p>
+</li>
+<li><p>Run the following command to install MonoGame Templates</p>
+<pre><code class="lang-sh">dotnet new install MonoGame.Templates.CSharp
+</code></pre>
+</li>
+</ol>
+<div class="TIP">
+<h5>Tip</h5>
+<p>Alternatively, consider using the Preview Packages provided by MonoGame to get access to the latest developments.</p>
+<ul>
+<li><a href="../getting_to_know/howto/HowTo_Install_Preview_Release.html">How to install MonoGame Preview packages</a></li>
+</ul>
+</div>
+<h2 id="install-visual-studio-code-c-extensions">Install Visual Studio Code C# Extensions</h2>
+<p>To transform Visual Studio Code from a simple text editor into a powerful development environment for C# projects, you must install the Visual Studio Code C# extension. This extension enhances the editor by providing syntax highlighting, code analysis, IntelliSense, and other features that significantly improve the development experience and productivity when working with C#.</p>
+<ol>
+<li><p>Open Visual Studio Code.</p>
+</li>
+<li><p>Click the <strong>Extensions</strong> icon in the <strong>Activity Bar</strong> on the left.</p>
+<p><img src="./images/1_setting_up_your_development_environment/vscode/click-extensions.png" alt="Click Extensions"></p>
+</li>
+<li><p>In the <strong>Search Box</strong> type <code>C#</code>.</p>
+</li>
+<li><p>Click <strong>Install</strong> for the <strong>C# Dev Kit</strong> extension.  Installing this will also install the base <strong>C#</strong> extension.</p>
+</li>
+</ol>
+<p><img src="./images/1_setting_up_your_development_environment/vscode/install-devkit.png" alt="Install C# DevKit Extension"></p>
+<div class="NOTE">
+<h5>Note</h5>
+<p><strong>For Arch Linux Code OSS users:</strong> The C# Dev Kit extension is not compatible with Code OSS. Instead, install only the base <strong>C#</strong> extension (by Microsoft), which provides all the core functionality needed for MonoGame development including IntelliSense, debugging, and code navigation.</p>
+</div>
+<h2 id="optional-install-the-monogame-for-vscode-extension">(Optional) Install the &quot;MonoGame for VSCode&quot; extension</h2>
+<p>A community member has built a VSCode extension for VS code to enable:</p>
+<ul>
+<li>Automatically install MonoGame templates</li>
+<li>Create new projects from the file menu or command palette</li>
+<li>Open the MGCB editor with the click of a button (very useful)</li>
+</ul>
+<p>You can find this extension by following the steps above and searching for &quot;MonoGame for VS Code&quot; by r88.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>While not built by the MonoGame team, we regularly use this extension ourselves and fully support it.</p>
+</div>
+<h2 id="optional-install-the-net-maui-extension-to-help-with-mobile-development">(Optional) Install the &quot;.NET MAUI&quot; extension to help with mobile development</h2>
+<p>This extension is provided by Microsoft and is built on top of the C# and C# Dev Kit extensions. They will be installed as dependencies if they were not already installed. While primarily designed for MAUI development, it provides essential mobile debugging capabilities that MonoGame mobile projects can utilize.</p>
+<p>The .NET MAUI extension adds features for building mobile apps, including:</p>
+<ul>
+<li>F5 debugging support - Debug your MonoGame mobile apps on emulators, simulators, and physical devices</li>
+<li>Easy target switching - Change debug/deploy targets between different mobile platforms</li>
+<li>Enhanced C# Dev Kit integration - Leverages Solution Explorer, Test Explorer, and advanced language features</li>
+</ul>
+<p><img src="../tutorials/building_2d_games/02_getting_started/images/maui-extension.png" alt="Install .NET MAUI DevKit Extension"></p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>This extension is recommended if you wish to do iOS or Android development. It is required for debugging support when working on mobile games.</p>
+</div>
+<div class="WARNING">
+<h5>Warning</h5>
+<p><strong>For Arch Linux Code OSS users:</strong> The .NET MAUI extension requires C# Dev Kit and therefore is not compatible with Code OSS. You will need to use the official Visual Studio Code for mobile development support.</p>
+</div>
+<h2 id="creating-a-new-monogame-project">Creating a new MonoGame project</h2>
+<ol>
+<li><p>Open up an empty folder in Visual Studio Code</p>
+</li>
+<li><p>Open up its terminal window (<code>Ctrl</code> + <code>`</code>)</p>
+</li>
+<li><p>Run the following command to create an empty project for desktop platforms:</p>
+<pre><code class="lang-sh">dotnet new mgdesktopgl
+</code></pre>
+</li>
+<li><p>Once the files are created, open up the <code>Game1.cs</code> file and wait a second for the C# extension to load</p>
+</li>
+<li><p>You can now press F5, select C# and then your projects name if Visual Studio Code asks you, and it should start up your brand new game!</p>
+</li>
+</ol>
+<h2 id="update-project-tool-references">Update Project Tool references</h2>
+<p>The MonoGame Content Editor (MGCB) it a tool delivered through NuGet for your project using the tools configuration held in your <code>dotnet-tools.json</code> file (located in the <code>.config</code> folder of your project).</p>
+<p>Once you have created your project you should run the following terminal/command-line command to ensure the tool (and the pipeline) is setup and read for your project:</p>
+<pre><code class="lang-dotnetcli">    dotnet tool restore
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>If you ever change the version of the tools or want to upgrade them by editing the <code>dotnet-tools.json</code> configuration, you MUST run this command again to update te tools.</p>
+</div>
+<h2 id="next-steps">Next Steps</h2>
+<p>Next, get to know MonoGame's code structure and project layout:</p>
+<ul>
+<li><a href="3_understanding_the_code.html">Understanding the code</a></li>
+</ul>
+
+</article>
+                </div>
+
+            </main>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+        <script type="text/javascript" src="../../../../styles/jquery.twbsPagination.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/jquery.mark.min.js"></script>
+        <script type="text/javascript" src="../../../../styles/url.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/anchor-js@5.0.0/anchor.min.js"></script>
+        <script type="text/javascript" src="../../../../styles/docfx.js"></script>
+        <script type="text/javascript" src="../../../../styles/main.js"></script>
+        <script type="text/javascript" src="../../../../styles/singulink.js"></script>    </body>
+</html>

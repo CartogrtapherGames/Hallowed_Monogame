@@ -1,0 +1,166 @@
+### YamlMime:ManagedReference
+items:
+- uid: Hallowed.Graphics.SpriteOrientation
+  commentId: T:Hallowed.Graphics.SpriteOrientation
+  id: SpriteOrientation
+  parent: Hallowed.Graphics
+  children:
+  - Hallowed.Graphics.SpriteOrientation.Both
+  - Hallowed.Graphics.SpriteOrientation.FlipHorizontal
+  - Hallowed.Graphics.SpriteOrientation.FlipVertical
+  - Hallowed.Graphics.SpriteOrientation.Normal
+  langs:
+  - csharp
+  - vb
+  name: SpriteOrientation
+  nameWithType: SpriteOrientation
+  fullName: Hallowed.Graphics.SpriteOrientation
+  type: Enum
+  source:
+    remote:
+      path: Hallowed/Source/Graphics/Sprite.cs
+      branch: master
+      repo: https://github.com/CartogrtapherGames/Hallowed_Monogame.git
+    id: SpriteOrientation
+    path: Hallowed/Source/Graphics/Sprite.cs
+    startLine: 8
+  assemblies:
+  - Hallowed
+  namespace: Hallowed.Graphics
+  syntax:
+    content: public enum SpriteOrientation
+    content.vb: Public Enum SpriteOrientation
+- uid: Hallowed.Graphics.SpriteOrientation.Normal
+  commentId: F:Hallowed.Graphics.SpriteOrientation.Normal
+  id: Normal
+  parent: Hallowed.Graphics.SpriteOrientation
+  langs:
+  - csharp
+  - vb
+  name: Normal
+  nameWithType: SpriteOrientation.Normal
+  fullName: Hallowed.Graphics.SpriteOrientation.Normal
+  type: Field
+  source:
+    remote:
+      path: Hallowed/Source/Graphics/Sprite.cs
+      branch: master
+      repo: https://github.com/CartogrtapherGames/Hallowed_Monogame.git
+    id: Normal
+    path: Hallowed/Source/Graphics/Sprite.cs
+    startLine: 10
+  assemblies:
+  - Hallowed
+  namespace: Hallowed.Graphics
+  syntax:
+    content: Normal = 0
+    return:
+      type: Hallowed.Graphics.SpriteOrientation
+- uid: Hallowed.Graphics.SpriteOrientation.FlipHorizontal
+  commentId: F:Hallowed.Graphics.SpriteOrientation.FlipHorizontal
+  id: FlipHorizontal
+  parent: Hallowed.Graphics.SpriteOrientation
+  langs:
+  - csharp
+  - vb
+  name: FlipHorizontal
+  nameWithType: SpriteOrientation.FlipHorizontal
+  fullName: Hallowed.Graphics.SpriteOrientation.FlipHorizontal
+  type: Field
+  source:
+    remote:
+      path: Hallowed/Source/Graphics/Sprite.cs
+      branch: master
+      repo: https://github.com/CartogrtapherGames/Hallowed_Monogame.git
+    id: FlipHorizontal
+    path: Hallowed/Source/Graphics/Sprite.cs
+    startLine: 11
+  assemblies:
+  - Hallowed
+  namespace: Hallowed.Graphics
+  syntax:
+    content: FlipHorizontal = 1
+    return:
+      type: Hallowed.Graphics.SpriteOrientation
+- uid: Hallowed.Graphics.SpriteOrientation.FlipVertical
+  commentId: F:Hallowed.Graphics.SpriteOrientation.FlipVertical
+  id: FlipVertical
+  parent: Hallowed.Graphics.SpriteOrientation
+  langs:
+  - csharp
+  - vb
+  name: FlipVertical
+  nameWithType: SpriteOrientation.FlipVertical
+  fullName: Hallowed.Graphics.SpriteOrientation.FlipVertical
+  type: Field
+  source:
+    remote:
+      path: Hallowed/Source/Graphics/Sprite.cs
+      branch: master
+      repo: https://github.com/CartogrtapherGames/Hallowed_Monogame.git
+    id: FlipVertical
+    path: Hallowed/Source/Graphics/Sprite.cs
+    startLine: 12
+  assemblies:
+  - Hallowed
+  namespace: Hallowed.Graphics
+  syntax:
+    content: FlipVertical = 2
+    return:
+      type: Hallowed.Graphics.SpriteOrientation
+- uid: Hallowed.Graphics.SpriteOrientation.Both
+  commentId: F:Hallowed.Graphics.SpriteOrientation.Both
+  id: Both
+  parent: Hallowed.Graphics.SpriteOrientation
+  langs:
+  - csharp
+  - vb
+  name: Both
+  nameWithType: SpriteOrientation.Both
+  fullName: Hallowed.Graphics.SpriteOrientation.Both
+  type: Field
+  source:
+    remote:
+      path: Hallowed/Source/Graphics/Sprite.cs
+      branch: master
+      repo: https://github.com/CartogrtapherGames/Hallowed_Monogame.git
+    id: Both
+    path: Hallowed/Source/Graphics/Sprite.cs
+    startLine: 13
+  assemblies:
+  - Hallowed
+  namespace: Hallowed.Graphics
+  syntax:
+    content: Both = 3
+    return:
+      type: Hallowed.Graphics.SpriteOrientation
+references:
+- uid: Hallowed.Graphics
+  commentId: N:Hallowed.Graphics
+  href: Hallowed.html
+  name: Hallowed.Graphics
+  nameWithType: Hallowed.Graphics
+  fullName: Hallowed.Graphics
+  spec.csharp:
+  - uid: Hallowed
+    name: Hallowed
+    href: Hallowed.html
+  - name: .
+  - uid: Hallowed.Graphics
+    name: Graphics
+    href: Hallowed.Graphics.html
+  spec.vb:
+  - uid: Hallowed
+    name: Hallowed
+    href: Hallowed.html
+  - name: .
+  - uid: Hallowed.Graphics
+    name: Graphics
+    href: Hallowed.Graphics.html
+- uid: Hallowed.Graphics.SpriteOrientation
+  commentId: T:Hallowed.Graphics.SpriteOrientation
+  parent: Hallowed.Graphics
+  href: Hallowed.Graphics.SpriteOrientation.html
+  name: SpriteOrientation
+  nameWithType: SpriteOrientation
+  fullName: Hallowed.Graphics.SpriteOrientation

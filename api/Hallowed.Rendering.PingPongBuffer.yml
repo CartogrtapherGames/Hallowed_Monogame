@@ -1,0 +1,935 @@
+### YamlMime:ManagedReference
+items:
+- uid: Hallowed.Rendering.PingPongBuffer
+  commentId: T:Hallowed.Rendering.PingPongBuffer
+  id: PingPongBuffer
+  parent: Hallowed.Rendering
+  children:
+  - Hallowed.Rendering.PingPongBuffer.#ctor(Microsoft.Xna.Framework.Graphics.GraphicsDevice,System.Int32,System.Int32,Microsoft.Xna.Framework.Graphics.SurfaceFormat)
+  - Hallowed.Rendering.PingPongBuffer.Assign(Microsoft.Xna.Framework.Graphics.Texture2D)
+  - Hallowed.Rendering.PingPongBuffer.Clear
+  - Hallowed.Rendering.PingPongBuffer.ClearAll
+  - Hallowed.Rendering.PingPongBuffer.Dispose
+  - Hallowed.Rendering.PingPongBuffer.HasSource
+  - Hallowed.Rendering.PingPongBuffer.Height
+  - Hallowed.Rendering.PingPongBuffer.Resize(System.Int32,System.Int32,Microsoft.Xna.Framework.Graphics.SurfaceFormat)
+  - Hallowed.Rendering.PingPongBuffer.Source
+  - Hallowed.Rendering.PingPongBuffer.Swap
+  - Hallowed.Rendering.PingPongBuffer.Target
+  - Hallowed.Rendering.PingPongBuffer.Width
+  langs:
+  - csharp
+  - vb
+  name: PingPongBuffer
+  nameWithType: PingPongBuffer
+  fullName: Hallowed.Rendering.PingPongBuffer
+  type: Class
+  source:
+    remote:
+      path: Hallowed/Source/Rendering/PingPongBuffer.cs
+      branch: master
+      repo: https://github.com/CartogrtapherGames/Hallowed_Monogame.git
+    id: PingPongBuffer
+    path: Hallowed/Source/Rendering/PingPongBuffer.cs
+    startLine: 47
+  assemblies:
+  - Hallowed
+  namespace: Hallowed.Rendering
+  summary: >-
+    A ping-pong buffer for efficient render texture operations in MonoGame.
+
+    Maintains two render textures and alternates between them to avoid read/write conflicts.
+  remarks: >-
+    The ping-pong pattern allows you to read from one texture (Source) while writing to another (Target),
+
+    then swap them for the next iteration. This is essential for iterative post-processing, feedback loops,
+
+    and blitting multiple textures together without memory reallocation overhead.
+  example:
+  - >-
+    Initialize the buffer and blit textures together:
+
+    <pre><code class="lang-csharp">var buffer = new PingPongBuffer(graphicsDevice, 1024, 1024);
+
+
+    // Render to the target texture
+
+    graphicsDevice.SetRenderTarget(buffer.Target);
+
+    graphicsDevice.Clear(Color.Transparent);
+
+
+
+    spriteBatch.Begin();
+
+    spriteBatch.Draw(texture1, Vector2.Zero, Color.White);
+
+    spriteBatch.Draw(texture2, new Vector2(512, 0), Color.White);
+
+    spriteBatch.End();
+
+
+
+    graphicsDevice.SetRenderTarget(null);
+
+    buffer.Swap(); // Swap so Target becomes Source for next iteration
+
+
+
+    Texture2D result = buffer.Source; // Result is now ready to use
+
+    buffer.Dispose();</code></pre>
+  syntax:
+    content: 'public class PingPongBuffer : IDisposable'
+    content.vb: Public Class PingPongBuffer Implements IDisposable
+  inheritance:
+  - System.Object
+  implements:
+  - System.IDisposable
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: Hallowed.Rendering.PingPongBuffer.#ctor(Microsoft.Xna.Framework.Graphics.GraphicsDevice,System.Int32,System.Int32,Microsoft.Xna.Framework.Graphics.SurfaceFormat)
+  commentId: M:Hallowed.Rendering.PingPongBuffer.#ctor(Microsoft.Xna.Framework.Graphics.GraphicsDevice,System.Int32,System.Int32,Microsoft.Xna.Framework.Graphics.SurfaceFormat)
+  id: '#ctor(Microsoft.Xna.Framework.Graphics.GraphicsDevice,System.Int32,System.Int32,Microsoft.Xna.Framework.Graphics.SurfaceFormat)'
+  parent: Hallowed.Rendering.PingPongBuffer
+  langs:
+  - csharp
+  - vb
+  name: PingPongBuffer(GraphicsDevice, int, int, SurfaceFormat)
+  nameWithType: PingPongBuffer.PingPongBuffer(GraphicsDevice, int, int, SurfaceFormat)
+  fullName: Hallowed.Rendering.PingPongBuffer.PingPongBuffer(Microsoft.Xna.Framework.Graphics.GraphicsDevice, int, int, Microsoft.Xna.Framework.Graphics.SurfaceFormat)
+  type: Constructor
+  source:
+    remote:
+      path: Hallowed/Source/Rendering/PingPongBuffer.cs
+      branch: master
+      repo: https://github.com/CartogrtapherGames/Hallowed_Monogame.git
+    id: .ctor
+    path: Hallowed/Source/Rendering/PingPongBuffer.cs
+    startLine: 64
+  assemblies:
+  - Hallowed
+  namespace: Hallowed.Rendering
+  summary: The ping pong buffer constructor.
+  example: []
+  syntax:
+    content: public PingPongBuffer(GraphicsDevice device, int width, int height, SurfaceFormat format = SurfaceFormat.Color)
+    parameters:
+    - id: device
+      type: Microsoft.Xna.Framework.Graphics.GraphicsDevice
+      description: ''
+    - id: width
+      type: System.Int32
+      description: ''
+    - id: height
+      type: System.Int32
+      description: ''
+    - id: format
+      type: Microsoft.Xna.Framework.Graphics.SurfaceFormat
+      description: ''
+    content.vb: Public Sub New(device As GraphicsDevice, width As Integer, height As Integer, format As SurfaceFormat = SurfaceFormat.Color)
+  overload: Hallowed.Rendering.PingPongBuffer.#ctor*
+  nameWithType.vb: PingPongBuffer.New(GraphicsDevice, Integer, Integer, SurfaceFormat)
+  fullName.vb: Hallowed.Rendering.PingPongBuffer.New(Microsoft.Xna.Framework.Graphics.GraphicsDevice, Integer, Integer, Microsoft.Xna.Framework.Graphics.SurfaceFormat)
+  name.vb: New(GraphicsDevice, Integer, Integer, SurfaceFormat)
+- uid: Hallowed.Rendering.PingPongBuffer.Source
+  commentId: P:Hallowed.Rendering.PingPongBuffer.Source
+  id: Source
+  parent: Hallowed.Rendering.PingPongBuffer
+  langs:
+  - csharp
+  - vb
+  name: Source
+  nameWithType: PingPongBuffer.Source
+  fullName: Hallowed.Rendering.PingPongBuffer.Source
+  type: Property
+  source:
+    remote:
+      path: Hallowed/Source/Rendering/PingPongBuffer.cs
+      branch: master
+      repo: https://github.com/CartogrtapherGames/Hallowed_Monogame.git
+    id: Source
+    path: Hallowed/Source/Rendering/PingPongBuffer.cs
+    startLine: 94
+  assemblies:
+  - Hallowed
+  namespace: Hallowed.Rendering
+  summary: Gets the current source texture (read from this).
+  example: []
+  syntax:
+    content: public RenderTarget2D Source { get; }
+    parameters: []
+    return:
+      type: Microsoft.Xna.Framework.Graphics.RenderTarget2D
+    content.vb: Public ReadOnly Property Source As RenderTarget2D
+  overload: Hallowed.Rendering.PingPongBuffer.Source*
+- uid: Hallowed.Rendering.PingPongBuffer.Target
+  commentId: P:Hallowed.Rendering.PingPongBuffer.Target
+  id: Target
+  parent: Hallowed.Rendering.PingPongBuffer
+  langs:
+  - csharp
+  - vb
+  name: Target
+  nameWithType: PingPongBuffer.Target
+  fullName: Hallowed.Rendering.PingPongBuffer.Target
+  type: Property
+  source:
+    remote:
+      path: Hallowed/Source/Rendering/PingPongBuffer.cs
+      branch: master
+      repo: https://github.com/CartogrtapherGames/Hallowed_Monogame.git
+    id: Target
+    path: Hallowed/Source/Rendering/PingPongBuffer.cs
+    startLine: 97
+  assemblies:
+  - Hallowed
+  namespace: Hallowed.Rendering
+  summary: Gets the current target texture (write to this).
+  example: []
+  syntax:
+    content: public RenderTarget2D Target { get; }
+    parameters: []
+    return:
+      type: Microsoft.Xna.Framework.Graphics.RenderTarget2D
+    content.vb: Public ReadOnly Property Target As RenderTarget2D
+  overload: Hallowed.Rendering.PingPongBuffer.Target*
+- uid: Hallowed.Rendering.PingPongBuffer.Width
+  commentId: P:Hallowed.Rendering.PingPongBuffer.Width
+  id: Width
+  parent: Hallowed.Rendering.PingPongBuffer
+  langs:
+  - csharp
+  - vb
+  name: Width
+  nameWithType: PingPongBuffer.Width
+  fullName: Hallowed.Rendering.PingPongBuffer.Width
+  type: Property
+  source:
+    remote:
+      path: Hallowed/Source/Rendering/PingPongBuffer.cs
+      branch: master
+      repo: https://github.com/CartogrtapherGames/Hallowed_Monogame.git
+    id: Width
+    path: Hallowed/Source/Rendering/PingPongBuffer.cs
+    startLine: 102
+  assemblies:
+  - Hallowed
+  namespace: Hallowed.Rendering
+  summary: the buffer width.
+  example: []
+  syntax:
+    content: public int Width { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public ReadOnly Property Width As Integer
+  overload: Hallowed.Rendering.PingPongBuffer.Width*
+- uid: Hallowed.Rendering.PingPongBuffer.Height
+  commentId: P:Hallowed.Rendering.PingPongBuffer.Height
+  id: Height
+  parent: Hallowed.Rendering.PingPongBuffer
+  langs:
+  - csharp
+  - vb
+  name: Height
+  nameWithType: PingPongBuffer.Height
+  fullName: Hallowed.Rendering.PingPongBuffer.Height
+  type: Property
+  source:
+    remote:
+      path: Hallowed/Source/Rendering/PingPongBuffer.cs
+      branch: master
+      repo: https://github.com/CartogrtapherGames/Hallowed_Monogame.git
+    id: Height
+    path: Hallowed/Source/Rendering/PingPongBuffer.cs
+    startLine: 107
+  assemblies:
+  - Hallowed
+  namespace: Hallowed.Rendering
+  summary: the buffer height.
+  example: []
+  syntax:
+    content: public int Height { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public ReadOnly Property Height As Integer
+  overload: Hallowed.Rendering.PingPongBuffer.Height*
+- uid: Hallowed.Rendering.PingPongBuffer.Swap
+  commentId: M:Hallowed.Rendering.PingPongBuffer.Swap
+  id: Swap
+  parent: Hallowed.Rendering.PingPongBuffer
+  langs:
+  - csharp
+  - vb
+  name: Swap()
+  nameWithType: PingPongBuffer.Swap()
+  fullName: Hallowed.Rendering.PingPongBuffer.Swap()
+  type: Method
+  source:
+    remote:
+      path: Hallowed/Source/Rendering/PingPongBuffer.cs
+      branch: master
+      repo: https://github.com/CartogrtapherGames/Hallowed_Monogame.git
+    id: Swap
+    path: Hallowed/Source/Rendering/PingPongBuffer.cs
+    startLine: 112
+  assemblies:
+  - Hallowed
+  namespace: Hallowed.Rendering
+  summary: Swap source and target buffers.
+  example: []
+  syntax:
+    content: public void Swap()
+    content.vb: Public Sub Swap()
+  overload: Hallowed.Rendering.PingPongBuffer.Swap*
+- uid: Hallowed.Rendering.PingPongBuffer.Clear
+  commentId: M:Hallowed.Rendering.PingPongBuffer.Clear
+  id: Clear
+  parent: Hallowed.Rendering.PingPongBuffer
+  langs:
+  - csharp
+  - vb
+  name: Clear()
+  nameWithType: PingPongBuffer.Clear()
+  fullName: Hallowed.Rendering.PingPongBuffer.Clear()
+  type: Method
+  source:
+    remote:
+      path: Hallowed/Source/Rendering/PingPongBuffer.cs
+      branch: master
+      repo: https://github.com/CartogrtapherGames/Hallowed_Monogame.git
+    id: Clear
+    path: Hallowed/Source/Rendering/PingPongBuffer.cs
+    startLine: 121
+  assemblies:
+  - Hallowed
+  namespace: Hallowed.Rendering
+  summary: Clear the current source to transparent.
+  example: []
+  syntax:
+    content: public void Clear()
+    content.vb: Public Sub Clear()
+  overload: Hallowed.Rendering.PingPongBuffer.Clear*
+- uid: Hallowed.Rendering.PingPongBuffer.ClearAll
+  commentId: M:Hallowed.Rendering.PingPongBuffer.ClearAll
+  id: ClearAll
+  parent: Hallowed.Rendering.PingPongBuffer
+  langs:
+  - csharp
+  - vb
+  name: ClearAll()
+  nameWithType: PingPongBuffer.ClearAll()
+  fullName: Hallowed.Rendering.PingPongBuffer.ClearAll()
+  type: Method
+  source:
+    remote:
+      path: Hallowed/Source/Rendering/PingPongBuffer.cs
+      branch: master
+      repo: https://github.com/CartogrtapherGames/Hallowed_Monogame.git
+    id: ClearAll
+    path: Hallowed/Source/Rendering/PingPongBuffer.cs
+    startLine: 131
+  assemblies:
+  - Hallowed
+  namespace: Hallowed.Rendering
+  summary: Clear both buffers.
+  example: []
+  syntax:
+    content: public void ClearAll()
+    content.vb: Public Sub ClearAll()
+  overload: Hallowed.Rendering.PingPongBuffer.ClearAll*
+- uid: Hallowed.Rendering.PingPongBuffer.Resize(System.Int32,System.Int32,Microsoft.Xna.Framework.Graphics.SurfaceFormat)
+  commentId: M:Hallowed.Rendering.PingPongBuffer.Resize(System.Int32,System.Int32,Microsoft.Xna.Framework.Graphics.SurfaceFormat)
+  id: Resize(System.Int32,System.Int32,Microsoft.Xna.Framework.Graphics.SurfaceFormat)
+  parent: Hallowed.Rendering.PingPongBuffer
+  langs:
+  - csharp
+  - vb
+  name: Resize(int, int, SurfaceFormat)
+  nameWithType: PingPongBuffer.Resize(int, int, SurfaceFormat)
+  fullName: Hallowed.Rendering.PingPongBuffer.Resize(int, int, Microsoft.Xna.Framework.Graphics.SurfaceFormat)
+  type: Method
+  source:
+    remote:
+      path: Hallowed/Source/Rendering/PingPongBuffer.cs
+      branch: master
+      repo: https://github.com/CartogrtapherGames/Hallowed_Monogame.git
+    id: Resize
+    path: Hallowed/Source/Rendering/PingPongBuffer.cs
+    startLine: 148
+  assemblies:
+  - Hallowed
+  namespace: Hallowed.Rendering
+  summary: Resize both buffers.
+  example: []
+  syntax:
+    content: public void Resize(int width, int height, SurfaceFormat format = SurfaceFormat.Color)
+    parameters:
+    - id: width
+      type: System.Int32
+      description: ''
+    - id: height
+      type: System.Int32
+      description: ''
+    - id: format
+      type: Microsoft.Xna.Framework.Graphics.SurfaceFormat
+      description: ''
+    content.vb: Public Sub Resize(width As Integer, height As Integer, format As SurfaceFormat = SurfaceFormat.Color)
+  overload: Hallowed.Rendering.PingPongBuffer.Resize*
+  nameWithType.vb: PingPongBuffer.Resize(Integer, Integer, SurfaceFormat)
+  fullName.vb: Hallowed.Rendering.PingPongBuffer.Resize(Integer, Integer, Microsoft.Xna.Framework.Graphics.SurfaceFormat)
+  name.vb: Resize(Integer, Integer, SurfaceFormat)
+- uid: Hallowed.Rendering.PingPongBuffer.Assign(Microsoft.Xna.Framework.Graphics.Texture2D)
+  commentId: M:Hallowed.Rendering.PingPongBuffer.Assign(Microsoft.Xna.Framework.Graphics.Texture2D)
+  id: Assign(Microsoft.Xna.Framework.Graphics.Texture2D)
+  parent: Hallowed.Rendering.PingPongBuffer
+  langs:
+  - csharp
+  - vb
+  name: Assign(Texture2D)
+  nameWithType: PingPongBuffer.Assign(Texture2D)
+  fullName: Hallowed.Rendering.PingPongBuffer.Assign(Microsoft.Xna.Framework.Graphics.Texture2D)
+  type: Method
+  source:
+    remote:
+      path: Hallowed/Source/Rendering/PingPongBuffer.cs
+      branch: master
+      repo: https://github.com/CartogrtapherGames/Hallowed_Monogame.git
+    id: Assign
+    path: Hallowed/Source/Rendering/PingPongBuffer.cs
+    startLine: 160
+  assemblies:
+  - Hallowed
+  namespace: Hallowed.Rendering
+  summary: First assign a texture to the source and target buffers.
+  example: []
+  syntax:
+    content: public void Assign(Texture2D texture)
+    parameters:
+    - id: texture
+      type: Microsoft.Xna.Framework.Graphics.Texture2D
+      description: ''
+    content.vb: Public Sub Assign(texture As Texture2D)
+  overload: Hallowed.Rendering.PingPongBuffer.Assign*
+- uid: Hallowed.Rendering.PingPongBuffer.HasSource
+  commentId: P:Hallowed.Rendering.PingPongBuffer.HasSource
+  id: HasSource
+  parent: Hallowed.Rendering.PingPongBuffer
+  langs:
+  - csharp
+  - vb
+  name: HasSource
+  nameWithType: PingPongBuffer.HasSource
+  fullName: Hallowed.Rendering.PingPongBuffer.HasSource
+  type: Property
+  source:
+    remote:
+      path: Hallowed/Source/Rendering/PingPongBuffer.cs
+      branch: master
+      repo: https://github.com/CartogrtapherGames/Hallowed_Monogame.git
+    id: HasSource
+    path: Hallowed/Source/Rendering/PingPongBuffer.cs
+    startLine: 188
+  assemblies:
+  - Hallowed
+  namespace: Hallowed.Rendering
+  summary: Check if the buffer has been initialized.
+  example: []
+  syntax:
+    content: public bool HasSource { get; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public ReadOnly Property HasSource As Boolean
+  overload: Hallowed.Rendering.PingPongBuffer.HasSource*
+- uid: Hallowed.Rendering.PingPongBuffer.Dispose
+  commentId: M:Hallowed.Rendering.PingPongBuffer.Dispose
+  id: Dispose
+  parent: Hallowed.Rendering.PingPongBuffer
+  langs:
+  - csharp
+  - vb
+  name: Dispose()
+  nameWithType: PingPongBuffer.Dispose()
+  fullName: Hallowed.Rendering.PingPongBuffer.Dispose()
+  type: Method
+  source:
+    remote:
+      path: Hallowed/Source/Rendering/PingPongBuffer.cs
+      branch: master
+      repo: https://github.com/CartogrtapherGames/Hallowed_Monogame.git
+    id: Dispose
+    path: Hallowed/Source/Rendering/PingPongBuffer.cs
+    startLine: 193
+  assemblies:
+  - Hallowed
+  namespace: Hallowed.Rendering
+  summary: Dispose the buffer.
+  example: []
+  syntax:
+    content: public void Dispose()
+    content.vb: Public Sub Dispose()
+  overload: Hallowed.Rendering.PingPongBuffer.Dispose*
+  implements:
+  - System.IDisposable.Dispose
+references:
+- uid: Hallowed.Rendering
+  commentId: N:Hallowed.Rendering
+  href: Hallowed.html
+  name: Hallowed.Rendering
+  nameWithType: Hallowed.Rendering
+  fullName: Hallowed.Rendering
+  spec.csharp:
+  - uid: Hallowed
+    name: Hallowed
+    href: Hallowed.html
+  - name: .
+  - uid: Hallowed.Rendering
+    name: Rendering
+    href: Hallowed.Rendering.html
+  spec.vb:
+  - uid: Hallowed
+    name: Hallowed
+    href: Hallowed.html
+  - name: .
+  - uid: Hallowed.Rendering
+    name: Rendering
+    href: Hallowed.Rendering.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Hallowed.Rendering.PingPongBuffer.#ctor*
+  commentId: Overload:Hallowed.Rendering.PingPongBuffer.#ctor
+  href: Hallowed.Rendering.PingPongBuffer.html#Hallowed_Rendering_PingPongBuffer__ctor_Microsoft_Xna_Framework_Graphics_GraphicsDevice_System_Int32_System_Int32_Microsoft_Xna_Framework_Graphics_SurfaceFormat_
+  name: PingPongBuffer
+  nameWithType: PingPongBuffer.PingPongBuffer
+  fullName: Hallowed.Rendering.PingPongBuffer.PingPongBuffer
+  nameWithType.vb: PingPongBuffer.New
+  fullName.vb: Hallowed.Rendering.PingPongBuffer.New
+  name.vb: New
+- uid: Microsoft.Xna.Framework.Graphics.GraphicsDevice
+  commentId: T:Microsoft.Xna.Framework.Graphics.GraphicsDevice
+  parent: Microsoft.Xna.Framework.Graphics
+  isExternal: true
+  name: GraphicsDevice
+  nameWithType: GraphicsDevice
+  fullName: Microsoft.Xna.Framework.Graphics.GraphicsDevice
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: Microsoft.Xna.Framework.Graphics.SurfaceFormat
+  commentId: T:Microsoft.Xna.Framework.Graphics.SurfaceFormat
+  parent: Microsoft.Xna.Framework.Graphics
+  isExternal: true
+  name: SurfaceFormat
+  nameWithType: SurfaceFormat
+  fullName: Microsoft.Xna.Framework.Graphics.SurfaceFormat
+- uid: Microsoft.Xna.Framework.Graphics
+  commentId: N:Microsoft.Xna.Framework.Graphics
+  isExternal: true
+  name: Microsoft.Xna.Framework.Graphics
+  nameWithType: Microsoft.Xna.Framework.Graphics
+  fullName: Microsoft.Xna.Framework.Graphics
+  spec.csharp:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+  - name: .
+  - uid: Microsoft.Xna
+    name: Xna
+    isExternal: true
+  - name: .
+  - uid: Microsoft.Xna.Framework
+    name: Framework
+    isExternal: true
+  - name: .
+  - uid: Microsoft.Xna.Framework.Graphics
+    name: Graphics
+    isExternal: true
+  spec.vb:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+  - name: .
+  - uid: Microsoft.Xna
+    name: Xna
+    isExternal: true
+  - name: .
+  - uid: Microsoft.Xna.Framework
+    name: Framework
+    isExternal: true
+  - name: .
+  - uid: Microsoft.Xna.Framework.Graphics
+    name: Graphics
+    isExternal: true
+- uid: Hallowed.Rendering.PingPongBuffer.Source*
+  commentId: Overload:Hallowed.Rendering.PingPongBuffer.Source
+  href: Hallowed.Rendering.PingPongBuffer.html#Hallowed_Rendering_PingPongBuffer_Source
+  name: Source
+  nameWithType: PingPongBuffer.Source
+  fullName: Hallowed.Rendering.PingPongBuffer.Source
+- uid: Microsoft.Xna.Framework.Graphics.RenderTarget2D
+  commentId: T:Microsoft.Xna.Framework.Graphics.RenderTarget2D
+  parent: Microsoft.Xna.Framework.Graphics
+  isExternal: true
+  name: RenderTarget2D
+  nameWithType: RenderTarget2D
+  fullName: Microsoft.Xna.Framework.Graphics.RenderTarget2D
+- uid: Hallowed.Rendering.PingPongBuffer.Target*
+  commentId: Overload:Hallowed.Rendering.PingPongBuffer.Target
+  href: Hallowed.Rendering.PingPongBuffer.html#Hallowed_Rendering_PingPongBuffer_Target
+  name: Target
+  nameWithType: PingPongBuffer.Target
+  fullName: Hallowed.Rendering.PingPongBuffer.Target
+- uid: Hallowed.Rendering.PingPongBuffer.Width*
+  commentId: Overload:Hallowed.Rendering.PingPongBuffer.Width
+  href: Hallowed.Rendering.PingPongBuffer.html#Hallowed_Rendering_PingPongBuffer_Width
+  name: Width
+  nameWithType: PingPongBuffer.Width
+  fullName: Hallowed.Rendering.PingPongBuffer.Width
+- uid: Hallowed.Rendering.PingPongBuffer.Height*
+  commentId: Overload:Hallowed.Rendering.PingPongBuffer.Height
+  href: Hallowed.Rendering.PingPongBuffer.html#Hallowed_Rendering_PingPongBuffer_Height
+  name: Height
+  nameWithType: PingPongBuffer.Height
+  fullName: Hallowed.Rendering.PingPongBuffer.Height
+- uid: Hallowed.Rendering.PingPongBuffer.Swap*
+  commentId: Overload:Hallowed.Rendering.PingPongBuffer.Swap
+  href: Hallowed.Rendering.PingPongBuffer.html#Hallowed_Rendering_PingPongBuffer_Swap
+  name: Swap
+  nameWithType: PingPongBuffer.Swap
+  fullName: Hallowed.Rendering.PingPongBuffer.Swap
+- uid: Hallowed.Rendering.PingPongBuffer.Clear*
+  commentId: Overload:Hallowed.Rendering.PingPongBuffer.Clear
+  href: Hallowed.Rendering.PingPongBuffer.html#Hallowed_Rendering_PingPongBuffer_Clear
+  name: Clear
+  nameWithType: PingPongBuffer.Clear
+  fullName: Hallowed.Rendering.PingPongBuffer.Clear
+- uid: Hallowed.Rendering.PingPongBuffer.ClearAll*
+  commentId: Overload:Hallowed.Rendering.PingPongBuffer.ClearAll
+  href: Hallowed.Rendering.PingPongBuffer.html#Hallowed_Rendering_PingPongBuffer_ClearAll
+  name: ClearAll
+  nameWithType: PingPongBuffer.ClearAll
+  fullName: Hallowed.Rendering.PingPongBuffer.ClearAll
+- uid: Hallowed.Rendering.PingPongBuffer.Resize*
+  commentId: Overload:Hallowed.Rendering.PingPongBuffer.Resize
+  href: Hallowed.Rendering.PingPongBuffer.html#Hallowed_Rendering_PingPongBuffer_Resize_System_Int32_System_Int32_Microsoft_Xna_Framework_Graphics_SurfaceFormat_
+  name: Resize
+  nameWithType: PingPongBuffer.Resize
+  fullName: Hallowed.Rendering.PingPongBuffer.Resize
+- uid: Hallowed.Rendering.PingPongBuffer.Assign*
+  commentId: Overload:Hallowed.Rendering.PingPongBuffer.Assign
+  href: Hallowed.Rendering.PingPongBuffer.html#Hallowed_Rendering_PingPongBuffer_Assign_Microsoft_Xna_Framework_Graphics_Texture2D_
+  name: Assign
+  nameWithType: PingPongBuffer.Assign
+  fullName: Hallowed.Rendering.PingPongBuffer.Assign
+- uid: Microsoft.Xna.Framework.Graphics.Texture2D
+  commentId: T:Microsoft.Xna.Framework.Graphics.Texture2D
+  parent: Microsoft.Xna.Framework.Graphics
+  isExternal: true
+  name: Texture2D
+  nameWithType: Texture2D
+  fullName: Microsoft.Xna.Framework.Graphics.Texture2D
+- uid: Hallowed.Rendering.PingPongBuffer.HasSource*
+  commentId: Overload:Hallowed.Rendering.PingPongBuffer.HasSource
+  href: Hallowed.Rendering.PingPongBuffer.html#Hallowed_Rendering_PingPongBuffer_HasSource
+  name: HasSource
+  nameWithType: PingPongBuffer.HasSource
+  fullName: Hallowed.Rendering.PingPongBuffer.HasSource
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: Hallowed.Rendering.PingPongBuffer.Dispose*
+  commentId: Overload:Hallowed.Rendering.PingPongBuffer.Dispose
+  href: Hallowed.Rendering.PingPongBuffer.html#Hallowed_Rendering_PingPongBuffer_Dispose
+  name: Dispose
+  nameWithType: PingPongBuffer.Dispose
+  fullName: Hallowed.Rendering.PingPongBuffer.Dispose
+- uid: System.IDisposable.Dispose
+  commentId: M:System.IDisposable.Dispose
+  parent: System.IDisposable
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  name: Dispose()
+  nameWithType: IDisposable.Dispose()
+  fullName: System.IDisposable.Dispose()
+  spec.csharp:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )

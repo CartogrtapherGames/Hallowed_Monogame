@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Setting up your development environment for Rider | hallowed </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Setting up your development environment for Rider | hallowed ">
+      <meta name="generator" content="docfx ">
+  
+      <link rel="shortcut icon" href="../../../../favicon.ico">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/night-owl.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" integrity="sha384-EvBWSlnoFgZlXJvpzS+MAUEjvN7+gcCwH+qh7GRFOGgZO0PuwOFro7qPOJnLfe7l" crossorigin="anonymous">
+      <link rel="stylesheet" href="../../../../styles/config.css">
+      <link rel="stylesheet" href="../../../../styles/singulink.css">
+      <link rel="stylesheet" href="../../../../styles/main.css">
+      <meta property="docfx:navrel" content="../../../../toc.html">
+      <meta property="docfx:tocrel" content="../toc.html">
+  
+  <meta property="docfx:rel" content="../../../../">
+  
+    </head>
+    <body>
+        <!-- Header required for docfx anchor scroll to work -->
+        <header id="head"></header>
+        <div class="top-navbar">
+            <a class="burger-icon" onclick="toggleMenu()">
+                <svg name="Hamburger" style="vertical-align: middle;" width="34" height="34" viewbox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M20 6H4V9H20V6ZM4 10.999H20V13.999H4V10.999ZM4 15.999H20V18.999H4V15.999Z"></path></svg>
+            </a>
+
+
+            <a class="brand" href="../../../../index.html">
+              <img src="../../../../logo.svg" alt="hallowed" class="logomark">
+              <span class="brand-title">hallowed</span>
+            </a>        </div>
+
+        <div class="body-content">
+            <div id="blackout" class="blackout" onclick="toggleMenu()"></div>
+
+            <nav id="sidebar" role="navigation">
+                <div class="sidebar">
+
+                    <div>
+                      <div class="mobile-hide">
+
+                        <a class="brand" href="../../../../index.html">
+                          <img src="../../../../logo.svg" alt="hallowed" class="logomark">
+                          <span class="brand-title">hallowed</span>
+                        </a>                      </div>
+
+                      <div class="sidesearch">
+                        <form id="search" role="search" class="search">
+                            <i class="bi bi-search search-icon"></i>
+                            <input type="text" id="search-query" placeholder="Search" autocomplete="off">
+                        </form>
+                      </div>
+
+                      <div id="navbar">
+                      </div>
+                    </div>                    <div class="sidebar-item-separator"></div>
+
+                        <div id="sidetoggle">
+                          <div id="sidetoc"></div>
+                        </div>
+                </div>
+                <div class="footer">
+  
+  <strong><a href='https://dotnet.github.io/docfx/'>DocFX</a> + <a href='https://www.singulink.com'>Singulink</a> = ♥</strong>
+                </div>            </nav>
+
+            <main class="main-panel">
+
+                <div id="search-results" style="display: none;">
+                  <h1 class="search-list">Search Results for <span></span></h1>
+                  <div class="sr-items">
+                    <p><i class="bi bi-hourglass-split index-loading"></i></p>
+                  </div>
+                  <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+                </div>
+ 
+
+                <div role="main" class="hide-when-search">
+
+                        <div class="subnav navbar navbar-default">
+                          <div class="container hide-when-search" id="breadcrumb">
+                            <ul class="breadcrumb">
+                              <li></li>
+                            </ul>
+                          </div>
+                        </div>
+
+                         <div class="contribution">
+                               <a href="https://github.com/MonoGame/docs.monogame.github.io/blob/main/articles/getting_started/2_choosing_your_ide_rider.md/#L1" class="contribution-link">Edit this page</a>
+                         </div>
+
+                    <article class="content wrap" id="_content" data-uid="">
+
+
+<p>This is a guide on setting up your development environment for creating games with MonoGame using Rider by JetBrains. By following this guide, you will learn how to install the tools for developing C# applications and configure Rider with recommended extensions for C# development.</p>
+<p>By the end, you will be fully equipped to start creating games with MonoGame using Rider.</p>
+<h2 id="install-rider">Install Rider</h2>
+<p>You can download and install Rider from: <a href="https://www.jetbrains.com/rider/download">https://www.jetbrains.com/rider/download</a></p>
+<p><img src="./images/2_chosing_your_ide_rider_download.png" alt="Rider download"></p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Rider is free for personal use, you do have to register and create an account, but otherwise all features will be unlocked.</p>
+</div>
+<h2 id="setting-up-rider-for-development-with-monogame">Setting up Rider for development with MonoGame</h2>
+<ol>
+<li><p>Open up terminal (or Powershell on Windows)</p>
+</li>
+<li><p>Run the following command to install templates:</p>
+<pre><code class="lang-sh">dotnet new install MonoGame.Templates.CSharp
+</code></pre>
+</li>
+</ol>
+<div class="TIP">
+<h5>Tip</h5>
+<p>Alternatively, consider using the Preview Packages provided by MonoGame to get access to the latest developments.</p>
+<ul>
+<li><a href="../getting_to_know/howto/HowTo_Install_Preview_Release.html">How to install MonoGame Preview packages</a></li>
+</ul>
+</div>
+<h2 id="creating-a-new-monogame-project">Creating a new MonoGame project</h2>
+<p>To get you started with Rider, here are the steps for setting up a new Rider MonoGame project.</p>
+<ol>
+<li><p>Open up Rider</p>
+</li>
+<li><p>Click on the &quot;New Solution&quot; button</p>
+<p><img src="./images/1_setting_up_your_development_environment/rider_new_solution_button.png" alt="Rider new project"></p>
+</li>
+<li><p>Select &quot;MonoGame Cross-Platform Desktop Application&quot; on the list on the left</p>
+<p><img src="./images/1_setting_up_your_development_environment/rider_new_solution_dialog.png" alt="Rider MonoGame template"></p>
+</li>
+<li><p>Press &quot;Create&quot;</p>
+</li>
+<li><p>You can now press <code>F5</code> to compile and debug your game, happy coding  :)</p>
+</li>
+</ol>
+<div class="NOTE">
+<h5>Note</h5>
+<p>If you are experiencing issues with compiling effects under Linux for JetBrains Rider,
+you might need to add the <code>MGFXC_WINE_PATH</code> environment variable to <code>/etc/environment</code> for it to be picked up.  See <a href="https://rider-support.jetbrains.com/hc/en-us/community/posts/5777151094034-Rider-cannot-see-all-Environmental-Variables">5777151094034-Rider-cannot-see-all-Environmental-Variables</a> for details.</p>
+</div>
+<h2 id="update-project-tool-references">Update Project Tool references</h2>
+<p>The MonoGame Content Editor (MGCB) it a tool delivered through NuGet for your project using the tools configuration held in your <code>dotnet-tools.json</code> file (located in the <code>.config</code> folder of your project).</p>
+<p>Once you have created your project you should run the following terminal/command-line command to ensure the tool (and the pipeline) is setup and read for your project:</p>
+<pre><code class="lang-dotnetcli">    dotnet tool restore
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>If you ever change the version of the tools or want to upgrade them by editing the <code>dotnet-tools.json</code> configuration, you MUST run this command again to update the tools.</p>
+</div>
+<h2 id="next-steps">Next Steps</h2>
+<p>Next, get to know MonoGame's code structure and project layout:</p>
+<ul>
+<li><a href="3_understanding_the_code.html">Understanding the code</a></li>
+</ul>
+
+</article>
+                </div>
+
+            </main>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+        <script type="text/javascript" src="../../../../styles/jquery.twbsPagination.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/jquery.mark.min.js"></script>
+        <script type="text/javascript" src="../../../../styles/url.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/anchor-js@5.0.0/anchor.min.js"></script>
+        <script type="text/javascript" src="../../../../styles/docfx.js"></script>
+        <script type="text/javascript" src="../../../../styles/main.js"></script>
+        <script type="text/javascript" src="../../../../styles/singulink.js"></script>    </body>
+</html>

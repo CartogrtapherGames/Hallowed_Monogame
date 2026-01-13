@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>How to record Sound with a Microphone | hallowed </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="How to record Sound with a Microphone | hallowed ">
+      <meta name="generator" content="docfx ">
+  
+      <link rel="shortcut icon" href="../../../../../../favicon.ico">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/night-owl.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" integrity="sha384-EvBWSlnoFgZlXJvpzS+MAUEjvN7+gcCwH+qh7GRFOGgZO0PuwOFro7qPOJnLfe7l" crossorigin="anonymous">
+      <link rel="stylesheet" href="../../../../../../styles/config.css">
+      <link rel="stylesheet" href="../../../../../../styles/singulink.css">
+      <link rel="stylesheet" href="../../../../../../styles/main.css">
+      <meta property="docfx:navrel" content="../../../../../../toc.html">
+      <meta property="docfx:tocrel" content="../../../toc.html">
+  
+  <meta property="docfx:rel" content="../../../../../../">
+  
+    </head>
+    <body>
+        <!-- Header required for docfx anchor scroll to work -->
+        <header id="head"></header>
+        <div class="top-navbar">
+            <a class="burger-icon" onclick="toggleMenu()">
+                <svg name="Hamburger" style="vertical-align: middle;" width="34" height="34" viewbox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M20 6H4V9H20V6ZM4 10.999H20V13.999H4V10.999ZM4 15.999H20V18.999H4V15.999Z"></path></svg>
+            </a>
+
+
+            <a class="brand" href="../../../../../../index.html">
+              <img src="../../../../../../logo.svg" alt="hallowed" class="logomark">
+              <span class="brand-title">hallowed</span>
+            </a>        </div>
+
+        <div class="body-content">
+            <div id="blackout" class="blackout" onclick="toggleMenu()"></div>
+
+            <nav id="sidebar" role="navigation">
+                <div class="sidebar">
+
+                    <div>
+                      <div class="mobile-hide">
+
+                        <a class="brand" href="../../../../../../index.html">
+                          <img src="../../../../../../logo.svg" alt="hallowed" class="logomark">
+                          <span class="brand-title">hallowed</span>
+                        </a>                      </div>
+
+                      <div class="sidesearch">
+                        <form id="search" role="search" class="search">
+                            <i class="bi bi-search search-icon"></i>
+                            <input type="text" id="search-query" placeholder="Search" autocomplete="off">
+                        </form>
+                      </div>
+
+                      <div id="navbar">
+                      </div>
+                    </div>                    <div class="sidebar-item-separator"></div>
+
+                        <div id="sidetoggle">
+                          <div id="sidetoc"></div>
+                        </div>
+                </div>
+                <div class="footer">
+  
+  <strong><a href='https://dotnet.github.io/docfx/'>DocFX</a> + <a href='https://www.singulink.com'>Singulink</a> = ♥</strong>
+                </div>            </nav>
+
+            <main class="main-panel">
+
+                <div id="search-results" style="display: none;">
+                  <h1 class="search-list">Search Results for <span></span></h1>
+                  <div class="sr-items">
+                    <p><i class="bi bi-hourglass-split index-loading"></i></p>
+                  </div>
+                  <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+                </div>
+ 
+
+                <div role="main" class="hide-when-search">
+
+                        <div class="subnav navbar navbar-default">
+                          <div class="container hide-when-search" id="breadcrumb">
+                            <ul class="breadcrumb">
+                              <li></li>
+                            </ul>
+                          </div>
+                        </div>
+
+                         <div class="contribution">
+                               <a href="https://github.com/MonoGame/docs.monogame.github.io/blob/main/articles/getting_to_know/howto/audio/HowTo_Record_Microphone.md/#L1" class="contribution-link">Edit this page</a>
+                         </div>
+
+                    <article class="content wrap" id="_content" data-uid="">
+
+<h2 id="overview">Overview</h2>
+<p>The following procedure shows the bare basics of using the microphone to record audio. In practice, you will want to use UI elements (such as buttons) to start and stop audio recording.</p>
+<p>As handling microphone audio can become quite complex, this tutorial is split into two halves:</p>
+<ul>
+<li>Part 1 walks through the required code in order to record audio from the default microphone and then stop recording.</li>
+<li>Part 2 is a more in-depth sample which also processes the recorded audio and plays it back to you.</li>
+</ul>
+<h2 id="part-1-guide-to-recording-audio-from-the-microphone">Part 1, Guide to recording audio from the microphone</h2>
+<ol>
+<li><p>Get the device's default microphone by using <a href="xref:Microsoft.Xna.Framework.Audio.Microphone">Microphone.Default</a>.</p>
+<pre><code class="lang-csharp">Microphone activeMicrophone;
+
+activeMicrophone = Microphone.Default;
+if (activeMicrophone != null)
+{
+
+}
+else
+{
+       // No microphone is attached to the device
+}
+</code></pre>
+</li>
+<li><p>Set the size (duration) of the Microphone buffer and wire up the event to handle the data as it becomes available.  THen declare a buffer array to hold the audio data from these settings.</p>
+<pre><code class="lang-csharp">// Set the capture buffer size for low latency.
+// Microphone will call the game back when it has captured at least that much audio data.
+activeMicrophone.BufferDuration = TimeSpan.FromMilliseconds(100);
+
+// Subscribe to the event that's raised when the capture buffer is filled.
+activeMicrophone.BufferReady += BufferReady;
+
+// We will put the mic samples in this buffer.  We only want to allocate it once.
+micSamples = new byte[activeMicrophone.GetSampleSizeInBytes(activeMicrophone.BufferDuration)];
+</code></pre>
+</li>
+<li><p>The <code>Buffer Ready</code> handler can then process the prepared microphone data for storage, transmission or playback, getting the sample data from the Microphone and storing it in the prepared buffer array (micSamples).</p>
+<pre><code class="lang-csharp">/// &lt;summary&gt;
+/// This is called each time a microphone buffer has been filled.
+/// &lt;/summary&gt;
+void BufferReady(object sender, EventArgs e)
+{
+    try
+    {
+        // Copy the captured audio data into the pre-allocated array.
+        int sampleDataSize = activeMicrophone.GetData(micSamples);
+    }
+    catch (NoMicrophoneConnectedException)
+    {
+        // Microphone was disconnected - let the user know.
+    }
+}
+</code></pre>
+</li>
+<li><p>Begin recording audio, calling method <a href="xref:Microsoft.Xna.Framework.Audio.Microphone">Microphone.Start</a>.</p>
+<pre><code class="lang-csharp">private void StartRecording()
+{
+    // Can't start a microphone that doesn't exist.
+    if (activeMicrophone == null) { return; }
+
+    try
+    {
+        activeMicrophone.Start();
+    }
+    catch (NoMicrophoneConnectedException)
+    {
+        // Microphone was disconnected - let the user know.
+    }
+}
+</code></pre>
+</li>
+<li><p>While the microphone is recording, <a href="xref:Microsoft.Xna.Framework.Audio.Microphone">Microphone.GetData (Byte[], Int32, Int32)</a> is called in the aforementioned <code>BufferReady</code> handler as the audio data becomes available.</p>
+<pre><code class="lang-csharp">int sampleDataSize = activeMicrophone.GetData(micSamples);
+</code></pre>
+</li>
+<li><p>When you are finished recording, set the microphone state to stopped by calling method <a href="xref:Microsoft.Xna.Framework.Audio.Microphone">Stop</a>.</p>
+<pre><code class="lang-csharp">private void StopRecording()
+{
+    // Can't stop a microphone that doesn't exist.
+    if (activeMicrophone == null) { return; }
+
+    try
+    {
+        // Stop the microphone
+        activeMicrophone.Stop();
+    }
+    catch (NoMicrophoneConnectedException)
+    {
+        UpdateMicrophoneStatus();
+    }
+}
+</code></pre>
+</li>
+</ol>
+<h2 id="part-2-full-example-of-outputting-the-microphone-to-audio">Part 2, Full example of outputting the microphone to audio</h2>
+<p>As promised, the following is a fully working sample that:</p>
+<ul>
+<li>Starts recording and outputting audio from the active microphone when &quot;space is pressed&quot;.</li>
+<li>Stops recording when &quot;P&quot; is pressed.</li>
+<li>Adds an &quot;Extension method&quot; to determine if a Microphone is connected.</li>
+<li>A &quot;PickFirstConnectedMicrophone&quot; method to choose a specific microphone.  Can be modified so you can switch mic's</li>
+<li>An &quot;InitializeMicrophone&quot; method to initialize and setup the microphone, updated to work in &quot;Update&quot; so it can continually monitor the Mic connection.</li>
+</ul>
+<p>Enjoy, all code commented where applicable for reference.</p>
+<pre><code class="lang-csharp">using System;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+
+namespace MonoGameMicrophoneExample;
+
+public class Game1 : Game
+{
+    private GraphicsDeviceManager graphics;
+    private SpriteBatch spriteBatch;
+    SpriteFont font;
+    // The most recent microphone samples.
+    byte[] micSamples;
+    // DynamicSoundEffectInstance is used to playback the captured audio after processing it for echo.
+    DynamicSoundEffectInstance dynamicSound;
+    // Microphone used for recording.
+    Microphone activeMicrophone;
+    // Used to communicate the microphone status to the user.
+    string microphoneStatus = string.Empty;
+    const string instructions = @&quot;Press 'Space' to start and 'P' to stop recording&quot;;
+
+#region MonoGame Boilerplate
+    public Game1()
+    {
+        graphics = new GraphicsDeviceManager(this);
+        Content.RootDirectory = &quot;Content&quot;;
+        IsMouseVisible = true;
+    }
+
+    protected override void Initialize()
+    {
+        // TODO: Add your initialization logic here
+
+        base.Initialize();
+    }
+
+    protected override void LoadContent()
+    {
+        spriteBatch = new SpriteBatch(GraphicsDevice);
+
+        // Make sure to create a SpriteFont in the Content project and set its build action to &quot;Content&quot;.
+        font = Content.Load&lt;SpriteFont&gt;(&quot;File&quot;);
+    }
+
+
+    protected override void Update(GameTime gameTime)
+    {
+        if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            Exit();
+
+        // Constantly check for a good microphone to start recording.
+        InitializeMicrophone();
+
+        // Check and update microphone status.
+        UpdateMicrophoneStatus();
+
+        if (IsKeyPressed(Keys.Space))
+        {
+            StartRecording();
+        }
+        if (IsKeyPressed(Keys.P))
+        {
+            StopRecording();
+        }
+
+        base.Update(gameTime);
+    }
+
+
+    protected override void Draw(GameTime gameTime)
+    {
+        GraphicsDevice.Clear(Color.CornflowerBlue);
+
+        // TODO: Add your drawing code here
+        spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
+        spriteBatch.DrawString(font, instructions, new Vector2(10f, 20f), Color.White);
+        spriteBatch.DrawString(font, microphoneStatus, new Vector2(10f, 50f), Color.White);
+        spriteBatch.End();
+        base.Draw(gameTime);
+    }    
+#endregion MonoGame Boilerplate
+
+#region Input Handling
+    private bool IsKeyPressed(Keys key)
+    {
+        return Keyboard.GetState().IsKeyDown(key);
+    }
+
+    private void StartRecording()
+    {
+        // Can't start a microphone that doesn't exist.
+        if (activeMicrophone == null) { return; }
+
+        try
+        {
+            activeMicrophone.Start();
+        }
+        catch (NoMicrophoneConnectedException)
+        {
+            UpdateMicrophoneStatus();
+        }
+    }
+
+    private void StopRecording()
+    {
+        // Can't stop a microphone that doesn't exist.
+        if (activeMicrophone == null) { return; }
+
+        try
+        {
+            // Stop the microphone
+            activeMicrophone.Stop();
+        }
+        catch (NoMicrophoneConnectedException)
+        {
+            UpdateMicrophoneStatus();
+        }
+    }
+#endregion Input Handling
+
+#region Microphone Handling
+    /// &lt;summary&gt;
+    /// Keep track of the microphone status to communicate to the user.
+    /// &lt;/summary&gt;
+    private void UpdateMicrophoneStatus()
+    {
+        // We don't have any microphones connected to the system.
+        if (activeMicrophone == null)
+        {
+            microphoneStatus = &quot;Waiting for microphone connection...&quot;;
+        }
+        else
+        {
+            try
+            {
+                // Update the status - if the microphone gets disconnected this will throw
+                microphoneStatus = string.Format(&quot;{0} is {1}&quot;, activeMicrophone.Name, activeMicrophone.State);
+            }
+            catch (NoMicrophoneConnectedException)
+            {
+                // Microphone got disconnected - Let's ask the user to reconnect it.
+                microphoneStatus = string.Format(&quot;Please reconnect {0}&quot;, activeMicrophone.Name);
+            }
+        }
+    }
+
+    /// &lt;summary&gt;
+    /// This is called each time a microphone buffer has been filled.
+    /// &lt;/summary&gt;
+    void BufferReady(object sender, EventArgs e)
+    {
+        try
+        {
+            // Copy the captured audio data into the pre-allocated array.
+            int sampleDataSize = activeMicrophone.GetData(micSamples);
+
+            // Process the captured audio for playback
+            dynamicSound.SubmitBuffer(micSamples, 0, sampleDataSize);
+        }
+        catch (NoMicrophoneConnectedException)
+        {
+            // Microphone was disconnected - let the user know.
+            UpdateMicrophoneStatus();
+        }
+    }
+
+    /// &lt;summary&gt;
+    /// Look for a good microphone to start recording.
+    /// &lt;/summary&gt;
+    /// &lt;returns&gt;&lt;/returns&gt;
+    private Microphone PickFirstConnectedMicrophone()
+    {
+        // Let's pick the default microphone if it's ready.
+        if (Microphone.Default != null &amp;&amp; Microphone.Default.IsConnected())
+        {
+            return Microphone.Default;
+        }
+
+        // Default microphone seems to be disconnected so look for another microphone that we can use.
+        // And if the default was null then the list will be empty and we'll skip the search.
+        foreach (Microphone microphone in Microphone.All)
+        {
+            if (microphone.IsConnected())
+            {
+                return microphone;
+            }
+        }
+
+        // There are no microphones hooked up to the system!
+        return null;
+    }
+
+    /// &lt;summary&gt;
+    /// Finds a good microphone to use and sets up everything to start recording and playback.
+    /// Once a microphone is selected the game uses it throughout its lifetime.
+    /// If it gets disconnected it will tell the user to reconnect it.
+    /// &lt;/summary&gt;
+    private void InitializeMicrophone()
+    {
+        // We already have a microphone, skip out early.
+        if (activeMicrophone != null) { return; }
+
+        try
+        {
+            // Find the first microphone that's ready to rock.
+            activeMicrophone = PickFirstConnectedMicrophone();
+            if (activeMicrophone != null)
+            {
+                // Set the capture buffer size for kow latency.
+                // Microphone will call the game back when it has captured at least that much audio data.
+                activeMicrophone.BufferDuration = TimeSpan.FromMilliseconds(100);
+                // Subscribe to the event that's raised when the capture buffer is filled.
+                activeMicrophone.BufferReady += BufferReady;
+                // We will put the mic samples in this buffer.  We only want to allocate it once.
+                micSamples = new byte[activeMicrophone.GetSampleSizeInBytes(activeMicrophone.BufferDuration)];
+
+                 // Create a DynamicSoundEffectInstance in the right format to playback the captured audio.
+                dynamicSound = new DynamicSoundEffectInstance(activeMicrophone.SampleRate, AudioChannels.Mono);
+                dynamicSound.Play();
+            }
+        }
+        catch (NoMicrophoneConnectedException)
+        {
+            // Uh oh, the microphone was disconnected in the middle of initialization.
+            // Let's clean up everything so we can look for another microphone again on the next update.
+            activeMicrophone.BufferReady -= BufferReady;
+            activeMicrophone = null;
+        }
+    }
+#endregion Microphone Handling
+}
+
+#region Helper Microphone Extension Method
+public static class MicrophoneExtensions
+{
+    // Provides a simple method to check if a microphone is connected.
+    // There is no guarantee that the microphone will not get disconnected at any time.
+    // This method helps in simplifying the microphone enumeration code.
+    public static bool IsConnected(this Microphone microphone)
+    {
+        try
+        {
+            MicrophoneState state = microphone.State;
+            return true;
+        }
+        catch (NoMicrophoneConnectedException)
+        {
+            return false;
+        }
+    }
+}
+#endregion Helper Microphone Extension Method
+</code></pre><h2 id="see-also">See Also</h2>
+<ul>
+<li><p><a href="HowTo_Microphone.html">Working with Microphones</a></p>
+<p>Provides basic information about microphone usage in games.</p>
+</li>
+<li><p><a href="HowTo_StreamDataFromWav.html">HowTo_StreamDataFromWav</a></p>
+<p>a sample demonstrating the uses of the <a href="xref:Microsoft.Xna.Framework.Audio.DynamicSoundEffectInstance">DynamicSoundEffectInstance</a></p>
+</li>
+</ul>
+<h2 id="reference">Reference</h2>
+<ul>
+<li><p><a href="xref:Microsoft.Xna.Framework.Audio.Microphone">Microphone</a></p>
+<p>Provides properties, methods, and fields and events for capturing audio data with microphones.</p>
+</li>
+<li><p><a href="xref:Microsoft.Xna.Framework.Audio.DynamicSoundEffectInstance">DynamicSoundEffectInstance</a></p>
+<p>Provides properties, methods, and events for play back of the audio buffer.</p>
+</li>
+</ul>
+
+</article>
+                </div>
+
+            </main>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/jquery.twbsPagination.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/jquery.mark.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/url.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/anchor-js@5.0.0/anchor.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/docfx.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/main.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/singulink.js"></script>    </body>
+</html>

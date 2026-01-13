@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Chapter 25: Packaging Your Game for Distribution | hallowed </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Chapter 25: Packaging Your Game for Distribution | hallowed ">
+      <meta name="generator" content="docfx ">
+  
+      <link rel="shortcut icon" href="../../../../../../favicon.ico">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/night-owl.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" integrity="sha384-EvBWSlnoFgZlXJvpzS+MAUEjvN7+gcCwH+qh7GRFOGgZO0PuwOFro7qPOJnLfe7l" crossorigin="anonymous">
+      <link rel="stylesheet" href="../../../../../../styles/config.css">
+      <link rel="stylesheet" href="../../../../../../styles/singulink.css">
+      <link rel="stylesheet" href="../../../../../../styles/main.css">
+      <meta property="docfx:navrel" content="../../../../../../toc.html">
+      <meta property="docfx:tocrel" content="../../../toc.html">
+  
+  <meta property="docfx:rel" content="../../../../../../">
+  
+    </head>
+    <body>
+        <!-- Header required for docfx anchor scroll to work -->
+        <header id="head"></header>
+        <div class="top-navbar">
+            <a class="burger-icon" onclick="toggleMenu()">
+                <svg name="Hamburger" style="vertical-align: middle;" width="34" height="34" viewbox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M20 6H4V9H20V6ZM4 10.999H20V13.999H4V10.999ZM4 15.999H20V18.999H4V15.999Z"></path></svg>
+            </a>
+
+
+            <a class="brand" href="../../../../../../index.html">
+              <img src="../../../../../../logo.svg" alt="hallowed" class="logomark">
+              <span class="brand-title">hallowed</span>
+            </a>        </div>
+
+        <div class="body-content">
+            <div id="blackout" class="blackout" onclick="toggleMenu()"></div>
+
+            <nav id="sidebar" role="navigation">
+                <div class="sidebar">
+
+                    <div>
+                      <div class="mobile-hide">
+
+                        <a class="brand" href="../../../../../../index.html">
+                          <img src="../../../../../../logo.svg" alt="hallowed" class="logomark">
+                          <span class="brand-title">hallowed</span>
+                        </a>                      </div>
+
+                      <div class="sidesearch">
+                        <form id="search" role="search" class="search">
+                            <i class="bi bi-search search-icon"></i>
+                            <input type="text" id="search-query" placeholder="Search" autocomplete="off">
+                        </form>
+                      </div>
+
+                      <div id="navbar">
+                      </div>
+                    </div>                    <div class="sidebar-item-separator"></div>
+
+                        <div id="sidetoggle">
+                          <div id="sidetoc"></div>
+                        </div>
+                </div>
+                <div class="footer">
+  
+  <strong><a href='https://dotnet.github.io/docfx/'>DocFX</a> + <a href='https://www.singulink.com'>Singulink</a> = ♥</strong>
+                </div>            </nav>
+
+            <main class="main-panel">
+
+                <div id="search-results" style="display: none;">
+                  <h1 class="search-list">Search Results for <span></span></h1>
+                  <div class="sr-items">
+                    <p><i class="bi bi-hourglass-split index-loading"></i></p>
+                  </div>
+                  <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+                </div>
+ 
+
+                <div role="main" class="hide-when-search">
+
+                        <div class="subnav navbar navbar-default">
+                          <div class="container hide-when-search" id="breadcrumb">
+                            <ul class="breadcrumb">
+                              <li></li>
+                            </ul>
+                          </div>
+                        </div>
+
+                         <div class="contribution">
+                               <a href="https://github.com/MonoGame/docs.monogame.github.io/blob/main/articles/tutorials/building_2d_games/25_packaging_game/index.md/#L1" class="contribution-link">Edit this page</a>
+                         </div>
+
+                    <article class="content wrap" id="_content" data-uid="">
+
+
+<p>After all of our work creating Dungeon Slime, we need to prepare the game for distribution to players.  Properly packaging your game ensures it runs correctly on different platforms without requiring players to have development tools installed.</p>
+<p>In this chapter you will:</p>
+<ul>
+<li>Learn how to prepare your game for release.</li>
+<li>Package your game for Windows, macOS, and Linux platforms.</li>
+<li>Create platform-specific distributions with appropriate configurations.</li>
+<li>Understand important publishing parameters and their impact on game performance.</li>
+<li>Address common cross-platform distribution challenges.</li>
+<li>Learn about third-party tools that can automate the packaging process.</li>
+</ul>
+<h2 id="understanding-game-packaging">Understanding Game Packaging</h2>
+<p>When developing with MonoGame, you are working in a .NET environment that abstracts away many platform-specific details.  However, when distributing your game to players, you need to ensure they can run it without installing the .NET runtime or other development dependencies.</p>
+<h3 id="self-contained-deployments">Self-Contained Deployments</h3>
+<p>The recommended approach for distributing MonoGame games is to use self-contained deployments.  This approach packages your game with all necessary .NET dependencies, resulting in a larger distribution but ensuring your game runs without requiring players install additional runtimes.</p>
+<p>A self-contained deployment offers several advantages:</p>
+<ul>
+<li>Players can run your game without installing the .NET runtime.</li>
+<li>Your game will always use the exact version of the runtime it was developed with.</li>
+<li>Distribution is simplified with fewer external dependencies.</li>
+</ul>
+<p>The main trade-off is a larger distribution size compared to framework-dependent deployments, but this is usually worth it for the improved player experience.</p>
+<h2 id="preparing-your-game-for-release">Preparing Your Game for Release</h2>
+<p>Before packaging your game for distribution, you should take some preparatory steps:</p>
+<ol>
+<li><strong>Set Release Configuration</strong>: Ensure your build configuration is set to &quot;Release&quot; rather than &quot;Debug&quot; for better performance and smaller executable size.</li>
+<li><strong>Update Game Information</strong>: Verify your game's title, version, and other information in the project's properties file (<code>.csproj</code>).</li>
+<li><strong>Final Testing</strong>: Perform thorough testing in Release mode to catch any issues that might not appear in Debug mode.</li>
+<li><strong>Asset Optimization</strong>: Consider optimizing larger content files to reduce the final package size.</li>
+</ol>
+<h2 id="platform-specific-packaging">Platform-Specific Packaging</h2>
+<p>Now that we understand the general packaging concepts, we will explore how to create distributions for Windows, macOS, and Linux.  Each platform has specific requirements and tooling that we will need to navigate.  Choose the instructions below based on the platform you are using.</p>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>The packaging instructions for each platform are designed to be executed on that same platform.  This is because each operating system provides specific tools needed for proper packaging (like <code>lipo</code> on macOS or <code>permission settings</code> on Unix-based systems).  When building on Windows for macOS or Linux, the executable permissions cannot be set since Windows lacks these concepts.</p>
+<p>While you will need access to each platform for the steps below, do not worry if you do not have all these systems available.  At the end of this chapter, third party libraries provided by MonoGame community members are included that can automate these processes for you without requiring you to own each type of machine.</p>
+</div>
+<div class="tabGroup" id="tabgroup_1">
+<ul role="tablist">
+<li role="presentation">
+<a href="#tabpanel_1_windows" role="tab" aria-controls="tabpanel_1_windows" data-tab="windows" tabindex="0" aria-selected="true">Windows</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_1_macOS" role="tab" aria-controls="tabpanel_1_macOS" data-tab="macOS" tabindex="-1">macOS</a>
+</li>
+<li role="presentation">
+<a href="#tabpanel_1_linux" role="tab" aria-controls="tabpanel_1_linux" data-tab="linux" tabindex="-1">Linux</a>
+</li>
+</ul>
+<section id="tabpanel_1_windows" role="tabpanel" data-tab="windows">
+
+<p>Windows is the most straightforward platform to target since MonoGame development typically happens on Windows machines.</p>
+<h4 id="building-for-windows">Building for Windows</h4>
+<p>To create a self-contained application for Windows, open a new command prompt window in the same folder as the main game project (in our case the folder with the <code>DungeonSlime.csproj</code> file) and execute the following .NET CLI command:</p>
+<pre><code class="lang-sh">dotnet publish -c Release -r win-x64 -p:PublishReadyToRun=false -p:TieredCompilation=false --self-contained
+</code></pre>
+<p>This command specifies:</p>
+<ul>
+<li><code>-c Release</code>: Builds in Release configuration for better performance.</li>
+<li><code>-r win-x64</code>: Targets 64-bit Windows platforms.</li>
+<li><code>-p:PublishReadyToRun=false</code>: Disables ReadyToRun compilation (explained later).</li>
+<li><code>-p:TieredCompilation=false</code>: Disables Tiered Compilation (explained later).</li>
+<li><code>--self-contained</code>: Includes the .NET runtime in the package.</li>
+</ul>
+<p>The output will be placed in a directory like <code>bin/Release/net8.0/win-x64/publish/</code>, relative to the game's <code>.csproj</code> file.  This directory will contain the executable and all necessary files to run your game.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>If your base game project is created with <strong>dotnet 9.0</strong> (which at the time of writing is the default), the above folder will be more like <code>bin/Release/net9.0/win-x64/publish/</code>, just so you are aware.
+Noting the change in folder from <code>net8.0</code> to <code>net9.0</code>.</p>
+</div>
+<h4 id="creating-a-windows-distribution">Creating a Windows Distribution</h4>
+<p>Once you have created a build for Windows, to create a Windows distribution, you can simply:</p>
+<ol>
+<li>Zip the entire contents of the publish folder.</li>
+<li>Distribute the ZIP file to your players.</li>
+<li>Players can extract the ZIP and run the executable directly.</li>
+</ol>
+<div class="NOTE">
+<h5>Note</h5>
+<p>If you are using the WindowsDX platform target, players may need to install the <a href="https://www.microsoft.com/en-us/download/details.aspx?id=8109">DirectX June 2010 Runtime</a> for audio and gamepad support.  If you are targeting this platform, consider including this information in your game's documentation.</p>
+</div>
+</section>
+<section id="tabpanel_1_macOS" role="tabpanel" data-tab="macOS" aria-hidden="true" hidden="hidden">
+
+<p>Packaging for macOS requires creating an <strong>Application Bundle</strong> (<code>.app</code>), which is a directory structure that macOS recognizes as an application.</p>
+<h4 id="building-for-macos">Building for macOS</h4>
+<p>For macOS, you will need to build for both the Intel (x64) and Apple Silicon (arm64) to support all modern Mac computers.  Open a new terminal window in the same folder as the <code>DungeonSlime.csproj</code> file (the main game project).</p>
+<div class="TIP">
+<h5>Tip</h5>
+<p>The following sections will guide you through several terminal commands that build on each other.  It is best to use a single terminal window located in your projects root directory (where the <code>DungeonSlime.csproj</code> file is) for all of these steps to ensure paths remain consistent.</p>
+</div>
+<p>First, to create the Intel (x64) self contained application, execute the following .NET CLI command in the terminal:</p>
+<pre><code class="lang-sh">dotnet publish -c Release -r osx-x64 -p:PublishReadyToRun=false -p:TieredCompilation=false --self-contained
+</code></pre>
+<p>This command specifies:</p>
+<ul>
+<li><code>-c Release</code>: Builds in Release configuration for better performance.</li>
+<li><code>-r osx-x64</code>: Targets Intel (x64) macOS platforms.</li>
+<li><code>-p:PublishReadyToRun=false</code>: Disables ReadyToRun compilation (explained later).</li>
+<li><code>-p:TieredCompilation=false</code>: Disables Tiered Compilation (explained later).</li>
+<li><code>--self-contained</code>: Includes the .NET runtime in the package.</li>
+</ul>
+<p>The output from this command will be placed in a directory like <code>bin/Release/net8.0/osx-x64/publish/</code>, relative to the game's <code>.csproj</code> file.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>If your base game project is created with <strong>dotnet 9.0</strong> (which at the time of writing is the default), the above folder will be more like <code>bin/Release/net9.0/osx-x64/publish/</code>, just so you are aware.
+Noting the change in folder from <code>net8.0</code> to <code>net9.0</code>.</p>
+</div>
+<p>Next, to create the Apple Silicon (arm64) self contained application for macOS, in the same terminal window, execute the following .NET CLI command:</p>
+<pre><code class="lang-sh">dotnet publish -c Release -r osx-arm64 -p:PublishReadyToRun=false -p:TieredCompilation=false --self-contained
+</code></pre>
+<p>The only difference in this command is the use of <code>-r osx-arm64</code> which specifies to target the Apple Silicon (arm64) macOS platform.</p>
+<p>The output from this command will be placed in a directory like <code>bin/Release/net8.0/osx-arm64/publish/</code>, relative to the game's <code>.csproj</code> file.</p>
+<h4 id="creating-a-macos-application-bundle">Creating a macOS Application Bundle</h4>
+<p>With the Intel (x64) and Apple Silicon (arm64) builds completed, we can now create the macOS <strong>Application Bundle</strong>.  macOS applications follow a very specific directory structure:</p>
+<pre><code class="lang-sh">YourGame.app/
+├── Contents/
+│   ├── Info.plist
+│   ├── MacOS/
+│   │   └── YourGame
+│   └── Resources/
+│       ├── Content/
+│       └── YourGame.icns
+</code></pre>
+<p>To create this structure, from the same terminal window:</p>
+<ol>
+<li><p>First, create the folder structure by executing the following commands:</p>
+<pre><code class="lang-sh">mkdir -p bin/Release/DungeonSlime.app/Contents/MacOS/
+mkdir -p bin/Release/DungeonSlime.app/Contents/Resources/Content
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>The <code>mkdir -p</code> command creates directories including any necessary parent directories.  The <code>-p</code> flag ensures all intermediate directories are created without error if they do not exist yet.</p>
+</div>
+</li>
+<li><p>Copy all files from the Intel (x64) build to the MacOS directory. This ensures all the required dependencies are included. To do this, execute the following command:</p>
+<pre><code class="lang-sh">cp -R bin/Release/net8.0/osx-x64/publish/* bin/Release/DungeonSlime.app/Contents/MacOS/
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>This copies all files from the publish directory, including the executable, all dependent <code>.dll</code> files, and the <code>Content</code> directory that contains your game assets.</p>
+</div>
+</li>
+<li><p>Replace the executable with a universal binary that works on both Intel and Apple Silicon Macs. To do this, execute the following command:</p>
+<pre><code class="lang-sh">lipo -create bin/Release/net8.0/osx-arm64/publish/DungeonSlime bin/Release/net8.0/osx-x64/publish/DungeonSlime -output bin/Release/DungeonSlime.app/Contents/MacOS/DungeonSlime
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>The <code>lipo</code> command is a macOS utility that works with multi-architecture binaries.  Here, it combines the Intel (x64) and Apple Silicon (arm64) executables into a single &quot;universal binary&quot; that can run natively on both Apple Silicon and Intel processor based Macs.</p>
+</div>
+</li>
+<li><p>Move the Content directory from the MacOS directory to the Resources directory, following macOS application bundle conventions. To do this, execute the following command:</p>
+<pre><code class="lang-sh">mv bin/Release/DungeonSlime.app/Contents/MacOS/Content bin/Release/DungeonSlime.app/Contents/Resources/
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>This moves the <code>Content</code> directory to the expected location for resources in a macOS application bundles.</p>
+</div>
+</li>
+<li><p>Create a new file called <code>Info.plist</code> in the <code>Contents</code> directory of the application bundle with the following command:</p>
+<pre><code class="lang-sh">touch bin/Release/DungeonSlime.app/Contents/Info.plist
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>The <code>touch</code> command creates an empty file if it does not exist or updates the modification time if it does exist.  We are using it here to create a blank file that we will populate with content in the next step.</p>
+</div>
+</li>
+<li><p>Open the <code>Info.plist</code> file you just created in a text editor and add the following content to the file and save it.</p>
+<pre><code class="lang-xml" highlight-lines="8,10,12,16,30">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE plist PUBLIC &quot;-//Apple//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;
+&lt;plist version=&quot;1.0&quot;&gt;
+&lt;dict&gt;
+    &lt;key&gt;CFBundleDevelopmentRegion&lt;/key&gt;
+    &lt;string&gt;en&lt;/string&gt;
+    &lt;key&gt;CFBundleExecutable&lt;/key&gt;
+    &lt;string&gt;DungeonSlime&lt;/string&gt;
+    &lt;key&gt;CFBundleIconFile&lt;/key&gt;
+    &lt;string&gt;DungeonSlime&lt;/string&gt;
+    &lt;key&gt;CFBundleIdentifier&lt;/key&gt;
+    &lt;string&gt;com.yourdomain.dungeonslime&lt;/string&gt;
+    &lt;key&gt;CFBundleInfoDictionaryVersion&lt;/key&gt;
+    &lt;string&gt;6.0&lt;/string&gt;
+    &lt;key&gt;CFBundleName&lt;/key&gt;
+    &lt;string&gt;DungeonSlime&lt;/string&gt;
+    &lt;key&gt;CFBundlePackageType&lt;/key&gt;
+    &lt;string&gt;APPL&lt;/string&gt;
+    &lt;key&gt;CFBundleShortVersionString&lt;/key&gt;
+    &lt;string&gt;1.0&lt;/string&gt;
+    &lt;key&gt;CFBundleSignature&lt;/key&gt;
+    &lt;string&gt;FONV&lt;/string&gt;
+    &lt;key&gt;CFBundleVersion&lt;/key&gt;
+    &lt;string&gt;1&lt;/string&gt;
+    &lt;key&gt;LSApplicationCategoryType&lt;/key&gt;
+    &lt;string&gt;public.app-category.games&lt;/string&gt;
+    &lt;key&gt;LSMinimumSystemVersion&lt;/key&gt;
+    &lt;string&gt;10.15&lt;/string&gt;
+    &lt;key&gt;NSHumanReadableCopyright&lt;/key&gt;
+    &lt;string&gt;Copyright © 2025&lt;/string&gt;
+    &lt;key&gt;NSPrincipalClass&lt;/key&gt;
+    &lt;string&gt;NSApplication&lt;/string&gt;
+    &lt;key&gt;LSRequiresNativeExecution&lt;/key&gt;
+    &lt;true/&gt;
+    &lt;key&gt;LSArchitecturePriority&lt;/key&gt;
+    &lt;array&gt;
+        &lt;string&gt;arm64&lt;/string&gt;
+    &lt;/array&gt;
+&lt;/dict&gt;
+&lt;/plist&gt;
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>The <code>Info.plist</code> file is a critical component of any macOS application bundle.  It contains essential metadata that macOS uses to:</p>
+<ul>
+<li>Identify the application (bundle identifier, name, version).</li>
+<li>Display the application correctly in Finder and the Dock.</li>
+<li>Associate the correct icon with the application.</li>
+<li>Define the application's capabilities and requirements.</li>
+<li>Provide copyright and developer information.</li>
+</ul>
+<p>Without a properly formatted <code>Info.plist</code> file, macOS would not recognize your game as a valid application, and users would be unable to launch it through normal means.</p>
+</div>
+<div class="TIP">
+<h5>Tip</h5>
+<p>The highlighted sections in the <code>Info.plist</code> file need to be customized for your game:</p>
+<ul>
+<li>Replace all instances of &quot;DungeonSlime&quot; with your game's name.</li>
+<li>The <code>CFBundleIconFile</code> value (line 10) must exactly match the name of your <code>.icns</code> file that we will create in the next step.</li>
+<li>Update the bundle identifier on line 12 with your domain.</li>
+<li>Modify the copyright information on line 30 as needed.</li>
+</ul>
+<p>Getting these values right, especially the icon filename, ensures your game appears correctly on macOS.</p>
+<p>For more information on the <code>Info.plist</code> manifest file, refer to the <a href="https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Introduction/Introduction.html">About Info.plist Keys and Values</a> Apple Developer documentation.</p>
+</div>
+</li>
+<li><p>Next, create the application bundle <code>.icns</code> icon file. To do this, perform the following:</p>
+<ol>
+<li><p>First, you will need a <code>.png</code> file that can be used to create the icon set for the final <code>.icns</code> output.  If you already have a <code>.png</code> icon for your game, ensure it is in the root of the main project directory and is named <code>Icon.png</code>.  If you do not have one already prepared, you can use the <code>Icon.bmp</code> that was generated in the root of the main project directory when you initially created the project.  However, it will need to be converted to a <code>.png</code> first. To do this, execute the following command:</p>
+<pre><code class="lang-sh">sips -s format png Icon.bmp --out Icon.png        
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p><code>sips</code> (Scriptable Image Processing System) is a command line tool in macOS for image manipulation.  Here we are using it to convert a <code>.bmp</code> to a <code>.png</code>.  In a moment, we will also use it to resize the <code>.png</code> into different icon sizes required for the application bundle.</p>
+</div>
+</li>
+<li><p>Next, create a directory that we can output each of the generated <code>.png</code> icon files to for the icon set.  Execute the following command:</p>
+<pre><code class="lang-sh">mkdir -p bin/Release/DungeonSlime.iconset
+</code></pre>
+</li>
+<li><p>Now we use the <code>sips</code> command to generate the icon for each size required for a mac app bundle.  Each size generated is necessary for different display scenarios in macOS (Dock, Finder, etc.).  To do this, execute the following commands:</p>
+<pre><code class="lang-sh"> sips -z 16 16 Icon.png --out bin/Release/DungeonSlime.iconset/icon_16x16.png
+ sips -z 32 32 Icon.png --out bin/Release/DungeonSlime.iconset/icon_16x16@2x.png
+ sips -z 32 32 Icon.png --out bin/Release/DungeonSlime.iconset/icon_32x32.png
+ sips -z 64 64 Icon.png --out bin/Release/DungeonSlime.iconset/icon_32x32@2x.png
+ sips -z 128 128 Icon.png --out bin/Release/DungeonSlime.iconset/icon_128x128.png
+ sips -z 256 256 Icon.png --out bin/Release/DungeonSlime.iconset/icon_128x128@2x.png
+ sips -z 256 256 Icon.png --out bin/Release/DungeonSlime.iconset/icon_256x256.png
+ sips -z 512 512 Icon.png --out bin/Release/DungeonSlime.iconset/icon_256x256@2x.png
+ sips -z 512 512 Icon.png --out bin/Release/DungeonSlime.iconset/icon_512x512.png
+ sips -z 1024 1024 Icon.png --out bin/Release/DungeonSlime.iconset/icon_512x512@2x.png
+</code></pre>
+</li>
+<li><p>Finally, combine all of the generated icons for the icon set into a <code>.icns</code> file.  To do this, execute the following:</p>
+<pre><code class="lang-sh">iconutil -c icns bin/Release/DungeonSlime.iconset --output bin/Release/DungeonSlime.app/Contents/Resources/DungeonSlime.icns
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p><code>iconutil</code> is a command line tool in macOS used to convert icon sets into a single high-resolution <code>.icns</code> file.</p>
+</div>
+<div class="TIP">
+<h5>Tip</h5>
+<p>After creating the <code>.icns</code> file using the above command, if you open the folder in Finder with <code>DungeonSlime.app</code> and it shows a blank square as the icon instead of the one you just created, right-click on <code>DungeonSlime.app</code> and choose <code>Get Info</code> from the context menu.  This will force it to do a refresh and show the icon properly.  After doing this, if the icon still does not show, then you need to double check that the <code>CFBundleIconFile</code> value in the <code>Info.plist</code> is named <strong>exactly</strong> the same as the <code>.icns</code> file that was created (minus the extension).</p>
+</div>
+</li>
+</ol>
+</li>
+<li><p>Set executable permissions for the game executable.  To do this, execute the following command:</p>
+<pre><code class="lang-sh">chmod +x bin/Release/DungeonSlime.app/Contents/MacOS/DungeonSlime
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>the <code>chmod +x</code> command changes the file permissions to make it executable. Without this step, macOS would not be able to run the application.</p>
+</div>
+</li>
+</ol>
+<h4 id="distributing-for-macos">Distributing for macOS</h4>
+<p>For macOS distribution:</p>
+<ol>
+<li><p>Archive the application bundle using the <code>tar.gz</code> archive format to preserve the executable permissions that were set.  To do this, execute the following command in the same terminal window:</p>
+<pre><code class="lang-sh">tar -czf DungeonSlime-osx.tar.gz -C bin/Release/DungeonSlime.app
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>The <code>tar</code> command creates an archive file:</p>
+<ul>
+<li><code>-c</code> creates a new archive.</li>
+<li><code>-z</code> compresses the archive using gzip.</li>
+<li><code>-f</code> specifies the filename to create</li>
+<li><code>-C</code> changes to the specified directory before adding files.</li>
+</ul>
+<p>Unlike <strong>ZIP</strong> files, the <code>tar.gz</code> format preserves Unix file permissions, which is crucial for maintaining the executable permission we set in the previous steps.</p>
+</div>
+</li>
+<li><p>Distribute the <code>tar.gz</code> archive file to players.</p>
+</li>
+<li><p>Players can extract the <code>tar.gz</code> archive file and run the application bundle to play the game.</p>
+</li>
+</ol>
+</section>
+<section id="tabpanel_1_linux" role="tabpanel" data-tab="linux" aria-hidden="true" hidden="hidden">
+
+<p>Linux packaging is relatively straightforward, but requires attention to ensure executable permission are set.</p>
+<h4 id="building-for-linux">Building for Linux</h4>
+<p>To create a self-contained application for Linux, open a new Terminal window in the same folder as the <code>DungeonSlime.csproj</code> file (your main game project folder) and execute the following .NET CLI command:</p>
+<pre><code class="lang-sh">dotnet publish -c Release -r linux-x64 -p:PublishReadyToRun=false -p:TieredCompilation=false --self-contained
+</code></pre>
+<ul>
+<li><code>-c Release</code>: Builds in Release configuration for better performance.</li>
+<li><code>-r linux-x64</code>: Targets 64-bit Linux platforms.</li>
+<li><code>-p:PublishReadyToRun=false</code>: Disables ReadyToRun compilation (explained later).</li>
+<li><code>-p:TieredCompilation=false</code>: Disables Tiered Compilation (explained later).</li>
+<li><code>--self-contained</code>: Includes the .NET runtime in the package.</li>
+</ul>
+<p>The output will be placed in a directory like <code>bin/Release/net8.0/linux-x64/publish</code>, relative to the <code>DungeonSlime.csproj</code> file.  This folder will contain the executable and all necessary files to run the game.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>If your base game project is created with <strong>dotnet 9.0</strong> (which at the time of writing is the default), the above folder will be more like <code>bin/Release/net9.0/linux-x64/publish/</code>, just so you are aware.
+Noting the change in folder from <code>net8.0</code> to <code>net9.0</code>.</p>
+</div>
+<h4 id="creating-a-linux-distribution">Creating a Linux Distribution</h4>
+<p>Once you have created a build for Linux, to create a distributable archive:</p>
+<ol>
+<li><p>Ensure the main executable has proper execution permissions by executing the following command in the same terminal window:</p>
+<pre><code class="lang-sh">chmod +x bin/Release/net8.0/linux-x64/publish/DungeonSlime
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>the <code>chmod +x</code> command changes the file permissions to make it executable. Without this step, Linux would not be able to run the application.</p>
+</div>
+</li>
+<li><p>Package the game using the <code>tar.gz</code> archive format to preserve executable permissions by executing the following command:</p>
+<pre><code class="lang-sh">tar -czf DungeonSlime-linux-x64.tar.gz -C bin/Release/net8.0/linux-x64/publish/
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>The <code>tar</code> command creates an archive file:</p>
+<ul>
+<li><code>-c</code> creates a new archive.</li>
+<li><code>-z</code> compresses the archive using gzip.</li>
+<li><code>-f</code> specifies the filename to create</li>
+<li><code>-C</code> changes to the specified directory before adding files.</li>
+</ul>
+<p>Unlike <strong>ZIP</strong> files, the <code>tar.gz</code> format preserves Unix file permissions, which is crucial for maintaining the executable permission we set in the previous step.</p>
+</div>
+</li>
+</ol>
+</section>
+</div>
+<h2 id="important-net-publishing-parameters">Important .NET Publishing Parameters</h2>
+<p>When publishing your game, there are several .NET parameters that can significantly impact the performance of the game.  In the above sections, these are all set to the recommended values, however, we will examine them in detail below.</p>
+<h3 id="readytorun-r2r">ReadyToRun (R2R)</h3>
+<p>ReadyToRun is a feature in .NET that pre-compiles code to improve startup time.  This sounds like a good thing on paper, however, for games, it can lead to micro-stutters during gameplay.</p>
+<p>This happens because ReadyToRun-compiled code is initially of lower quality, and the Just-In-Time (JIT) compiler will trigger periodically to optimize the code further.  These optimization passes can cause visible stutters in the game.</p>
+<p>For games, it is recommended to disable ReadyToRun by setting <code>-p:PublishReadyToRun=false</code> in your publish command, which we have already included in our examples.</p>
+<p>For more information on ReadyToRun, refer to the <a href="https://learn.microsoft.com/en-us/dotnet/core/deploying/ready-to-run">ReadyToRun deployment overview</a> documentation on Microsoft Learn</p>
+<h3 id="tiered-compilation">Tiered Compilation</h3>
+<p>Tiered compilation is another .NET feature that works similarly to ReadyToRun.  It initially compiles code quickly at a lower optimization level, then recompiles frequently-used methods with higher optimization.</p>
+<p>While this improves application startup time, it can also cause stutters during gameplay as methods are recompiled.  It is recommended to disable tiered compilation by setting <code>-p:TieredCompilation=false</code> in your publish command, which we have already included in our examples.</p>
+<p>For more information on Tiered Compilation, refer to the <a href="https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-core-3-0#tiered-compilation">Tiered compilation</a> section on Microsoft Learn.</p>
+<h3 id="native-aot-ahead-of-time-compilation">Native AOT (Ahead-of-Time) Compilation</h3>
+<p>Native AOT compilation (specified with <code>-p:PublishAot=true</code>) compiles your entire application to native code at build time, eliminating the need for JIT compilation during runtime.  This can provide better performance and a smaller distribution size.</p>
+<p>However, AOT has limitations:</p>
+<ol>
+<li>No support for runtime reflection.</li>
+<li>No runtime code generation.</li>
+<li>Some third-party libraries your game uses may not be compatible.</li>
+</ol>
+<p>For MonoGame game, AOT can work well if you avoid these limitations.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Native AoT is recommended for mobile platforms due to its performance benefits and smaller binary size, which are important for mobile devices with limited resources.  Additionally, it is mandatory when targeting console platforms (Xbox, PlayStation, Switch) as these platforms typically do not support JIT compilation for security and performance reasons.</p>
+</div>
+<p>For more information on Native AOT, refer to the <a href="https://learn.microsoft.com/en-us/dotnet/core/deploying/native-aot/?tabs=windows%2Cnet8">Native AOT deployment overview</a> documentation on Microsoft Learn.</p>
+<h3 id="trimming">Trimming</h3>
+<p>Trimming (specified with <code>-p:Trimming:true</code>) removes unused code from your distribution to reduce size.  It is automatically enabled when using AOT.</p>
+<p>While trimming can significantly reduce your game's size, it may remove types that appear unused but are accessed indirectly through reflection or generics causing runtime errors.</p>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>Trimming can cause issues with content pipeline extensions that are used at runtime.  When the compiler cannot detect that certain types are used (especially with reflection or generic collections), they might be trimmed away, resulting in &quot;type not found&quot; exceptions when loading content.</p>
+<p>If you encounter runtime exceptions about missing types when loading content with trimming enabled, you can resolve this by ensuring the compiler recognizes the types being used at runtime by making the following call:</p>
+<pre><code class="lang-cs">ContentTypeReaderManager.AddTypeCreator(typeof(ReflectiveReader&lt;ReaderType&gt;).FullName, () =&gt; new ReflectiveReader&lt;ReaderType&gt;())
+</code></pre>
+<p>Where <code>ReaderType</code> is the <code>ContentTypeReader</code> of the content pipeline extension to be preserved.  This call should be made somewhere in your code before loading content that uses these types.</p>
+</div>
+<p>For more information on Trimming, refer to the <a href="https://learn.microsoft.com/en-us/dotnet/core/deploying/trimming/trim-self-contained">Trim self-contained applications</a> documentation on Microsoft Learn.</p>
+<h3 id="single-file-publishing">Single File Publishing</h3>
+<p>Single file publishing packages your entire application into a single executable.  While this sounds convenient, it is essentially a self-extracting archive that extracts to a temporary directory at runtime.</p>
+<p>This can significantly increase startup time for larger games and may fail on system with restricted permissions or limited storage.  For this reason, it is not recommended to use this option for games.</p>
+<p>For more information on Single File Publishing, refer to the <a href="https://learn.microsoft.com/en-us/dotnet/core/deploying/single-file/overview?tabs=cli">Create a single file for application deployment</a> documentation on Microsoft Learn.</p>
+<h2 id="cross-platform-considerations">Cross-Platform Considerations</h2>
+<p>When distributing your games across multiple platforms, be aware of these additional considerations:</p>
+<h3 id="file-paths">File Paths</h3>
+<p>Different operating systems use different path separators (Windows uses backslashes, macOS and Linux use forward slashes).  Always use <code>Path.Combine</code> in your code rather than hardcoding path separators.</p>
+<pre><code class="lang-cs">// Incorrect approach - will fail on some platforms
+string path = &quot;Content\\images\\atlas-definition.xml&quot;; 
+
+// Correct approach, works on all platforms
+string path = Path.Combine(&quot;Content&quot;, &quot;images&quot;, &quot;atlas-definition.xml&quot;);
+</code></pre>
+<h3 id="case-sensitivity">Case Sensitivity</h3>
+<p>Windows is case-insensitive for filenames, but macOS and Linux are case-sensitive.  Ensure your asset references use the exact case that matches your files for maximum compatibility.</p>
+<pre><code class="lang-cs">// If the content path on disk is:
+// images/Atlas.xnb
+
+// On Windows, this would work fine since windows is case-insensitive.
+// On macOS and Linux, this would fail since they are case-sensitive.
+Texture2D text = Content.Load&lt;Texture2D&gt;(&quot;images/atlas&quot;);
+</code></pre>
+<h3 id="external-dependencies">External Dependencies</h3>
+<p>Try to minimize external dependencies.  If your game requires additional libraries or runtimes, document these requirements clearly for players.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>When publishing to distribution platforms and app stores (such as Steam, Epic Game Store, App Store, or Google Play), you are typically required to disclose all external dependencies in your privacy policy or a dedicated dependencies section.  This includes third-party libraries, analytics tools, and any software components that your game depends on.</p>
+<p>Check specific requirements for each distribution platform you plant to target, as well as requirements by third-party libraries for using them, as disclosure requirements may vary.</p>
+</div>
+<h2 id="asset-security-and-protection">Asset Security and Protection</h2>
+<p>When distributing your game, you may have concerns about protecting your assets and code from unauthorized access or reverse engineering.  It is important to understand the practical limitations and trade-offs involved in various security approaches.</p>
+<h3 id="xnb-asset-protection">XNB Asset Protection</h3>
+<p>MonoGame's content pipeline compiles assets into compressed XNB format, which provides a basic level of protection for your game content.  For the majority of indie game projects, this compression is sufficient protection for several reasons:</p>
+<ul>
+<li><strong>XNB files are not standard formats</strong>: Unlike raw images or audio files, XNB files require specific knowledge and tools to extract.  While the XNB format is documented and part of the MonoGame open source code, this still creates a barrier for the casual user.</li>
+<li><strong>Practical protection</strong>: While not cryptographically secure, XNB compression deters casual attempts at asset extraction.</li>
+<li><strong>Performance benefits</strong>: The primary purpose of XNB compilation is optimization, with content protection being a secondary benefit.</li>
+<li><strong>Cross-platform consistency</strong>: The same XNB format works across all MonoGame platforms without additional configuration.</li>
+</ul>
+<div class="TIP">
+<h5>Tip</h5>
+<p>Unless you are working with highly valuable or sensitive assets (such as unreleased music from major artists or proprietary artwork), the standard XNB compression provides adequate protection for most games.</p>
+</div>
+<h3 id="code-obfuscation">Code Obfuscation</h3>
+<p>For protecting your game's source code logic, obfuscation tools can make reverse engineering more difficult by renaming variables, restructuring code flow, and adding dummy logic paths. However, code obfuscation comes with significant trade-offs:</p>
+<ul>
+<li><strong>Performance impact</strong>: Obfuscated code often runs slower than clean, optimized code due to additional indirection and complexity.</li>
+<li><strong>Debugging complexity</strong>: Stack traces become unreadable, making it nearly impossible to diagnose issues reported by players.</li>
+<li><strong>Build process overhead</strong>: Additional build steps, tools, and integration are required in your development workflow.</li>
+<li><strong>Platform limitations</strong>: Some obfuscation techniques may not work correctly across all target platforms or may interfere with .NET features that MonoGame uses internally.</li>
+<li><strong>Compatibility issues</strong>: Obfuscation can break reflection-based code or third-party libraries.</li>
+</ul>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>Consider whether the performance cost of obfuscation is worth the potential security benefits for your specific project.  For most indie game, the impact on player experience may outweigh the security advantages.</p>
+</div>
+<h3 id="the-reality-of-modern-society">The Reality of Modern Society</h3>
+<p>It is crucial to understand that in the modern digital landscape, no security measure is truly impenetrable:</p>
+<ul>
+<li><strong>Corporate security investments</strong>: Major corporations invest millions of dollars annually in security research and implementation, yet breaches still occur regularly. This demonstrates the fundamental challenge of client-side protection.</li>
+<li><strong>Advanced tools</strong>: Sophisticated reverse engineering tools are readily available and constantly improving, making traditional protection less effective.</li>
+<li><strong>AI-assisted analysis</strong>: Artificial intelligence can now assist in code analysis and pattern recognition, making traditional obfuscation techniques less reliable.</li>
+<li><strong>Determined attackers</strong>: If someone is sufficiently motived to extract your assets or reverse engineer your code, they will likely succeed regardless of protection measures.</li>
+<li><strong>Diminished returns</strong>: For indie developers, time spent on extensive security measures often exceeds the value of the content being protected and could be better invested in core development.</li>
+</ul>
+<h3 id="practical-security-recommendations">Practical Security Recommendations</h3>
+<p>For most MonoGame projects, consider these practical approaches to content protection:</p>
+<ol>
+<li><strong>Accept standard protection</strong>: The built-in XNB compression is sufficient for typical use cases and provides the good balance of protection and performance.</li>
+<li><strong>Focus on gameplay</strong>: Invest development time in creating compelling gameplay rather than extensive security measures.</li>
+<li><strong>Legal protection</strong>: Consider proper licensing, terms of service, and copyright notices as your primary protection—intellectual property law provides stronger protection than technical measures.</li>
+<li><strong>Contractual compliance</strong>: If using licensed assets with specific protection requirements, work with the licensor to understand what constitutes &quot;reasonable protection.&quot;</li>
+<li><strong>Threat assessment</strong>: Realistically evaluate whether your game is likely to be a target for asset extraction or reverse engineering.</li>
+</ol>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Remember that the goal of asset protection should be to deter the casual extraction, not to create an impenetrable fortress.  The time and resources spent on extensive security measures are often better invested in improving the game itself.</p>
+</div>
+<h2 id="mobile-platforms">Mobile Platforms</h2>
+<p>While this tutorial series has focused on creating a 2D game for desktop platforms, MonoGame also offers support for mobile development on Android and iOS.  The game we have built throughout this series could be adapted for touch controls and distributed through mobile app stores with additional work.</p>
+<p>Mobile deployment involves several considerations beyond those of desktop platforms:</p>
+<ul>
+<li>App store submission process and platform-specific requirements.</li>
+<li>Platform-specific signing and certification procedures.</li>
+<li>Extensive device compatibility testing across various screen sizes and hardware.</li>
+<li>Optimization of touch input controls (replacing our keyboard and gamepad input).</li>
+<li>Power consumption management and performance optimization for mobile hardware.</li>
+</ul>
+<p>For the Dungeon Slime game, adapting to mobile would require:</p>
+<ul>
+<li>Implementing touch controls to replace the keyboard/gamepad movement.</li>
+<li>Potentially rethinking game mechanics to suit mobile play patterns.</li>
+</ul>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Mobile deployment for MonoGame games is significantly more complex than desktop deployment and typically requires platform-specific development environments (Android Studio for Android and Xcode for iOS).  A comprehensive guide to mobile deployment will be covered in a future tutorial.</p>
+</div>
+<p>If you are interested in extending the Dungeon Slime game, or future games, to mobile platforms after completing this tutorial series, these resources provide a good starting point:</p>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/previous-versions/xamarin/android/deploy-test/publishing/">Android Deployment Guide</a></li>
+<li><a href="https://learn.microsoft.com/en-us/previous-versions/xamarin/ios/deploy-test/app-distribution/app-store-distribution/publishing-to-the-app-store?tabs=windows">iOS App Store Distribution</a></li>
+</ul>
+<h2 id="third-party-packaging-tools">Third-Party Packaging Tools</h2>
+<p>While the platform-specific packaging steps outlined in this chapter give you complete control over the distribution process, they require multiple commands and potentially access to different operating systems.  Fortunately, the MonoGame community has developed several tools that can automate these packaging steps across platforms.</p>
+<h3 id="gamebundle">GameBundle</h3>
+<p><a href="https://github.com/Ellpeck/GameBundle">GameBundle</a> is a .NET command-line tool created by <a href="https://github.com/Ellpeck">Ellpeck</a> that simplifies packaging MonoGame and other .NET applications into several distributable formats.  This tool can automatically bundle your game for Windows, Linux, and macOS platforms, create applications bundles for macOS, and handle various packaging configurations with a single command.</p>
+<p>For more information about GameBundle, including installation and usage instructions, visit the <a href="https://github.com/Ellpeck/GameBundle">official repository on GitHub</a></p>
+<h3 id="monopack">MonoPack</h3>
+<p><a href="https://github.com/shyfox-studio/MonoPack">MonoPack</a> is a .NET command-line tool created by <a href="https://github.com/shyfox-studio">ShyFox Studio</a> designed specifically for MonoGame projects.  According to its documentation, &quot;MonoPack is a dotnet tool used for MonoGame projects to package the game for Windows, Linux, and/or macOS&quot;.</p>
+<p>Key features include:</p>
+<ul>
+<li>Cross-platform packaging capabilities (build for any OS from any OS).</li>
+<li>Automatic creation of macOS application bundles.</li>
+<li>Appropriate compression formats for each target platform for distribution.</li>
+</ul>
+<p>For more information about MonoPack, including installation and usage instructions, visit the <a href="https://github.com/shyfox-studio/MonoPack">official repository on GitHub</a></p>
+<h2 id="conclusion">Conclusion</h2>
+<p>In this chapter, you learned how to package your MonoGame project for distribution across Windows, macOS, and Linux platforms. You now understand how to create self-contained deployments for each target platform, the impact of various .NET publishing options on game performance, and important cross-platform considerations.</p>
+<p>Whether you choose to use the manual platform-specific packaging steps or automate the process with tools like <a href="#gamebundle">GameBundle</a> or <a href="#monopack">MonoPack</a>, you now have the knowledge to ensure your game runs smoothly for players across different platforms without requiring them to install additional dependencies.</p>
+<h2 id="test-your-knowledge">Test Your Knowledge</h2>
+<ol>
+<li><p>Why is it recommended to use self-contained deployments for distributing MonoGame games?</p>
+<p>:::question-answer
+Self-contained deployments package your game with all necessary .NET dependencies, ensuring players can run the game without installing the .NET runtime. This simplifies distribution, guarantees your game uses the exact runtime version it was developed with, and provides a better player experience despite the larger package size.
+:::</p>
+</li>
+<li><p>Why should ReadyToRun and Tiered Compilation be disabled when publishing games?</p>
+<p>:::question-answer
+ReadyToRun and Tiered Compilation both initially produce lower-quality code that gets optimized during runtime. This dynamic optimization process causes micro-stutters during gameplay as the Just-In-Time compiler triggers to improve code quality. Disabling these features results in slightly longer startup times but provides smoother gameplay without performance hitches.
+:::</p>
+</li>
+<li><p>What is the purpose of the <code>Info.plist</code> file when creating a macOS application bundle?</p>
+<p>:::question-answer
+The <code>Info.plist</code> file contains essential metadata about the macOS application, including the bundle identifier, application name, version, copyright information, minimum system requirements, and other configuration details. macOS requires this file to properly recognize and display the application in the Finder and Dock, and to associate the correct icon and file types with the application.
+:::</p>
+</li>
+<li><p>What is the advantage of using a tar.gz archive over zip file when distributing for macOS and Linux?</p>
+<p>:::question-answer
+A tar.gz archive preserves Unix file permissions, which is crucial for maintaining the executable permissions set on game files.  Without these permissions, users would need to manually set execute permissions before running the game.  ZIP files do not reliably preserve these Unix-specific permissions, which could prevent the game from running directly after extraction on macOS and Linux platforms.
+:::</p>
+</li>
+<li><p>What is the purpose of creating a universal binary for macOS distributions?</p>
+<p>:::question-answer
+A universal binary combines executables for multiple CPU architectures (Intel x64 and Apple Silicon arm64) into a single file.  This allows the game to run natively on both older Intel-based Macs and newer Apple Silicon Macs without requiring separate distributions.
+:::</p>
+</li>
+</ol>
+
+</article>
+                </div>
+
+            </main>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/jquery.twbsPagination.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/jquery.mark.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/url.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/anchor-js@5.0.0/anchor.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/docfx.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/main.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/singulink.js"></script>    </body>
+</html>

@@ -1,0 +1,91 @@
+### YamlMime:ManagedReference
+items:
+- uid: Hallowed.Graphics
+  commentId: N:Hallowed.Graphics
+  id: Hallowed.Graphics
+  children:
+  - Hallowed.Graphics.AnimatedSprite
+  - Hallowed.Graphics.Sprite
+  - Hallowed.Graphics.SpriteAnchor
+  - Hallowed.Graphics.SpriteAnimationData
+  - Hallowed.Graphics.SpriteOrientation
+  - Hallowed.Graphics.TextureAtlas
+  - Hallowed.Graphics.TextureWrapper
+  langs:
+  - csharp
+  - vb
+  name: Hallowed.Graphics
+  nameWithType: Hallowed.Graphics
+  fullName: Hallowed.Graphics
+  type: Namespace
+  assemblies:
+  - Hallowed
+references:
+- uid: Hallowed.Graphics.AnimatedSprite
+  commentId: T:Hallowed.Graphics.AnimatedSprite
+  href: Hallowed.Graphics.AnimatedSprite.html
+  name: AnimatedSprite
+  nameWithType: AnimatedSprite
+  fullName: Hallowed.Graphics.AnimatedSprite
+- uid: Hallowed.Graphics.SpriteAnimationData
+  commentId: T:Hallowed.Graphics.SpriteAnimationData
+  parent: Hallowed.Graphics
+  href: Hallowed.Graphics.SpriteAnimationData.html
+  name: SpriteAnimationData
+  nameWithType: SpriteAnimationData
+  fullName: Hallowed.Graphics.SpriteAnimationData
+- uid: Hallowed.Graphics.SpriteOrientation
+  commentId: T:Hallowed.Graphics.SpriteOrientation
+  parent: Hallowed.Graphics
+  href: Hallowed.Graphics.SpriteOrientation.html
+  name: SpriteOrientation
+  nameWithType: SpriteOrientation
+  fullName: Hallowed.Graphics.SpriteOrientation
+- uid: Hallowed.Graphics.Sprite
+  commentId: T:Hallowed.Graphics.Sprite
+  parent: Hallowed.Graphics
+  href: Hallowed.Graphics.Sprite.html
+  name: Sprite
+  nameWithType: Sprite
+  fullName: Hallowed.Graphics.Sprite
+- uid: Hallowed.Graphics.SpriteAnchor
+  commentId: T:Hallowed.Graphics.SpriteAnchor
+  href: Hallowed.Graphics.SpriteAnchor.html
+  name: SpriteAnchor
+  nameWithType: SpriteAnchor
+  fullName: Hallowed.Graphics.SpriteAnchor
+- uid: Hallowed.Graphics.TextureAtlas
+  commentId: T:Hallowed.Graphics.TextureAtlas
+  parent: Hallowed.Graphics
+  href: Hallowed.Graphics.TextureAtlas.html
+  name: TextureAtlas
+  nameWithType: TextureAtlas
+  fullName: Hallowed.Graphics.TextureAtlas
+- uid: Hallowed.Graphics.TextureWrapper
+  commentId: T:Hallowed.Graphics.TextureWrapper
+  href: Hallowed.Graphics.TextureWrapper.html
+  name: TextureWrapper
+  nameWithType: TextureWrapper
+  fullName: Hallowed.Graphics.TextureWrapper
+- uid: Hallowed.Graphics
+  commentId: N:Hallowed.Graphics
+  href: Hallowed.html
+  name: Hallowed.Graphics
+  nameWithType: Hallowed.Graphics
+  fullName: Hallowed.Graphics
+  spec.csharp:
+  - uid: Hallowed
+    name: Hallowed
+    href: Hallowed.html
+  - name: .
+  - uid: Hallowed.Graphics
+    name: Graphics
+    href: Hallowed.Graphics.html
+  spec.vb:
+  - uid: Hallowed
+    name: Hallowed
+    href: Hallowed.html
+  - name: .
+  - uid: Hallowed.Graphics
+    name: Graphics
+    href: Hallowed.Graphics.html

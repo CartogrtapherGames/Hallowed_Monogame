@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Supported Platforms | hallowed </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Supported Platforms | hallowed ">
+      <meta name="generator" content="docfx ">
+  
+      <link rel="shortcut icon" href="../../../../favicon.ico">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/night-owl.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" integrity="sha384-EvBWSlnoFgZlXJvpzS+MAUEjvN7+gcCwH+qh7GRFOGgZO0PuwOFro7qPOJnLfe7l" crossorigin="anonymous">
+      <link rel="stylesheet" href="../../../../styles/config.css">
+      <link rel="stylesheet" href="../../../../styles/singulink.css">
+      <link rel="stylesheet" href="../../../../styles/main.css">
+      <meta property="docfx:navrel" content="../../../../toc.html">
+      <meta property="docfx:tocrel" content="../toc.html">
+  
+  <meta property="docfx:rel" content="../../../../">
+  
+    </head>
+    <body>
+        <!-- Header required for docfx anchor scroll to work -->
+        <header id="head"></header>
+        <div class="top-navbar">
+            <a class="burger-icon" onclick="toggleMenu()">
+                <svg name="Hamburger" style="vertical-align: middle;" width="34" height="34" viewbox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M20 6H4V9H20V6ZM4 10.999H20V13.999H4V10.999ZM4 15.999H20V18.999H4V15.999Z"></path></svg>
+            </a>
+
+
+            <a class="brand" href="../../../../index.html">
+              <img src="../../../../logo.svg" alt="hallowed" class="logomark">
+              <span class="brand-title">hallowed</span>
+            </a>        </div>
+
+        <div class="body-content">
+            <div id="blackout" class="blackout" onclick="toggleMenu()"></div>
+
+            <nav id="sidebar" role="navigation">
+                <div class="sidebar">
+
+                    <div>
+                      <div class="mobile-hide">
+
+                        <a class="brand" href="../../../../index.html">
+                          <img src="../../../../logo.svg" alt="hallowed" class="logomark">
+                          <span class="brand-title">hallowed</span>
+                        </a>                      </div>
+
+                      <div class="sidesearch">
+                        <form id="search" role="search" class="search">
+                            <i class="bi bi-search search-icon"></i>
+                            <input type="text" id="search-query" placeholder="Search" autocomplete="off">
+                        </form>
+                      </div>
+
+                      <div id="navbar">
+                      </div>
+                    </div>                    <div class="sidebar-item-separator"></div>
+
+                        <div id="sidetoggle">
+                          <div id="sidetoc"></div>
+                        </div>
+                </div>
+                <div class="footer">
+  
+  <strong><a href='https://dotnet.github.io/docfx/'>DocFX</a> + <a href='https://www.singulink.com'>Singulink</a> = ♥</strong>
+                </div>            </nav>
+
+            <main class="main-panel">
+
+                <div id="search-results" style="display: none;">
+                  <h1 class="search-list">Search Results for <span></span></h1>
+                  <div class="sr-items">
+                    <p><i class="bi bi-hourglass-split index-loading"></i></p>
+                  </div>
+                  <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+                </div>
+ 
+
+                <div role="main" class="hide-when-search">
+
+                        <div class="subnav navbar navbar-default">
+                          <div class="container hide-when-search" id="breadcrumb">
+                            <ul class="breadcrumb">
+                              <li></li>
+                            </ul>
+                          </div>
+                        </div>
+
+                         <div class="contribution">
+                               <a href="https://github.com/MonoGame/docs.monogame.github.io/blob/main/articles/getting_started/platforms.md/#L1" class="contribution-link">Edit this page</a>
+                         </div>
+
+                    <article class="content wrap" id="_content" data-uid="">
+
+
+<p>MonoGame supports building games for the following <strong>systems</strong>:</p>
+<table>
+<thead>
+<tr>
+<th><strong>Desktop PCs</strong></th>
+<th><strong>Mobiles</strong></th>
+<th><strong>Gaming consoles</strong>*</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Windows<br>macOS<br>Linux</td>
+<td>iOS<br>iPadOS<br>Android</td>
+<td>Xbox<br>PlayStation 4<br>PlayStation 5<br>Nintendo Switch</td>
+</tr>
+</tbody>
+</table>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>*<em>Gaming consoles are restricted to registered developers and are not publicly available nor publicly documented. To get access to those platforms, please contact your console account manager(s). MonoGame documentation for closed platforms is available in their respective repositories.</em></p>
+</div>
+<h2 id="understanding-monogames-platform-types">Understanding MonoGame's platform types</h2>
+<p>There are different implementations of MonoGame that we call <strong>target platforms</strong> (or just <strong>platforms</strong>).</p>
+<p>The platforms mostly correspond to the systems MonoGame supports but some platforms support multiple systems. For instance, the <em>DesktopGL</em> platform can be used to build games that will run either on Windows, macOS, or Linux with the same base code and project.</p>
+<p>Each platform comes with its own project template that you can choose when starting a project.</p>
+<p>Below is a list of public platforms with their corresponding NuGet package, the <code>dotnet new</code> template identifier, and an explanation of the platform.</p>
+<ul>
+<li><a href="#windowsdx">WindowsDX</a></li>
+<li><a href="#desktopgl">DesktopGL</a></li>
+<li><a href="#android">Android</a></li>
+<li><a href="#ios">iOS</a></li>
+</ul>
+<p>Beside these target platforms, MonoGame provides additional templates for shared game logic and extensions to the MonoGame Content Pipeline that can be used across all platforms.</p>
+<ul>
+<li><a href="#understanding-monogames-platform-types">Understanding MonoGame's platform types</a></li>
+<li><a href="#platform-details">Platform details</a>
+<ul>
+<li><a href="#windowsdx">WindowsDX</a></li>
+<li><a href="#desktopgl">DesktopGL</a></li>
+<li><a href="#android">Android</a></li>
+<li><a href="#ios">iOS</a></li>
+</ul>
+</li>
+<li><a href="#other-templates">Other templates</a>
+<ul>
+<li><a href="#net-class-library">.NET Class Library</a></li>
+<li><a href="#shared-project">Shared Project</a></li>
+<li><a href="#content-pipeline-extension">Content Pipeline Extension</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="platform-details">Platform details</h2>
+<h3 id="windowsdx">WindowsDX</h3>
+<table>
+<thead>
+<tr>
+<th><strong>Supported Systems</strong></th>
+<th><strong>NuGet Package</strong></th>
+<th><strong>Template ID</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Windows</td>
+<td>MonoGame.Framework.WindowsDX</td>
+<td>mgwindowsdx</td>
+</tr>
+</tbody>
+</table>
+<p>WindowsDX uses WinForms to manage the game window, <strong>DirectX</strong> (9.0c or newer) is used for graphics, and XAudio is used for audio.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>DX 12 for Windows and Xbox coming very soon.</p>
+</div>
+<p>You can target <strong>Windows</strong>* 8.1 and up with this platform.</p>
+<p>WindowsDX requires the <a href="https://www.microsoft.com/en-us/download/details.aspx?id=8109">DirectX June 2010</a> runtime to both build and run games. Make sure that your players have it installed (otherwise you might be missing sound and gamepad rumble support).</p>
+<h3 id="desktopgl">DesktopGL</h3>
+<table>
+<thead>
+<tr>
+<th><strong>Supported Systems</strong></th>
+<th><strong>NuGet Package</strong></th>
+<th><strong>Template ID</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Windows, macOS, Linux</td>
+<td>MonoGame.Framework.DesktopGL</td>
+<td>mgdesktopgl</td>
+</tr>
+</tbody>
+</table>
+<p>DesktopGL uses SDL for windowing, <strong>OpenGL</strong> for graphics, and OpenAL-Soft for audio.</p>
+<p>DesktopGL supports <strong>Windows</strong> (8.1 and up), <strong>macOS</strong> (Catalina 10.15 and up) and <strong>Linux</strong> (64bit-only).</p>
+<p>DesktopGL requires at least OpenGL 2.0 with the ARB_framebuffer_object extension (or alternatively at least OpenGL 3.0).</p>
+<p>DesktopGL is a convenient way to publish builds for Windows, macOS, and Linux from a single project and source code. It also allows to cross-compile any build from any of these operating systems (e.g. you can build a Linux game from Windows).</p>
+<p>You can target Windows 8.1 (and up), macOS Catalina 10.15 (and up), and Linux with this platform.</p>
+<p>DesktopGL currently does not have a <code>VideoPlayer</code> implementation.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>New native platform with upgraded libraries and Metal/Vulkan support coming very soon.</p>
+</div>
+<h3 id="android">Android</h3>
+<table>
+<thead>
+<tr>
+<th><strong>Supported Systems</strong></th>
+<th><strong>NuGet Package</strong></th>
+<th><strong>Template ID</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Android</td>
+<td>MonoGame.Framework.Android</td>
+<td>mgandroid</td>
+</tr>
+</tbody>
+</table>
+<p>The Android platform uses <a href="https://docs.microsoft.com/en-us/xamarin/android/">Xamarin.Android</a>. <strong>OpenGL</strong> is used for graphics, and OpenAL for audio.</p>
+<p>Building for Android requires the .NET Xamarin component to be installed. You can install it with the Visual Studio installer (if you are using Visual Studio) or with the CLI command <code>dotnet workload install android</code> (if you are working with Rider, VS Code, or the CLI).</p>
+<p>Building for Android also requires the Java 11 JDK (we recommend that you use <a href="https://docs.microsoft.com/en-us/java/openjdk/download#openjdk-11">the Microsoft's distribution</a>) as well as the Android SDK 31.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>New native platform with upgraded libraries and Metal/Vulkan support coming very soon.</p>
+</div>
+<h3 id="ios">iOS</h3>
+<table>
+<thead>
+<tr>
+<th><strong>Supported Systems</strong></th>
+<th><strong>NuGet Package</strong></th>
+<th><strong>Template ID</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>iOS, iPadOS</td>
+<td>MonoGame.Framework.iOS</td>
+<td>mgios</td>
+</tr>
+</tbody>
+</table>
+<p>The iOS platform uses <a href="https://docs.microsoft.com/en-us/xamarin/ios/">Xamarin.iOS</a>. <strong>OpenGL</strong> is used for graphics, and OpenAL for audio.</p>
+<p>Building for iOS requires the .NET Xamarin component to be installed. You can install it with the Visual Studio installer (if you are using Visual Studio) or with the CLI command <code>dotnet workload install ios</code> (if you are working with Rider, VS Code, or the CLI).</p>
+<p>The latest version of Xcode will also be required.</p>
+<p>You can test and deploy an iOS game on Windows by <a href="https://docs.microsoft.com/en-us/xamarin/ios/get-started/installation/windows/connecting-to-mac/">pairing your Visual Studio 2022 with a mac on your local network</a>. This feature is not available for Rider, Visual Studio Code, or the CLI.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>New native platform with upgraded libraries and Metal/Vulkan support coming very soon.</p>
+</div>
+<h2 id="other-templates">Other templates</h2>
+<h3 id="net-class-library">.NET Class Library</h3>
+<p><strong>Template ID</strong>: mglib</p>
+<p>A project template to create <a href="https://learn.microsoft.com/en-us/dotnet/standard/class-library-overview">.NET</a> libraries to distribute code through a DLL. This can be used to redistribute libraries or to share code between multiple projects (like different platforms).</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>See the <a href="https://github.com/MonoGame/MonoGame.Samples">MonoGame Samples</a> for examples of how a .NET class library is used to share code between platforms.</p>
+</div>
+<h3 id="shared-project">Shared Project</h3>
+<p><strong>Template ID</strong>: mgshared</p>
+<p>A project template to create a <a href="https://docs.microsoft.com/en-us/xamarin/cross-platform/app-fundamentals/shared-projects">shared project</a> which can be used to share code between multiple other projects. The difference with .NET Standard libraries is that shared projects do not produce an intermediate DLL and the code is directly shared and built into the other projects it reference.</p>
+<h3 id="content-pipeline-extension">Content Pipeline Extension</h3>
+<p><strong>Template ID</strong>: mgpipeline</p>
+<p>A project template for writing custom logic for handling content and building it into XNB files.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>See <a href="../getting_to_know/whatis/content_pipeline/CP_Overview.html">What Is the Content Pipeline?</a> for more infomation and read about <a href="../getting_to_know/whatis/content_pipeline/CP_AddCustomProcImp.html">What is a Custom Importer</a> here.</p>
+</div>
+
+</article>
+                </div>
+
+            </main>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+        <script type="text/javascript" src="../../../../styles/jquery.twbsPagination.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/jquery.mark.min.js"></script>
+        <script type="text/javascript" src="../../../../styles/url.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/anchor-js@5.0.0/anchor.min.js"></script>
+        <script type="text/javascript" src="../../../../styles/docfx.js"></script>
+        <script type="text/javascript" src="../../../../styles/main.js"></script>
+        <script type="text/javascript" src="../../../../styles/singulink.js"></script>    </body>
+</html>

@@ -2,6 +2,10 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hallowed", "Hallowed\Hallowed.csproj", "{31E049BB-5CCE-4C66-BD63-1CA412D8A9B2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample", "Sample\Sample.csproj", "{E3E93B8B-C4FC-4E04-A479-8878234E2A30}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HallowedEditor", "HallowedEditor\HallowedEditor.csproj", "{82944656-CC9A-41F0-8360-48EC066EA590}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +16,13 @@ Global
 		{31E049BB-5CCE-4C66-BD63-1CA412D8A9B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31E049BB-5CCE-4C66-BD63-1CA412D8A9B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31E049BB-5CCE-4C66-BD63-1CA412D8A9B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3E93B8B-C4FC-4E04-A479-8878234E2A30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3E93B8B-C4FC-4E04-A479-8878234E2A30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3E93B8B-C4FC-4E04-A479-8878234E2A30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3E93B8B-C4FC-4E04-A479-8878234E2A30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82944656-CC9A-41F0-8360-48EC066EA590}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82944656-CC9A-41F0-8360-48EC066EA590}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82944656-CC9A-41F0-8360-48EC066EA590}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82944656-CC9A-41F0-8360-48EC066EA590}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Loading Additional Content Types? | hallowed </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Loading Additional Content Types? | hallowed ">
+      <meta name="generator" content="docfx ">
+  
+      <link rel="shortcut icon" href="../../../../../../favicon.ico">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/night-owl.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" integrity="sha384-EvBWSlnoFgZlXJvpzS+MAUEjvN7+gcCwH+qh7GRFOGgZO0PuwOFro7qPOJnLfe7l" crossorigin="anonymous">
+      <link rel="stylesheet" href="../../../../../../styles/config.css">
+      <link rel="stylesheet" href="../../../../../../styles/singulink.css">
+      <link rel="stylesheet" href="../../../../../../styles/main.css">
+      <meta property="docfx:navrel" content="../../../../../../toc.html">
+      <meta property="docfx:tocrel" content="../../../toc.html">
+  
+  <meta property="docfx:rel" content="../../../../../../">
+  
+    </head>
+    <body>
+        <!-- Header required for docfx anchor scroll to work -->
+        <header id="head"></header>
+        <div class="top-navbar">
+            <a class="burger-icon" onclick="toggleMenu()">
+                <svg name="Hamburger" style="vertical-align: middle;" width="34" height="34" viewbox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M20 6H4V9H20V6ZM4 10.999H20V13.999H4V10.999ZM4 15.999H20V18.999H4V15.999Z"></path></svg>
+            </a>
+
+
+            <a class="brand" href="../../../../../../index.html">
+              <img src="../../../../../../logo.svg" alt="hallowed" class="logomark">
+              <span class="brand-title">hallowed</span>
+            </a>        </div>
+
+        <div class="body-content">
+            <div id="blackout" class="blackout" onclick="toggleMenu()"></div>
+
+            <nav id="sidebar" role="navigation">
+                <div class="sidebar">
+
+                    <div>
+                      <div class="mobile-hide">
+
+                        <a class="brand" href="../../../../../../index.html">
+                          <img src="../../../../../../logo.svg" alt="hallowed" class="logomark">
+                          <span class="brand-title">hallowed</span>
+                        </a>                      </div>
+
+                      <div class="sidesearch">
+                        <form id="search" role="search" class="search">
+                            <i class="bi bi-search search-icon"></i>
+                            <input type="text" id="search-query" placeholder="Search" autocomplete="off">
+                        </form>
+                      </div>
+
+                      <div id="navbar">
+                      </div>
+                    </div>                    <div class="sidebar-item-separator"></div>
+
+                        <div id="sidetoggle">
+                          <div id="sidetoc"></div>
+                        </div>
+                </div>
+                <div class="footer">
+  
+  <strong><a href='https://dotnet.github.io/docfx/'>DocFX</a> + <a href='https://www.singulink.com'>Singulink</a> = ♥</strong>
+                </div>            </nav>
+
+            <main class="main-panel">
+
+                <div id="search-results" style="display: none;">
+                  <h1 class="search-list">Search Results for <span></span></h1>
+                  <div class="sr-items">
+                    <p><i class="bi bi-hourglass-split index-loading"></i></p>
+                  </div>
+                  <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+                </div>
+ 
+
+                <div role="main" class="hide-when-search">
+
+                        <div class="subnav navbar navbar-default">
+                          <div class="container hide-when-search" id="breadcrumb">
+                            <ul class="breadcrumb">
+                              <li></li>
+                            </ul>
+                          </div>
+                        </div>
+
+                         <div class="contribution">
+                               <a href="https://github.com/MonoGame/docs.monogame.github.io/blob/main/articles/getting_to_know/whatis/content_pipeline/CP_Customizing.md/#L1" class="contribution-link">Edit this page</a>
+                         </div>
+
+                    <article class="content wrap" id="_content" data-uid="">
+
+
+<p>MonoGame provides standard Content Pipeline components that import and process the most commonly used game asset file types. These file types include, for example, Content Importers for the Autodesk (.fbx) format and the DirectX (.x) format. A complete list of file types is available in the <a href="CP_StdImpsProcs.html">Standard Content Importers and Content Processors</a> topic. Most digital Content creation (DCC) tools are capable of creating output in at least one of these standard formats.</p>
+<h2 id="choosing-to-customize">Choosing to Customize</h2>
+<p>A custom Content Importer is required for game assets available only in formats unsupported by MonoGame standard Content Importers. One may already be available from a third party. Custom Content Importers can be developed by DCC vendors, game-engine developers, and interested game hobbyists. Once a custom Content Importer is installed on your computer, you can associate art files with the Content Importer to invoke it when you build the art files (see <a href="CP_AddCustomProcImp.html">Adding a Custom Importer</a>).</p>
+<p>You may need to write your own custom MonoGame Content Pipeline components to:</p>
+<ul>
+<li>Support a new type of game asset or format from a DCC tool.</li>
+<li>Derive special-purpose content from another piece of content at the time the game is built.</li>
+</ul>
+<p>Here are some typical scenarios, and a summary of which Content Pipeline components require customization.</p>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>When to customize</th>
+<th>Output options</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content Importer</td>
+<td><ul><li>A game asset created by a DCC tool is available only in a format unsupported by a MonoGame standard Content Importer.</li></ul></td>
+<td><ol><li><a href="CP_DOM.html">Content Document Object Model</a> (DOM) object that can be consumed by a standard Content Processor.</li><li>A custom object that must be consumed by a custom Content Processor.</li></ol></td>
+</tr>
+<tr>
+<td>Content Processor</td>
+<td><ul><li>Must process the custom output of a custom Content Importer.</li><li>Needs to process the output of a standard Content Importer in a special-purpose way.</li></ul></td>
+<td><ol><li>A standard Content Processor output type.</li><li>A custom Content Processor output type that must be consumed by a custom Content Loader at game run time.</li></ol></td>
+</tr>
+<tr>
+<td>Content Loader</td>
+<td><ul><li>Must load custom output of a customized Content Processor.</li><li>A custom Content Loader is implemented by extending the <a href="xref:Microsoft.Xna.Framework.Content.ContentManager">ContentManager.Load</a> method to load the new custom data type.</li></ul></td>
+<td><ol><li>A standard MonoGame Framework class object.</li><li>A custom class object.</li></ol></td>
+</tr>
+</tbody>
+</table>
+<h2 id="customization-scenarios">Customization Scenarios</h2>
+<p>This section examines some typical examples where customization is needed, and illustrates which Content Pipeline components must be changed.</p>
+<h3 id="supporting-a-new-file-format">Supporting a New File Format</h3>
+<p>In this example, a nonstandard file format contains information that can be represented by a standard Content DOM type.</p>
+<p><img src="../images/CP_CustomImporter.png" alt="Custom Importer DOM"></p>
+<p>As illustrated, only a custom Content Importer that can read the nonstandard file format and output a Content DOM object (in this case, a <strong>TextureContent</strong> object) is required. The remainder of the Content Pipeline process can be performed by a standard Content Processor and Content Loader.</p>
+<h3 id="creating-special-purpose-data-from-standard-objects">Creating Special-Purpose Data from Standard Objects</h3>
+<p>For this example, a texture object that represents a map of normalized vectors derived from the original texture object is created.</p>
+<p><img src="../images/CP_CustomImporter.png" alt="Sprite Importer DOM"></p>
+<p>Since the texture is contained in a standard format for the game asset, a standard Content Importer can be used to create the <strong>TextureContent</strong> object. A custom Content Processor (<strong>NormalMapProcessor</strong>) creates the special-purpose data, but uses the standard <strong>TextureContent</strong> class to contain the result so that it can be loaded by the standard Content Loader.</p>
+<h2 id="supporting-custom-data-from-a-nonstandard-game-asset">Supporting Custom Data from a Nonstandard Game Asset</h2>
+<p>Illustrated in this example is a nonstandard game asset file containing data that does not correspond to any standard data types.</p>
+<p><img src="../images/CP_CustomData.png" alt="Custom Importer DOM"></p>
+<p>To read the nonstandard game asset file, a custom Content Importer is required that outputs a <strong>CustomContent</strong> object. Since the output of the Content Importer is a custom class, a custom Content Processor also is needed, and the <a href="xref:Microsoft.Xna.Framework.Content.ContentManager">ContentManager.Load</a> method must be extended to support the custom data object.</p>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="CP_Content_Advanced.html">Adding New Content Types</a></li>
+<li><a href="CP_Overview.html">What Is Content?</a></li>
+<li><a href="CP_Architecture.html">What is the Content Pipeline?</a></li>
+</ul>
+
+</article>
+                </div>
+
+            </main>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/jquery.twbsPagination.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/jquery.mark.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/url.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/anchor-js@5.0.0/anchor.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/docfx.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/main.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/singulink.js"></script>    </body>
+</html>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Updating Versions | hallowed </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Updating Versions | hallowed ">
+      <meta name="generator" content="docfx ">
+  
+      <link rel="shortcut icon" href="../../../../favicon.ico">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/night-owl.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" integrity="sha384-EvBWSlnoFgZlXJvpzS+MAUEjvN7+gcCwH+qh7GRFOGgZO0PuwOFro7qPOJnLfe7l" crossorigin="anonymous">
+      <link rel="stylesheet" href="../../../../styles/config.css">
+      <link rel="stylesheet" href="../../../../styles/singulink.css">
+      <link rel="stylesheet" href="../../../../styles/main.css">
+      <meta property="docfx:navrel" content="../../../../toc.html">
+      <meta property="docfx:tocrel" content="../toc.html">
+  
+  <meta property="docfx:rel" content="../../../../">
+  
+    </head>
+    <body>
+        <!-- Header required for docfx anchor scroll to work -->
+        <header id="head"></header>
+        <div class="top-navbar">
+            <a class="burger-icon" onclick="toggleMenu()">
+                <svg name="Hamburger" style="vertical-align: middle;" width="34" height="34" viewbox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M20 6H4V9H20V6ZM4 10.999H20V13.999H4V10.999ZM4 15.999H20V18.999H4V15.999Z"></path></svg>
+            </a>
+
+
+            <a class="brand" href="../../../../index.html">
+              <img src="../../../../logo.svg" alt="hallowed" class="logomark">
+              <span class="brand-title">hallowed</span>
+            </a>        </div>
+
+        <div class="body-content">
+            <div id="blackout" class="blackout" onclick="toggleMenu()"></div>
+
+            <nav id="sidebar" role="navigation">
+                <div class="sidebar">
+
+                    <div>
+                      <div class="mobile-hide">
+
+                        <a class="brand" href="../../../../index.html">
+                          <img src="../../../../logo.svg" alt="hallowed" class="logomark">
+                          <span class="brand-title">hallowed</span>
+                        </a>                      </div>
+
+                      <div class="sidesearch">
+                        <form id="search" role="search" class="search">
+                            <i class="bi bi-search search-icon"></i>
+                            <input type="text" id="search-query" placeholder="Search" autocomplete="off">
+                        </form>
+                      </div>
+
+                      <div id="navbar">
+                      </div>
+                    </div>                    <div class="sidebar-item-separator"></div>
+
+                        <div id="sidetoggle">
+                          <div id="sidetoc"></div>
+                        </div>
+                </div>
+                <div class="footer">
+  
+  <strong><a href='https://dotnet.github.io/docfx/'>DocFX</a> + <a href='https://www.singulink.com'>Singulink</a> = ♥</strong>
+                </div>            </nav>
+
+            <main class="main-panel">
+
+                <div id="search-results" style="display: none;">
+                  <h1 class="search-list">Search Results for <span></span></h1>
+                  <div class="sr-items">
+                    <p><i class="bi bi-hourglass-split index-loading"></i></p>
+                  </div>
+                  <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+                </div>
+ 
+
+                <div role="main" class="hide-when-search">
+
+                        <div class="subnav navbar navbar-default">
+                          <div class="container hide-when-search" id="breadcrumb">
+                            <ul class="breadcrumb">
+                              <li></li>
+                            </ul>
+                          </div>
+                        </div>
+
+                         <div class="contribution">
+                               <a href="https://github.com/MonoGame/docs.monogame.github.io/blob/main/articles/migration/updating_versions.md/#L1" class="contribution-link">Edit this page</a>
+                         </div>
+
+                    <article class="content wrap" id="_content" data-uid="">
+
+
+<ul>
+<li><a href="#update-existing-projects">Update Existing Projects</a>
+<ul>
+<li><a href="#update-target-framework">Update Target Framework</a></li>
+<li><a href="#update-nuget-references">Update NuGet References</a>
+<ul>
+<li><a href="#visual-studio-2022">Visual Studio 2022</a></li>
+<li><a href="#manually-editing-csproj-file-vscoderider">Manually Editing .csproj File (VSCode/Rider)</a></li>
+</ul>
+</li>
+<li><a href="#update-mgcb-editor">Update MGCB Editor</a></li>
+</ul>
+</li>
+<li><a href="#updating-environment-for-new-projects">Updating Environment for New Projects</a>
+<ul>
+<li><a href="#update-dotnet-templates">Update dotnet Templates</a></li>
+<li><a href="#visual-studio-2022-templates">Visual Studio 2022</a></li>
+<li><a href="#dotnet-cli-vscoderider-templates">dotnet CLI (VSCode/Rider)</a></li>
+</ul>
+</li>
+</ul>
+<p>When a new release of MonoGame is pushed, developers will need to manually update their development environment and/or existing project to make use of the new version.  This guide is intended to walk you through the steps of performing these updates.</p>
+<h2 id="update-existing-projects">Update Existing Projects</h2>
+<p>Developers wishing to update their current project to use a new release version only need to update the <em>target framework</em>, <em>NuGet package versions</em>, and <em>dotnet tools</em> version. Doing this depends on if you are using Visual Studio 2022 or another development environment.</p>
+<h3 id="update-target-framework">Update Target Framework</h3>
+<p>Developers will need to ensure the project is updated to target the .NET version used by MonoGame at minimum (currently <code>net8.0</code>). To do this, open your project's <em>.csproj</em> file and find the <code>&lt;TargetFramework&gt;</code> element and change the <code>net-X.Y</code> version to <code>net-8.0</code>, then save the file.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Only change the .NET version number. some project types have platform specifiers such as <code>net6.0-windows</code>. The only thing that should change here is the version number.</p>
+</div>
+<h3 id="update-nuget-references">Update NuGet References</h3>
+<p>The following sections cover updating your NuGet packages for existing projects based on your development environment.</p>
+<h4 id="visual-studio-2022">Visual Studio 2022</h4>
+<p>Open your existing project in Visual Studio 2022 and perform the following:</p>
+<ol>
+<li>Right-click on the project in the <em>Solution Explorer</em> panel and select *Manage NuGet Packages...&quot;.</li>
+<li>In the NuGet Packages Manager window, click the <em>Updates</em> tab.</li>
+<li>Select the MonoGame Framework packages in the list on the left, then click the <em>Update</em> button for each one on the right.</li>
+</ol>
+<h4 id="manually-editing-csproj-file-vscoderider">Manually Editing .csproj File (VSCode/Rider)</h4>
+<p>Alternatively, regardless of the development environment, developers can manually edit the <em>.csproj</em> file for their project to update to the newest MonoGame release.</p>
+<p>To do this:</p>
+<ol>
+<li>Open your project's <em>.csproj</em> file</li>
+<li>Locate the <code>&lt;PacakgeReference&gt;</code> elements for any MonoGame referenced packages.</li>
+<li>Change the <code>Version=</code> attribute for each one to the current version of MonoGame (currently this is <code>3.8.2.1105</code>)</li>
+<li>Save the <em>.csproj</em> file.</li>
+</ol>
+<p>Once these changes are made, open a command prompt or terminal at the root of the project directory and enter the following commands</p>
+<pre><code class="lang-sh">dotnet clean
+dotnet restore
+</code></pre>
+<h3 id="update-mgcb-editor">Update MGCB Editor</h3>
+<p>Regardless of the development environment, users will need to update the dotnet tools manifest file manually to use the newest version of the <em>MonoGame Content Builder</em>. To do this:</p>
+<ol>
+<li>Open the <em>.config/dotnet-tools.json</em> manifest file located in the project root directory</li>
+<li>Update the version specified for each tool to the current version of MonoGame (currently this is <code>3.8.4</code>).</li>
+<li>Save the changes</li>
+</ol>
+<p>Once these changes are made, open a command prompt or terminal at the root of the project directory and enter the following commands</p>
+<pre><code class="lang-sh">dotnet tool restore
+</code></pre>
+<h2 id="updating-environment-for-new-projects">Updating Environment for New Projects</h2>
+<p>The following sections will cover updating your development environment for new projects.</p>
+<h3 id="update-dotnet-templates">Update dotnet Templates</h3>
+<p>Developers will need to update the MonoGame C# Templates used to create new projects.  Doing this depends on if you are using Visual Studio 2022 or through the dotnet cli.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Updating the templates will not affect existing projects.  if developers wish to update existing project, see the info in the <a href="#update-existing-projects">Update Existing Projects</a> section.</p>
+</div>
+<h4 id="visual-studio-2022-templates">Visual Studio 2022 templates</h4>
+<p>Developers using Visual Studio 2022 should be using the <a href="https://marketplace.visualstudio.com/items?itemName=MonoGame.MonoGame-Templates-VSExtension">MonoGame C# Project Templates</a> extension.  This provides not only the templates but also the functionality to open the <em>MonoGame Content Builder Editor</em> (MGCB Editor) within Visual Studio.  You can update the extension by performing the following</p>
+<ol>
+<li>Open Visual Studio 2022</li>
+<li>In the launch window, choose the <em>Continue without code</em> option at the bottom on the right.</li>
+<li>From the top menu choose, <em>Extensions &gt; Manage Extensions</em>  to open the <em>Extension Manager</em> panel.</li>
+<li>Click the <em>Updates</em> tab and choose <em>MonoGame Framework C# project templates</em> and update it to the latest version.</li>
+</ol>
+<p>If prompted to close Visual Studio to finish the update, do so now to continue installing the update.</p>
+<h4 id="dotnet-cli-vscoderider-templates">dotnet CLI (VSCode/Rider) templates</h4>
+<p>Developers using the dotnet CLI with environments such as Visual Studio Code, JetBrains Rider, or other editors, can execute the following command in a command prompt/terminal to update the templates</p>
+<pre><code class="lang-sh">dotnet new install MonoGame.Templates.CSharp
+</code></pre>
+<div class="TIP">
+<h5>Tip</h5>
+<p>If you receive a an error or warning stating there are naming conflicts in the templates, you may need to uninstall the templates first with the following command and then install them:</p>
+<pre><code class="lang-sh">dotnet new uninstall MonoGame.Templates.CSharp
+</code></pre>
+</div>
+<p>Alternatively, you can perform <code>dotnet new update</code> which will update all templates installed to their most current version available.  However, this may affect other templates you have installed that you may not wish to update, it's an all or nothing command.</p>
+
+</article>
+                </div>
+
+            </main>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+        <script type="text/javascript" src="../../../../styles/jquery.twbsPagination.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/jquery.mark.min.js"></script>
+        <script type="text/javascript" src="../../../../styles/url.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/anchor-js@5.0.0/anchor.min.js"></script>
+        <script type="text/javascript" src="../../../../styles/docfx.js"></script>
+        <script type="text/javascript" src="../../../../styles/main.js"></script>
+        <script type="text/javascript" src="../../../../styles/singulink.js"></script>    </body>
+</html>

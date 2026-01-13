@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>MonoGame Roadmap | hallowed </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="MonoGame Roadmap | hallowed ">
+      <meta name="generator" content="docfx ">
+  
+      <link rel="shortcut icon" href="../../../favicon.ico">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/night-owl.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" integrity="sha384-EvBWSlnoFgZlXJvpzS+MAUEjvN7+gcCwH+qh7GRFOGgZO0PuwOFro7qPOJnLfe7l" crossorigin="anonymous">
+      <link rel="stylesheet" href="../../../styles/config.css">
+      <link rel="stylesheet" href="../../../styles/singulink.css">
+      <link rel="stylesheet" href="../../../styles/main.css">
+      <meta property="docfx:navrel" content="../../../toc.html">
+      <meta property="docfx:tocrel" content="../toc.html">
+  
+  <meta property="docfx:rel" content="../../../">
+  
+    </head>
+    <body>
+        <!-- Header required for docfx anchor scroll to work -->
+        <header id="head"></header>
+        <div class="top-navbar">
+            <a class="burger-icon" onclick="toggleMenu()">
+                <svg name="Hamburger" style="vertical-align: middle;" width="34" height="34" viewbox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M20 6H4V9H20V6ZM4 10.999H20V13.999H4V10.999ZM4 15.999H20V18.999H4V15.999Z"></path></svg>
+            </a>
+
+
+            <a class="brand" href="../../../index.html">
+              <img src="../../../logo.svg" alt="hallowed" class="logomark">
+              <span class="brand-title">hallowed</span>
+            </a>        </div>
+
+        <div class="body-content">
+            <div id="blackout" class="blackout" onclick="toggleMenu()"></div>
+
+            <nav id="sidebar" role="navigation">
+                <div class="sidebar">
+
+                    <div>
+                      <div class="mobile-hide">
+
+                        <a class="brand" href="../../../index.html">
+                          <img src="../../../logo.svg" alt="hallowed" class="logomark">
+                          <span class="brand-title">hallowed</span>
+                        </a>                      </div>
+
+                      <div class="sidesearch">
+                        <form id="search" role="search" class="search">
+                            <i class="bi bi-search search-icon"></i>
+                            <input type="text" id="search-query" placeholder="Search" autocomplete="off">
+                        </form>
+                      </div>
+
+                      <div id="navbar">
+                      </div>
+                    </div>                    <div class="sidebar-item-separator"></div>
+                </div>
+                <div class="footer">
+  
+  <strong><a href='https://dotnet.github.io/docfx/'>DocFX</a> + <a href='https://www.singulink.com'>Singulink</a> = ♥</strong>
+                </div>            </nav>
+
+            <main class="main-panel">
+
+                <div id="search-results" style="display: none;">
+                  <h1 class="search-list">Search Results for <span></span></h1>
+                  <div class="sr-items">
+                    <p><i class="bi bi-hourglass-split index-loading"></i></p>
+                  </div>
+                  <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+                </div>
+ 
+
+                <div role="main" class="hide-when-search">
+
+                         <div class="contribution">
+                               <a href="https://github.com/MonoGame/docs.monogame.github.io/blob/main/roadmap/index.md/#L1" class="contribution-link">Edit this page</a>
+                         </div>
+
+                    <article class="content wrap" id="_content" data-uid="">
+
+<h2 id="monogame-official-roadmap">MonoGame official roadmap</h2>
+<p><img src="./images/Roadmap.png" alt="Roadmap"></p>
+<p>MonoGame has been in development for a long time with a stable outward-facing API based on XNA 4.0, which remains largely static.  The core development has always been the rapid waters behind this API, providing stable and modern access to the native platforms that MonoGame can run on.</p>
+<p>The current development branch, targeting a release version of <code>3.8.5</code> of MonoGame, is expanding platform support and addressing a key subject of contention, the content editor (MGCB), for which an alternative solution is being devised (the Content Project system).</p>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>All information and dates are subject to change.  In other words, if we can get it done faster, we will!</p>
+</div>
+<h3 id="release-385-current-development-branch"><a href="https://github.com/MonoGame/MonoGame/milestone/22">Release 3.8.5</a> (current development branch)</h3>
+<p>The <code>3.8.5</code> release seeks to formalize the preview of several preview components for testing in preparation for the <code>3.9</code> release, namely:</p>
+<ul>
+<li>Preview Vulkan (DesktopVK) platform.</li>
+<li>Preview DX 12 (DesktopDX) platform.</li>
+<li>Preview the new Content Project solution.</li>
+<li>Native Platform evolution (dependencies derived from Platforms instead of dependencies).</li>
+</ul>
+<blockquote>
+<p>Preview releases are currently available for the <code>3.8.5</code> delivery for test.</p>
+</blockquote>
+<h3 id="release-384-live-release"><a href="https://github.com/MonoGame/MonoGame/milestone/23">Release 3.8.4</a> Live Release</h3>
+<p>The <code>3.8.4</code> primary focus was a quick turn-around maintenance release, primarily to address some Android platform issues introduced in 3.8.3.  This release was the first to receive Preview releases (7 in total) to full road test changes, including:</p>
+<ul>
+<li>Improvements to AoT delivery.</li>
+<li>Improvements to Android release delivery.</li>
+<li>New testing pipeline using Samples.</li>
+<li>Upgrade of build dependencies and Wine (for Mac / Linux)</li>
+<li>Compressed texture support in Pipeline.</li>
+</ul>
+<blockquote>
+<p>See the <a href="https://github.com/MonoGame/MonoGame/releases/tag/v3.8.4">Release Log</a> for full details.</p>
+</blockquote>
+<h3 id="release-39"><a href="https://github.com/MonoGame/MonoGame/milestone/17">Release 3.9</a></h3>
+<p><code>3.9</code> will effectively be the LTS release of the 3.x series for MonoGame, formalizing the XNA API support and platform access.  It will also include an update to using a more ruggedized and standardized native implementation that is standard across all platforms, making the underlying native elements for MonoGame easier to maintain.</p>
+<ul>
+<li>All the native libraries into their own repo, hook it up to the current system.</li>
+<li>Vulcan support.</li>
+<li>DX 12 support.</li>
+<li>Updated GDK integration for Xbox Consoles (only available to registered ID@Xbox developers)</li>
+<li>New Content Project system.</li>
+</ul>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>Please note that the move to the new native backend will effectively <strong>deprecate the DesktopGL project type</strong>.  This will be replaced with the newer <strong>DesktopVK</strong> platform.</p>
+<p>The <strong>WindowsDX</strong> platform is also under review to include support for DX12 and the <a href="https://github.com/microsoft/GDK">Microsoft GDK</a> (Game Development Kit), once the results are published, the Roadmap will be updated to reflect the plans.</p>
+</div>
+<h3 id="release-40-provisional"><a href="https://github.com/MonoGame/MonoGame/milestone/10">Release 4.0</a> (Provisional)</h3>
+<p>Version <code>4.0</code> of MonoGame aims to break compatibility with the older XNA Content Pipeline system and introduce a much more manageable and extendable system to meet the more modern needs of game development.</p>
+<h3 id="release-50"><a href="https://github.com/MonoGame/MonoGame/milestone/15">Release 5.0</a></h3>
+<p>This phase is still very much in the early planning and testing phase, with the ultimate aim to break the older XNA 4.0 API. This will be a very different beast, built from the foundational ideas of XNA / MonoGame.</p>
+<h3 id="proposed-release-schedule">Proposed Release Schedule</h3>
+<p>Just to sneak this in here, we are listening when the community says that we need a faster and more direct delivery of the MonoGame Framework.  To this end, we are proposing to:</p>
+<ul>
+<li>Have regular maintenance updates, ideally delivered through NuGet.</li>
+<li>Annual major releases.</li>
+</ul>
+<p>All of this is subject to the will of the community, so if you have an idea or suggestion, make sure to let us know on <a href="https://discord.gg/monogame">Discord</a>.</p>
+<h2 id="monogame-bounty-schedule">MonoGame bounty schedule</h2>
+<div class="NOTE">
+<h5>Note</h5>
+<p><a href="https://github.com/MonoGame/MonoGame/issues/8120">Also check out the Bounty tracker for the latest</a></p>
+</div>
+<p>In order to provide more transparency, the following section details all the current Bounties in production, as well as a provisional list of all other bounties under consideration or development.</p>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>All bounties are subject to the legal requirements set out in the MonoGame Foundation charter.  <a href="https://monogame.net/bounties/">Please check the <code>Bounties</code> page for more information</a></p>
+</div>
+<h3 id="active-bounties">Active Bounties</h3>
+<p>This is a list of all known bounties currently <a href="https://github.com/MonoGame/MonoGame/issues/8120">being worked on</a>:</p>
+<ul>
+<li><a href="https://github.com/MonoGame/MonoGame/issues/8194">Switch the console runtime from BRUTE to NativeAOT</a></li>
+<li><a href="https://github.com/MonoGame/MonoGame/issues/8318">A better 3D onboarding tutorial</a></li>
+<li><a href="https://github.com/MonoGame/MonoGame/issues/8819">MonoGame 2D advanced series - Shaders</a></li>
+<li><a href="https://github.com/MonoGame/MonoGame/issues/8820">MonoGame 2D advanced series - Mobile targeting</a></li>
+<li><a href="https://github.com/MonoGame/MonoGame/issues/8821">MonoGame 2D advanced series - Networking</a></li>
+</ul>
+<h3 id="bounties-in-development">Bounties in development</h3>
+<ul>
+<li><p><strong>Advanced onboarding tutorials</strong></p>
+<p>Working on suggestions for advanced physics integration, complex shaders, animation systems, procedural content generation, optimizations and performance.</p>
+</li>
+<li><p><strong>An Endless runner game sample/starter-kit</strong></p>
+<p>A reusable sample / starter-kit for developers to build an endless runner game.</p>
+</li>
+<li><p><strong>A first-person 3D game sample/starter-kit</strong></p>
+<p>A reusable sample / starter-kit for developers to build a first person style game.</p>
+</li>
+<li><p><strong>A third-person 3D game sample/starter-kit</strong></p>
+<p>A reusable sample / starter-kit for developers to build a third person style game.</p>
+</li>
+<li><p><strong>A network starter sample</strong></p>
+<p>Building an example framework for building local or networked multi-player games.</p>
+</li>
+<li><p><strong>A graphical/shader starter-kit</strong></p>
+<p>A quick introduction to effects and shaders in MonoGame.</p>
+</li>
+<li><p><strong>A custom editor sample</strong></p>
+<p>A starter solution showing how to build an editor for MonoGame showcasing multiple editor windows, multiple viewports (in a single window), custom dialogs, docking windows?, rebuilding content and a simple undo/redo framework (which we may have one available for use).</p>
+</li>
+<li><p><strong>A GUI integration tutorial</strong>
+With so many great GUI systems available for MonoGame, we could do with a tutorial showing how to integrate or build on teh best of them, such as IMGUI, NEX and so on.</p>
+</li>
+<li><p><strong>Texture Compression Content Pipeline</strong>
+The current texture compression systems does not work on <code>arm</code> based machines like the Apple M1/M2/M3. This bounty will upgrade the system to use <a href="https://github.com/BinomialLLC/basis_universal">Basis Universal</a> which works across all supported Desktop plaforms.</p>
+</li>
+</ul>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Have an idea for another bounty / sample or something that can make MonoGame even better, or a guide that you feel the community needs, then let us know on GitHub by raising a <a href="https://github.com/MonoGame/MonoGame/issues/new?assignees=&amp;labels=Feature+Request&amp;projects=&amp;template=02_feature_request.yml">Feature Request</a> and give us the details.</p>
+</div>
+<h2 id="onward-monogame">Onward MonoGame!</h2>
+<p>Thank you to the MonoGame community for your patience and support, we continue, as ever, to try and make MonoGame the best it can be.</p>
+
+</article>
+                </div>
+
+            </main>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+        <script type="text/javascript" src="../../../styles/jquery.twbsPagination.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/jquery.mark.min.js"></script>
+        <script type="text/javascript" src="../../../styles/url.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/anchor-js@5.0.0/anchor.min.js"></script>
+        <script type="text/javascript" src="../../../styles/docfx.js"></script>
+        <script type="text/javascript" src="../../../styles/main.js"></script>
+        <script type="text/javascript" src="../../../styles/singulink.js"></script>    </body>
+</html>

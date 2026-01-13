@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>How to install a preview release of MonoGame from NuGet | hallowed </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="How to install a preview release of MonoGame from NuGet | hallowed ">
+      <meta name="generator" content="docfx ">
+  
+      <link rel="shortcut icon" href="../../../../../favicon.ico">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/night-owl.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" integrity="sha384-EvBWSlnoFgZlXJvpzS+MAUEjvN7+gcCwH+qh7GRFOGgZO0PuwOFro7qPOJnLfe7l" crossorigin="anonymous">
+      <link rel="stylesheet" href="../../../../../styles/config.css">
+      <link rel="stylesheet" href="../../../../../styles/singulink.css">
+      <link rel="stylesheet" href="../../../../../styles/main.css">
+      <meta property="docfx:navrel" content="../../../../../toc.html">
+      <meta property="docfx:tocrel" content="../../toc.html">
+  
+  <meta property="docfx:rel" content="../../../../../">
+  
+    </head>
+    <body>
+        <!-- Header required for docfx anchor scroll to work -->
+        <header id="head"></header>
+        <div class="top-navbar">
+            <a class="burger-icon" onclick="toggleMenu()">
+                <svg name="Hamburger" style="vertical-align: middle;" width="34" height="34" viewbox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M20 6H4V9H20V6ZM4 10.999H20V13.999H4V10.999ZM4 15.999H20V18.999H4V15.999Z"></path></svg>
+            </a>
+
+
+            <a class="brand" href="../../../../../index.html">
+              <img src="../../../../../logo.svg" alt="hallowed" class="logomark">
+              <span class="brand-title">hallowed</span>
+            </a>        </div>
+
+        <div class="body-content">
+            <div id="blackout" class="blackout" onclick="toggleMenu()"></div>
+
+            <nav id="sidebar" role="navigation">
+                <div class="sidebar">
+
+                    <div>
+                      <div class="mobile-hide">
+
+                        <a class="brand" href="../../../../../index.html">
+                          <img src="../../../../../logo.svg" alt="hallowed" class="logomark">
+                          <span class="brand-title">hallowed</span>
+                        </a>                      </div>
+
+                      <div class="sidesearch">
+                        <form id="search" role="search" class="search">
+                            <i class="bi bi-search search-icon"></i>
+                            <input type="text" id="search-query" placeholder="Search" autocomplete="off">
+                        </form>
+                      </div>
+
+                      <div id="navbar">
+                      </div>
+                    </div>                    <div class="sidebar-item-separator"></div>
+
+                        <div id="sidetoggle">
+                          <div id="sidetoc"></div>
+                        </div>
+                </div>
+                <div class="footer">
+  
+  <strong><a href='https://dotnet.github.io/docfx/'>DocFX</a> + <a href='https://www.singulink.com'>Singulink</a> = ♥</strong>
+                </div>            </nav>
+
+            <main class="main-panel">
+
+                <div id="search-results" style="display: none;">
+                  <h1 class="search-list">Search Results for <span></span></h1>
+                  <div class="sr-items">
+                    <p><i class="bi bi-hourglass-split index-loading"></i></p>
+                  </div>
+                  <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+                </div>
+ 
+
+                <div role="main" class="hide-when-search">
+
+                        <div class="subnav navbar navbar-default">
+                          <div class="container hide-when-search" id="breadcrumb">
+                            <ul class="breadcrumb">
+                              <li></li>
+                            </ul>
+                          </div>
+                        </div>
+
+                         <div class="contribution">
+                               <a href="https://github.com/MonoGame/docs.monogame.github.io/blob/main/articles/getting_to_know/howto/HowTo_Install_Preview_Release.md/#L1" class="contribution-link">Edit this page</a>
+                         </div>
+
+                    <article class="content wrap" id="_content" data-uid="">
+
+<h2 id="overview">Overview</h2>
+<p>MonoGame provides preview deployments for testing releases prior to the full release of a new version. This gives developers early access to new features before they are made officially available.</p>
+<div class="WARNING">
+<h5>Warning</h5>
+<p>While preview releases still undergo the same rigorous testing used for full releases, some features may not work as expected as it is still classed as developmental code.</p>
+<p><em>Preview releases should not be used for production deployments.</em>*</p>
+<p>The preview packages are intended for testing and validating fixes/updates and new features in your projects without drastically affecting them.</p>
+</div>
+<h2 id="updating-nuget-package-dependencies">Updating NuGet package dependencies</h2>
+<p>To use the preview packages delivered via NuGet you need to update or replace your existing MonoGame references for your project:</p>
+<ul>
+<li>The Platform NuGet package reference - e.g. <code>MonoGame.Framework.DesktopGL</code></li>
+<li>The Builder Task package - <code>MonoGame.Content.Builder.Task</code> (Only required if using the Content Pipeline)</li>
+</ul>
+<p>The simplest way is from the command line in the folder where your <code>csproj</code> is located (if you have multiple projects, please repeat for each) using the following syntax:</p>
+<pre><code class="lang-dotnetcli">dotnet add package MonoGame.Framework.DesktopGL -v 3.8.4-preview.1
+dotnet add package MonoGame.Content.Builder.Task -v 3.8.4-preview.1
+</code></pre>
+<p><strong>Replacing the preview version with the specific version you wish to install.</strong></p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>For Visual Studio, use <code>Tools -&gt; NuGet Package Manager -&gt; Manage NuGet Packages for Solution/Project</code>, then click on the <code>Updates</code> tab and update each package.</p>
+<p>Make sure to select <strong>&quot;Include Prerelease&quot;</strong> for the preview packages to be detected.</p>
+</div>
+<h2 id="update-dotnet-toolsjson-for-content-manager">Update <code>dotnet-tools.json</code> for Content Manager</h2>
+<p>To ensure symmetry between the project version and the Content Pipeline Editor (MGCB) the <code>dotnet-tools.json</code> configuration in your project <code>.config</code> directory will also need updating.</p>
+<p>This is simply a matter of updating the tools references, again from the command line in the projects folder, as follows:</p>
+<pre><code class="lang-dotnetcli">dotnet tool install dotnet-mgcb --version 3.8.4-preview.1
+dotnet tool install dotnet-mgcb-editor --version 3.8.4-preview.1
+dotnet tool install dotnet-mgcb-editor-linux --version 3.8.4-preview.1
+dotnet tool install dotnet-mgcb-editor-windows --version 3.8.4-preview.1
+dotnet tool install dotnet-mgcb-editor-mac --version 3.8.4-preview.1
+</code></pre>
+<p><strong>Replacing the preview version with the specific version you wish to install.</strong></p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Alternatively, simply edit the <code>dotnet-tools.json</code> file and replace the <strong>&quot;version&quot;</strong> value across the file.</p>
+</div>
+<div class="IMPORTANT">
+<h5>Important</h5>
+<p>Make sure to run <code>dotnet tool restore</code> any time you make changes to the <code>dotnet-tools.json</code> to refresh the installation of the Content Builder and Editor.</p>
+</div>
+<h2 id="installing-the-preview-templates">Installing the preview templates</h2>
+<p>This step is optional, if you intend to generate a new project using the latest templates, including any automated or templates setup</p>
+<ol>
+<li>Simply run the following from the command line:</li>
+</ol>
+<pre><code class="lang-dotnetcli">dotnet new install MonoGame.Templates.CSharp::3.8.4-preview.1
+</code></pre>
+<p><strong>Replacing the preview version of MonoGame at the end of the command with the specific version you wish to install.</strong></p>
+<h2 id="visual-studio-extensions-with-preview-releases">Visual Studio Extensions with Preview releases</h2>
+<p>At this time, the Visual Studio marketplace does not support preview versions of extensions, if you wish to test a preview version of the Visual Studio Extension, you can install it manually.</p>
+<p>The Extension can be downloaded from the latest <code>GitHub Actions</code> build used to generate the preview build.</p>
+<ol>
+<li>Go to the <a href="https://github.com/MonoGame/MonoGame/actions">MonoGame GitHub repository</a> and select the &quot;Actions&quot; tab.</li>
+<li>Find the build with the associated tag, e.g. <a href="https://github.com/MonoGame/MonoGame/actions/runs/14713318149"><code>v3.8.4-preview.1</code></a></li>
+<li>In the <code>Artifacts</code> for the build, you should see the extensions installer <code>MonoGame.Templates.VSExtension.vsix</code></li>
+<li>Click on the &quot;Download Icon&quot; on the far right-hand side of the row.</li>
+<li>Once downloaded, run the <code>vsix</code> which will update your installation of the extensions package.</li>
+</ol>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="../../getting_started/index.html">Getting Started with MonoGame</a></li>
+<li><a href="../../getting_started/using_development_nuget_packages.html">Using Development NuGet Packages</a></li>
+</ul>
+
+</article>
+                </div>
+
+            </main>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+        <script type="text/javascript" src="../../../../../styles/jquery.twbsPagination.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/jquery.mark.min.js"></script>
+        <script type="text/javascript" src="../../../../../styles/url.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/anchor-js@5.0.0/anchor.min.js"></script>
+        <script type="text/javascript" src="../../../../../styles/docfx.js"></script>
+        <script type="text/javascript" src="../../../../../styles/main.js"></script>
+        <script type="text/javascript" src="../../../../../styles/singulink.js"></script>    </body>
+</html>

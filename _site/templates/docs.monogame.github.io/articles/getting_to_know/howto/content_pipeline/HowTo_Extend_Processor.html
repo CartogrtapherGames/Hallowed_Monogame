@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>How To Extend a Standard Content Processor? | hallowed </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="How To Extend a Standard Content Processor? | hallowed ">
+      <meta name="generator" content="docfx ">
+  
+      <link rel="shortcut icon" href="../../../../../../favicon.ico">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/night-owl.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" integrity="sha384-EvBWSlnoFgZlXJvpzS+MAUEjvN7+gcCwH+qh7GRFOGgZO0PuwOFro7qPOJnLfe7l" crossorigin="anonymous">
+      <link rel="stylesheet" href="../../../../../../styles/config.css">
+      <link rel="stylesheet" href="../../../../../../styles/singulink.css">
+      <link rel="stylesheet" href="../../../../../../styles/main.css">
+      <meta property="docfx:navrel" content="../../../../../../toc.html">
+      <meta property="docfx:tocrel" content="../../../toc.html">
+  
+  <meta property="docfx:rel" content="../../../../../../">
+  
+    </head>
+    <body>
+        <!-- Header required for docfx anchor scroll to work -->
+        <header id="head"></header>
+        <div class="top-navbar">
+            <a class="burger-icon" onclick="toggleMenu()">
+                <svg name="Hamburger" style="vertical-align: middle;" width="34" height="34" viewbox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M20 6H4V9H20V6ZM4 10.999H20V13.999H4V10.999ZM4 15.999H20V18.999H4V15.999Z"></path></svg>
+            </a>
+
+
+            <a class="brand" href="../../../../../../index.html">
+              <img src="../../../../../../logo.svg" alt="hallowed" class="logomark">
+              <span class="brand-title">hallowed</span>
+            </a>        </div>
+
+        <div class="body-content">
+            <div id="blackout" class="blackout" onclick="toggleMenu()"></div>
+
+            <nav id="sidebar" role="navigation">
+                <div class="sidebar">
+
+                    <div>
+                      <div class="mobile-hide">
+
+                        <a class="brand" href="../../../../../../index.html">
+                          <img src="../../../../../../logo.svg" alt="hallowed" class="logomark">
+                          <span class="brand-title">hallowed</span>
+                        </a>                      </div>
+
+                      <div class="sidesearch">
+                        <form id="search" role="search" class="search">
+                            <i class="bi bi-search search-icon"></i>
+                            <input type="text" id="search-query" placeholder="Search" autocomplete="off">
+                        </form>
+                      </div>
+
+                      <div id="navbar">
+                      </div>
+                    </div>                    <div class="sidebar-item-separator"></div>
+
+                        <div id="sidetoggle">
+                          <div id="sidetoc"></div>
+                        </div>
+                </div>
+                <div class="footer">
+  
+  <strong><a href='https://dotnet.github.io/docfx/'>DocFX</a> + <a href='https://www.singulink.com'>Singulink</a> = ♥</strong>
+                </div>            </nav>
+
+            <main class="main-panel">
+
+                <div id="search-results" style="display: none;">
+                  <h1 class="search-list">Search Results for <span></span></h1>
+                  <div class="sr-items">
+                    <p><i class="bi bi-hourglass-split index-loading"></i></p>
+                  </div>
+                  <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+                </div>
+ 
+
+                <div role="main" class="hide-when-search">
+
+                        <div class="subnav navbar navbar-default">
+                          <div class="container hide-when-search" id="breadcrumb">
+                            <ul class="breadcrumb">
+                              <li></li>
+                            </ul>
+                          </div>
+                        </div>
+
+                         <div class="contribution">
+                               <a href="https://github.com/MonoGame/docs.monogame.github.io/blob/main/articles/getting_to_know/howto/content_pipeline/HowTo_Extend_Processor.md/#L1" class="contribution-link">Edit this page</a>
+                         </div>
+
+                    <article class="content wrap" id="_content" data-uid="">
+
+
+<p>MonoGame lets you modify or extend the behavior of any standard Content Pipeline processor that ships with the product. See <a href="../../whatis/content_pipeline/CP_StdImpsProcs.html">Standard Content Importers and Content Processors</a> for a description of standard processors.</p>
+<p>Because there are so many asset variants supported by different digital content creation (DCC) tools, it is often useful to be able to modify how one of the standard processors operates. The following examples illustrate some of the kinds of things you might want to do.</p>
+<div class="TIP">
+<h5>Tip</h5>
+<p>The following code samples are provided only for demonstration. Most of the functionality described is already available by using parameters on a standard processor.</p>
+</div>
+<h2 id="adding-a-scaling-operation-to-a-processor">Adding a Scaling Operation to a Processor</h2>
+<p>There are many reasons why you might want to modify the existing functionality of a standard processor. Here is one example. If your source assets and your game are at different scales, you may want the processor to scale each model automatically at build time. You can implement such automatic scaling by overriding the <a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelProcessor">Process</a> method of the <a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelProcessor">ModelProcessor</a> class, which generates a <a href="xref:Microsoft.Xna.Framework.Graphics.Model">Model</a>. In the override, you first scale the entire scene, and then invoke the base class functionality to process as usual.</p>
+<p>The following code illustrates this technique:</p>
+<pre><code class="lang-csharp">    [ContentProcessor]
+    class ScalingModelProcessor : ModelProcessor
+    {
+        public override ModelContent Process(
+            NodeContent input, ContentProcessorContext context )
+        {
+            MeshHelper.TransformScene( input, Matrix.CreateScale( 10.0f ) );
+            return base.Process( input, context );
+        }
+    }
+</code></pre>
+<h2 id="generating-additional-data">Generating Additional Data</h2>
+<p>In some cases, you may want to add information to a game asset that a standard processor would not. For example, if a custom effect you want to apply requires tangent or binormal data, you can extend the standard model processor to build this additional data into the asset. To do this, you override the <a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelProcessor">Process</a> method of the <a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelProcessor">ModelProcessor</a> class. In the override, navigate the <a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Graphics.NodeContent">NodeContent</a> hierarchy of the game asset, and call <a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Graphics.MeshHelper">CalculateTangentFrames</a> for each <a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Graphics.MeshContent">MeshContent</a> object you find.</p>
+<p>The following code shows how to do this:</p>
+<pre><code class="lang-csharp">    [ContentProcessor]
+    class ModelProcessorWithTangents : ModelProcessor
+    {
+        public override ModelContent Process( NodeContent input, ContentProcessorContext context )
+        {
+            GenerateTangentFramesRecursive( input );
+            return base.Process( input, context );
+        }
+
+        private void GenerateTangentFramesRecursive( NodeContent node )
+        {
+            MeshContent mesh = node as MeshContent;
+            if (mesh != null)
+            {
+                MeshHelper.CalculateTangentFrames( mesh, VertexChannelNames.TextureCoordinate( 0 ), 
+                    VertexChannelNames.Tangent( 0 ), VertexChannelNames.Binormal( 0 ) );
+            }
+
+            foreach (NodeContent child in node.Children)
+            {
+                GenerateTangentFramesRecursive( child );
+            }
+        }
+    }
+</code></pre>
+<h2 id="changing-the-processors-called-for-child-objects">Changing the Processors Called for Child Objects</h2>
+<p>Another useful technique is to override a standard processor, and to change how child objects are processed just by changing the processors they use.</p>
+<p>Consider, for example, the hierarchy of calls through which textures in a model are processed:</p>
+<ul>
+<li>The standard <a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelProcessor">ModelProcessor.Process</a> method is called to process a <a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Graphics.NodeContent">NodeContent</a> object that represents the root of a scene.</li>
+<li><code>ModelProcessor.Process</code> in turn calls the <a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Processors.ModelProcessor">ModelProcessor.ConvertMaterial</a> method once for every <a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Graphics.MaterialContent">MaterialContent</a> object used in the scene.</li>
+<li><code>ModelProcessor.ConvertMaterial</code> in turn invokes the <a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Processors.MaterialProcessor">MaterialProcessor.Process</a> method on the <a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Graphics.MaterialContent">MaterialContent</a> object passed to it.</li>
+<li><code>MaterialProcessor.Process</code> in turn calls the <a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Processors.MaterialProcessor">MaterialProcessor.BuildTexture</a> method once for each texture in the <a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Graphics.MaterialContent.Textures">MaterialContent.Textures</a> collection in the <code>MaterialContent</code> object passed to it.</li>
+<li><code>MaterialProcessor.BuildTexture</code> in turn invokes the <a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Processors.TextureProcessor">ModelTextureProcessor.Process</a> method on the <a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Graphics.TextureContent">TextureContent</a> object passed to it.</li>
+</ul>
+<p>One reason you may want to change how this works is that the <code>ModelTextureProcessor.Process</code> method applies texture compression to all textures it processes. This could be DXT1, DXT5, PVRTC, ETC1, RGBA4444 or ATITC depending on target your platform. If textures in your game assets are compressed already, you may want to avoid a second compression.</p>
+<div class="TIP">
+<h5>Tip</h5>
+<p>Not all platforms support all types of texture compression. For example DXT1/5 are generally only supported on Desktop graphics cards and some NVidia mobile graphics cards. PVRTC is only supported on iOS and some Android devices with PowerVR graphics cards, and ATITC is only supported on ATI graphics cards. Using the <code>Compressed</code> setting for <code>TextureCompression</code> for the Texture Processor will let the Pipeline pick the best compression for your target platform.</p>
+</div>
+<h3 id="to-prevent-compression-of-textures-during-processing">To prevent compression of textures during processing</h3>
+<p>Here is how to prevent compression from being applied to model textures during processing.</p>
+<ol>
+<li>Create an override of the standard <a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Processors.MaterialProcessor">MaterialProcessor.BuildTexture</a> method, and invoke the <a href="xref:Microsoft.Xna.Framework.Content.Pipeline.Processors.TextureProcessor">TextureProcessor.Process</a> method, which does no compression, instead of <code>ModelTextureProcessor.Process</code>.</li>
+<li>Create an override of <code>ModelProcessor.ConvertMaterial</code> that invokes your override of <code>MaterialProcessor.BuildTexture</code> instead of the standard one.</li>
+</ol>
+<p>The first of these overrides could be coded as:</p>
+<pre><code class="lang-csharp">    [ContentProcessor]
+    class NoCompressionMaterialProcessor : MaterialProcessor
+    {
+        protected override ExternalReference&lt;TextureContent&gt; BuildTexture( 
+            string textureName, ExternalReference&lt;TextureContent&gt; texture, ContentProcessorContext context )
+        {
+            return context.BuildAsset&lt;TextureContent, TextureContent&gt;( texture, &quot;TextureProcessor&quot; );
+        }
+    }
+</code></pre>
+<p>There are several things to note about this code.</p>
+<ul>
+<li>An <a href="xref:Microsoft.Xna.Framework.Content.Pipeline">ExternalReference</a> is an asset object that is shared between multiple classes, such as a diffuse texture used by more than one material. When such an asset is specified, the Content Manager loads only one copy of the <code>ExternalReference</code> at run time and builds it only once, no matter how many references there are to it.</li>
+<li>The <a href="xref:Microsoft.Xna.Framework.Content.Pipeline.ContentProcessorContext">ContentProcessorContext</a><a href="xref:Microsoft.Xna.Framework.Content.Pipeline.ContentProcessorContext">BuildAsset</a> method lets you invoke a processor by name to build the content in an object.</li>
+<li>Although <em>textureName</em>, the first argument to <code>BuildTexture</code>, is ignored in the override above, you could use it if you wanted to process textures differently depending on normal maps or other criteria.</li>
+</ul>
+<p>Given the processor created by your first override above, you could code the second override:</p>
+<pre><code class="lang-csharp">    [ContentProcessor]
+    class NoCompressionModelProcessor : ModelProcessor
+    {
+        protected override MaterialContent ConvertMaterial(
+            MaterialContent material, ContentProcessorContext context )
+        {
+            return context.Convert&lt;MaterialContent, MaterialContent&gt;(
+                material, &quot;NoCompressionMaterialProcessor&quot; );
+        }
+    }
+</code></pre>
+<p>Because this override is processing <code>MaterialContent</code> objects in memory rather than <code>ExternalReference</code> objects, it uses the <a href="xref:Microsoft.Xna.Framework.Content.Pipeline.ContentProcessorContext">ContentProcessorContext.Convert</a> function instead of <a href="xref:Microsoft.Xna.Framework.Content.Pipeline.ContentProcessorContext">BuildAsset</a> to invoke the processor created by your first override.</p>
+<p>After building and installing your new <code>NoCompressionModelProcessor</code> (see <a href="../../whatis/content_pipeline/CP_AddCustomProcImp.html">Adding a Custom Importer</a>), you can assign it to any models whose textures are already compressed and no further compression is applied.</p>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="../../whatis/content_pipeline/CP_Content_Advanced.html">Adding New Content Types</a></li>
+<li><a href="../../whatis/content_pipeline/CP_Overview.html">What Is Content?</a></li>
+<li><a href="../../whatis/content_pipeline/CP_Architecture.html">What is the Content Pipeline?</a></li>
+<li><a href="../../whatis/content_pipeline/CP_StdImpsProcs.html">Standard Content Importers and Content Processors</a></li>
+<li><a href="../../whatis/content_pipeline/CP_AddCustomProcImp.html">Adding a Custom Importer</a></li>
+</ul>
+
+</article>
+                </div>
+
+            </main>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/jquery.twbsPagination.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/jquery.mark.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/url.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/anchor-js@5.0.0/anchor.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/docfx.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/main.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/singulink.js"></script>    </body>
+</html>

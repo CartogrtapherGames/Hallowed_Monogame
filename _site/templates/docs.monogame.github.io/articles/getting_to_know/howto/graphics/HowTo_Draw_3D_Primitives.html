@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Drawing 3D Primitives using Lists or Strips | hallowed </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Drawing 3D Primitives using Lists or Strips | hallowed ">
+      <meta name="generator" content="docfx ">
+  
+      <link rel="shortcut icon" href="../../../../../../favicon.ico">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/night-owl.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" integrity="sha384-EvBWSlnoFgZlXJvpzS+MAUEjvN7+gcCwH+qh7GRFOGgZO0PuwOFro7qPOJnLfe7l" crossorigin="anonymous">
+      <link rel="stylesheet" href="../../../../../../styles/config.css">
+      <link rel="stylesheet" href="../../../../../../styles/singulink.css">
+      <link rel="stylesheet" href="../../../../../../styles/main.css">
+      <meta property="docfx:navrel" content="../../../../../../toc.html">
+      <meta property="docfx:tocrel" content="../../../toc.html">
+  
+  <meta property="docfx:rel" content="../../../../../../">
+  
+    </head>
+    <body>
+        <!-- Header required for docfx anchor scroll to work -->
+        <header id="head"></header>
+        <div class="top-navbar">
+            <a class="burger-icon" onclick="toggleMenu()">
+                <svg name="Hamburger" style="vertical-align: middle;" width="34" height="34" viewbox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M20 6H4V9H20V6ZM4 10.999H20V13.999H4V10.999ZM4 15.999H20V18.999H4V15.999Z"></path></svg>
+            </a>
+
+
+            <a class="brand" href="../../../../../../index.html">
+              <img src="../../../../../../logo.svg" alt="hallowed" class="logomark">
+              <span class="brand-title">hallowed</span>
+            </a>        </div>
+
+        <div class="body-content">
+            <div id="blackout" class="blackout" onclick="toggleMenu()"></div>
+
+            <nav id="sidebar" role="navigation">
+                <div class="sidebar">
+
+                    <div>
+                      <div class="mobile-hide">
+
+                        <a class="brand" href="../../../../../../index.html">
+                          <img src="../../../../../../logo.svg" alt="hallowed" class="logomark">
+                          <span class="brand-title">hallowed</span>
+                        </a>                      </div>
+
+                      <div class="sidesearch">
+                        <form id="search" role="search" class="search">
+                            <i class="bi bi-search search-icon"></i>
+                            <input type="text" id="search-query" placeholder="Search" autocomplete="off">
+                        </form>
+                      </div>
+
+                      <div id="navbar">
+                      </div>
+                    </div>                    <div class="sidebar-item-separator"></div>
+
+                        <div id="sidetoggle">
+                          <div id="sidetoc"></div>
+                        </div>
+                </div>
+                <div class="footer">
+  
+  <strong><a href='https://dotnet.github.io/docfx/'>DocFX</a> + <a href='https://www.singulink.com'>Singulink</a> = ♥</strong>
+                </div>            </nav>
+
+            <main class="main-panel">
+
+                <div id="search-results" style="display: none;">
+                  <h1 class="search-list">Search Results for <span></span></h1>
+                  <div class="sr-items">
+                    <p><i class="bi bi-hourglass-split index-loading"></i></p>
+                  </div>
+                  <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+                </div>
+ 
+
+                <div role="main" class="hide-when-search">
+
+                        <div class="subnav navbar navbar-default">
+                          <div class="container hide-when-search" id="breadcrumb">
+                            <ul class="breadcrumb">
+                              <li></li>
+                            </ul>
+                          </div>
+                        </div>
+
+                         <div class="contribution">
+                               <a href="https://github.com/MonoGame/docs.monogame.github.io/blob/main/articles/getting_to_know/howto/graphics/HowTo_Draw_3D_Primitives.md/#L1" class="contribution-link">Edit this page</a>
+                         </div>
+
+                    <article class="content wrap" id="_content" data-uid="">
+
+<h2 id="overview">Overview</h2>
+<p>A 3D primitive describes how vertex data is ordered. This example demonstrates line and triangle primitive types that are the basis for all drawing calls in the MonoGame Framework. To render primitives, you need to create a basic effect and transformation matrices. This topic follows the steps described in <a href="HowTo_Create_a_BasicEffect.html">Creating a Basic Effect</a> to create an instance of <a href="xref:Microsoft.Xna.Framework.Graphics.BasicEffect">BasicEffect</a>. This sample uses orthographic projection, but you can also use perspective projection to render primitives. The vertices used in the sample are of type <a href="xref:Microsoft.Xna.Framework.Graphics.VertexPositionColor">VertexPositionColor Structure</a> which contains per-vertex position and color.</p>
+<h3 id="prerequisites">Prerequisites</h3>
+<p>This tutorial assumes you are following on from the project created in <a href="HowTo_Create_a_BasicEffect.html">How to create a Basic Effect</a></p>
+<h2 id="creating-vertices">Creating Vertices</h2>
+<p>The major steps for this example are:</p>
+<ul>
+<li>Creating Vertices</li>
+<li>Drawing a Line List</li>
+<li>Drawing a Line Strip</li>
+<li>Drawing A Triangle List</li>
+<li>Drawing a Triangle Strip</li>
+</ul>
+<h2 id="to-create-vertices">To create vertices</h2>
+<p>First we need to setup some data to draw our primitives, essentially a list of points that we will connect together and draw in different ways.</p>
+<ol>
+<li><p>Position the camera and create the required transformations.</p>
+<pre><code class="lang-csharp">// Matrix to translate the drawn primitives to the center of the screen.
+private Matrix translationMatrix;
+
+// Number of vertex points to draw the primitive with.
+private int points = 8;
+
+// The length of the primitive lines to draw.
+private int lineLength = 100;
+
+protected override void Initialize()
+{
+    worldMatrix = Matrix.Identity;
+
+    viewMatrix = Matrix.CreateLookAt(
+        new Vector3(0.0f, 0.0f, 1.0f),
+        Vector3.Zero,
+        Vector3.Up
+        );
+
+    projectionMatrix = Matrix.CreateOrthographicOffCenter(
+        0,
+        (float)GraphicsDevice.Viewport.Width,
+        (float)GraphicsDevice.Viewport.Height,
+        0,
+        1.0f, 1000.0f);
+
+    // Calculate the center of the visible screen using the ViewPort.
+    Vector2 screenCenter = new Vector2(GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2);
+    // Calculate the center of the primitives to be drawn.
+    var primitiveCenter = new Vector2((points / 2 - 1) * lineLength / 2, lineLength / 2);
+    // Create a translation matrix to position the drawn primitives in the center of the screen and the center of the primitives.
+    translationMatrix = Matrix.CreateTranslation(screenCenter.X - primitiveCenter.X, screenCenter.Y - primitiveCenter.Y, 0);
+
+   base.Initialize();
+}
+</code></pre>
+</li>
+<li><p>Create a list of vertices in 3D space that represent the points to draw.</p>
+<p>The following code creates eight vertices (determined from the <code>points</code> variable) and stores them in an array of type <strong>VertexPositionColor</strong>.</p>
+<pre><code class="lang-csharp">// The vertex sata array.
+private VertexPositionColor[] primitiveList;
+
+protected override void LoadContent()
+{
+... // &lt;-Existing Load Content from Creating a Basic Effect
+
+    primitiveList = new VertexPositionColor[points];
+
+    for (int x = 0; x &lt; points / 2; x++)
+    {
+        for (int y = 0; y &lt; 2; y++)
+        {
+            primitiveList[(x * 2) + y] = new VertexPositionColor(
+                new Vector3(x * lineLength, y * lineLength, 0), Color.White);
+        }
+    }
+
+    // Translate the position of the vertices by the translation matrix calculated earlier.
+    for (int i = 0; i &lt; primitiveList.Length; i++)
+    {
+        primitiveList[i].Position = Vector3.Transform(primitiveList[i].Position, translationMatrix);
+    }        
+</code></pre>
+<ul>
+<li>These eight points form a <code>triangle strip</code> consisting of six triangles drawn along the plane <code>z = 0</code>, with the first point at <code>(0, 0, 0)</code>.</li>
+<li>The camera is positioned at <code>(0, 0, 1)</code> looking at <code>(0, 0, 0)</code>.</li>
+<li>An orthogonal projection matrix is created with the upper-left point at <code>(0, 0)</code> and the lower-right point at the current <code>GraphicsDevice</code> screen dimensions.</li>
+<li>In addition, a translation matrix shifts the <code>primitiveList</code> point set to the center of the screen.</li>
+</ul>
+</li>
+<li><p>To make the drawing of lines clearer, also change the <code>Clear</code> color in the <code>Draw</code> method to <code>black</code>.  Just makes it easier to see drawn lines.</p>
+<pre><code class="lang-csharp">protected override void Draw(GameTime gameTime)
+{
+    GraphicsDevice.Clear(Color.Black);
+</code></pre>
+</li>
+</ol>
+<h2 id="drawing-a-line-list">Drawing a Line List</h2>
+<p>The example in this section uses the sample vertex list created by following step 1 in the <code>Creating Vertices</code> steps.</p>
+<p><img src="images/HowTo_Draw_3D_Primitives_Line_List.png" alt="Drawing a Line List"></p>
+<h3 id="to-draw-a-line-list">To draw a line list</h3>
+<ol>
+<li><p>Create an index array that indexes into the vertex buffer.</p>
+<p>This identifies a series of lines.</p>
+<pre><code class="lang-csharp">private short[] lineListIndices;
+
+protected override void LoadContent()
+{
+... // &lt;-Existing Load Content
+
+    // Initialize an array of indices of type short.
+    lineListIndices = new short[(points * 2) - 2];
+
+    // Populate the array with references to indices in the vertex buffer
+    for (int i = 0; i &lt; points - 1; i++)
+    {
+        lineListIndices[i * 2] = (short)(i);
+        lineListIndices[(i * 2) + 1] = (short)(i + 1);
+    }
+</code></pre>
+</li>
+<li><p>Render the lines by calling <a href="xref:Microsoft.Xna.Framework.Graphics.GraphicsDevice#Microsoft_Xna_Framework_Graphics_GraphicsDevice_DrawUserIndexedPrimitives__1_Microsoft_Xna_Framework_Graphics_PrimitiveType___0___System_Int32_System_Int32_System_Int32___System_Int32_System_Int32_">DrawUserIndexedPrimitives</a>, which specifies <a href="xref:Microsoft.Xna.Framework.Graphics.PrimitiveType">PrimitiveType.LineList</a> to determine how to interpret the data in the vertex array.</p>
+<pre><code class="lang-csharp">GraphicsDevice.DrawUserIndexedPrimitives&lt;VertexPositionColor&gt;(
+    PrimitiveType.LineList,
+    primitiveList,
+    0,  // vertex buffer offset to add to each element of the index buffer
+    points,  // number of vertices in pointList
+    lineListIndices,  // the index buffer
+    0,  // first index element to read
+    points - 1   // number of primitives to draw
+);
+</code></pre>
+</li>
+</ol>
+<h2 id="drawing-a-line-strip">Drawing a Line Strip</h2>
+<p>The example in this section uses the same point list and renders the same output as the Drawing a Line List procedure. However, it uses a <code>line strip</code> primitive type when it identifies the indices of the vertex array to draw. <strong>Fewer indices are stored when you use a line strip.</strong></p>
+<p><img src="images/HowTo_Draw_3D_Primitives_Line_List.png" alt="Drawing a Line List"></p>
+<h3 id="to-draw-a-line-strip">To draw a line strip</h3>
+<ol>
+<li><p>Create a list of indices to identify the order in which to draw the points in the specified point list.</p>
+<p>Only half the number of indices used for the line list are needed here because the data consist of a series of connected lines.</p>
+<pre><code class="lang-csharp">private short[] lineStripIndices;
+
+protected override void LoadContent()
+{
+    ... // &lt;-Existing Load Content
+
+    // Initialize an array of indices of type short.
+    lineStripIndices = new short[points];
+
+    // Populate the array with references to indices in the vertex buffer.
+    for (int i = 0; i &lt; points; i++)
+    {
+        lineStripIndices[i] = (short)(i);
+    }
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>This is equivalent to setting <code>lineStripIndices</code> with the following array that consists of a series of <strong>connected</strong> lines between <code>pointList[0]</code>, <code>pointList[1]</code>, and <code>pointList[2]</code>, and so forth.</p>
+<pre><code class="lang-csharp">lineStripIndices = new short[8]{ 0, 1, 2, 3, 4, 5, 6, 7 };
+</code></pre>
+</div>
+</li>
+<li><p>Render the line strip by calling <a href="xref:Microsoft.Xna.Framework.Graphics.GraphicsDevice#Microsoft_Xna_Framework_Graphics_GraphicsDevice_DrawUserIndexedPrimitives__1_Microsoft_Xna_Framework_Graphics_PrimitiveType___0___System_Int32_System_Int32_System_Int32___System_Int32_System_Int32_">DrawUserIndexedPrimitives</a>, which specifies <a href="xref:Microsoft.Xna.Framework.Graphics.PrimitiveType">PrimitiveType.LineStrip</a> to determine how to interpret the data in the vertex array.</p>
+<p>Fewer vertices are used to render the same number of primitives rendered earlier by the line list.</p>
+<pre><code class="lang-csharp">GraphicsDevice.DrawUserIndexedPrimitives&lt;VertexPositionColor&gt;(
+    PrimitiveType.LineList,
+    primitiveList,
+    0,  // vertex buffer offset to add to each element of the index buffer
+    points,  // number of vertices in pointList
+    lineListIndices,  // the index buffer
+    0,  // first index element to read
+    points - 1   // number of primitives to draw
+);
+</code></pre>
+</li>
+</ol>
+<h2 id="drawing-a-triangle-list">Drawing A Triangle List</h2>
+<p>A triangle list, like a line list, is a primitive type that indicates you need to interpret the vertices in the vertex buffer as a series of separately drawn triangles.</p>
+<h3 id="to-draw-a-triangle-list">To draw a triangle list</h3>
+<ol>
+<li><p>Create an array to hold the list of indices that identify a series of triangles to draw from the specified point list.</p>
+<pre><code class="lang-csharp">private short[] triangleStripIndices;
+private int triangleWidth = 10;
+private int triangleHeight = 10;
+
+protected override void LoadContent()
+{
+    ... // &lt;-Existing Load Content
+    triangleListIndices = new short[(width - 1) * (height - 1) * 6];
+
+    for (int x = 0; x &lt; width - 1; x++)
+    {
+        for (int y = 0; y &lt; height - 1; y++)
+        {
+            triangleListIndices[(x + y * (width - 1)) * 6] = (short)(2 * x);
+            triangleListIndices[(x + y * (width - 1)) * 6 + 1] = (short)(2 * x + 1);
+            triangleListIndices[(x + y * (width - 1)) * 6 + 2] = (short)(2 * x + 2);
+
+            triangleListIndices[(x + y * (width - 1)) * 6 + 3] = (short)(2 * x + 2);
+            triangleListIndices[(x + y * (width - 1)) * 6 + 4] = (short)(2 * x + 1);
+            triangleListIndices[(x + y * (width - 1)) * 6 + 5] = (short)(2 * x + 3);
+        }
+    }
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>This is equivalent to setting <code>triangleListIndices</code> to the following array, which consists of a series of triangles between  <code>pointList[0]</code>, <code>pointList[1]</code>, and <code>pointList[2]</code>, and so forth.</p>
+<pre><code class="lang-csharp">triangleListIndices = new short[18]{ 0, 1, 2, 2, 1, 3, 2, 3, 4, 4, 3, 5, 4, 5, 6, 6, 5, 7 };
+</code></pre>
+</div>
+</li>
+<li><p>Render the lines by calling <a href="xref:Microsoft.Xna.Framework.Graphics.GraphicsDevice#Microsoft_Xna_Framework_Graphics_GraphicsDevice_DrawUserIndexedPrimitives__1_Microsoft_Xna_Framework_Graphics_PrimitiveType___0___System_Int32_System_Int32_System_Int32___System_Int32_System_Int32_">DrawUserIndexedPrimitives</a></p>
+<p>This specifies <a href="xref:Microsoft.Xna.Framework.Graphics.PrimitiveType">PrimitiveType.TriangleList</a>, which determines how the data in the vertex array is interpreted.</p>
+<pre><code class="lang-csharp">GraphicsDevice.DrawUserIndexedPrimitives&lt;VertexPositionColor&gt;(
+    PrimitiveType.TriangleList,
+    primitiveList,
+    0,   // vertex buffer offset to add to each element of the index buffer
+    8,   // number of vertices to draw
+    triangleListIndices,
+    0,   // first index element to read
+    6    // number of primitives to draw
+);
+</code></pre>
+</li>
+</ol>
+<h2 id="drawing-a-triangle-strip">Drawing a Triangle Strip</h2>
+<p>A triangle strip is a set of triangles that share multiple vertices. This example shows you how to render an object that looks the same as the object rendered with a triangle list. However, fewer vertices are needed because the triangles share multiple vertices.</p>
+<h3 id="to-draw-a-triangle-strip">To draw a triangle strip</h3>
+<ol>
+<li><p>Create an array to hold the list of indices that identify a strip of triangles.</p>
+<pre><code class="lang-csharp">private short[] triangleStripIndices;
+
+protected override void LoadContent()
+{
+    ... // &lt;-Existing Load Content
+
+    // Initialize an array of indices of type short.
+    triangleStripIndices = new short[points];
+
+    // Populate the array with references to indices in the vertex buffer.
+    for (int i = 0; i &lt; points; i++)
+    {
+        triangleStripIndices[i] = (short)i;
+    }
+</code></pre>
+<div class="NOTE">
+<h5>Note</h5>
+<p>This is equivalent to setting <code>triangleStripIndices</code> to the following array, which consists of a series of <strong>connected</strong> triangles between <code>pointList[0]</code>, <code>pointList[1]</code>, and <code>pointList[2]</code>, and so forth.</p>
+<pre><code class="lang-csharp">triangleStripIndices = new short[8]{ 0, 1, 2, 3, 4, 5, 6, 7 };
+</code></pre>
+</div>
+</li>
+<li><p>Render the lines by calling <a href="xref:Microsoft.Xna.Framework.Graphics.GraphicsDevice#Microsoft_Xna_Framework_Graphics_GraphicsDevice_DrawUserIndexedPrimitives__1_Microsoft_Xna_Framework_Graphics_PrimitiveType___0___System_Int32_System_Int32_System_Int32___System_Int32_System_Int32_">DrawUserIndexedPrimitives</a>.</p>
+<p>This specifies <a href="xref:Microsoft.Xna.Framework.Graphics.PrimitiveType">PrimitiveType.TriangleStrip</a> to determine how to interpret the data in the vertex array. Fewer vertices are used to render the same number of primitives rendered earlier by the triangle list.</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>In the example code, the triangle strip is rendered by a series of red lines instead of the white lines used for the previous triangle list. The color change indicates a different primitive type was used to achieve the same result.</p>
+</div>
+<pre><code class="lang-csharp">GraphicsDevice.DrawUserIndexedPrimitives&lt;VertexPositionColor&gt;(
+    PrimitiveType.TriangleStrip,
+    primitiveList,
+    0,  // vertex buffer offset to add to each element of the index buffer
+    8,  // number of vertices to draw
+    triangleStripIndices,
+    0,  // first index element to read
+    6   // number of primitives to draw
+);
+</code></pre>
+</li>
+</ol>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="HowTo_Enable_Anti_Aliasing.html">How to enable Anti-aliasing</a></li>
+</ul>
+<h3 id="concepts">Concepts</h3>
+<ul>
+<li><a href="../../whatis/graphics/WhatIs_3DRendering.html">What Is 3D Rendering?</a></li>
+</ul>
+<h3 id="reference">Reference</h3>
+<ul>
+<li><a href="xref:Microsoft.Xna.Framework.Graphics.GraphicsDevice">GraphicsDevice</a></li>
+<li><a href="xref:Microsoft.Xna.Framework.Graphics.GraphicsDevice#Microsoft_Xna_Framework_Graphics_GraphicsDevice_DrawUserIndexedPrimitives__1_Microsoft_Xna_Framework_Graphics_PrimitiveType___0___System_Int32_System_Int32_System_Int32___System_Int32_System_Int32_">DrawUserIndexedPrimitives</a></li>
+</ul>
+
+</article>
+                </div>
+
+            </main>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/jquery.twbsPagination.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/jquery.mark.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/url.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/anchor-js@5.0.0/anchor.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/docfx.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/main.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/singulink.js"></script>    </body>
+</html>

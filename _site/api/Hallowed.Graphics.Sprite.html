@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class Sprite | hallowed </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class Sprite | hallowed ">
+      <meta name="generator" content="docfx ">
+  
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/night-owl.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" integrity="sha384-EvBWSlnoFgZlXJvpzS+MAUEjvN7+gcCwH+qh7GRFOGgZO0PuwOFro7qPOJnLfe7l" crossorigin="anonymous">
+      <link rel="stylesheet" href="../styles/config.css">
+      <link rel="stylesheet" href="../styles/singulink.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="../toc.html">
+      <meta property="docfx:tocrel" content="toc.html">
+  
+  <meta property="docfx:rel" content="../">
+  
+    </head>
+    <body>
+        <!-- Header required for docfx anchor scroll to work -->
+        <header id="head"></header>
+        <div class="top-navbar">
+            <a class="burger-icon" onclick="toggleMenu()">
+                <svg name="Hamburger" style="vertical-align: middle;" width="34" height="34" viewbox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M20 6H4V9H20V6ZM4 10.999H20V13.999H4V10.999ZM4 15.999H20V18.999H4V15.999Z"></path></svg>
+            </a>
+
+
+            <a class="brand" href="../index.html">
+              <img src="../logo.svg" alt="hallowed" class="logomark">
+              <span class="brand-title">hallowed</span>
+            </a>        </div>
+
+        <div class="body-content">
+            <div id="blackout" class="blackout" onclick="toggleMenu()"></div>
+
+            <nav id="sidebar" role="navigation">
+                <div class="sidebar">
+
+                    <div>
+                      <div class="mobile-hide">
+
+                        <a class="brand" href="../index.html">
+                          <img src="../logo.svg" alt="hallowed" class="logomark">
+                          <span class="brand-title">hallowed</span>
+                        </a>                      </div>
+
+                      <div class="sidesearch">
+                        <form id="search" role="search" class="search">
+                            <i class="bi bi-search search-icon"></i>
+                            <input type="text" id="search-query" placeholder="Search" autocomplete="off">
+                        </form>
+                      </div>
+
+                      <div id="navbar">
+                      </div>
+                    </div>                    <div class="sidebar-item-separator"></div>
+
+                        <div id="sidetoggle">
+                          <div id="sidetoc"></div>
+                        </div>
+                </div>
+                <div class="footer">
+  
+  <strong><a href='https://dotnet.github.io/docfx/'>DocFX</a> + <a href='https://www.singulink.com'>Singulink</a> = ♥</strong>
+                </div>            </nav>
+
+            <main class="main-panel">
+
+                <div id="search-results" style="display: none;">
+                  <h1 class="search-list">Search Results for <span></span></h1>
+                  <div class="sr-items">
+                    <p><i class="bi bi-hourglass-split index-loading"></i></p>
+                  </div>
+                  <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+                </div>
+ 
+
+                <div role="main" class="hide-when-search">
+
+                        <div class="subnav navbar navbar-default">
+                          <div class="container hide-when-search" id="breadcrumb">
+                            <ul class="breadcrumb">
+                              <li></li>
+                            </ul>
+                          </div>
+                        </div>
+
+                         <div class="contribution">
+                               <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/new/master/apiSpec/new?filename=Hallowed_Graphics_Sprite.md&amp;value=---%0Auid%3A%20Hallowed.Graphics.Sprite%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Edit this page</a>
+                         </div>
+
+                    <article class="content wrap" id="_content" data-uid="Hallowed.Graphics.Sprite">
+
+
+
+  <h1 id="Hallowed_Graphics_Sprite" data-uid="Hallowed.Graphics.Sprite" class="text-break">Class Sprite</h1>
+  <div class="markdown level0 summary"><p>Represents a 2D renderable object that displays a texture in the scene graph.
+A <a class="xref" href="Hallowed.Graphics.Sprite.html">Sprite</a> is the primary visual element used for rendering images,
+supporting transformations (position, rotation, scale), color tinting, and
+orientation flips.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+    <div class="level1"><a class="xref" href="Hallowed.Core.DisplayObject.html">DisplayObject</a></div>
+    <div class="level2"><span class="xref">Sprite</span></div>
+      <div class="level3"><a class="xref" href="Hallowed.Graphics.AnimatedSprite.html">AnimatedSprite</a></div>
+  </div>
+  <div class="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Hallowed.Core.DisplayObject.html#Hallowed_Core_DisplayObject_IsDisposed">DisplayObject.IsDisposed</a>
+    </div>
+    <div>
+      <a class="xref" href="Hallowed.Core.DisplayObject.html#Hallowed_Core_DisplayObject_WorldTransform">DisplayObject.WorldTransform</a>
+    </div>
+    <div>
+      <a class="xref" href="Hallowed.Core.DisplayObject.html#Hallowed_Core_DisplayObject_Parent">DisplayObject.Parent</a>
+    </div>
+    <div>
+      <a class="xref" href="Hallowed.Core.DisplayObject.html#Hallowed_Core_DisplayObject_Children">DisplayObject.Children</a>
+    </div>
+    <div>
+      <a class="xref" href="Hallowed.Core.DisplayObject.html#Hallowed_Core_DisplayObject_Visible">DisplayObject.Visible</a>
+    </div>
+    <div>
+      <a class="xref" href="Hallowed.Core.DisplayObject.html#Hallowed_Core_DisplayObject_Position">DisplayObject.Position</a>
+    </div>
+    <div>
+      <a class="xref" href="Hallowed.Core.DisplayObject.html#Hallowed_Core_DisplayObject_X">DisplayObject.X</a>
+    </div>
+    <div>
+      <a class="xref" href="Hallowed.Core.DisplayObject.html#Hallowed_Core_DisplayObject_Y">DisplayObject.Y</a>
+    </div>
+    <div>
+      <a class="xref" href="Hallowed.Core.DisplayObject.html#Hallowed_Core_DisplayObject_Scale">DisplayObject.Scale</a>
+    </div>
+    <div>
+      <a class="xref" href="Hallowed.Core.DisplayObject.html#Hallowed_Core_DisplayObject_Rotation">DisplayObject.Rotation</a>
+    </div>
+    <div>
+      <a class="xref" href="Hallowed.Core.DisplayObject.html#Hallowed_Core_DisplayObject_Width">DisplayObject.Width</a>
+    </div>
+    <div>
+      <a class="xref" href="Hallowed.Core.DisplayObject.html#Hallowed_Core_DisplayObject_Height">DisplayObject.Height</a>
+    </div>
+    <div>
+      <a class="xref" href="Hallowed.Core.DisplayObject.html#Hallowed_Core_DisplayObject_GetWorldBounds">DisplayObject.GetWorldBounds()</a>
+    </div>
+    <div>
+      <a class="xref" href="Hallowed.Core.DisplayObject.html#Hallowed_Core_DisplayObject_AddChild_Hallowed_Core_DisplayObject_">DisplayObject.AddChild(DisplayObject)</a>
+    </div>
+    <div>
+      <a class="xref" href="Hallowed.Core.DisplayObject.html#Hallowed_Core_DisplayObject_AddChild_System_Collections_Generic_IEnumerable_Hallowed_Core_DisplayObject__">DisplayObject.AddChild(IEnumerable&lt;DisplayObject&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="Hallowed.Core.DisplayObject.html#Hallowed_Core_DisplayObject_AddChild_Hallowed_Core_DisplayObject___">DisplayObject.AddChild(params DisplayObject[])</a>
+    </div>
+    <div>
+      <a class="xref" href="Hallowed.Core.DisplayObject.html#Hallowed_Core_DisplayObject_RemoveChild_Hallowed_Core_DisplayObject_System_Boolean_">DisplayObject.RemoveChild(DisplayObject, bool)</a>
+    </div>
+    <div>
+      <a class="xref" href="Hallowed.Core.DisplayObject.html#Hallowed_Core_DisplayObject_RemoveChild_System_Collections_Generic_IEnumerable_Hallowed_Core_DisplayObject__System_Boolean_">DisplayObject.RemoveChild(IEnumerable&lt;DisplayObject&gt;, bool)</a>
+    </div>
+    <div>
+      <a class="xref" href="Hallowed.Core.DisplayObject.html#Hallowed_Core_DisplayObject_RemoveChild_System_Boolean_Hallowed_Core_DisplayObject___">DisplayObject.RemoveChild(bool, params DisplayObject[])</a>
+    </div>
+    <div>
+      <a class="xref" href="Hallowed.Core.DisplayObject.html#Hallowed_Core_DisplayObject_MarkDirty">DisplayObject.MarkDirty()</a>
+    </div>
+    <div>
+      <a class="xref" href="Hallowed.Core.DisplayObject.html#Hallowed_Core_DisplayObject_UpdateWorldTransform">DisplayObject.UpdateWorldTransform()</a>
+    </div>
+    <div>
+      <a class="xref" href="Hallowed.Core.DisplayObject.html#Hallowed_Core_DisplayObject_DecomposeMatrix2D_Microsoft_Xna_Framework_Matrix_Microsoft_Xna_Framework_Vector2__System_Single__Microsoft_Xna_Framework_Vector2__">DisplayObject.DecomposeMatrix2D(Matrix, out Vector2, out float, out Vector2)</a>
+    </div>
+    <div>
+      <a class="xref" href="Hallowed.Core.DisplayObject.html#Hallowed_Core_DisplayObject_Dispose">DisplayObject.Dispose()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Hallowed.html">Hallowed</a>.<a class="xref" href="Hallowed.Graphics.html">Graphics</a></h6>
+  <h6><strong>Assembly</strong>: Hallowed.dll</h6>
+  <h5 id="Hallowed_Graphics_Sprite_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class Sprite : DisplayObject, IDisposable</code></pre>
+  </div>
+  <h5 id="Hallowed_Graphics_Sprite_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>The <a class="xref" href="Hallowed.Graphics.Sprite.html">Sprite</a> class inherits from <a class="xref" href="Hallowed.Core.DisplayObject.html">DisplayObject</a>,
+meaning it participates in the world transform hierarchy.
+The texture is automatically disposed when the sprite is disposed, so it should
+not be shared across multiple sprites unless handled externally.</p>
+</div>
+  <h3 id="constructors">Constructors
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/new/master/apiSpec/new?filename=Hallowed_Graphics_Sprite__ctor.md&amp;value=---%0Auid%3A%20Hallowed.Graphics.Sprite.%23ctor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/blob/master/Hallowed/Source/Graphics/Sprite.cs/#L38">View Source</a>
+  </span>
+  <a id="Hallowed_Graphics_Sprite__ctor_" data-uid="Hallowed.Graphics.Sprite.#ctor*"></a>
+  <h4 id="Hallowed_Graphics_Sprite__ctor" data-uid="Hallowed.Graphics.Sprite.#ctor">Sprite()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Sprite()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/new/master/apiSpec/new?filename=Hallowed_Graphics_Sprite__ctor_Hallowed_Graphics_TextureAtlas_System_String_.md&amp;value=---%0Auid%3A%20Hallowed.Graphics.Sprite.%23ctor(Hallowed.Graphics.TextureAtlas%2CSystem.String)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/blob/master/Hallowed/Source/Graphics/Sprite.cs/#L56">View Source</a>
+  </span>
+  <a id="Hallowed_Graphics_Sprite__ctor_" data-uid="Hallowed.Graphics.Sprite.#ctor*"></a>
+  <h4 id="Hallowed_Graphics_Sprite__ctor_Hallowed_Graphics_TextureAtlas_System_String_" data-uid="Hallowed.Graphics.Sprite.#ctor(Hallowed.Graphics.TextureAtlas,System.String)">Sprite(TextureAtlas, string)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Sprite(TextureAtlas textureAtlas, string regionName)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Hallowed.Graphics.TextureAtlas.html">TextureAtlas</a></td>
+        <td><span class="parametername">textureAtlas</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></td>
+        <td><span class="parametername">regionName</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/new/master/apiSpec/new?filename=Hallowed_Graphics_Sprite__ctor_Microsoft_Xna_Framework_Graphics_Texture2D_.md&amp;value=---%0Auid%3A%20Hallowed.Graphics.Sprite.%23ctor(Microsoft.Xna.Framework.Graphics.Texture2D)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/blob/master/Hallowed/Source/Graphics/Sprite.cs/#L51">View Source</a>
+  </span>
+  <a id="Hallowed_Graphics_Sprite__ctor_" data-uid="Hallowed.Graphics.Sprite.#ctor*"></a>
+  <h4 id="Hallowed_Graphics_Sprite__ctor_Microsoft_Xna_Framework_Graphics_Texture2D_" data-uid="Hallowed.Graphics.Sprite.#ctor(Microsoft.Xna.Framework.Graphics.Texture2D)">Sprite(Texture2D)</h4>
+  <div class="markdown level1 summary"><p>The sprite constructor.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Sprite(Texture2D texture)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Texture2D</span></td>
+        <td><span class="parametername">texture</span></td>
+        <td><p>the sprite texture</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/new/master/apiSpec/new?filename=Hallowed_Graphics_Sprite_Anchor.md&amp;value=---%0Auid%3A%20Hallowed.Graphics.Sprite.Anchor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/blob/master/Hallowed/Source/Graphics/Sprite.cs/#L90">View Source</a>
+  </span>
+  <a id="Hallowed_Graphics_Sprite_Anchor_" data-uid="Hallowed.Graphics.Sprite.Anchor*"></a>
+  <h4 id="Hallowed_Graphics_Sprite_Anchor" data-uid="Hallowed.Graphics.Sprite.Anchor">Anchor</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector2 Anchor { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector2</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/new/master/apiSpec/new?filename=Hallowed_Graphics_Sprite_Color.md&amp;value=---%0Auid%3A%20Hallowed.Graphics.Sprite.Color%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/blob/master/Hallowed/Source/Graphics/Sprite.cs/#L76">View Source</a>
+  </span>
+  <a id="Hallowed_Graphics_Sprite_Color_" data-uid="Hallowed.Graphics.Sprite.Color*"></a>
+  <h4 id="Hallowed_Graphics_Sprite_Color" data-uid="Hallowed.Graphics.Sprite.Color">Color</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Color Color { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Color</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/new/master/apiSpec/new?filename=Hallowed_Graphics_Sprite_Frame.md&amp;value=---%0Auid%3A%20Hallowed.Graphics.Sprite.Frame%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/blob/master/Hallowed/Source/Graphics/Sprite.cs/#L82">View Source</a>
+  </span>
+  <a id="Hallowed_Graphics_Sprite_Frame_" data-uid="Hallowed.Graphics.Sprite.Frame*"></a>
+  <h4 id="Hallowed_Graphics_Sprite_Frame" data-uid="Hallowed.Graphics.Sprite.Frame">Frame</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Rectangle Frame { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Rectangle</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/new/master/apiSpec/new?filename=Hallowed_Graphics_Sprite_Orientation.md&amp;value=---%0Auid%3A%20Hallowed.Graphics.Sprite.Orientation%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/blob/master/Hallowed/Source/Graphics/Sprite.cs/#L84">View Source</a>
+  </span>
+  <a id="Hallowed_Graphics_Sprite_Orientation_" data-uid="Hallowed.Graphics.Sprite.Orientation*"></a>
+  <h4 id="Hallowed_Graphics_Sprite_Orientation" data-uid="Hallowed.Graphics.Sprite.Orientation">Orientation</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SpriteOrientation Orientation { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Hallowed.Graphics.SpriteOrientation.html">SpriteOrientation</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/new/master/apiSpec/new?filename=Hallowed_Graphics_Sprite_Origin.md&amp;value=---%0Auid%3A%20Hallowed.Graphics.Sprite.Origin%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/blob/master/Hallowed/Source/Graphics/Sprite.cs/#L103">View Source</a>
+  </span>
+  <a id="Hallowed_Graphics_Sprite_Origin_" data-uid="Hallowed.Graphics.Sprite.Origin*"></a>
+  <h4 id="Hallowed_Graphics_Sprite_Origin" data-uid="Hallowed.Graphics.Sprite.Origin">Origin</h4>
+  <div class="markdown level1 summary"><p>The display object origin.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override Vector2 Origin { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector2</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Hallowed.Core.DisplayObject.html#Hallowed_Core_DisplayObject_Origin">DisplayObject.Origin</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/new/master/apiSpec/new?filename=Hallowed_Graphics_Sprite_Texture.md&amp;value=---%0Auid%3A%20Hallowed.Graphics.Sprite.Texture%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/blob/master/Hallowed/Source/Graphics/Sprite.cs/#L65">View Source</a>
+  </span>
+  <a id="Hallowed_Graphics_Sprite_Texture_" data-uid="Hallowed.Graphics.Sprite.Texture*"></a>
+  <h4 id="Hallowed_Graphics_Sprite_Texture" data-uid="Hallowed.Graphics.Sprite.Texture">Texture</h4>
+  <div class="markdown level1 summary"><p>The sprite texture.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual Texture2D Texture { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Texture2D</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+</h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/new/master/apiSpec/new?filename=Hallowed_Graphics_Sprite_Dispose_System_Boolean_.md&amp;value=---%0Auid%3A%20Hallowed.Graphics.Sprite.Dispose(System.Boolean)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/blob/master/Hallowed/Source/Graphics/Sprite.cs/#L164">View Source</a>
+  </span>
+  <a id="Hallowed_Graphics_Sprite_Dispose_" data-uid="Hallowed.Graphics.Sprite.Dispose*"></a>
+  <h4 id="Hallowed_Graphics_Sprite_Dispose_System_Boolean_" data-uid="Hallowed.Graphics.Sprite.Dispose(System.Boolean)">Dispose(bool)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void Dispose(bool disposing)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a></td>
+        <td><span class="parametername">disposing</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Hallowed.Core.DisplayObject.html#Hallowed_Core_DisplayObject_Dispose_System_Boolean_">DisplayObject.Dispose(bool)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/new/master/apiSpec/new?filename=Hallowed_Graphics_Sprite_Draw_Microsoft_Xna_Framework_Graphics_SpriteBatch_.md&amp;value=---%0Auid%3A%20Hallowed.Graphics.Sprite.Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/blob/master/Hallowed/Source/Graphics/Sprite.cs/#L130">View Source</a>
+  </span>
+  <a id="Hallowed_Graphics_Sprite_Draw_" data-uid="Hallowed.Graphics.Sprite.Draw*"></a>
+  <h4 id="Hallowed_Graphics_Sprite_Draw_Microsoft_Xna_Framework_Graphics_SpriteBatch_" data-uid="Hallowed.Graphics.Sprite.Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch)">Draw(SpriteBatch)</h4>
+  <div class="markdown level1 summary"><p>draw the object and all of its children.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void Draw(SpriteBatch spriteBatch)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">SpriteBatch</span></td>
+        <td><span class="parametername">spriteBatch</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Hallowed.Core.DisplayObject.html#Hallowed_Core_DisplayObject_Draw_Microsoft_Xna_Framework_Graphics_SpriteBatch_">DisplayObject.Draw(SpriteBatch)</a></div>
+  <h5 id="Hallowed_Graphics_Sprite_Draw_Microsoft_Xna_Framework_Graphics_SpriteBatch__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>if an object or its children visible flag is set to false it wont
+be draw but still be updated.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/new/master/apiSpec/new?filename=Hallowed_Graphics_Sprite_GetBounds.md&amp;value=---%0Auid%3A%20Hallowed.Graphics.Sprite.GetBounds%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/blob/master/Hallowed/Source/Graphics/Sprite.cs/#L114">View Source</a>
+  </span>
+  <a id="Hallowed_Graphics_Sprite_GetBounds_" data-uid="Hallowed.Graphics.Sprite.GetBounds*"></a>
+  <h4 id="Hallowed_Graphics_Sprite_GetBounds" data-uid="Hallowed.Graphics.Sprite.GetBounds">GetBounds()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override Rectangle GetBounds()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Rectangle</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Hallowed.Core.DisplayObject.html#Hallowed_Core_DisplayObject_GetBounds">DisplayObject.GetBounds()</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/new/master/apiSpec/new?filename=Hallowed_Graphics_Sprite_GetSpriteEffects.md&amp;value=---%0Auid%3A%20Hallowed.Graphics.Sprite.GetSpriteEffects%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/blob/master/Hallowed/Source/Graphics/Sprite.cs/#L153">View Source</a>
+  </span>
+  <a id="Hallowed_Graphics_Sprite_GetSpriteEffects_" data-uid="Hallowed.Graphics.Sprite.GetSpriteEffects*"></a>
+  <h4 id="Hallowed_Graphics_Sprite_GetSpriteEffects" data-uid="Hallowed.Graphics.Sprite.GetSpriteEffects">GetSpriteEffects()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual SpriteEffects GetSpriteEffects()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">SpriteEffects</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/new/master/apiSpec/new?filename=Hallowed_Graphics_Sprite_Update_Microsoft_Xna_Framework_GameTime_.md&amp;value=---%0Auid%3A%20Hallowed.Graphics.Sprite.Update(Microsoft.Xna.Framework.GameTime)%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/blob/master/Hallowed/Source/Graphics/Sprite.cs/#L125">View Source</a>
+  </span>
+  <a id="Hallowed_Graphics_Sprite_Update_" data-uid="Hallowed.Graphics.Sprite.Update*"></a>
+  <h4 id="Hallowed_Graphics_Sprite_Update_Microsoft_Xna_Framework_GameTime_" data-uid="Hallowed.Graphics.Sprite.Update(Microsoft.Xna.Framework.GameTime)">Update(GameTime)</h4>
+  <div class="markdown level1 summary"><p>update the object and all of its children.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void Update(GameTime gameTime)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">GameTime</span></td>
+        <td><span class="parametername">gameTime</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Hallowed.Core.DisplayObject.html#Hallowed_Core_DisplayObject_Update_Microsoft_Xna_Framework_GameTime_">DisplayObject.Update(GameTime)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/new/master/apiSpec/new?filename=Hallowed_Graphics_Sprite_UpdateAnchorFromOrigin.md&amp;value=---%0Auid%3A%20Hallowed.Graphics.Sprite.UpdateAnchorFromOrigin%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/blob/master/Hallowed/Source/Graphics/Sprite.cs/#L180">View Source</a>
+  </span>
+  <a id="Hallowed_Graphics_Sprite_UpdateAnchorFromOrigin_" data-uid="Hallowed.Graphics.Sprite.UpdateAnchorFromOrigin*"></a>
+  <h4 id="Hallowed_Graphics_Sprite_UpdateAnchorFromOrigin" data-uid="Hallowed.Graphics.Sprite.UpdateAnchorFromOrigin">UpdateAnchorFromOrigin()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void UpdateAnchorFromOrigin()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/new/master/apiSpec/new?filename=Hallowed_Graphics_Sprite_UpdateOriginFromAnchor.md&amp;value=---%0Auid%3A%20Hallowed.Graphics.Sprite.UpdateOriginFromAnchor%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Edit this page</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/CartogrtapherGames/Hallowed_Monogame/blob/master/Hallowed/Source/Graphics/Sprite.cs/#L170">View Source</a>
+  </span>
+  <a id="Hallowed_Graphics_Sprite_UpdateOriginFromAnchor_" data-uid="Hallowed.Graphics.Sprite.UpdateOriginFromAnchor*"></a>
+  <h4 id="Hallowed_Graphics_Sprite_UpdateOriginFromAnchor" data-uid="Hallowed.Graphics.Sprite.UpdateOriginFromAnchor">UpdateOriginFromAnchor()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="declaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void UpdateOriginFromAnchor()</code></pre>
+  </div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a>
+  </div>
+
+</article>
+                </div>
+
+            </main>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+        <script type="text/javascript" src="../styles/jquery.twbsPagination.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/jquery.mark.min.js"></script>
+        <script type="text/javascript" src="../styles/url.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/anchor-js@5.0.0/anchor.min.js"></script>
+        <script type="text/javascript" src="../styles/docfx.js"></script>
+        <script type="text/javascript" src="../styles/main.js"></script>
+        <script type="text/javascript" src="../styles/singulink.js"></script>    </body>
+</html>

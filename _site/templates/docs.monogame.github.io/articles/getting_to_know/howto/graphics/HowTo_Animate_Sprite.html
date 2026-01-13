@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Animating a Sprite | hallowed </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Animating a Sprite | hallowed ">
+      <meta name="generator" content="docfx ">
+  
+      <link rel="shortcut icon" href="../../../../../../favicon.ico">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/night-owl.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" integrity="sha384-EvBWSlnoFgZlXJvpzS+MAUEjvN7+gcCwH+qh7GRFOGgZO0PuwOFro7qPOJnLfe7l" crossorigin="anonymous">
+      <link rel="stylesheet" href="../../../../../../styles/config.css">
+      <link rel="stylesheet" href="../../../../../../styles/singulink.css">
+      <link rel="stylesheet" href="../../../../../../styles/main.css">
+      <meta property="docfx:navrel" content="../../../../../../toc.html">
+      <meta property="docfx:tocrel" content="../../../toc.html">
+  
+  <meta property="docfx:rel" content="../../../../../../">
+  
+    </head>
+    <body>
+        <!-- Header required for docfx anchor scroll to work -->
+        <header id="head"></header>
+        <div class="top-navbar">
+            <a class="burger-icon" onclick="toggleMenu()">
+                <svg name="Hamburger" style="vertical-align: middle;" width="34" height="34" viewbox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M20 6H4V9H20V6ZM4 10.999H20V13.999H4V10.999ZM4 15.999H20V18.999H4V15.999Z"></path></svg>
+            </a>
+
+
+            <a class="brand" href="../../../../../../index.html">
+              <img src="../../../../../../logo.svg" alt="hallowed" class="logomark">
+              <span class="brand-title">hallowed</span>
+            </a>        </div>
+
+        <div class="body-content">
+            <div id="blackout" class="blackout" onclick="toggleMenu()"></div>
+
+            <nav id="sidebar" role="navigation">
+                <div class="sidebar">
+
+                    <div>
+                      <div class="mobile-hide">
+
+                        <a class="brand" href="../../../../../../index.html">
+                          <img src="../../../../../../logo.svg" alt="hallowed" class="logomark">
+                          <span class="brand-title">hallowed</span>
+                        </a>                      </div>
+
+                      <div class="sidesearch">
+                        <form id="search" role="search" class="search">
+                            <i class="bi bi-search search-icon"></i>
+                            <input type="text" id="search-query" placeholder="Search" autocomplete="off">
+                        </form>
+                      </div>
+
+                      <div id="navbar">
+                      </div>
+                    </div>                    <div class="sidebar-item-separator"></div>
+
+                        <div id="sidetoggle">
+                          <div id="sidetoc"></div>
+                        </div>
+                </div>
+                <div class="footer">
+  
+  <strong><a href='https://dotnet.github.io/docfx/'>DocFX</a> + <a href='https://www.singulink.com'>Singulink</a> = ♥</strong>
+                </div>            </nav>
+
+            <main class="main-panel">
+
+                <div id="search-results" style="display: none;">
+                  <h1 class="search-list">Search Results for <span></span></h1>
+                  <div class="sr-items">
+                    <p><i class="bi bi-hourglass-split index-loading"></i></p>
+                  </div>
+                  <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+                </div>
+ 
+
+                <div role="main" class="hide-when-search">
+
+                        <div class="subnav navbar navbar-default">
+                          <div class="container hide-when-search" id="breadcrumb">
+                            <ul class="breadcrumb">
+                              <li></li>
+                            </ul>
+                          </div>
+                        </div>
+
+                         <div class="contribution">
+                               <a href="https://github.com/MonoGame/docs.monogame.github.io/blob/main/articles/getting_to_know/howto/graphics/HowTo_Animate_Sprite.md/#L1" class="contribution-link">Edit this page</a>
+                         </div>
+
+                    <article class="content wrap" id="_content" data-uid="">
+
+<h2 id="overview">Overview</h2>
+<p>In this example, you will draw a sprite to the screen and then animate the sprite using a custom sprite animation class.</p>
+<h3 id="end-result">End result</h3>
+<p><img src="images/HowTo_AnimateSprite_Final.gif" alt="The output of this tutorial"></p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Better animations can be done with better images and more frames, have a look at the <a href="https://github.com/MonoGame/MonoGame.Samples/tree/3.8.1/Platformer2D">Platformer Sample</a> Provided by MonoGame for example.</p>
+</div>
+<h2 id="requirements">Requirements</h2>
+<p>The example assumes the texture you are loading contains multiple frames of the same size in a texture whose size is uniform (also known as a spritesheet), for example, the following spritesheet contains 8 Images of a character in different phases of motion, when player together it looks like it is animated.</p>
+<p><img src="images/HowTo_SpriteAnimate_Spritesheet.PNG" alt="Character Spritesheet"></p>
+<p>Save the spritesheet to your content project and name it &quot;<strong>AnimatedCharacter</strong>&quot; (this name will used to reference it in the project).</p>
+<div class="NOTE">
+<h5>Note</h5>
+<p>The sample also uses a class named <strong>AnimatedTexture</strong>, which is included with the sample below.</p>
+<p>The <code>AnimatedTexture.cs</code> is a helper to simplify the loading and drawing of a texture that contains multiple frames of animation.</p>
+</div>
+<h2 id="drawing-an-animated-sprite">Drawing an Animated Sprite</h2>
+<ol>
+<li><p>Follow the steps of <a href="HowTo_Draw_A_Sprite.html">How To: Draw a Sprite</a>.
+A good first step to understanding the loading and drawing of textures and setting up your project.</p>
+</li>
+<li><p>Create a new class called <code>AnimatedTexture.cs</code> in your project and replace its contents with the following:</p>
+<pre><code class="lang-csharp">using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
+
+/// &lt;summary&gt;
+/// A helper class for handling animated textures.
+/// &lt;/summary&gt;
+public class AnimatedTexture
+{
+    // Number of frames in the animation.
+    private int frameCount;
+    
+    // The animation spritesheet.
+    private Texture2D myTexture;
+    
+    // The number of frames to draw per second.
+    private float timePerFrame;
+    
+    // The current frame being drawn.
+    private int frame;
+    
+    // Total amount of time the animation has been running.
+    private float totalElapsed;
+    
+    // Is the animation currently running?
+    private bool isPaused;
+
+    // The current rotation, scale and draw depth for the animation.
+    public float Rotation, Scale, Depth;
+    
+    // The origin point of the animated texture.
+    public Vector2 Origin;
+
+    public AnimatedTexture(Vector2 origin, float rotation, float scale, float depth)
+    {
+        this.Origin = origin;
+        this.Rotation = rotation;
+        this.Scale = scale;
+        this.Depth = depth;
+    }
+
+    public void Load(ContentManager content, string asset, int frameCount, int framesPerSec)
+    {
+        this.frameCount = frameCount;
+        myTexture = content.Load&lt;Texture2D&gt;(asset);
+        timePerFrame = (float)1 / framesPerSec;
+        frame = 0;
+        totalElapsed = 0;
+        isPaused = false;
+    }
+
+    public void UpdateFrame(float elapsed)
+    {
+        if (isPaused)
+            return;
+        totalElapsed += elapsed;
+        if (totalElapsed &gt; timePerFrame)
+        {
+            frame++;
+            // Keep the Frame between 0 and the total frames, minus one.
+            frame %= frameCount;
+            totalElapsed -= timePerFrame;
+        }
+    }
+
+    public void DrawFrame(SpriteBatch batch, Vector2 screenPos)
+    {
+        DrawFrame(batch, frame, screenPos);
+    }
+
+    public void DrawFrame(SpriteBatch batch, int frame, Vector2 screenPos)
+    {
+        int FrameWidth = myTexture.Width / frameCount;
+        Rectangle sourcerect = new Rectangle(FrameWidth * frame, 0,
+            FrameWidth, myTexture.Height);
+        batch.Draw(myTexture, screenPos, sourcerect, Color.White,
+            Rotation, Origin, Scale, SpriteEffects.None, Depth);
+    }
+
+    public bool IsPaused
+    {
+        get { return isPaused; }
+    }
+
+    public void Reset()
+    {
+        frame = 0;
+        totalElapsed = 0f;
+    }
+
+    public void Stop()
+    {
+        Pause();
+        Reset();
+    }
+
+    public void Play()
+    {
+        isPaused = false;
+    }
+
+    public void Pause()
+    {
+        isPaused = true;
+    }
+}
+</code></pre></li>
+<li><p>In your game's constructor, create an instance of the <strong>AnimatedTexture</strong> class.
+This example uses <code>(0,0)</code> as the origin of the texture, <code>no rotation</code>, a scale of <code>2</code>, and a depth of <code>0.5</code>.</p>
+<pre><code class="lang-csharp">// The reference to the AnimatedTexture for the character
+private AnimatedTexture spriteTexture;
+// The rotation of the character on screen
+private const float rotation = 0;
+// The scale of the character, how big it is drawn
+private const float scale = 0.5f;
+// The draw order of the sprite
+private const float depth = 0.5f;
+
+public Game1()
+{
+    _graphics = new GraphicsDeviceManager(this);
+    Content.RootDirectory = &quot;Content&quot;;
+    spriteTexture = new AnimatedTexture(Vector2.Zero, rotation, scale, depth);
+}
+</code></pre>
+</li>
+<li><p>Load the texture to provide the image data for the animation.
+In this example, the <strong>AnimatedTexture</strong> class loads a single texture and divides it into frames of animation. It uses the last parameter to determine how many frames to draw each second. In this case, it draws eight frames at three frames per second (fps).</p>
+<pre><code class="lang-csharp">// The game visible area
+private Viewport viewport;
+// The position to draw the character
+private Vector2 characterPos;
+// How many frames/images are included in the animation
+private const int frames = 8;
+// How many frames should be drawn each second, how fast does the animation run?
+private const int framesPerSec = 10;
+
+protected override void LoadContent()
+{
+    // Create a new SpriteBatch, which can be used to draw textures.
+    _spriteBatch = new SpriteBatch(GraphicsDevice);
+
+    // &quot;AnimatedCharacter&quot; is the name of the sprite asset in the project.
+    spriteTexture.Load(Content, &quot;AnimatedCharacter&quot;, frames, framesPerSec);
+    viewport = _graphics.GraphicsDevice.Viewport;
+    characterPos = new Vector2(viewport.Width / 2, viewport.Height / 2);
+}
+</code></pre>
+</li>
+<li><p>In your game's <a href="xref:Microsoft.Xna.Framework.Game#Microsoft_Xna_Framework_Game_Update_Microsoft_Xna_Framework_GameTime_">Game.Update</a> method, determine which animation frame to display.</p>
+<pre><code class="lang-csharp">protected override void Update(GameTime gameTime)
+{
+    if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+        Exit();
+
+    // TODO: Add your update logic here
+    float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
+    spriteTexture.UpdateFrame(elapsed);
+
+    base.Update(gameTime);
+}
+</code></pre>
+<p>This is handled by AnimatedTexture's <strong>UpdateFrame</strong> method, which takes the elapsed seconds between updates as a parameter, as shown below in the except from the &quot;AnimatedTexture&quot; class.</p>
+<pre><code class="lang-csharp">// class AnimatedTexture
+public void UpdateFrame(float elapsed)
+{
+    if (isPaused)
+        return;
+    totalElapsed += elapsed;
+    if (totalElapsed &gt; timePerFrame)
+    {
+        frame++;
+        // Keep the Frame between 0 and the total frames, minus one.
+        frame %= frameCount;
+        totalElapsed -= timePerFrame;
+    }
+}
+</code></pre>
+</li>
+<li><p>In your game's <a href="xref:Microsoft.Xna.Framework.Game#Microsoft_Xna_Framework_Game_Draw_Microsoft_Xna_Framework_GameTime_">Game.Draw</a> method, call <a href="xref:Microsoft.Xna.Framework.Graphics.SpriteBatch#Microsoft_Xna_Framework_Graphics_SpriteBatch_Draw_Microsoft_Xna_Framework_Graphics_Texture2D_Microsoft_Xna_Framework_Vector2_Microsoft_Xna_Framework_Color_">SpriteBatch.Draw</a> on the <strong>AnimatedTexture</strong> object.</p>
+<pre><code class="lang-csharp">protected override void Draw(GameTime gameTime)
+{
+    GraphicsDevice.Clear(Color.CornflowerBlue);
+
+    // TODO: Add your drawing code here
+    _spriteBatch.Begin();
+    // Replacing the normal SpriteBatch.Draw call to use the version from the &quot;AnimatedTexture&quot; class instead
+    spriteTexture.DrawFrame(_spriteBatch, characterPos);
+    _spriteBatch.End();
+
+    base.Draw(gameTime);
+}
+</code></pre>
+<p><strong>AnimatedTexture</strong> draws the sprite using the subrectangle of the texture that contains the desired animation.</p>
+<pre><code class="lang-csharp">// class AnimatedTexture
+public void DrawFrame(SpriteBatch batch, Vector2 screenPos)
+{
+    DrawFrame(batch, frame, screenPos);
+}
+
+public void DrawFrame(SpriteBatch batch, int frame, Vector2 screenPos)
+{
+    int FrameWidth = myTexture.Width / frameCount;
+    Rectangle sourcerect = new Rectangle(FrameWidth * frame, 0,
+        FrameWidth, myTexture.Height);
+    batch.Draw(myTexture, screenPos, sourcerect, Color.White,
+        Rotation, Origin, Scale, SpriteEffects.None, Depth);
+}
+</code></pre>
+</li>
+</ol>
+<p>There are many ways in which to handle the animation of sprites and they do not all need to be in a single line, some spritesheets use both Rows and Columns, sometimes for different animations for the same characters, or to maintain the same animation for multiple characters (remember it costs memory and time to load multiple textures, so why not just use one for efficiency).</p>
+<div class="TIP">
+<h5>Tip</h5>
+<p>Alternatively, some projects use a <a href="../content_pipeline/HowTo_Extend_Processor.html">Custom Content Processor</a> to generate the animation when the spritesheet is imported, which is more of an advanced topic.</p>
+</div>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a href="HowTo_Draw_A_Sprite.html">Drawing a Sprite</a></li>
+</ul>
+<h3 id="concepts">Concepts</h3>
+<ul>
+<li><a href="../../whatis/graphics/WhatIs_Sprite.html">What Is a Sprite?</a></li>
+</ul>
+<h3 id="reference">Reference</h3>
+<ul>
+<li><a href="xref:Microsoft.Xna.Framework.Graphics.SpriteBatch">SpriteBatch</a></li>
+<li><a href="xref:Microsoft.Xna.Framework.Graphics.SpriteBatch#Microsoft_Xna_Framework_Graphics_SpriteBatch_Draw_Microsoft_Xna_Framework_Graphics_Texture2D_Microsoft_Xna_Framework_Vector2_Microsoft_Xna_Framework_Color_">SpriteBatch.Draw</a></li>
+<li><a href="xref:Microsoft.Xna.Framework.Graphics.Texture2D">Texture2D</a></li>
+</ul>
+
+</article>
+                </div>
+
+            </main>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/jquery.twbsPagination.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mark.js@8.11.1/dist/jquery.mark.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/url.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/anchor-js@5.0.0/anchor.min.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/docfx.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/main.js"></script>
+        <script type="text/javascript" src="../../../../../../styles/singulink.js"></script>    </body>
+</html>
