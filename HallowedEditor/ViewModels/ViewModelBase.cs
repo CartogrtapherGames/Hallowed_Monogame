@@ -1,7 +1,13 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace HallowedEditor.ViewModels;
+namespace Hallowed.Editor.ViewModels;
 
-public class ViewModelBase : ObservableObject
+public abstract class ViewModelBase : ObservableObject
 {
+  
+  public virtual bool IsLoaded { get; protected set; }
+  
+  public abstract void LoadFromProject();
+  
+  public abstract void SaveToProject();
 }

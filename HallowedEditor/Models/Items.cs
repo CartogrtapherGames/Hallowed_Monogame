@@ -1,43 +1,43 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace HallowedEditor.Models;
+namespace Hallowed.Editor.Models;
 
 public partial class Item : ObservableObject
 {
+
   [ObservableProperty]
-  private int id;
-    
+  bool consumable = true;
+
   [ObservableProperty]
-  private string name = "New Item";
-    
+  string description = "";
+
   [ObservableProperty]
-  private string description = "";
-    
+  string effectScript = "";
+
   [ObservableProperty]
-  private string iconPath = "";
-    
+  int hpRestore;
+
   [ObservableProperty]
-  private bool isKeyItem = false;
-    
+  string iconPath = "";
   [ObservableProperty]
-  private int price = 0;
-    
+  int id;
+
   [ObservableProperty]
-  private bool consumable = true;
-    
+  bool isKeyItem;
+
   [ObservableProperty]
-  private int hpRestore = 0;
-    
+  int mpRestore;
+
   [ObservableProperty]
-  private int mpRestore = 0;
-    
+  string name = "New Item";
+
   [ObservableProperty]
-  private string effectScript = "";
-    
+  int price;
+
   public Item()
   {
   }
-    
+
   public Item(int id)
   {
     Id = id;

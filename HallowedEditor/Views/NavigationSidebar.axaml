@@ -1,9 +1,9 @@
 ﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:vm="using:HallowedEditor.ViewModels"
-             x:Class="HallowedEditor.Views.NavigationSidebar"
-             x:DataType="vm:MainWindowViewModel">
-    
+             xmlns:viewModels="clr-namespace:Hallowed.Editor.ViewModels"
+             x:Class="Hallowed.Editor.Views.NavigationSidebar"
+             x:DataType="viewModels:MainWindowViewModel">
+
     <Border Classes="SidebarPanel">
         <ItemsControl ItemsSource="{Binding Navigation.Items}">
             <ItemsControl.ItemTemplate>
@@ -19,14 +19,14 @@
                                     Height="40"
                                     BorderBrush="{StaticResource BorderMedium}"
                                     BorderThickness="1">
-                                <TextBlock Text="{Binding Icon}" 
-                                           FontSize="24" 
+                                <TextBlock Text="{Binding Icon}"
+                                           FontSize="24"
                                            HorizontalAlignment="Center"
-                                           VerticalAlignment="Center"/>
+                                           VerticalAlignment="Center" />
                             </Border>
-                            <TextBlock Text="{Binding Label}" 
-                                       FontSize="10" 
-                                       HorizontalAlignment="Center"/>
+                            <TextBlock Text="{Binding Label}"
+                                       FontSize="10"
+                                       HorizontalAlignment="Center" />
                         </StackPanel>
                     </Button>
                 </DataTemplate>

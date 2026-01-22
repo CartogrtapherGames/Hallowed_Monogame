@@ -1,4 +1,3 @@
-﻿
-# Hallowed Game engine editor.
+﻿# Hallowed Game engine editor.
 
 * create the manifest Manager.

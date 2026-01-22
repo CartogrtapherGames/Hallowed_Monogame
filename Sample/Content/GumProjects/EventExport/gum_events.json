@@ -1,35 +1,6 @@
 {
   "UserEvents": {
     "nioka": [],
-    "09563eff93b903bbfee753219f8b98e85b6a9ad68be146878cf89b0c7179c555": [
-      {
-        "NewName": "SceneBattle",
-        "OldName": null,
-        "ElementType": "Screens",
-        "EventType": 0,
-        "TimestampUtc": "2026-01-05T04:09:38.9495722Z"
-      },
-      {
-        "NewName": "SceneBattle.ColoredRectangleInstance",
-        "OldName": null,
-        "ElementType": "Screens",
-        "EventType": 5,
-        "TimestampUtc": "2026-01-05T04:13:24.8962753Z"
-      },
-      {
-        "NewName": "SceneBattle.ButtonStandardInstance",
-        "OldName": null,
-        "ElementType": "Screens",
-        "EventType": 5,
-        "TimestampUtc": "2026-01-05T04:14:45.2022789Z"
-      },
-      {
-        "NewName": "SceneBattle.CommandWindow",
-        "OldName": "SceneBattle.ColoredRectangleInstance",
-        "ElementType": "Screens",
-        "EventType": 7,
-        "TimestampUtc": "2026-01-05T04:18:08.2223934Z"
-      }
-    ]
+    "09563eff93b903bbfee753219f8b98e85b6a9ad68be146878cf89b0c7179c555": []
   }
 }

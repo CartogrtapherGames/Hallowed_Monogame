@@ -1,0 +1,84 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:Hallowed.Editor.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
+             x:Class="Hallowed.Editor.Views.EmptyView"
+             x:DataType="viewModels:MainWindowViewModel">
+    
+    <Border Classes="ContentPanel">
+        <Grid RowDefinitions="*,Auto,Auto,Auto,*">
+            
+            <!-- Top spacer -->
+            <Border Grid.Row="0" />
+            
+            <!-- Logo/Icon -->
+            <StackPanel Grid.Row="1" 
+                        HorizontalAlignment="Center" 
+                        Spacing="20">
+                <TextBlock Text="📚" 
+                           FontSize="72" 
+                           HorizontalAlignment="Center"
+                           Opacity="0.6" />
+                <TextBlock Text="Hallowed Editor" 
+                           Classes="SectionHeader" 
+                           FontSize="32"
+                           HorizontalAlignment="Center" />
+                <TextBlock Text="Visual Novel Development Tool" 
+                           Classes="Subtitle" 
+                           FontSize="14"
+                           HorizontalAlignment="Center"
+                           Opacity="0.7" />
+            </StackPanel>
+            
+            <!-- Action Buttons -->
+            <StackPanel Grid.Row="2" 
+                        HorizontalAlignment="Center" 
+                        Spacing="12"
+                        Margin="0,40,0,0">
+                <Button Content="📂 Open Project" 
+                        Command="{Binding OpenProjectCommand}"
+                        Classes="PrimaryButton"
+                        Width="200"
+                        Padding="16,10"
+                        FontSize="14" />
+                <Button Content="✨ Create New Project" 
+                        Command="{Binding NewProjectCommand}"
+                        Classes="SecondaryButton"
+                        Width="200"
+                        Padding="16,10"
+                        FontSize="14" />
+            </StackPanel>
+            
+            <!-- Recent Projects (Optional) -->
+            <StackPanel Grid.Row="3" 
+                        HorizontalAlignment="Center"
+                        Margin="0,60,0,0"
+                        Spacing="10"
+                        MaxWidth="400">
+                <TextBlock Text="Recent Projects" 
+                           Classes="Subtitle" 
+                           FontSize="12"
+                           HorizontalAlignment="Left"
+                           Opacity="0.6" />
+                
+                <!-- Placeholder for recent projects list -->
+                <Border Background="{StaticResource ParchmentLight}"
+                        BorderBrush="{StaticResource BorderMedium}"
+                        BorderThickness="1"
+                        CornerRadius="4"
+                        Padding="16,12">
+                    <TextBlock Text="No recent projects" 
+                               Classes="Subtitle"
+                               FontSize="12"
+                               HorizontalAlignment="Center"
+                               Opacity="0.5" />
+                </Border>
+            </StackPanel>
+            
+            <!-- Bottom spacer -->
+            <Border Grid.Row="4" />
+        </Grid>
+    </Border>
+</UserControl>

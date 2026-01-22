@@ -1,12 +1,11 @@
 ﻿using Avalonia.Controls;
 
-namespace HallowedEditor.Views
+namespace Hallowed.Editor.Views;
+
+public partial class NavigationSidebar : UserControl
 {
-  public partial class NavigationSidebar : UserControl
+  public NavigationSidebar()
   {
-    public NavigationSidebar()
-    {
-      InitializeComponent();
-    }
+    InitializeComponent();
   }
 }

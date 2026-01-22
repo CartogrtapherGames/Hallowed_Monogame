@@ -2,9 +2,9 @@
 
 namespace Hallowed.Editor.Views;
 
-public partial class ItemsView : UserControl
+public partial class StoryEditorView : UserControl
 {
-  public ItemsView()
+  public StoryEditorView()
   {
     InitializeComponent();
   }

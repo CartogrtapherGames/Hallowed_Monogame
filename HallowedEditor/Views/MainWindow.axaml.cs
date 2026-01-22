@@ -1,6 +1,6 @@
 using Avalonia.Controls;
 
-namespace HallowedEditor.Views;
+namespace Hallowed.Editor.Views;
 
 public partial class MainWindow : Window
 {

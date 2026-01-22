@@ -14,10 +14,13 @@
         <entry key="HallowedEditor/Styles/NaviguationStyles.axaml" value="HallowedEditor/HallowedEditor.csproj" />
         <entry key="HallowedEditor/Styles/TextStyles.axaml" value="HallowedEditor/HallowedEditor.csproj" />
         <entry key="HallowedEditor/Views/Dummy.axaml" value="HallowedEditor/HallowedEditor.csproj" />
+        <entry key="HallowedEditor/Views/EmptyView.axaml" value="HallowedEditor/HallowedEditor.csproj" />
         <entry key="HallowedEditor/Views/ItemsView.axaml" value="HallowedEditor/HallowedEditor.csproj" />
         <entry key="HallowedEditor/Views/MainWindow.axaml" value="HallowedEditor/HallowedEditor.csproj" />
         <entry key="HallowedEditor/Views/NavigationSidebar.axaml" value="HallowedEditor/HallowedEditor.csproj" />
+        <entry key="HallowedEditor/Views/StoryEditorView.axaml" value="HallowedEditor/HallowedEditor.csproj" />
         <entry key="HallowedEditor/Views/SystemView.axaml" value="HallowedEditor/HallowedEditor.csproj" />
+        <entry key="HallowedEditor/Views/VariablesView.axaml" value="HallowedEditor/HallowedEditor.csproj" />
       </map>
     </option>
   </component>

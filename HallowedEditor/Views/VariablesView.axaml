@@ -1,0 +1,272 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:viewModels="clr-namespace:Hallowed.Editor.ViewModels"
+             x:Class="Hallowed.Editor.Views.VariablesView"
+             x:DataType="viewModels:VariablesViewModel">
+
+    <Border Classes="ContentPanel">
+        <Grid RowDefinitions="Auto,*">
+
+            <!-- Tab Header -->
+            <Border Grid.Row="0"
+                    Background="{StaticResource ParchmentMedium}"
+                    BorderBrush="{StaticResource BorderMedium}"
+                    BorderThickness="0,0,0,1"
+                    Padding="10">
+                <StackPanel Orientation="Horizontal" Spacing="10">
+                    <RadioButton Content="🗂️ Local Variables (Save File)"
+                                 GroupName="VariableTab"
+                                 IsChecked="{Binding IsLocalTabSelected}" />
+                    <RadioButton Content="🌍 Global Variables (Persistent)"
+                                 GroupName="VariableTab"
+                                 IsChecked="{Binding !IsLocalTabSelected}" />
+                </StackPanel>
+            </Border>
+
+            <!-- Tab Content -->
+            <Grid Grid.Row="1">
+                <!-- Local Variables Tab -->
+                <Grid ColumnDefinitions="300,*"
+                      ColumnSpacing="15"
+                      IsVisible="{Binding IsLocalTabSelected}">
+
+                    <!-- Left: Variable List -->
+                    <Border Grid.Column="0"
+                            Background="{StaticResource ParchmentMedium}"
+                            Padding="10"
+                            CornerRadius="8"
+                            Margin="15">
+                        <Grid RowDefinitions="Auto,Auto,*,Auto" RowSpacing="0">
+                            <TextBlock Grid.Row="0"
+                                       Text="📝 Local Variables"
+                                       Classes="SectionHeader"
+                                       FontSize="18" />
+
+                            <Separator Grid.Row="1" Margin="0,10,0,10" />
+
+                            <ListBox Grid.Row="2"
+                                     ItemsSource="{Binding LocalVariables}"
+                                     SelectedItem="{Binding SelectedLocalVariable}"
+                                     Padding="0"
+                                     Margin="0">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock>
+                                            <Run Text="{Binding Id, StringFormat='{}{0:D4}'}" FontWeight="Bold" />
+                                            <Run Text=" " />
+                                            <Run Text="{Binding Name}" />
+                                        </TextBlock>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+
+                            <Button Grid.Row="3"
+                                    Content="+ New Variable"
+                                    Command="{Binding AddLocalVariableCommand}"
+                                    Classes="PrimaryButton"
+                                    HorizontalAlignment="Stretch"
+                                    Margin="0,10,0,0" />
+                        </Grid>
+                    </Border>
+
+                    <!-- Right: Variable Editor -->
+                    <ScrollViewer Grid.Column="1">
+                        <StackPanel Spacing="15"
+                                    Margin="15"
+                                    IsEnabled="{Binding SelectedLocalVariable, Converter={x:Static ObjectConverters.IsNotNull}}">
+
+                            <TextBlock Text="Variable Details"
+                                       Classes="SectionHeader"
+                                       FontSize="18" />
+
+                            <Border Background="{StaticResource ParchmentMedium}"
+                                    Padding="15"
+                                    CornerRadius="8">
+                                <Grid ColumnDefinitions="120,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto">
+
+                                    <!-- ID (read-only) -->
+                                    <TextBlock Grid.Row="0" Grid.Column="0"
+                                               Text="ID:"
+                                               Classes="SmallText"
+                                               VerticalAlignment="Center" />
+                                    <TextBlock Grid.Row="0" Grid.Column="1"
+                                               Text="{Binding SelectedLocalVariable.Id}"
+                                               FontWeight="Bold"
+                                               VerticalAlignment="Center" />
+
+                                    <TextBlock Grid.Row="1" Grid.Column="0"
+                                               Text="Name:"
+                                               Classes="SmallText"
+                                               VerticalAlignment="Center"
+                                               Margin="0,10,0,0" />
+                                    <TextBox Grid.Row="1" Grid.Column="1"
+                                             Text="{Binding SelectedLocalVariable.Name}"
+                                             Margin="0,10,0,0" />
+
+                                    <TextBlock Grid.Row="2" Grid.Column="0"
+                                               Text="Type:"
+                                               Classes="SmallText"
+                                               VerticalAlignment="Center"
+                                               Margin="0,10,0,0" />
+                                    <ComboBox Grid.Row="2" Grid.Column="1"
+                                              ItemsSource="{Binding VariableTypes}"
+                                              SelectedItem="{Binding SelectedLocalVariable.Type}"
+                                              Margin="0,10,0,0"
+                                              HorizontalAlignment="Stretch" />
+
+                                    <TextBlock Grid.Row="3" Grid.Column="0"
+                                               Text="Default Value:"
+                                               Classes="SmallText"
+                                               VerticalAlignment="Center"
+                                               Margin="0,10,0,0" />
+                                    <TextBox Grid.Row="3" Grid.Column="1"
+                                             Text="{Binding SelectedLocalVariable.Value}"
+                                             Margin="0,10,0,0" />
+
+                                    <TextBlock Grid.Row="4" Grid.Column="0"
+                                               Text="Description:"
+                                               Classes="SmallText"
+                                               VerticalAlignment="Top"
+                                               Margin="0,10,0,0" />
+                                    <TextBox Grid.Row="4" Grid.Column="1"
+                                             Text="{Binding SelectedLocalVariable.Description}"
+                                             AcceptsReturn="True"
+                                             TextWrapping="Wrap"
+                                             Height="80"
+                                             Margin="0,10,0,0"
+                                             Watermark="Optional description..." />
+                                </Grid>
+                            </Border>
+
+                            <Button Content="Delete Variable"
+                                    Command="{Binding DeleteLocalVariableCommand}"
+                                    Classes="SecondaryButton"
+                                    HorizontalAlignment="Right" />
+                        </StackPanel>
+                    </ScrollViewer>
+                </Grid>
+
+                <!-- Global Variables Tab -->
+                <Grid ColumnDefinitions="300,*"
+                      ColumnSpacing="15"
+                      IsVisible="{Binding !IsLocalTabSelected}">
+
+                    <!-- Same layout as Local Variables but for Global -->
+                    <Border Grid.Column="0"
+                            Background="{StaticResource ParchmentMedium}"
+                            Padding="10"
+                            CornerRadius="8"
+                            Margin="15">
+                        <Grid RowDefinitions="Auto,Auto,*,Auto" RowSpacing="0">
+                            <TextBlock Grid.Row="0"
+                                       Text="🌍 Global Variables"
+                                       Classes="SectionHeader"
+                                       FontSize="18" />
+
+                            <Separator Grid.Row="1" Margin="0,10,0,10" />
+
+                            <ListBox Grid.Row="2"
+                                     ItemsSource="{Binding GlobalVariables}"
+                                     SelectedItem="{Binding SelectedGlobalVariable}"
+                                     Padding="0"
+                                     Margin="0">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock>
+                                            <Run Text="{Binding Id, StringFormat='{}{0:D4}'}" FontWeight="Bold" />
+                                            <Run Text=" " />
+                                            <Run Text="{Binding Name}" />
+                                        </TextBlock>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+
+                            <Button Grid.Row="3"
+                                    Content="+ New Variable"
+                                    Command="{Binding AddGlobalVariableCommand}"
+                                    Classes="PrimaryButton"
+                                    HorizontalAlignment="Stretch"
+                                    Margin="0,10,0,0" />
+                        </Grid>
+                    </Border>
+
+                    <ScrollViewer Grid.Column="1">
+                        <StackPanel Spacing="15"
+                                    Margin="15"
+                                    IsEnabled="{Binding SelectedGlobalVariable, Converter={x:Static ObjectConverters.IsNotNull}}">
+
+                            <TextBlock Text="Variable Details"
+                                       Classes="SectionHeader"
+                                       FontSize="18" />
+
+                            <Border Background="{StaticResource ParchmentMedium}"
+                                    Padding="15"
+                                    CornerRadius="8">
+                                <Grid ColumnDefinitions="120,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto">
+
+                                    <!-- ID (read-only) -->
+                                    <TextBlock Grid.Row="0" Grid.Column="0"
+                                               Text="ID:"
+                                               Classes="SmallText"
+                                               VerticalAlignment="Center" />
+                                    <TextBlock Grid.Row="0" Grid.Column="1"
+                                               Text="{Binding SelectedGlobalVariable.Id}"
+                                               FontWeight="Bold"
+                                               VerticalAlignment="Center" />
+
+                                    <TextBlock Grid.Row="1" Grid.Column="0"
+                                               Text="Name:"
+                                               Classes="SmallText"
+                                               VerticalAlignment="Center"
+                                               Margin="0,10,0,0" />
+                                    <TextBox Grid.Row="1" Grid.Column="1"
+                                             Text="{Binding SelectedGlobalVariable.Name}"
+                                             Margin="0,10,0,0" />
+
+                                    <TextBlock Grid.Row="2" Grid.Column="0"
+                                               Text="Type:"
+                                               Classes="SmallText"
+                                               VerticalAlignment="Center"
+                                               Margin="0,10,0,0" />
+                                    <ComboBox Grid.Row="2" Grid.Column="1"
+                                              ItemsSource="{Binding VariableTypes}"
+                                              SelectedItem="{Binding SelectedGlobalVariable.Type}"
+                                              Margin="0,10,0,0"
+                                              HorizontalAlignment="Stretch" />
+
+                                    <TextBlock Grid.Row="3" Grid.Column="0"
+                                               Text="Default Value:"
+                                               Classes="SmallText"
+                                               VerticalAlignment="Center"
+                                               Margin="0,10,0,0" />
+                                    <TextBox Grid.Row="3" Grid.Column="1"
+                                             Text="{Binding SelectedGlobalVariable.Value}"
+                                             Margin="0,10,0,0" />
+
+                                    <TextBlock Grid.Row="4" Grid.Column="0"
+                                               Text="Description:"
+                                               Classes="SmallText"
+                                               VerticalAlignment="Top"
+                                               Margin="0,10,0,0" />
+                                    <TextBox Grid.Row="4" Grid.Column="1"
+                                             Text="{Binding SelectedGlobalVariable.Description}"
+                                             AcceptsReturn="True"
+                                             TextWrapping="Wrap"
+                                             Height="80"
+                                             Margin="0,10,0,0"
+                                             Watermark="Optional description..." />
+                                </Grid>
+                            </Border>
+
+                            <Button Content="Delete Variable"
+                                    Command="{Binding DeleteGlobalVariableCommand}"
+                                    Classes="SecondaryButton"
+                                    HorizontalAlignment="Right" />
+                        </StackPanel>
+                    </ScrollViewer>
+                </Grid>
+            </Grid>
+
+        </Grid>
+    </Border>
+</UserControl>

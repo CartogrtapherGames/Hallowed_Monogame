@@ -1,9 +1,9 @@
 using System;
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
-using HallowedEditor.ViewModels;
+using Hallowed.Editor.ViewModels;
 
-namespace HallowedEditor;
+namespace Hallowed.Editor;
 
 public class ViewLocator : IDataTemplate
 {

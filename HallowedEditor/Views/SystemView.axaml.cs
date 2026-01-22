@@ -1,8 +1,6 @@
-﻿using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
+﻿using Avalonia.Controls;
 
-namespace HallowedEditor.Views;
+namespace Hallowed.Editor.Views;
 
 public partial class SystemView : UserControl
 {
@@ -11,4 +9,3 @@ public partial class SystemView : UserControl
     InitializeComponent();
   }
 }
-
