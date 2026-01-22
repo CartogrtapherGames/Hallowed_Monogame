@@ -1,0 +1,9 @@
+[
+  {
+    "description": "Some description about this variable",
+    "id": 1,
+    "name": "Dummy",
+    "type": 3,
+    "value": "false"
+  }
+]
