@@ -16,7 +16,7 @@ public class NodeLinear : NodeBase
     return editorData.text;
   }
   
-  public override string NextNode(int index = -1)
+  public override string FetchNextNode(int index = -1)
   {
     return  editorData.nextNode;
   }

@@ -16,5 +16,5 @@ public abstract class NodeBase
 
 
   public abstract string Text();
-  public abstract string NextNode(int index = -1);
+  public abstract string FetchNextNode(int index = -1);
 }

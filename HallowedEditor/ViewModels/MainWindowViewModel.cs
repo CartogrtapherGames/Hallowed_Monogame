@@ -29,9 +29,7 @@ public partial class MainWindowViewModel : ObservableObject
   string currentViewTitle = "📖 Story Editor";
   [ObservableProperty]
   string projectName = "Fable Maker";
-
-  public static string ProjectPath = "";
-
+  
   public bool IsProjectOpen => ProjectManager.IsProjectOpen;
   
   public MainWindowViewModel()
