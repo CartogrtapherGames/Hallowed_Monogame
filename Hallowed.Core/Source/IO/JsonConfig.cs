@@ -9,6 +9,10 @@ public static class JsonConfig
   {
     ContractResolver = new CamelCasePropertyNamesContractResolver(),
     Formatting = Formatting.Indented,
-    NullValueHandling = NullValueHandling.Ignore
+    NullValueHandling = NullValueHandling.Ignore,
+    
+    // ⭐ Add these two lines for polymorphic serialization
+    TypeNameHandling = TypeNameHandling.Auto,
+    TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Simple
   };
 }

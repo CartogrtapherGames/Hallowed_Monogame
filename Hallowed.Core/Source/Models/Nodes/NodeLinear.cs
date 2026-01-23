@@ -2,6 +2,8 @@
 
 public class NodeLinear : NodeBase
 {
+  public override NodeType Type => NodeType.Linear;
+  
   internal readonly EditorData editorData = new EditorData();
 
   internal class EditorData

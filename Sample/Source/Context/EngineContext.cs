@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using Sample.Source;
 
-namespace Sample.Source.Context;
+namespace Sample.Context;
 
 public class EngineContext : IContext
 {
@@ -12,6 +13,7 @@ public class EngineContext : IContext
   {
     Characters = [];
     Variables = [];
+    
   }
 
   public void Update(GameTime gameTime)

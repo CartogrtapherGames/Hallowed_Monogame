@@ -6,7 +6,7 @@ public interface IGameVariableContext
 {
   public void SetLocalVariable<T>(string name, T value);
   public T GetLocalVariable<T>(string name);
-  public T SetGlobalVariable<T>(string name, T value);
+  public void SetGlobalVariable<T>(string name, T value);
   public T GetGlobalVariable<T>(string name);
   
   public GameVariables LocalVariables { get; }
@@ -19,4 +19,5 @@ public interface IGameVariableContext
   /// <typeparam name="T"></typeparam>
   /// <returns></returns>
   public T Find<T>(string name);
+  public bool HasVariable(string name);
 }

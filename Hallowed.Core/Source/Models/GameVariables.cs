@@ -13,7 +13,7 @@ public enum VariableType
   String,
 }
 [Serializable]
-internal class VariableContainer
+public class VariableContainer
 {
 
   public required string Name { get; set; }
@@ -79,6 +79,14 @@ public class GameVariables
 
     if (value != null) 
       container.Value = JToken.FromObject(value);
+  }
+
+  public void Set(string name, JToken value)
+  {
+    var container = variables.FirstOrDefault(v => v.Name == name)
+      ?? throw new KeyNotFoundException($"Variable '{name}' not found");
+
+    container.Value = value;
   }
 
 
