@@ -36,7 +36,6 @@
     <ItemGroup>
         <Folder Include="Content\GumProjects\"/>
         <Folder Include="Content\GumProjects\textures\" />
-        <Folder Include="Source\Core\" />
     </ItemGroup>
     <ItemGroup>
         <None Update="Content\GumProjects\**\*.*">

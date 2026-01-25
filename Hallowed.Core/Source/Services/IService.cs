@@ -2,7 +2,9 @@
 
 public interface IService : IDisposable
 {
-  IServiceProvider Provider {get; set;}
-  public Task Initialize();
+  IGameServiceProvider Provider {get; set;}
+  
+  public bool Enabled {get; set;}
+  public void Initialize();
   public void Update(float deltaSeconds) {}
 }

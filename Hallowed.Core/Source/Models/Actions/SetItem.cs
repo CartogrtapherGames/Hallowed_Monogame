@@ -19,19 +19,22 @@ public class SetItem : ActionBase
   {
     public string ItemId { get; set; } = string.Empty;
     public ItemOperation Operation { get; set; } = ItemOperation.Add;
+    
+    public int Amount { get; set; } = 1;
   }
 
   public override void OnAction(IGameContext gameContext)
   {
     var inventory = gameContext.GetService<IInventoryService>();
     var itemId = editorData.ItemId;
+    var amount = editorData.Amount;
     switch (editorData.Operation)
     {
       case ItemOperation.Add:
-        inventory.AddItem(itemId);
+        inventory.AddItem(itemId, amount);
         break;
       case ItemOperation.Remove:
-        inventory.RemoveItem(itemId);
+        inventory.RemoveItem(itemId, amount);
         break;
       default:
         throw new ArgumentOutOfRangeException();

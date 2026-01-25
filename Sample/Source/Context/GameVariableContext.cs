@@ -9,15 +9,9 @@ namespace Sample.Context;
 public class GameVariableContext : IGameVariableContext
 {
 
-  public GameVariables LocalVariables { get; private set; }
-  public GameVariables GlobalVariables { get; private set; }
+  public GameVariables LocalVariables { get; private set; } = new GameVariables();
+  public GameVariables GlobalVariables { get; private set; } = new GameVariables();
 
-  public GameVariableContext()
-  {
-    LocalVariables = new GameVariables();
-    GlobalVariables = new GameVariables();
-  }
-  
   public void SetLocalVariable<T>(string name, T value)
   {
     LocalVariables.Set(name, value);
@@ -56,6 +50,6 @@ public class GameVariableContext : IGameVariableContext
 
   public string Save()
   {
-    
+    return ""; // TODO : maybe not using this ? and use an more automatic smooth system instead.
   }
 }

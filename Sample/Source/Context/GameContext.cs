@@ -1,20 +1,26 @@
 ﻿using Hallowed.Core.Context;
 using Hallowed.Core.Services;
-using IServiceProvider = System.IServiceProvider;
+
 
 namespace Sample.Context;
 
 public class GameContext : IGameContext
 {
 
-  public IServiceProvider ServiceProvider { get; }
+  public IGameServiceProvider ServiceProvider { get; }
   public IGameVariableContext GameVariables { get; }
+
+  public GameContext(IGameServiceProvider serviceProvider)
+  {
+    ServiceProvider = serviceProvider;
+    GameVariables = new GameVariableContext();
+  }
   public T GetService<T>() where T : class, IService
   {
-    throw new System.NotImplementedException();
+    return ServiceProvider.GetService<T>();
   }
   public T GetService<T>(string name) where T : class, IService
   {
-    throw new System.NotImplementedException();
+    return  ServiceProvider.GetService<T>(name); 
   }
 }
