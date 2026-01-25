@@ -20,5 +20,5 @@ public abstract class NodeBase
   public abstract NodeType Type { get;}
   
   public abstract string Text();
-  public abstract string FetchNextNode(int index = -1);
+  public abstract Guid FetchNextNode(int index = -1);
 }

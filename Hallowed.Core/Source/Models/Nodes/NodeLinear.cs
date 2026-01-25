@@ -1,26 +1,30 @@
-﻿namespace Hallowed.Core.Models.Nodes;
+﻿using Newtonsoft.Json;
+
+namespace Hallowed.Core.Models.Nodes;
 
 public class NodeLinear : NodeBase
 {
   public override NodeType Type => NodeType.Linear;
   
+  [JsonProperty]
   internal readonly EditorData editorData = new EditorData();
 
   internal class EditorData
   {
-    public string text;
-    public string nextNode;
+    public string Text { get; set; } = "";
+    public Guid NextNode  { get; set; } =  Guid.Empty;
   }
   
   // the system use this as nodes have different ways of displaying the text (such as *condition* node displaying different text based on a variable etc.
   public override string Text()
   {
-    return editorData.text;
+    return editorData.Text;
   }
-  
-  public override string FetchNextNode(int index = -1)
+
+  public override Guid FetchNextNode(int index = -1)
   {
-    return  editorData.nextNode;
+    return  editorData.NextNode;
   }
+
   
 }

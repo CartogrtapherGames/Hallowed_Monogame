@@ -24,9 +24,10 @@ public class NodeChoice : NodeBase
     return editorData.Text;
   }
   
-  public override string FetchNextNode(int index = -1)
+  public override Guid FetchNextNode(int index = -1)
   {
-    return editorData.Choices[index].NextNode;
+    throw new NotImplementedException();
+    // return editorData.Choices[index].NextNode;
   }
 
   public bool IsChoiceAvailable(int index, IGameContext gameContext)

@@ -23,11 +23,12 @@ public class NodeAction : NodeBase
   {
     return editorData.Text;
   }
-  public override string FetchNextNode(int index = -1)
+
+  public override Guid FetchNextNode(int index = -1)
   {
-    return editorData.NextNode;
+    throw new NotImplementedException();
   }
-  
+
   public void OnExecute(IGameContext context)
   {
     foreach (var action in editorData.Actions)
