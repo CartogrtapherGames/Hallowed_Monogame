@@ -2,12 +2,13 @@
 
 namespace Hallowed.Core.Models.Nodes;
 
+[NodeType(NodeType.Linear)]
 public class NodeLinear : NodeBase
 {
   public override NodeType Type => NodeType.Linear;
   
   [JsonProperty]
-  internal readonly EditorData editorData = new EditorData();
+  internal EditorData editorData = new EditorData();
 
   internal class EditorData
   {

@@ -1,14 +1,13 @@
 ﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="clr-namespace:Hallowed.Editor.ViewModels"
-             xmlns:nodes="clr-namespace:Hallowed.Editor.Views.Nodes"
              x:Class="Hallowed.Editor.Views.NodeLinearEditorView"
-             x:DataType="nodes:NodeLinearView">
+             x:DataType="vm:NodeLinearViewModel">
     
     <Border Classes="ContentPanel">
         <StackPanel Spacing="15">
             
-            <TextBlock Text="📄 Linear Node"
+            <TextBlock Text="📄 Linear Node Editor"
                        Classes="SectionHeader"
                        FontSize="18" />
             
@@ -19,7 +18,7 @@
                       RowDefinitions="Auto,Auto,Auto,Auto" 
                       RowSpacing="10">
                     
-                    <!-- Guid (Read-only, for reference) -->
+                    <!-- Guid (Read-only) -->
                     <TextBlock Grid.Row="0" Grid.Column="0"
                                Text="Guid:"
                                Classes="SmallText"
@@ -28,20 +27,20 @@
                                Text="{Binding Guid}"
                                FontFamily="Consolas"
                                FontSize="10"
-                               Foreground="{StaticResource TextLight}"
+                               Opacity="0.6"
                                VerticalAlignment="Center"
                                ToolTip.Tip="Unique identifier for this node" />
                     
-                    <!-- Name -->
+                    <!-- ID -->
                     <TextBlock Grid.Row="1" Grid.Column="0"
-                               Text="Name:"
+                               Text="ID:"
                                Classes="SmallText"
                                VerticalAlignment="Center" />
                     <TextBox Grid.Row="1" Grid.Column="1"
-                             Text="{Binding Name}"
-                             Watermark="e.g., intro_greeting, forest_encounter" />
+                             Text="{Binding Id}"
+                             Watermark="e.g., intro_greeting" />
                     
-                    <!-- Text Content -->
+                    <!-- Dialogue Text -->
                     <TextBlock Grid.Row="2" Grid.Column="0"
                                Text="Dialogue:"
                                Classes="SmallText"
@@ -52,9 +51,9 @@
                              AcceptsReturn="True"
                              TextWrapping="Wrap"
                              Height="150"
-                             Watermark="Enter the dialogue text that will be shown to the player..." />
+                             Watermark="Enter dialogue..." />
                     
-                    <!-- Next Node Selector -->
+                    <!-- Next Node Selector (Guid-based) -->
                     <TextBlock Grid.Row="3" Grid.Column="0"
                                Text="Next Node:"
                                Classes="SmallText"
@@ -62,7 +61,7 @@
                     <ComboBox Grid.Row="3" Grid.Column="1"
                               ItemsSource="{Binding AvailableNodes}"
                               SelectedValue="{Binding NextNodeGuid}"
-                              SelectedValueBinding="{Binding Guid}"
+                              SelectedValueBinding="{Binding NodeGuid}"
                               DisplayMemberBinding="{Binding DisplayName}"
                               HorizontalAlignment="Stretch"
                               PlaceholderText="Select next node..." />

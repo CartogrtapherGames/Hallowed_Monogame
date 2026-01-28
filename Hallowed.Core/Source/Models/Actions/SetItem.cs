@@ -13,7 +13,7 @@ public class SetItem : ActionBase
 
   public override string Name => nameof(SetItem);
 
-  internal readonly EditorData editorData = new EditorData();
+  internal  EditorData editorData = new EditorData();
 
   internal class EditorData
   {

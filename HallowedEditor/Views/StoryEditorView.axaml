@@ -1,6 +1,9 @@
 ﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:viewModels="clr-namespace:Hallowed.Editor.ViewModels"
+             xmlns:nodeVm="clr-namespace:Hallowed.Editor.ViewModels"
+             xmlns:views="clr-namespace:Hallowed.Editor.Views"
+             xmlns:views1="clr-namespace:Hallowed.Editor.Views"
              x:Class="Hallowed.Editor.Views.StoryEditorView"
              x:DataType="viewModels:StoryEditorViewModel">
 
@@ -27,7 +30,8 @@
                               SelectedItem="{Binding SelectedItem}"
                               AutoScrollToSelectedItem="True">
                         <TreeView.DataTemplates>
-                            <TreeDataTemplate DataType="viewModels:TreeItemViewModel" ItemsSource="{Binding Children}">
+                            <TreeDataTemplate DataType="viewModels:TreeItemViewModel" 
+                                              ItemsSource="{Binding Children}">
                                 <StackPanel Orientation="Horizontal" Spacing="5">
                                     <TextBlock Text="📁"
                                                FontSize="16"
@@ -47,29 +51,58 @@
                                 Command="{Binding AddFolderCommand}"
                                 Classes="SecondaryButton"
                                 HorizontalAlignment="Stretch" />
-                        <Button Content="📄 New Story"
+                        <Button Content="📄 New Node"
                                 Command="{Binding AddStoryCommand}"
                                 Classes="PrimaryButton"
                                 HorizontalAlignment="Stretch" />
+                        <Button Content="🗑️ Delete"
+                                Command="{Binding DeleteStoryCommand}"
+                                Classes="SecondaryButton"
+                                HorizontalAlignment="Stretch"
+                                IsEnabled="{Binding SelectedItem.Node, Converter={x:Static ObjectConverters.IsNotNull}}" />
                     </StackPanel>
                 </Grid>
             </Border>
 
-            <!-- Right: Story Editor (Placeholder for now) -->
+            <!-- Right: Node Editor -->
             <Border Grid.Column="1"
                     Background="{StaticResource ParchmentMedium}"
                     Padding="20"
                     CornerRadius="8">
-                <StackPanel HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Spacing="10">
-                    <TextBlock Text="Story Node Editor"
-                               Classes="SectionHeader"
-                               HorizontalAlignment="Center" />
-                    <TextBlock Text="Select a story to edit"
-                               Classes="Subtitle"
-                               HorizontalAlignment="Center" />
-                </StackPanel>
+                
+                <Grid>
+                    <!-- Placeholder when no node selected -->
+                    <StackPanel HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Spacing="10"
+                                IsVisible="{Binding CurrentNodeEditor, Converter={x:Static ObjectConverters.IsNull}}">
+                        <TextBlock Text="📄"
+                                   FontSize="48"
+                                   HorizontalAlignment="Center"
+                                   Opacity="0.3" />
+                        <TextBlock Text="Select a node to edit"
+                                   Classes="Subtitle"
+                                   HorizontalAlignment="Center"
+                                   Opacity="0.6" />
+                    </StackPanel>
+                    
+                    <!-- Editor when node is selected -->
+                    <ContentControl Content="{Binding CurrentNodeEditor}"
+                                    IsVisible="{Binding CurrentNodeEditor, Converter={x:Static ObjectConverters.IsNotNull}}">
+                        <ContentControl.DataTemplates>
+                            <!-- Linear Node Editor -->
+                            <DataTemplate DataType="viewModels:NodeLinearViewModel">
+                                <views1:NodeLinearEditorView />
+                            </DataTemplate>
+                            
+                            <!-- Future: Add more node type editors here -->
+                            <!-- <DataTemplate DataType="nodeVm:NodeChoiceViewModel">
+                                <views:NodeChoiceEditorView />
+                            </DataTemplate> -->
+                        </ContentControl.DataTemplates>
+                    </ContentControl>
+                </Grid>
+                
             </Border>
 
         </Grid>

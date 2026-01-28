@@ -24,7 +24,7 @@ public class VariableContainer
 /// <summary>
 /// The class that handle game variables. 
 /// </summary>
-public class GameVariables
+public class GameVariables : BaseData
 {
 
   List<VariableContainer> variables = [];
@@ -39,6 +39,12 @@ public class GameVariables
     { typeof(string), VariableType.String },
   };
 
+
+  public GameVariables(string name)
+  {
+    Id = name;
+  }
+  
   public void Add<T>(string name, JToken value)
   {
     if (HasVariable(name)) return;

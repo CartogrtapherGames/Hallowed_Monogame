@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Sample.Source.Commands;
+namespace Sample.Commands;
 
 [AttributeUsage( AttributeTargets.Class)]
 public class CommandAttribute : Attribute

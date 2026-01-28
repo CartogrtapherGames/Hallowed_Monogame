@@ -18,6 +18,8 @@
         <entry key="HallowedEditor/Views/ItemsView.axaml" value="HallowedEditor/HallowedEditor.csproj" />
         <entry key="HallowedEditor/Views/MainWindow.axaml" value="HallowedEditor/HallowedEditor.csproj" />
         <entry key="HallowedEditor/Views/NavigationSidebar.axaml" value="HallowedEditor/HallowedEditor.csproj" />
+        <entry key="HallowedEditor/Views/NodeLinearEditorView.axaml" value="HallowedEditor/HallowedEditor.csproj" />
+        <entry key="HallowedEditor/Views/Nodes/NodeLinearEditorView.axaml" value="HallowedEditor/HallowedEditor.csproj" />
         <entry key="HallowedEditor/Views/Nodes/NodeLinearView.axaml" value="HallowedEditor/HallowedEditor.csproj" />
         <entry key="HallowedEditor/Views/StoryEditorView.axaml" value="HallowedEditor/HallowedEditor.csproj" />
         <entry key="HallowedEditor/Views/SystemView.axaml" value="HallowedEditor/HallowedEditor.csproj" />

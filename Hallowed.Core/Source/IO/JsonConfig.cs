@@ -13,6 +13,11 @@ public static class JsonConfig
     
     // ⭐ Add these two lines for polymorphic serialization
     TypeNameHandling = TypeNameHandling.Auto,
-    TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Simple
+    TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Simple,
+    // Add the custom node converter
+    Converters = new List<JsonConverter>
+    {
+      new NodeJsonConverter()  // ← Add this
+    }
   };
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using Sample.Commands;
 
 namespace Sample.Source.Commands;
 

@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 
 namespace Hallowed.Core.Models.Nodes;
 
+[NodeType(NodeType.Choice)]
 public class NodeChoice : NodeBase
 {
 

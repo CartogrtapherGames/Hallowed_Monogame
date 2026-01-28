@@ -12,11 +12,8 @@ public enum NodeType
 }
 
 
-public abstract class NodeBase
+public abstract class NodeBase : BaseData 
 {
-
-  public Guid Guid { get; init; } = Guid.NewGuid();
-  public string Id { get; set; } = "new node";
   public abstract NodeType Type { get;}
   
   public abstract string Text();

@@ -62,6 +62,7 @@ public class InventoryService(IGameServiceProvider provider) : GameServiceBase(p
       items.Remove(item);
     }
   }
+  
   public int ItemMaxStackSize(string itemId)
   {
     var item = GetItem(itemId);
